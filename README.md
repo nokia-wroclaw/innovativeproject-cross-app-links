@@ -2,7 +2,7 @@
 <h2>Prepere your Python environment</h2>
 <h3>Download Python</h3>
 <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>
-<p>Ver.2.7 lub 3.6</p>
+<p>Ver.2.7 or 3.6</p>
 <p>Open your cmd window / bash and type:</p>
 <blockquote>python</blockquote>
 <p>If you can see your python version everything seems to be OK!</p>

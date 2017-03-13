@@ -1,5 +1,5 @@
 <h1>innovativeproject-cross-app-links</h1>
-<h2>Prepere your Python environment</h2>
+<h2>Prepare your Python environment</h2>
 <h3>Download Python</h3>
 <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>
 <p>Ver.2.7 or 3.6</p>

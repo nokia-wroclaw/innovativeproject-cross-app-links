@@ -16,4 +16,4 @@
 <blockquote>flask run</blockquote>
 <p>You should see server is running on your localhost (probably localhost:5000). Follow this address in your browser. </p>
 
-<p>If you have a problem (pip, python is not recognised) checkout <a href="http://stackoverflow.com/questions/13596505/python-not-working-in-command-prompt">this</a> </p>gt
+<p>If you have a problem (pip, python is not recognised) checkout <a href="http://stackoverflow.com/questions/13596505/python-not-working-in-command-prompt">this</a> </p>

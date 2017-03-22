@@ -5,8 +5,9 @@
     <title>Sign in</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/loginpage.css">
     <link rel="stylesheet" href="../static/css/media.css">
 
@@ -16,8 +17,14 @@
     <div class="login-container">
         <h1>Sign in</h1>
         <form class="login-form" name="login_form">
-            <input type="text" name="email" placeholder="Your e-mail">
-            <input type="password" name="password" placeholder="Your password">
+            <div class="input-socket">
+                <span class="input-icon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" name="email" placeholder="Your e-mail">
+            </div>
+            <div class="input-socket">
+                <span class="input-icon"><span class="glyphicon glyphicon-lock"></span></span>
+                <input type="password" name="password" placeholder="Your password">
+            </div>
             <input type="submit" name="submit" value="Sign in">
             <span class="form-link forgotten-pass"><a href="#forgot">Forgot your password?</a></span>
             <span class="form-link new-account"><a href="#new-account">I'd like to register a new account</a></span>

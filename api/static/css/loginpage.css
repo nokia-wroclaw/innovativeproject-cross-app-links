@@ -2,20 +2,20 @@ body {
     background: #34313d url(../img/loginpage/background.png) no-repeat center;
     background-size: cover;
     background-attachment: fixed;
-    font-family: "Lato", sans-serif;
+    font-family: 'Lato';
 }
 
 .login-container {
-    width: 240px;
+    width: 330px;
     margin: 0 auto;
-    margin-top: 15vh;
+    margin-top: 28vh;
 }
 
 .login-container>h1 {
     margin: 20px 0;
     color: white;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 .login-container>.login-form {
@@ -23,19 +23,63 @@ body {
     width: 100%;
 }
 
-.login-container>.login-form>input[type="text"],
-.login-container>.login-form>input[type="password"],
-.login-container>.login-form>input[type="submit"] {
-    float: left;
+.login-container>.login-form>.input-socket {
     width: 100%;
-    padding: 15px;
     box-sizing: border-box;
-    clear: both;
-    border: none;
+    float: left;
     margin-bottom: 20px;
-    font-size: 13px;
-    font-weight: 700;
+    background: white;
     border-radius: 2px;
+    overflow: hidden;
+}
+
+.login-container>.login-form>.input-socket>input[type="text"],
+.login-container>.login-form>.input-socket>input[type="password"],
+.login-container>.login-form>.input-socket>.input-icon,
+.login-container>.login-form>input[type="submit"] {
+    float: right;
+    width: 85%;
+    padding: 20px;
+    padding-left: 10px;
+    padding-top: 22px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 2px;
+    color: #b6b0c8;
+    height: 60px;
+    background: white;
+    display: inline;
+}
+
+.login-container>.login-form>.input-socket>.input-icon {
+    text-align: center;
+    width: 15%;
+    float: left;
+    display: inline;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.login-container>.login-form>.input-socket>input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #b6b0c8;
+}
+
+.login-container>.login-form>.input-socket>input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #b6b0c8;
+}
+
+.login-container>.login-form>.input-socket>input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: pink;
+}
+
+.login-container>.login-form>.input-socket>input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #b6b0c8;
 }
 
 .login-container>.login-form>input[type="submit"] {
@@ -43,11 +87,17 @@ body {
     float: right;
     background: #D45A5A;
     color: white;
-    width: 80px;
+    width: 100px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.login-container>.login-form>input[type="submit"]:hover {
+    cursor: poiner;
 }
 
 .login-container>.login-form>.form-link {
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 400;
     float: left;
 }

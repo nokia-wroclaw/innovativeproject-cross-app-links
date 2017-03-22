@@ -1,0 +1,30 @@
+.iframe-nav {
+  float: left;
+  width: auto;
+  max-width: 180px;
+  font-family: 'Lato', sans-serif; }
+  .iframe-nav ul {
+    width: 100%;
+    box-sizing: border-box;
+    float: left;
+    display: inline-block; }
+    .iframe-nav ul li {
+      display: block;
+      float: left;
+      width: 100%; }
+      .iframe-nav ul li a {
+        display: block;
+        float: left;
+        padding: 20px;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        text-decoration: none;
+        color: black;
+        font-weight: 600;
+        box-sizing: border-box; }
+        .iframe-nav ul li a:hover {
+          background: #f0f0f0; }
+        .iframe-nav ul li a .glyphicon {
+          margin-right: 20px; }
+
+/*# sourceMappingURL=iframe.css.map */

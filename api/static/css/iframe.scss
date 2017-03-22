@@ -1,0 +1,34 @@
+.iframe-nav {
+    float: left;
+    width: auto;
+    max-width: 180px;
+    font-family: 'Lato', sans-serif;
+    ul {
+        width: 100%;
+        box-sizing: border-box;
+        float: left;
+        display: inline-block;
+        li {
+            display: block;
+            float: left;
+            width: 100%;
+            a {
+                display: block;
+                float: left;
+                padding: 20px;
+                width: 100%;
+                border-bottom: 1px solid #ddd;
+                text-decoration: none;
+                color: black;
+                font-weight: 600;
+                box-sizing: border-box;
+                &:hover {
+                    background: #f0f0f0;
+                }
+                .glyphicon {
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+}

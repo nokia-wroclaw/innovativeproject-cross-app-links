@@ -1,0 +1,21 @@
+@media only screen and (max-width: 1200px) {
+  .main-navigation ul li a {
+    text-align: center; }
+    .main-navigation ul li a .glyphicon {
+      margin: 0; } }
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  .main-navigation {
+    height: auto;
+    min-height: none;
+    max-height: none;
+    position: static; }
+    .main-navigation ul li a {
+      text-align: left; }
+      .main-navigation ul li a .glyphicon {
+        margin-right: 20px; } }
+/* Small Devices, Tablets */
+/* Extra Small Devices, Phones */
+/* Custom, iPhone Retina */
+
+/*# sourceMappingURL=media.css.map */

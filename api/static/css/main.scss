@@ -1,0 +1,243 @@
+html,
+body {
+    height: 100%;
+    min-height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Lato", sans-serif;
+    background: #f0f0f0;
+}
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    height: 100%;
+}
+
+.row {
+    padding: 0;
+    margin: 0;
+}
+
+.nav-fill {
+    background: red;
+}
+
+.main-navigation {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: #34313d;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        float: left;
+        .label {
+            padding: 20px;
+            color: #b6b0c8;
+            font-size: 13px;
+            text-transform: uppercase;
+            font-weight: 800;
+            opacity: 0.3;
+            float: left;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+        li {
+            width: 100%;
+            float: left;
+            margin: 0;
+            padding: 0;
+            a {
+                box-sizing: border-box;
+                display: block;
+                padding: 20px;
+                text-decoration: none;
+                color: #b6b0c8;
+                font-weight: 400;
+                transition: all 0.3s linear;
+                opacity: 0.6;
+                font-weight: 400;
+                .glyphicon {
+                    margin-right: 20px;
+                }
+                &:hover {
+                    background: rgba(black, 0.1);
+                    transition: all 0.3s linear;
+                    opacity: 1;
+                }
+                &.site-name {
+                    color: #f0f0f0;
+                    opacity: 1;
+                    box-sizing: border-box;
+                    height: 90px;
+                    background: #48b0f7;
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    padding-top: 40px;
+                    font-weight: 800;
+                    text-align: center;
+                    &:hover {
+                        background: #48b0f7;
+                        color: #F0F0F0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.main-header {
+    height: 90px;
+    background: darken(white, 2%);
+    box-sizing: border-box;
+    border-bottom: 2px solid lighten(#ccc, 9%);
+    .user-section {
+        float: right;
+        position: relative;
+        padding: 20px;
+        box-sizing: border-box;
+        height: 88px;
+        transition: all 0.3s ease;
+        .user-avatar {
+            position: relative;
+            display: inline-block;
+            float: left;
+            overflow: hidden;
+            border-radius: 100%;
+            height: 50px;
+            width: 50px;
+            background: #D45A5A;
+            text-align: center;
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 50px;
+                display: block;
+                border-radius: 100%;
+                transition: all 0.3s ease;
+                z-index: 1;
+            }
+            .glyphicon {
+                position: absolute;
+                left: 0;
+                right: 0;
+                color: #fff;
+                margin-top: 13px;
+                font-size: 20px;
+                z-index: 2;
+                opacity: 0;
+            }
+        }
+        .user-name {
+            display: inline-block;
+            float: left;
+            margin: 16px 20px;
+            margin-left: 5px;
+            font-weight: 800;
+        }
+        &:hover {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        &:hover .user-avatar img {
+            opacity: 0.2;
+            transition: all 0.3s ease;
+        }
+        &:hover .user-avatar .glyphicon {
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+        .user-menu {
+            position: absolute;
+            width: 100%;
+            box-sizing: border-box;
+            right: 0;
+            top: 88px;
+            background: darken(white, 2%);
+            text-align: left;
+            z-index: 3;
+            border: 1px solid lighten(#ccc, 9%);
+            border-top: 2px solid lighten(#ccc, 9%);
+            ul {
+                float: left;
+                display: inline-block;
+                width: 100%;
+                li {
+                    display: block;
+                    float: left;
+                    width: 100%;
+                    a {
+                        display: block;
+                        width: 100%;
+                        padding: 15px;
+                        color: #34313d;
+                        .glyphicon {
+                            font-size: 11px;
+                            margin-right: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.main-content {
+    padding: 20px;
+    box-sizing: border-box;
+    .box {
+        padding: 20px;
+        box-sizing: border-box;
+        background: darken(white, 2%);
+        border: 1px solid lighten(#ccc, 9%);
+        margin-bottom: 20px;
+        border-radius: 3px;
+    }
+    .box.link-box {
+        float: left;
+        .main-link-info {
+            margin-bottom: 30px;
+            float: left;
+            img {
+                float: left;
+                display: inline-block;
+                width: 45px;
+                height: 45px;
+            }
+            .main-link-heading {
+                text-transform: uppercase;
+                font-weight: 800;
+                font-size: 16px;
+                float: left;
+                display: inline-block;
+                padding: 10px 20px;
+                padding-right: 0;
+            }
+        }
+        .main-link-desc {
+            float: left;
+            clear: both;
+            padding: 20px 0px;
+            border-top: 1px solid lighten(#ccc, 9%);
+            line-height: 1.4;
+            font-weight: 400;
+            color: #888;
+        }
+        .settings-icon {
+            float: left;
+        }
+    }
+}

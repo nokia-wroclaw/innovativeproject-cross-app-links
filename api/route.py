@@ -34,9 +34,11 @@ components_list=[
 
 @app.before_request
 def before_request():
-    g.user = None
+    
     if 'email' in session:
         g.user = session['email']
+    else:
+        g.user = None
 
 #-----------
 #ROUTING

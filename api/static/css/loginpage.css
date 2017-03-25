@@ -1,5 +1,10 @@
+html,
 body {
-    background: #34313d url(../img/loginpage/background.png) no-repeat center;
+    height: 100%;
+}
+
+body {
+    background: #34313d url(../img/loginpage/background.png) center no-repeat;
     background-size: cover;
     background-attachment: fixed;
     font-family: 'Lato';
@@ -9,6 +14,9 @@ body {
     width: 330px;
     margin: 0 auto;
     margin-top: 28vh;
+    position: absolute;
+    left: 0;
+    right: 0;
 }
 
 .login-container>h1 {
@@ -31,6 +39,8 @@ body {
     background: white;
     border-radius: 2px;
     overflow: hidden;
+    height: 60px;
+    position: relative;
 }
 
 .login-container>.login-form>.input-socket>input[type="text"],
@@ -51,15 +61,33 @@ body {
     height: 60px;
     background: white;
     display: inline;
+    transition: 0.3s ease all;
+}
+
+.login-container>.login-form>.input-socket>input[type="text"]:focus,
+.login-container>.login-form>.input-socket>input[type="password"]:focus {
+    width: 100%;
+    border: 0;
+    outline: none;
+    padding-left: 20px;
+    transition: 0.3s ease all;
+}
+
+.login-container>.login-form>.input-socket>input[type="text"]:focus + .input-icon,
+.login-container>.login-form>.input-socket>input[type="password"]:focus + .input-icon {
+    transform: translateX(-100%);
+    transition: 0.4s ease all;
 }
 
 .login-container>.login-form>.input-socket>.input-icon {
+    position: absolute;
     text-align: center;
     width: 15%;
     float: left;
     display: inline;
     padding-left: 20px;
     padding-top: 20px;
+    transition: 0.4s ease all;
 }
 
 .login-container>.login-form>.input-socket>input::-webkit-input-placeholder {

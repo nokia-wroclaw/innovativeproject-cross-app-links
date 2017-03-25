@@ -1,10 +1,20 @@
 @media only screen and (max-width: 1200px) {
-  .main-navigation ul li a {
-    text-align: center; }
-    .main-navigation ul li a .glyphicon {
-      margin: 0; } }
+  .main-navigation {
+    top: 0; }
+    .main-navigation ul li a {
+      text-align: center; }
+      .main-navigation ul li a .glyphicon {
+        margin: 0; } }
 /* Medium Devices, Desktops */
 @media only screen and (max-width: 992px) {
+  .main-header {
+    background: #2d2a35;
+    border: 0; }
+    .main-header .site-name a {
+      font-size: 6px; }
+    .main-header .user-section .user-name {
+      color: #fafafa; }
+
   .main-navigation {
     height: auto;
     min-height: none;

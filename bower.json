@@ -13,9 +13,9 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.6.3",
-    "bootstrap": "^3.3.7",
     "angular-route": "1.6.3",
-    "dstyle_resetCSS": "*"
+    "dstyle_resetCSS": "*",
+    "bootstrap": "^3.3.7",
+    "ng-scrollbars": "^0.0.11"
   }
 }

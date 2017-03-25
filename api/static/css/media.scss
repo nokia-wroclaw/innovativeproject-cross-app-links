@@ -1,5 +1,6 @@
 @media only screen and (max-width: 1200px) {
     .main-navigation {
+        top: 0;
         ul {
             li {
                 a {
@@ -17,6 +18,20 @@
 /* Medium Devices, Desktops */
 
 @media only screen and (max-width: 992px) {
+    .main-header {
+        background: darken(#34313d,3%);
+        border: 0;
+        .site-name {
+            a {
+                font-size: 6px;
+            }
+        }
+        .user-section {
+            .user-name {
+                color: #fafafa;
+            }
+        }
+    }
     .main-navigation {
         height: auto;
         min-height: none;

@@ -2,3 +2,4 @@ __pycache__/*
 .sass-cache/*
 api/__pycache__/*
 api/static/css/*.map
+api/static/bower_components/*

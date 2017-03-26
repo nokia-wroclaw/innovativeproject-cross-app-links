@@ -65,3 +65,12 @@ def component(component_type, component_id):
     elif component_type=='json':
         return jsonify({'name': 'json-component', 'data': '755'})
     return None
+
+#Routes for components test
+@app.route('/component/<component_type>')
+def component_test(component_type):
+    if component_type=='iframe':
+        return make_response(open('api/static/web-components/iframe/iframe-index.html').read())
+    elif component_type=='json':
+        make_response(open('api/static/web-components/json/json-index.html').read())
+    return None

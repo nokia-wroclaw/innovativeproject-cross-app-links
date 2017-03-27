@@ -1,3 +1,51 @@
+<h2>HTTP requests- Angular</h2>
+<p>There are four types of request GET, POST, PUT, DELETE and they can be called like this:</p>
+<code>
+restful.get(<i>string</i> table_name[, <i>integer</i> element_id]).then(function(response){
+<i>JSON Object </i> response
+});
+restful.post(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Object </i> data);
+restful.put(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Object </i> data);
+restful.delete(<i>string</i> table_name, <i>integer</i>);
+</code>
+<p>Every created service's function could get couple params but some of them are REQUIRED for each function:</p>
+<table>
+<thead>
+      <tr>
+        <th>Request type</th>
+        <th>Table name</th>
+        <th>Element ID</th>
+        <th>JSON Object</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GET</td>
+        <td>Yes</td>
+        <td>Could be</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>PUT</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>DELETE</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+    </tbody>
+</table>
+<p>If you won't follow this restrictions the request would not be sent. But even if you somehow done that, Flask is also secured in similiar way.</p>
 <h2>Innovative cross-app-links</h2>
 <h3>It's online! <a href="https://cross-app-links.herokuapp.com">https://cross-app-links.herokuapp.com</a></h3>
 <h2>To run locally</h2>

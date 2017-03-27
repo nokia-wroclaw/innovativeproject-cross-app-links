@@ -1,6 +1,6 @@
 (function () {
-    var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars']);
-    app.controller('mainCtrl', ['$scope', function ($scope) {
+    var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services']);
+    app.controller('mainCtrl', ['$scope', 'restful', function ($scope, restful) {
         /*Custom Scrollbar Config*/
         $scope.config = {
             autoHideScrollbar: true,
@@ -10,9 +10,9 @@
             },
             scrollInertia: 0,
             axis: 'y'
-        }
+        };
 
-        }]);
+    }]);
 
 
 }());

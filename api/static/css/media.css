@@ -10,8 +10,10 @@
   .main-header {
     background: #2d2a35;
     border: 0; }
-    .main-header .site-name a {
-      font-size: 6px; }
+    .main-header .site-name {
+      position: static; }
+      .main-header .site-name a {
+        font-size: 6px; }
     .main-header .user-section .user-name {
       color: #fafafa; }
 

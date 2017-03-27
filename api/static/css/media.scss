@@ -22,6 +22,7 @@
         background: darken(#34313d,3%);
         border: 0;
         .site-name {
+            position: static;
             a {
                 font-size: 6px;
             }

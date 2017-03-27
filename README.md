@@ -62,7 +62,7 @@ restful.delete(<i>string</i> table_name, <i>integer</i>);
       </tr>
     </tbody>
 </table>
-<p>If you don't follow this restrictions the request will not be sent. But even if you somehow done that, Flask is also secured in similiar way.</p>
+<p>If you don't follow this restrictions the request will not be sent. But even if you somehow done that, Flask is also secured in a similar way.</p>
 <h2>Innovative cross-app-links</h2>
 <h3>It's online! <a href="https://cross-app-links.herokuapp.com">https://cross-app-links.herokuapp.com</a></h3>
 <h2>To run locally</h2>

@@ -7,18 +7,19 @@ restful.get(<i>string</i> table_name[, <i>integer</i> element_id]).then(function
 });
 </code>
 
-
+<br/>
 
 <code>
 restful.post(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Object </i> data);
 </code>
 
+<br/>
 
 <code>
 restful.update(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Object </i> data);
 </code>
 
-
+<br/>
 
 <code>
 restful.delete(<i>string</i> table_name, <i>integer</i>);

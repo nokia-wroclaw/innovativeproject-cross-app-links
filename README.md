@@ -1,13 +1,31 @@
 <h2>HTTP requests- Angular</h2>
 <p>There are four types of request GET, POST, PUT, DELETE and they can be called like this:</p>
-```javascript
+
+<pre>
+<code>
 restful.get(<i>string</i> table_name[, <i>integer</i> element_id]).then(function(response){
 <i>JSON Object </i> response
 });
+</code>
+</pre>
+
+<pre>
+<code>
 restful.post(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Object </i> data);
-restful.put(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Object </i> data);
+</code>
+</pre>
+<pre>
+<code>
+restful.update(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Object </i> data);
+</code>
+</pre>
+
+<pre>
+<code>
 restful.delete(<i>string</i> table_name, <i>integer</i>);
-```
+</code>
+</pre>
+
 <p>Every created service's function could get couple params but some of them are REQUIRED for each function:</p>
 <table>
 <thead>

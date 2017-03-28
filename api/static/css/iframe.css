@@ -2,41 +2,43 @@ body,
 ul,
 li {
   margin: 0;
-  padding: 0; }
-
-body {
-  background-color: #34313d; }
+  padding: 0;
+  background-color: #48b0f7; }
 
 .iframe-nav {
   float: left;
   width: auto;
-  max-width: 350px;
-  font-family: 'Lato', sans-serif; }
+  width: 340px;
+  font-family: 'Lato', sans-serif;
+  padding: 10px; }
   .iframe-nav ul {
     width: 100%;
     box-sizing: border-box;
     float: left;
     display: inline-block; }
     .iframe-nav ul li {
-      display: block;
+      display: inline-block;
       float: left;
-      width: 100%; }
+      width: 50%; }
       .iframe-nav ul li a {
-        display: block;
+        display: inline-block;
         float: left;
         padding: 20px;
         width: 100%;
         border-bottom: 1px solid rgba(182, 176, 200, 0.2);
         text-decoration: none;
-        color: #b6b0c8;
+        color: #fff;
         opacity: 0.7;
         font-weight: 600;
-        box-sizing: border-box; }
+        box-sizing: border-box;
+        text-align: center; }
         .iframe-nav ul li a:hover {
           background: rgba(0, 0, 0, 0.1);
           opacity: 1; }
         .iframe-nav ul li a .glyphicon {
-          margin-right: 20px;
-          color: #b6b0c8; }
+          margin-bottom: 20px;
+          display: block;
+          clear: both;
+          font-size: 24px; }
 
 /*# sourceMappingURL=iframe.css.map */

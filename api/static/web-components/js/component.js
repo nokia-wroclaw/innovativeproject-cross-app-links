@@ -9,11 +9,11 @@
             var componentOverflow = this.overflow;
 
             if (component.className.indexOf("visible") === -1) {
-                component.className = component.className.replace(/hidden/g, 'visible');
-                componentOverflow.className = componentOverflow.className.replace(/hidden/g, 'visible');
+                component.className = component.className.replace(/c-hidden/g, 'visible');
+                componentOverflow.className = componentOverflow.className.replace(/c-hidden/g, 'visible');
             } else {
-                component.className = component.className.replace(/visible/g, 'hidden');
-                componentOverflow.className = componentOverflow.className.replace(/visible/g, 'hidden');
+                component.className = component.className.replace(/visible/g, 'c-hidden');
+                componentOverflow.className = componentOverflow.className.replace(/visible/g, 'c-hidden');
             }
         },
         start: function () {

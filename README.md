@@ -37,7 +37,8 @@ restful.login(<i>JSON Object </i> data).then(function(response){
 restful.logout();
 </code>
 <br/>
-<p>Every created service's function could get couple params but some of them are REQUIRED for each function:</p>
+<br/>
+<p>Every created service's functions could get couple params but some of them are REQUIRED for each function:</p>
 <table>
 <thead>
       <tr>

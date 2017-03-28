@@ -417,4 +417,15 @@
                 }
             }
         }
+        .row {
+            .row-buried {
+                padding: 0;
+                &:nth-child(odd) {
+                    padding-right: 10px;
+                }
+                &:nth-child(even) {
+                    padding-left: 10px;
+                }
+            }
+        }
     }

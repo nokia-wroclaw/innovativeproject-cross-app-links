@@ -351,5 +351,11 @@ body {
       box-sizing: border-box; }
       .main-content .box.image-box img {
         width: 100%; }
+  .main-content .row .row-buried {
+    padding: 0; }
+    .main-content .row .row-buried:nth-child(odd) {
+      padding-right: 10px; }
+    .main-content .row .row-buried:nth-child(even) {
+      padding-left: 10px; }
 
 /*# sourceMappingURL=main.css.map */

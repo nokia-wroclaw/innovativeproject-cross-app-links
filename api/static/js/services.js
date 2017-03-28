@@ -80,6 +80,36 @@
                     });
         };
 
+        var _login = function (data) {
+            var url = 'api/auth';
+            if (data)
+                return $http.post(url, data, {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(function (response) {
+                        return response.data;
+                    })
+                    .catch(function (error) {
+                        return null;
+                    });
+        };
+        var _logout = function () {
+            var url = 'api/auth/logout';
+            if (data)
+                return $http.post(url {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(function (response) {
+                        return response.data;
+                    })
+                    .catch(function (error) {
+                        return null;
+                    });
+        };
 
 
 
@@ -87,7 +117,9 @@
             get: _get,
             post: _post,
             update: _update,
-            delete: _delete
+            delete: _delete,
+            login: _login,
+            logout: _logout
         }
 
         }]);

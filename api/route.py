@@ -1,5 +1,9 @@
 from flask import Flask, make_response, jsonify, render_template, redirect, session, g
 from api import app
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask.ext.login import current_user
+from api.database import db
+
 #-----------
 #FUNCTIONS
 #-----------
@@ -32,25 +36,48 @@ components_list=[
     'iframe'
 ]
 
-@app.before_request
-def before_request():
-    
-    if 'email' in session:
-        g.user = session['email']
-    else:
-        g.user = None
+# Login manager and user class to hande auth
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+# put @login_required to deny access for no-login 
 
 #-----------
 #ROUTING
 #-----------
-@app.route('/login')
-def login():
-    if g.user:
-        return redirect('/')
-    else:
-        return make_response(open('api/templates/login-page.html').read())
-    
-    
+
+#Auth route
+# Temporary logs in default user and opens session for it
+@app.route('/api/auth')
+def auth():
+    user = User.query.filter_by(username='bakowroc').first()
+    login_user(user)
+    session['logged_in'] = True
+    return redirect('/')
+
+# we logout user and close session
+@app.route('/api/auth/logout')
+@login_required
+def logout():
+    logout_user()
+    session.pop('logged_in', None)
+    return redirect('/')
+
+# to check if user is logged in
+@app.route('/api/auth/checkifloggedin')
+@login_required
+def checkifloggedin():
+    return 'The current user is ' + current_user.username
+
     
 #Default templates for Flask route
 @app.route('/')
@@ -59,10 +86,10 @@ def login():
 def main(content='dashboard', content_id=None):
     
         if content in index_content_list:
-            if g.user:
-                return make_response(open('api/templates/index.html').read())
+            if not session.get('logged_in'):
+                return make_response(open('api/templates/login-page.html').read())
             else:
-                return redirect('/login')
+                return make_response(open('api/templates/index.html').read())
         else:    
             return make_response(open('api/templates/404.html').read())
    
@@ -75,19 +102,6 @@ def api(table, row_id = None):
     if table in api_list:
         return jsonify({'name': 'cross-app-links', 'wlcm_txt': 'Hello World!'})
     return None
-
-
-
-
-#Auth route - TEMPORARY
-@app.route('/api/auth')
-def auth():
-    session['email'] = 'test@com.pl'
-    return redirect('/')
-@app.route('/api/auth/logout')
-def logout():
-    session['email'] = None
-    return redirect('/')
 
 
 

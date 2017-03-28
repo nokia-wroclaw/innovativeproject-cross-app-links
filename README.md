@@ -24,8 +24,8 @@ restful.update(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Obje
 <code>
 restful.delete(<i>string</i> table_name, <i>integer</i> element_id);
 </code>
-<br/>
-<p>And there're two function which are used to login and logout:</p>
+<br/><br/>
+<p>And there're two functions which are used to login and logout:</p>
 
 <code>
 restful.login(<i>JSON Object </i> data).then(function(response){
@@ -37,8 +37,8 @@ restful.login(<i>JSON Object </i> data).then(function(response){
 restful.logout();
 </code>
 <br/>
-<br/>
-<p>Every created service's functions could get couple params but some of them are REQUIRED for each function:</p>
+
+<p>Every created service's function could get couple params but some of them are REQUIRED for each function:</p>
 <table>
 <thead>
       <tr>

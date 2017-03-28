@@ -22,7 +22,7 @@ restful.update(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Obje
 <br/>
 
 <code>
-restful.delete(<i>string</i> table_name, <i>integer</i>);
+restful.delete(<i>string</i> table_name, <i>integer</i> element_id);
 </code>
 
 <p>Every created service's function could get couple params but some of them are REQUIRED for each function:</p>

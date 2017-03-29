@@ -57,11 +57,15 @@ def api(table, row_id = None):
         return jsonify({'name': 'cross-app-links', 'wlcm_txt': 'Hello World!'})
     return None
 
-#Routes for components
+#Routes for components data
+@app.route('/api/component/<component_type>/<component_id>')
+def component(component_type, component_id):
+    if component_type=='iframe':
+        return render_template('iframe-web-component.html')
+    elif component_type=='json':
+        return jsonify([{'name': 'Office', 'link': 'http://www.google.pl'},{'name': 'Web', 'link': 'http://www.google.pl'}, {'name': 'Yahoo', 'link': 'http://www.google.pl'}])
+    return None
 
-@app.route('/api/applications', methods=['GET'])
-def json_applications():
-    return jsonify([{'name': 'Office', 'link': 'http://www.google.pl'},{'name': 'Web', 'link': 'http://www.google.pl'}, {'name': 'Yahoo', 'link': 'http://www.google.pl'}])
 
 #Routes for components test
 @app.route('/component/<component_type>')
@@ -69,6 +73,6 @@ def component_test(component_type):
     if component_type=='iframe':
         return make_response(open('api/static/web-components/iframe/iframe-index.html').read())
     elif component_type=='json':
-        return make_response(open('api/static/json/app.html').read())
+        return make_response(open('api/static/web-components/json/json-index.html').read())
     return None
 

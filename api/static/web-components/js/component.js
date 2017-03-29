@@ -16,6 +16,28 @@
                 componentOverflow.className = componentOverflow.className.replace(/visible/g, 'c-hidden');
             }
         },
+        request: function () {
+
+            var req = new XMLHttpRequest();
+            // creating GET request to yahoo weather API
+            req.open('GET', "http://127.0.0.1:5000/api/component/json/1212", true);
+            // sending a request
+            req.send();
+
+            req.onreadystatechange = generateHTML;
+            var navbar = document.querySelector('.component-overflow ul');
+
+            function generateHTML() {
+                if (req.readyState == 4 && req.status == 200) {
+                    var listGenerateString = '';
+                    var linkArray = JSON.parse(req.responseText);
+                    for (var i = 0; i < linkArray.length; i++) {
+                        listGenerateString += '<li><a href="' + linkArray[i]['link'] + '"><span class="glyphicon glyphicon-link"></span>' + linkArray[i]['name'] + '</a></li>';
+                    }
+                    navbar.insertAdjacentHTML('beforeend', listGenerateString);
+                }
+            }
+        },
         start: function () {
             var button = this.button;
             var component = this.element;
@@ -28,6 +50,7 @@
             component.style.width = parseInt(pageNavbarHeight) + 'px';
             componentOverflow.style.top = parseInt(pageNavbarHeight) + 'px';
             button.addEventListener('click', this.use.bind(this));
+            this.request();
             component.style.visibility = 'visible';
         }
     };

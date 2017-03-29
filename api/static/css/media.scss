@@ -19,17 +19,20 @@
 
 @media only screen and (max-width: 992px) {
     .main-header {
-        background: darken(#34313d,3%);
+        background: darken(#34313d, 3%);
         border: 0;
-        .site-name {
-            position: static;
-            a {
-                font-size: 6px;
+        box-shadow: none;
+        .header-cell {
+            .site-name {
+                position: static;
+                a {
+                    font-size: 6px;
+                }
             }
-        }
-        .user-section {
-            .user-name {
-                color: #fafafa;
+            .user-section {
+                .user-name {
+                    color: #fafafa;
+                }
             }
         }
     }

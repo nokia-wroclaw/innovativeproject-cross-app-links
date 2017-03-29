@@ -27,6 +27,9 @@ body {
   padding: 0;
   margin: 0; }
 
+.no-padding {
+  padding: 0; }
+
 [ng\:cloak],
 [ng-cloak],
 [data-ng-cloak],
@@ -37,112 +40,143 @@ body {
 
 /*WEBSITE */
 .main-header {
-  height: 90px;
+  height: auto;
   background: #fafafa;
   box-sizing: border-box;
   box-shadow: 0 3px 7px #e6e6e6;
   position: relative; }
-  .main-header .site-name {
-    padding: 0;
+  .main-header .header-land {
+    background: url(../img/header-land.jpg);
+    height: 200px;
+    overflow: hidden;
     box-sizing: border-box;
-    float: left;
-    position: fixed;
-    top: 0;
-    left: 0; }
-    .main-header .site-name a {
-      text-decoration: none;
-      width: 100%;
-      padding: 0;
-      margin: 0;
-      float: left;
-      color: #f0f0f0;
-      opacity: 1;
-      box-sizing: border-box;
-      height: 90px;
-      background: #2ea4d2;
-      font-size: 16px;
-      text-transform: uppercase;
-      padding-top: 35px;
-      font-weight: 800;
-      text-align: center; }
-      .main-header .site-name a:hover {
-        background: #2ea4d2;
-        color: #F0F0F0; }
-  .main-header .user-section {
-    float: right;
-    position: relative;
     padding: 20px;
-    box-sizing: border-box;
-    height: 88px;
-    transition: all 0.3s ease; }
-    .main-header .user-section .user-avatar {
-      position: relative;
-      display: inline-block;
+    position: relative; }
+    .main-header .header-land .partial-name {
+      color: #fff;
+      font-size: 26px;
+      font-weight: 300;
       float: left;
-      overflow: hidden;
-      border-radius: 100%;
-      height: 50px;
-      width: 50px;
-      background: #D45A5A;
-      text-align: center; }
-      .main-header .user-section .user-avatar img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 50px;
-        display: block;
-        border-radius: 100%;
-        transition: all 0.3s ease;
-        z-index: 1; }
-      .main-header .user-section .user-avatar .glyphicon {
-        position: absolute;
-        left: 0;
-        right: 0;
-        color: #fff;
-        margin-top: 13px;
-        font-size: 20px;
-        z-index: 2;
-        opacity: 0; }
-    .main-header .user-section .user-name {
-      display: inline-block;
-      float: left;
-      margin: 16px 20px;
-      margin-left: 5px;
-      font-weight: 800; }
-    .main-header .user-section:hover {
-      cursor: pointer;
-      transition: all 0.3s ease; }
-    .main-header .user-section:hover .user-avatar img {
-      opacity: 0.2;
-      transition: all 0.3s ease; }
-    .main-header .user-section:hover .user-avatar .glyphicon {
-      opacity: 1;
-      transition: all 0.3s ease; }
-    .main-header .user-section .user-menu {
-      position: absolute;
-      width: 100%;
-      box-sizing: border-box;
-      right: 0;
-      top: 88px;
-      background: #fafafa;
       text-align: left;
-      z-index: 3; }
-      .main-header .user-section .user-menu ul {
+      width: auto;
+      position: absolute;
+      bottom: 20px;
+      left: 20px; }
+      .main-header .header-land .partial-name .loc-icon {
+        margin-right: 20px; }
+  .main-header .header-cell {
+    height: 90px; }
+    .main-header .header-cell .site-name {
+      padding: 0;
+      box-sizing: border-box;
+      float: left;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 5; }
+      .main-header .header-cell .site-name a {
+        text-decoration: none;
+        width: 100%;
+        padding: 0;
+        margin: 0;
         float: left;
+        color: #f0f0f0;
+        opacity: 1;
+        box-sizing: border-box;
+        height: 90px;
+        background: #2ea4d2;
+        font-size: 16px;
+        text-transform: uppercase;
+        padding-top: 35px;
+        font-weight: 800;
+        text-align: center; }
+        .main-header .header-cell .site-name a:hover {
+          background: #2ea4d2;
+          color: #F0F0F0; }
+    .main-header .header-cell .menu-toggle {
+      color: #e3e3e3;
+      font-size: 24px;
+      box-sizing: border-box;
+      height: 100%;
+      padding: 30px 20px; }
+      .main-header .header-cell .menu-toggle:hover {
+        color: #ddd;
+        cursor: pointer; }
+    .main-header .header-cell .user-section {
+      float: right;
+      position: relative;
+      padding: 20px;
+      box-sizing: border-box;
+      height: 88px;
+      transition: all 0.3s ease; }
+      .main-header .header-cell .user-section .user-avatar {
+        position: relative;
         display: inline-block;
-        width: 100%; }
-        .main-header .user-section .user-menu ul li {
+        float: left;
+        overflow: hidden;
+        border-radius: 100%;
+        height: 50px;
+        width: 50px;
+        background: #D45A5A;
+        text-align: center; }
+        .main-header .header-cell .user-section .user-avatar img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 50px;
           display: block;
+          border-radius: 100%;
+          transition: all 0.3s ease;
+          z-index: 1; }
+        .main-header .header-cell .user-section .user-avatar .glyphicon {
+          position: absolute;
+          left: 0;
+          right: 0;
+          color: #fff;
+          margin-top: 13px;
+          font-size: 20px;
+          z-index: 2;
+          opacity: 0; }
+      .main-header .header-cell .user-section .user-name {
+        display: inline-block;
+        float: left;
+        margin: 16px 20px;
+        margin-left: 5px;
+        font-weight: 800; }
+      .main-header .header-cell .user-section:hover {
+        cursor: pointer;
+        transition: all 0.3s ease; }
+      .main-header .header-cell .user-section:hover .user-avatar img {
+        opacity: 0.2;
+        transition: all 0.3s ease; }
+      .main-header .header-cell .user-section:hover .user-avatar .glyphicon {
+        opacity: 1;
+        transition: all 0.3s ease; }
+      .main-header .header-cell .user-section .user-menu {
+        position: absolute;
+        width: 100%;
+        box-sizing: border-box;
+        right: 0;
+        top: 88px;
+        background: #fafafa;
+        text-align: left;
+        z-index: 3; }
+        .main-header .header-cell .user-section .user-menu ul {
           float: left;
+          display: inline-block;
           width: 100%; }
-          .main-header .user-section .user-menu ul li a {
+          .main-header .header-cell .user-section .user-menu ul li {
             display: block;
-            width: 100%;
-            padding: 15px;
-            color: #34313d; }
-            .main-header .user-section .user-menu ul li a .glyphicon {
-              font-size: 11px;
-              margin-right: 15px; }
+            float: left;
+            width: 100%; }
+            .main-header .header-cell .user-section .user-menu ul li a {
+              display: block;
+              width: 100%;
+              padding: 15px;
+              color: #34313d; }
+              .main-header .header-cell .user-section .user-menu ul li a .glyphicon {
+                font-size: 11px;
+                margin-right: 15px; }
 
 .main-navigation {
   position: fixed;

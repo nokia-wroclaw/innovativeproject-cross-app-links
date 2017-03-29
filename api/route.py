@@ -63,5 +63,9 @@ def component(component_type, component_id):
     if component_type=='iframe':
         return render_template('iframe-web-component.html')
     elif component_type=='json':
-        return jsonify({'name': 'json-component', 'data': '755'})
+        return make_response(open('api/static/json/app.html').read())
     return None
+
+@app.route('/api/applications', methods=['GET'])
+def json_applications():
+    return jsonify([{'name': 'Office', 'link': 'http://www.google.pl'},{'name': 'Web', 'link': 'http://www.google.pl'}, {'name': 'Yahoo', 'link': 'http://www.google.pl'}])

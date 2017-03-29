@@ -52,11 +52,9 @@ def load_user(user_id):
 # pass: admin123
 @app.route('/api/auth', methods=['POST'])
 def auth():
-    remail = request.form['email']
-    rpassword = request.form['password']
-    user = User.query.filter_by(email=remail).first()
+    user = User.query.filter_by(email=request.form['email']).first()
     if user:
-        if sha256_crypt.verify(rpassword, user.password):
+        if sha256_crypt.verify(request.form['password'], user.password):
             login_user(user)
             session['logged_in'] = True
             return redirect('/')

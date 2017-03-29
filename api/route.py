@@ -49,13 +49,14 @@ def load_user(user_id):
 
 #Auth route
 # Temporary logs in default user and opens session for it
+# pass: admin123
 @app.route('/api/auth', methods=['POST'])
 def auth():
     remail = request.form['email']
     rpassword = request.form['password']
     user = User.query.filter_by(email=remail).first()
     if user:
-        if user.password == rpassword:
+        if sha256_crypt.verify(rpassword, user.password):
             login_user(user)
             session['logged_in'] = True
             return redirect('/')
@@ -64,7 +65,16 @@ def auth():
     else:
         return make_response(open('api/templates/login-page.html').read())
 
-
+# @app.route('/api/auth/register', methods=['POST'])
+# def register():
+#     if request.form['email']:
+#         regemail = request.form['email']
+#         regpassword = request.form['password']
+#         regusername = request.form['username']
+#         hashed = sha256_crypt.encrypt(regpassword)
+#         return 'User ' + regusername + ' registered!'
+#     else:
+#        return make_response(open('api/templates/404.html').read())
 
 # we logout user and close session
 @app.route('/api/auth/logout')

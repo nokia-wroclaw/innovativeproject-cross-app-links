@@ -1,32 +1,49 @@
+body,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    background-color: #48b0f7;
+}
+
+body {}
+
 .iframe-nav {
     float: left;
     width: auto;
-    max-width: 180px;
+    width: 340px;
     font-family: 'Lato', sans-serif;
+    padding: 10px;
     ul {
         width: 100%;
         box-sizing: border-box;
         float: left;
         display: inline-block;
         li {
-            display: block;
+            display: inline-block;
             float: left;
-            width: 100%;
+            width: 50%;
             a {
-                display: block;
+                display: inline-block;
                 float: left;
                 padding: 20px;
                 width: 100%;
-                border-bottom: 1px solid #ddd;
+                border-bottom: 1px solid rgba(#b6b0c8, 0.2);
                 text-decoration: none;
-                color: black;
+                color: #fff;
+                opacity: 0.7;
                 font-weight: 600;
                 box-sizing: border-box;
+                text-align: center;
                 &:hover {
-                    background: #f0f0f0;
+                    background: rgba(black, 0.1);
+                    opacity: 1;
                 }
                 .glyphicon {
-                    margin-right: 20px;
+                    margin-bottom: 20px;
+                    display: block;
+                    clear: both;
+                    font-size: 24px;
                 }
             }
         }

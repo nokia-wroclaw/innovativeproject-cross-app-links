@@ -3,6 +3,7 @@ from api import app
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from api.database import db
 from api.models import User
+from flask import request
 
 #Registered list of available templates
 index_content_list = [
@@ -47,12 +48,17 @@ def load_user(user_id):
 
 #Auth route
 # Temporary logs in default user and opens session for it
-@app.route('/api/auth')
+@app.route('/api/auth', methods=['POST'])
 def auth():
-    user = User.query.filter_by(username='bakowroc').first()
-    login_user(user)
-    session['logged_in'] = True
-    return redirect('/')
+    remail = request.form['email']
+    rpassword = request.form['password']
+    user = User.query.filter_by(email=remail).first()
+    if user.password == rpassword:
+        login_user(user)
+        session['logged_in'] = True
+        return redirect('/')
+    else:
+        return make_response(open('api/templates/login-page.html').read())
 
 # we logout user and close session
 @app.route('/api/auth/logout')
@@ -66,7 +72,7 @@ def logout():
 @app.route('/api/auth/checkifloggedin')
 @login_required
 def checkifloggedin():
-    return 'The current user is ' + current_user.username
+    return 'The current user is ' + current_user.username + ' / ' + current_user.email
 
     
 #Default templates for Flask route

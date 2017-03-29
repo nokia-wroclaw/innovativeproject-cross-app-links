@@ -1,3 +1,5 @@
+<h2>Dashboard static preview</h2>
+<p>For now it's only static part written in html/css. As soon as we connect the db and angular it will be edited.</p>
 <h2>Innovative cross-app-links</h2>
 <h3>It's online! <a href="https://cross-app-links.herokuapp.com">https://cross-app-links.herokuapp.com</a></h3>
 <h2>To run locally</h2>

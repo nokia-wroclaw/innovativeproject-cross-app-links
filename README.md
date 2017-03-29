@@ -1,5 +1,7 @@
 <h2>JSON component</h2>
 <p>It's available on your computer here(probably): <a href="http://127.0.0.1:5000/component/json">http://127.0.0.1:5000/component/json</a></p>
+<h2>Iframe component</h2>
+<p>It's available on your computer here(probably): <a href="http://127.0.0.1:5000/component/iframe">http://127.0.0.1:5000/component/iframe</a></p>
 <h2>To run locally</h2>
 <p>We're using npm / bower so first you have to install them. Ofc python is also necessary(3.6 for best).</p>
 <p>Try <a href="https://nodejs.org/en/">this</a> to install node.js</p>

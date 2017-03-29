@@ -21,7 +21,7 @@ body {
 .container-fluid {
   padding: 0;
   margin: 0;
-  background: #f3f3f3; }
+  background: #f0f0f0; }
 
 .row {
   padding: 0;
@@ -40,7 +40,7 @@ body {
   height: 90px;
   background: #fafafa;
   box-sizing: border-box;
-  border-bottom: 2px solid #e3e3e3;
+  box-shadow: 0 3px 7px #e6e6e6;
   position: relative; }
   .main-header .site-name {
     padding: 0;
@@ -126,9 +126,7 @@ body {
       top: 88px;
       background: #fafafa;
       text-align: left;
-      z-index: 3;
-      border: 1px solid #e3e3e3;
-      border-top: 2px solid #e3e3e3; }
+      z-index: 3; }
       .main-header .user-section .user-menu ul {
         float: left;
         display: inline-block;
@@ -209,9 +207,8 @@ body {
     padding: 20px;
     box-sizing: border-box;
     background: #fafafa;
-    border: 1px solid #e3e3e3;
+    box-shadow: 0 3px 7px #e6e6e6;
     margin-bottom: 20px;
-    border-radius: 3px;
     width: 100%;
     float: left;
     overflow: hidden;
@@ -246,7 +243,6 @@ body {
     .main-content .box.link-box {
       float: left; }
       .main-content .box.link-box .main-link-info {
-        margin-bottom: 30px;
         float: left; }
         .main-content .box.link-box .main-link-info img {
           float: left;
@@ -259,19 +255,13 @@ body {
           font-size: 0.8vw;
           float: left;
           display: inline-block;
-          padding: 10px 20px;
-          padding-right: 0;
-          padding-top: 12px; }
-      .main-content .box.link-box .main-link-desc {
-        float: left;
-        clear: both;
-        padding: 20px 0px;
-        border-top: 1px solid #e3e3e3;
-        line-height: 1.4;
-        font-weight: 400;
-        color: #888; }
+          padding: 15px 20px;
+          padding-right: 0; }
       .main-content .box.link-box .settings-icon {
-        float: left; }
+        float: right;
+        padding: 15px 0;
+        height: 45px;
+        box-sizing: border-box; }
     .main-content .box.box-table {
       float: left;
       padding: 0; }
@@ -293,17 +283,31 @@ body {
         .main-content .box.box-table .table thead tr td,
         .main-content .box.box-table .table tbody tr td {
           color: #888; }
-      .main-content .box.box-table .full-width-button {
+      .main-content .box.box-table .full-width-button-area {
         float: left;
         width: 100%;
         box-sizing: border-box;
-        background: #f2f2f2;
+        padding: 20px;
+        background: transparent;
         text-align: center;
-        padding: 10px;
-        text-decoration: none;
-        border-top: 1px solid #e3e3e3; }
-        .main-content .box.box-table .full-width-button:hover {
-          background: #e6e6e6; }
+        text-decoration: none; }
+        .main-content .box.box-table .full-width-button-area .button {
+          float: right;
+          padding: 10px;
+          color: #fff;
+          border-radius: 3px;
+          opacity: 0.8;
+          text-decoration: none; }
+          .main-content .box.box-table .full-width-button-area .button:hover {
+            opacity: 1; }
+          .main-content .box.box-table .full-width-button-area .button .glyphicon {
+            margin-right: 10px; }
+          .main-content .box.box-table .full-width-button-area .button.blue {
+            background: #2ea4d2; }
+          .main-content .box.box-table .full-width-button-area .button.orange {
+            background: #F4B759; }
+          .main-content .box.box-table .full-width-button-area .button.green {
+            background: #3fce91; }
       .main-content .box.box-table .tag {
         border-radius: 2px;
         float: right;
@@ -351,6 +355,28 @@ body {
       box-sizing: border-box; }
       .main-content .box.image-box img {
         width: 100%; }
+    .main-content .box.color-border-box {
+      border-left: 3px solid #ddd;
+      box-sizing: border-box; }
+      .main-content .box.color-border-box.blue {
+        border-color: #2ea4d2; }
+      .main-content .box.color-border-box.orange {
+        border-color: #F4B759; }
+      .main-content .box.color-border-box.green {
+        border-color: #3fce91; }
+      .main-content .box.color-border-box .site-stat .stat-number {
+        font-size: 56px;
+        font-weight: 800;
+        width: 100%;
+        text-align: center;
+        float: left; }
+      .main-content .box.color-border-box .site-stat .stat-desc {
+        font-size: 14px;
+        font-weight: 400;
+        width: 100%;
+        text-align: center;
+        float: left;
+        color: #888; }
   .main-content .row .row-buried {
     padding: 0; }
     .main-content .row .row-buried:nth-child(odd) {

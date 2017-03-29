@@ -24,7 +24,7 @@
     .container-fluid {
         padding: 0;
         margin: 0;
-        background: #f3f3f3;
+        background: #f0f0f0;
     }
     
     .row {
@@ -46,7 +46,7 @@
         height: 90px;
         background: darken(white, 2%);
         box-sizing: border-box;
-        border-bottom: 2px solid lighten(#ccc, 9%);
+        box-shadow: 0 3px 7px lighten(#ccc, 10%);
         position: relative;
         .site-name {
             padding: 0;
@@ -143,8 +143,7 @@
                 background: darken(white, 2%);
                 text-align: left;
                 z-index: 3;
-                border: 1px solid lighten(#ccc, 9%);
-                border-top: 2px solid lighten(#ccc, 9%);
+                //border: 1px solid lighten(#ccc, 9%);
                 ul {
                     float: left;
                     display: inline-block;
@@ -240,9 +239,10 @@
             padding: 20px;
             box-sizing: border-box;
             background: darken(white, 2%);
-            border: 1px solid lighten(#ccc, 9%);
+            //border: 1px solid lighten(#ccc, 9%);
+            box-shadow: 0 3px 7px lighten(#ccc, 10%);
             margin-bottom: 20px;
-            border-radius: 3px;
+            //border-radius: 3px;
             width: 100%;
             float: left;
             overflow: hidden;
@@ -284,7 +284,6 @@
             &.link-box {
                 float: left;
                 .main-link-info {
-                    margin-bottom: 30px;
                     float: left;
                     img {
                         float: left;
@@ -298,22 +297,15 @@
                         font-size: 0.8vw;
                         float: left;
                         display: inline-block;
-                        padding: 10px 20px;
+                        padding: 15px 20px;
                         padding-right: 0;
-                        padding-top: 12px;
                     }
                 }
-                .main-link-desc {
-                    float: left;
-                    clear: both;
-                    padding: 20px 0px;
-                    border-top: 1px solid lighten(#ccc, 9%);
-                    line-height: 1.4;
-                    font-weight: 400;
-                    color: #888;
-                }
                 .settings-icon {
-                    float: left;
+                    float: right;
+                    padding: 15px 0;
+                    height: 45px;
+                    box-sizing: border-box;
                 }
             }
             &.box-table {
@@ -342,17 +334,36 @@
                         }
                     }
                 }
-                .full-width-button {
+                .full-width-button-area {
                     float: left;
                     width: 100%;
                     box-sizing: border-box;
-                    background: lighten(#ccc, 15%);
+                    padding: 20px;
+                    background: transparent;
                     text-align: center;
-                    padding: 10px;
                     text-decoration: none;
-                    border-top: 1px solid lighten(#ccc, 9%);
-                    &:hover {
-                        background: lighten(#ccc, 10%);
+                    .button {
+                        float: right;
+                        padding: 10px;
+                        color: #fff;
+                        border-radius: 3px;
+                        opacity: 0.8;
+                        text-decoration: none;
+                        &:hover {
+                            opacity: 1;
+                        }
+                        .glyphicon {
+                            margin-right: 10px;
+                        }
+                        &.blue {
+                            background: #2ea4d2;
+                        }
+                        &.orange {
+                            background: #F4B759;
+                        }
+                        &.green {
+                            background: #3fce91;
+                        }
                     }
                 }
                 .tag {
@@ -414,6 +425,36 @@
                 box-sizing: border-box;
                 img {
                     width: 100%;
+                }
+            }
+            &.color-border-box {
+                border-left: 3px solid #ddd;
+                box-sizing: border-box;
+                &.blue {
+                    border-color: #2ea4d2;
+                }
+                &.orange {
+                    border-color: #F4B759;
+                }
+                &.green {
+                    border-color: #3fce91;
+                }
+                .site-stat {
+                    .stat-number {
+                        font-size: 56px;
+                        font-weight: 800;
+                        width: 100%;
+                        text-align: center;
+                        float: left;
+                    }
+                    .stat-desc {
+                        font-size: 14px;
+                        font-weight: 400;
+                        width: 100%;
+                        text-align: center;
+                        float: left;
+                        color: #888;
+                    }
                 }
             }
         }

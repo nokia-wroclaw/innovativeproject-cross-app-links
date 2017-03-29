@@ -21,7 +21,13 @@ body {
 .container-fluid {
   padding: 0;
   margin: 0;
-  background: #f0f0f0; }
+  background: #f0f0f0;
+  transition: 0.3s ease; }
+
+.container {
+  width: 66.9%;
+  padding: 0;
+  transition: 0.3s ease; }
 
 .row {
   padding: 0;

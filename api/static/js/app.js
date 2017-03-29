@@ -10,6 +10,13 @@
             },
             scrollInertia: 0,
             axis: 'y'
+        };
+
+        $scope.menu = {
+            status: true,
+            hide: function () {
+                this.status = !this.status;
+            }
         }
 
         }]);

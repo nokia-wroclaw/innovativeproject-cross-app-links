@@ -1,4 +1,11 @@
+/*For almost medium*/
+@media only screen and (max-width: 1440px) {
+  .container {
+    width: 90%; } }
 @media only screen and (max-width: 1200px) {
+  .container {
+    width: 100%; }
+
   .main-navigation {
     top: 0; }
     .main-navigation ul li a {
@@ -7,14 +14,13 @@
         margin: 0; } }
 /* Medium Devices, Desktops */
 @media only screen and (max-width: 992px) {
+  .container {
+    width: 100%; }
+
   .main-header {
     background: #2d2a35;
     border: 0;
     box-shadow: none; }
-    .main-header .header-cell .site-name {
-      position: static; }
-      .main-header .header-cell .site-name a {
-        font-size: 6px; }
     .main-header .header-cell .user-section .user-name {
       color: #fafafa; }
 

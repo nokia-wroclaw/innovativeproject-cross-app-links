@@ -25,6 +25,14 @@
         padding: 0;
         margin: 0;
         background: #f0f0f0;
+        transition: 0.3s ease;
+    }
+    
+    .container {
+        width: 66.9%;
+        padding: 0;
+        // margin: 0 auto;
+        transition: 0.3s ease;
     }
     
     .row {
@@ -284,7 +292,7 @@
         box-sizing: border-box;
         background: darken(white, 2%);
         box-shadow: 0 3px 7px lighten(#ccc, 10%);
-        margin-bottom: 20px;   
+        margin-bottom: 20px;
         width: 100%;
         float: left;
         overflow: hidden;

@@ -1,16 +1,8 @@
-from flask import Flask, make_response, jsonify, render_template, redirect, session, g
+from flask import Flask, make_response, jsonify, render_template, redirect, session
 from api import app
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask.ext.login import current_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from api.database import db
-
-#-----------
-#FUNCTIONS
-#-----------
-
-#-----------
-#STATIC VAL
-#-----------
+from api.models import User
 
 #Registered list of available templates
 index_content_list = [
@@ -36,20 +28,18 @@ components_list=[
     'iframe'
 ]
 
-# Login manager and user class to hande auth
+# Login manager to hande auth
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-class User(UserMixin, db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
 # put @login_required to deny access for no-login 
+
+
+
 
 #-----------
 #ROUTING
@@ -102,7 +92,6 @@ def api(table, row_id = None):
     if table in api_list:
         return jsonify({'name': 'cross-app-links', 'wlcm_txt': 'Hello World!'})
     return None
-
 
 
 #Routes for components

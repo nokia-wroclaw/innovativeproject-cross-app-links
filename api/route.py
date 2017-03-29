@@ -4,6 +4,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from api.database import db
 from api.models import User
 from flask import request
+from passlib.hash import sha256_crypt
 
 #Registered list of available templates
 index_content_list = [
@@ -53,12 +54,17 @@ def auth():
     remail = request.form['email']
     rpassword = request.form['password']
     user = User.query.filter_by(email=remail).first()
-    if user.password == rpassword:
-        login_user(user)
-        session['logged_in'] = True
-        return redirect('/')
+    if user:
+        if user.password == rpassword:
+            login_user(user)
+            session['logged_in'] = True
+            return redirect('/')
+        else:
+            return make_response(open('api/templates/login-page.html').read())
     else:
         return make_response(open('api/templates/login-page.html').read())
+
+
 
 # we logout user and close session
 @app.route('/api/auth/logout')

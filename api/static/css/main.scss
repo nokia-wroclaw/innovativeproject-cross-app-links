@@ -29,8 +29,8 @@
     }
     
     .container {
-        width: 66.9%;
-        padding: 0;
+        width: 68.8%;
+        box-sizing: border-box;
         // margin: 0 auto;
         transition: 0.3s ease;
     }
@@ -62,7 +62,6 @@
         position: relative;
         .header-land {
             background: url(../img/header-land.jpg);
-           
             height: 200px;
             overflow: hidden;
             box-sizing: border-box;

@@ -14,6 +14,7 @@
     }
     .main-navigation {
         top: 0;
+        .main-navigation-overflow{
         ul {
             li {
                 a {
@@ -24,6 +25,7 @@
                 }
             }
         }
+    }
     }
 }
 

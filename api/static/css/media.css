@@ -9,9 +9,9 @@
 
   .main-navigation {
     top: 0; }
-    .main-navigation ul li a {
+    .main-navigation .main-navigation-overflow ul li a {
       text-align: center; }
-      .main-navigation ul li a .glyphicon {
+      .main-navigation .main-navigation-overflow ul li a .glyphicon {
         margin: 0; } }
 /* Medium Devices, Desktops */
 @media only screen and (max-width: 992px) {

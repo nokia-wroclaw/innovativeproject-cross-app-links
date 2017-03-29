@@ -30,7 +30,7 @@ components_list=[
     'iframe'
 ]
 
-# Login manager to hande auth
+#Login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -38,9 +38,7 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# put @login_required to deny access for no-login 
-
-
+# put @login_required to deny access for unknown visitors
 
 
 #-----------
@@ -48,7 +46,7 @@ def load_user(user_id):
 #-----------
 
 #Auth route
-# Temporary logs in default user and opens session for it
+# User verification
 # pass: admin123
 @app.route('/api/auth', methods=['POST'])
 def auth():
@@ -63,18 +61,8 @@ def auth():
     else:
         return make_response(open('api/templates/login-page.html').read())
 
-# @app.route('/api/auth/register', methods=['POST'])
-# def register():
-#     if request.form['email']:
-#         regemail = request.form['email']
-#         regpassword = request.form['password']
-#         regusername = request.form['username']
-#         hashed = sha256_crypt.encrypt(regpassword)
-#         return 'User ' + regusername + ' registered!'
-#     else:
-#        return make_response(open('api/templates/404.html').read())
 
-# we logout user and close session
+#Logout user and close session
 @app.route('/api/auth/logout')
 @login_required
 def logout():
@@ -82,7 +70,7 @@ def logout():
     session.pop('logged_in', None)
     return redirect('/')
 
-# to check if user is logged in
+#Verify if user is logged in
 @app.route('/api/auth/checkifloggedin')
 @login_required
 def checkifloggedin():

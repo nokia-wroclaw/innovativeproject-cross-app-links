@@ -29,7 +29,7 @@ class Group(db.Model):
         
     def __init__(name):
         
-        self.group_name=name
+        self.name=name
 
             
             
@@ -57,8 +57,7 @@ class Log(db.Model):
     content=db.Column(db.String(60),unique=True)
     author_id=db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, data_time, content, author_id):
+    def __init__(self, content, author_id):
         
-        self.data_time=data_time
-        self.author=author
         self.content=content
+        self.author=author_id

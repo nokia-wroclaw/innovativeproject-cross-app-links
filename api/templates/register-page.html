@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800,900" rel="stylesheet">
+    <!--        BOWER PCKG-->
+    <link rel="stylesheet" href="../static/bower_components/dstyle_resetCSS/reset.min.css">
+    <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!--        BOWER PCKG:END-->
+    <link rel="stylesheet" href="../static/css/loginpage.css">
+    <link rel="stylesheet" href="../static/css/media.css">
+
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>Sign in</h1>
+        <form class="login-form" method="post" name="login_form" action="/api/auth/register">
+            <div class="input-socket">
+                <input type="text" name="email" placeholder="Your e-mail">
+                <span class="input-icon"><span class="glyphicon glyphicon-user"></span></span>
+            </div>
+            <div class="input-socket">
+                <input type="text" name="username" placeholder="Your username">
+                <span class="input-icon"><span class="glyphicon glyphicon-user"></span></span>
+            </div>
+            <div class="input-socket">
+                <input type="password" name="password" placeholder="Your password">
+                <span class="input-icon"><span class="glyphicon glyphicon-lock"></span></span>
+            </div>
+            <input type="submit" name="submit" value="Register">
+            <span class="form-link forgotten-pass"><a href="#forgot">Forgot your password?</a></span>
+            <span class="form-link new-account"><a href="#new-account">I'd like to register a new account</a></span>
+        </form>
+    </div>
+</body>
+
+</html>

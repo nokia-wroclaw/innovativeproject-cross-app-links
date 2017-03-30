@@ -70,6 +70,33 @@ def logout():
     session.pop('logged_in', None)
     return redirect('/')
 
+#Register new user in database
+@app.route('/api/auth/register', methods=['POST'])
+@login_required
+def register():
+    if not User.query.filter_by(email=request.form['email']).first():
+        if not User.query.filter_by(username=request.form['username']).first():
+            new = User(request.form['username'],request.form['email'],sha256_crypt.encrypt(request.form['password']))
+            db.session.add(new)
+            db.session.commit()
+            return 'New user created.'
+        else:
+            return 'Error. Username already taken!'
+    else:
+        return 'Error. Email already in use!'
+
+#Verify user and redirect to register form        
+@app.route('/register')
+def registerpage():
+    if session.get('logged_in'):
+        if current_user.username == 'admin':
+            return make_response(open('api/templates/register-page.html').read())
+        else:
+            return redirect('/')
+    else:
+        return redirect('/')
+
+
 #Verify if user is logged in
 @app.route('/api/auth/checkifloggedin')
 @login_required

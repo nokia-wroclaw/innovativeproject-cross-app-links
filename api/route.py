@@ -1,5 +1,6 @@
 from flask import Flask, make_response, jsonify, render_template, redirect
 from api import app
+from api.models import User
 
 #-----------
 #FUNCTIONS
@@ -65,3 +66,7 @@ def component(component_type, component_id):
     elif component_type=='json':
         return jsonify({'name': 'json-component', 'data': '755'})
     return None
+
+@app.route('/database/<table>')
+def database(table):
+    user = User.query.all()

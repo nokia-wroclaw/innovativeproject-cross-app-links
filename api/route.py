@@ -1,9 +1,8 @@
-from flask import Flask, make_response, jsonify, render_template, redirect, session
+from flask import Flask, make_response, jsonify, render_template, redirect, session, request, g
 from api import app
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from api.database import db
 from api.models import User
-from flask import request
 from passlib.hash import sha256_crypt
 
 #Registered list of available templates
@@ -40,6 +39,11 @@ def load_user(user_id):
 
 # put @login_required to deny access for unknown visitors
 
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user' in session:
+        g.user = session['user']
 
 #-----------
 #ROUTING
@@ -50,29 +54,29 @@ def load_user(user_id):
 # pass: admin123
 @app.route('/api/auth', methods=['POST'])
 def auth():
+    session.pop('user', None)
     user = User.query.filter_by(email=request.form['email']).first()
     if user:
         if sha256_crypt.verify(request.form['password'], user.password):
             login_user(user)
-            session['logged_in'] = True
+            session['user'] = user.username
             return redirect('/')
         else:
             return make_response(open('api/templates/login-page.html').read())
     else:
         return make_response(open('api/templates/login-page.html').read())
 
-
+#            session['logged_in'] = True
 #Logout user and close session
 @app.route('/api/auth/logout')
 @login_required
 def logout():
     logout_user()
-    session.pop('logged_in', None)
+    session.pop('user', None)
     return redirect('/')
 
 #Register new user in database
 @app.route('/api/auth/register', methods=['POST'])
-@login_required
 def register():
     if not User.query.filter_by(email=request.form['email']).first():
         if not User.query.filter_by(username=request.form['username']).first():
@@ -88,7 +92,7 @@ def register():
 #Verify user and redirect to register form        
 @app.route('/register')
 def registerpage():
-    if session.get('logged_in'):
+    if g.user:
         if current_user.username == 'admin':
             return make_response(open('api/templates/register-page.html').read())
         else:
@@ -111,7 +115,7 @@ def checkifloggedin():
 def main(content='dashboard', content_id=None):
     
         if content in index_content_list:
-            if not session.get('logged_in'):
+            if not g.user:
                 return make_response(open('api/templates/login-page.html').read())
             else:
                 return make_response(open('api/templates/index.html').read())

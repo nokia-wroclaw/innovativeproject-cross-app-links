@@ -66,7 +66,7 @@ def auth():
     else:
         return make_response(open('api/templates/login-page.html').read())
 
-#            session['logged_in'] = True
+
 #Logout user and close session
 @app.route('/api/auth/logout')
 @login_required

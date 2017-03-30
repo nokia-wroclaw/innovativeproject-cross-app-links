@@ -20,7 +20,7 @@ class User(UserMixin,db.Model):
         #   self.user_id=user_id
         #   self.username=username
 
-class Group(UserMixin,db.Model):
+class Group(db.Model):
         group_id = db.Column(db.Integer, primary_key=True)
         group_name = db.Column(db.String(30), unique=True)
 
@@ -28,7 +28,7 @@ class Group(UserMixin,db.Model):
         #   self.group_id=group_id
         #   self.group_name=group_name
 
-class App(UserMixin,db.Model):
+class App(db.Model):
         app_id = db.Column(db.Integer, primary_key=True)
         app_name = db.Column(db.String(30), unique=True)
         app_link = db.Column(db.String(50), unique=True)
@@ -39,7 +39,7 @@ class App(UserMixin,db.Model):
         # self.app_name=app_name
         # self.app_link=app_link
         # self.app_desc=app_desc
-class Log(UserMixin,db.Model):
+class Log(db.Model):
     log_id = db.Column(db.Integer,primary_key=True)
     data_time = db.Column(db.TIMESTAMP,unique=True)
     author = db.Column(db.String(40),unique=True)

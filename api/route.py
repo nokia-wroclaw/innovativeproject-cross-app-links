@@ -77,6 +77,7 @@ def logout():
 
 #Register new user in database
 @app.route('/api/auth/register', methods=['POST'])
+@login_required
 def register():
     if not User.query.filter_by(email=request.form['email']).first():
         if not User.query.filter_by(username=request.form['username']).first():

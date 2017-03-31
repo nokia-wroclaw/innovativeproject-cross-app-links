@@ -23,10 +23,9 @@
 
 
 
-        var _post = function (table, row_id, data) {
-            row_id = (row_id == undefined) ? false : '/' + row_id
-            var url = 'api/' + table + row_id;
-            if (data && row_id)
+        var _post = function (table, data) {
+            var url = 'api/' + table;
+            if (data)
                 return $http.post(url, data, {
                         headers: {
                             'Content-Type': 'application/json'

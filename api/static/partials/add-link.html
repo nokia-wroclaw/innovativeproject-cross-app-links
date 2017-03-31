@@ -1,1 +1,13 @@
-Add link
+<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+    <form name='form' class="box box-form" ng-submit="form.$valid && newlink.add()" novalidate>
+        <header>
+            <h3 class="blue">Add new link</h3>
+        </header>
+        <input type='text' name='name' ng-model='newlink.name' placeholder='Set a name for your link' required>
+        <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required>
+        <textarea name='desc' ng-model='newlink.desc' placeholder="Write a little bit about it" required></textarea>
+        <button type="submit" class='button blue pull-right'>Confirm</button>
+        <span class='button pure pull-right in-row'>Upload icon</span>
+    </form>
+    {{form.$valid}}
+</div>

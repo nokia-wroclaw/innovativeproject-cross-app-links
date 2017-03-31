@@ -70,6 +70,8 @@ body {
       left: 20px; }
       .main-header .header-land .partial-name .loc-icon {
         margin-right: 20px; }
+      .main-header .header-land .partial-name .location-name::first-letter {
+        text-transform: uppercase; }
   .main-header .header-cell {
     height: 90px; }
     .main-header .header-cell .site-name {
@@ -259,14 +261,16 @@ body {
     float: left;
     box-sizing: border-box;
     width: 100%;
-    padding: 15px; }
+    padding-bottom: 15px; }
     .box header h3 {
       float: left;
       width: 100%;
       box-sizing: border-box;
       text-align: left;
       font-size: 24px;
-      font-weight: 400; }
+      font-weight: 400;
+      padding: 0;
+      margin: 0; }
       .box header h3.blue {
         color: #2ea4d2; }
       .box header h3.orange {
@@ -290,7 +294,8 @@ body {
         float: left;
         display: inline-block;
         width: 45px;
-        height: 45px; }
+        height: 45px;
+        border-radius: 100%; }
       .box.link-box .main-link-info .main-link-heading {
         text-transform: uppercase;
         font-weight: 800;
@@ -299,6 +304,18 @@ body {
         display: inline-block;
         padding: 15px 20px;
         padding-right: 0; }
+    .box.link-box .main-link-href {
+      float: left;
+      width: 100%;
+      padding: 20px 0; }
+    .box.link-box .main-link-desc {
+      float: left;
+      width: 100%;
+      box-sizing: border-box; }
+      .box.link-box .main-link-desc p {
+        float: left;
+        margin: 0;
+        padding: 0; }
     .box.link-box .settings-icon {
       float: right;
       padding: 15px 0;
@@ -307,6 +324,8 @@ body {
   .box.box-table {
     float: left;
     padding: 0; }
+    .box.box-table header {
+      padding: 15px; }
     .box.box-table .table {
       margin: 0; }
       .box.box-table .table thead tr td,
@@ -340,25 +359,8 @@ body {
       box-sizing: border-box;
       padding: 20px;
       background: transparent;
-      text-align: center;
+      text-align: right;
       text-decoration: none; }
-      .box.box-table .full-width-button-area .button {
-        float: right;
-        padding: 10px;
-        color: #fff;
-        border-radius: 3px;
-        opacity: 0.8;
-        text-decoration: none; }
-        .box.box-table .full-width-button-area .button:hover {
-          opacity: 1; }
-        .box.box-table .full-width-button-area .button .glyphicon {
-          margin-right: 10px; }
-        .box.box-table .full-width-button-area .button.blue {
-          background: #2ea4d2; }
-        .box.box-table .full-width-button-area .button.orange {
-          background: #F4B759; }
-        .box.box-table .full-width-button-area .button.green {
-          background: #3fce91; }
     .box.box-table .tag {
       border-radius: 2px;
       float: right;
@@ -428,6 +430,21 @@ body {
       text-align: center;
       float: left;
       color: #888; }
+  .box.box-form {
+    float: left;
+    margin: 0; }
+    .box.box-form input[type=text],
+    .box.box-form textarea {
+      float: left;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      border-radius: 3px;
+      border: 1px solid #e3e3e3;
+      margin-bottom: 20px; }
+    .box.box-form textarea {
+      height: 180px;
+      resize: none; }
 
 .row .row-buried {
   padding: 0; }
@@ -435,5 +452,36 @@ body {
     padding-right: 10px; }
   .row .row-buried:nth-child(even) {
     padding-left: 10px; }
+
+.button {
+  padding: 10px;
+  color: #fff;
+  border-radius: 3px;
+  opacity: 0.8;
+  text-decoration: none;
+  text-align: center;
+  border: 0; }
+  .button:hover {
+    opacity: 1;
+    color: #fff;
+    cursor: pointer; }
+  .button .glyphicon {
+    margin-right: 10px; }
+  .button.blue {
+    background: #2ea4d2; }
+  .button.orange {
+    background: #F4B759; }
+  .button.green {
+    background: #3fce91; }
+  .button.pure {
+    background: #ddd;
+    color: #333; }
+    .button.pure:hover {
+      color: #333; }
+  .button.in-row {
+    margin-right: 10px; }
+
+.no-box-el {
+  margin-bottom: 20px; }
 
 /*# sourceMappingURL=main.css.map */

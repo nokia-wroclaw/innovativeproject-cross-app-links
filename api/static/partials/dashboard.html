@@ -1,6 +1,6 @@
 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pull-left">
 
-    <div class="box link-box" ng-repeat='app in apps | limitTo: 3'>
+    <div class="box link-box" ng-repeat='app in apps | orderBy : id : true | limitTo: 3'>
         <div class="main-link-info">
             <img src="../static/img/app-img/{{app.id}}.png">
             <h3 class="main-link-heading">{{app.name}}</h3>
@@ -54,7 +54,7 @@
         <div class="col-lg-6 col-md-12 row-buried">
             <div class="box color-border-box blue">
                 <div class="site-stat">
-                    <span class="stat-number">23</span>
+                    <span class="stat-number">{{apps.length}}</span>
                     <span class="stat-desc">Registered applications</span>
                 </div>
             </div>
@@ -85,7 +85,7 @@
             <span class='warning-text' ng-hide='logs.length'>There're no activity yet</span>
         </table>
         <div href="action-log" class="full-width-button-area">
-            <a href="#" class="button orange"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+            <a href="#" class="button orange pull-right"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
         </div>
     </div>
     <div class="box box-table">
@@ -105,7 +105,7 @@
             <span class='warning-text' ng-hide='users.length'>No active users since last check</span>
         </table>
         <div href="action-log" class="full-width-button-area">
-            <a href="#" class="button green"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+            <a href="#" class="button green pull-right"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
         </div>
     </div>
 

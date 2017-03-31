@@ -1,6 +1,6 @@
 (function () {
     var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services']);
-    app.controller('mainCtrl', ['$scope', 'restful', function ($scope, restful) {
+    app.controller('mainCtrl', ['$scope', 'restful', '$location', function ($scope, restful, $location) {
         /*Custom Scrollbar Config*/
         $scope.config = {
             autoHideScrollbar: true,
@@ -16,6 +16,9 @@
             status: true,
             hide: function () {
                 this.status = !this.status;
+            },
+            location: function () {
+                return $location.path().replace(/\//g, '').replace(/\ /g, 'sa');
             }
         }
 
@@ -48,7 +51,26 @@
             }
         }
 
-    }]);
+        //ADDING ITEMS MODELS
+
+        $scope.newlink = {
+            name: '',
+            address: '',
+            desc: '',
+            add: function () {
+                alert('App adding start');
+                var post_object = {
+                    name: this.name,
+                    link: this.address,
+                    desc: this.desc,
+                    creator_id: 1
+                }
+                console.log(post_object);
+                restful.post('app', post_object);
+            }
+        };
+
+                }]);
 
 
 }());

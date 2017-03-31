@@ -55,7 +55,7 @@ def main(content='dashboard', content_id=None):
     return make_response(open('api/templates/404.html').read())
 
 #Routes for components
-@app.route('/api/component/<component_type>/<component_id>')
+@app.route('/getcomponent/<component_type>/<component_id>')
 def component(component_type, component_id):
     if component_type=='iframe':
         return render_template('iframe-web-component.html')

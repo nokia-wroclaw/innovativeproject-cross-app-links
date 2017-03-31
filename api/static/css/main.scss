@@ -535,7 +535,7 @@ body {
             border: 1px solid lighten(#ccc, 9%);
             margin-bottom: 20px;
         }
-        textarea{
+        textarea {
             height: 180px;
             resize: none;
         }
@@ -593,4 +593,21 @@ body {
 
 .no-box-el {
     margin-bottom: 20px;
+}
+
+.success-bar {
+    background: #3fce91;
+    position: fixed;
+    bottom: 0;
+    height: auto;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 105;
 }

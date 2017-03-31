@@ -23,22 +23,36 @@
         }
 
         //Get data
-        //Aplications 
-        restful.get('app').then(function (response) {
-            $scope.apps = response['objects'];
-        });
-        //Users
-        restful.get('user').then(function (response) {
-            $scope.users = response['objects'];
-        });
-        //Groups 
-        restful.get('group').then(function (response) {
-            $scope.groups = response['objects'];
-        });
-        //Logs
-        restful.get('log').then(function (response) {
-            $scope.logs = response['objects'];
-        });
+
+        var update = {
+            apps: function () {
+                restful.get('app').then(function (response) {
+                    $scope.apps = response['objects'];
+                });
+            },
+            users: function () {
+                restful.get('user').then(function (response) {
+                    $scope.users = response['objects'];
+                });
+            },
+            groups: function () {
+                restful.get('group').then(function (response) {
+                    $scope.groups = response['objects'];
+                });
+            },
+            logs: function () {
+                restful.get('log').then(function (response) {
+                    $scope.logs = response['objects'];
+                });
+            },
+            all: function () {
+                this.apps();
+                this.users();
+                this.groups();
+                this.logs();
+            }
+        }
+        update.all();
 
         //DASHBOARD COMPONENTS
         $scope.clockDate = {
@@ -58,16 +72,24 @@
             address: '',
             desc: '',
             add: function () {
-                alert('App adding start');
                 var post_object = {
                     name: this.name,
                     link: this.address,
                     desc: this.desc,
                     creator_id: 1
                 }
-                console.log(post_object);
                 restful.post('app', post_object);
-            }
+                update.apps();
+
+                this.clear();
+                this.status = true;
+            },
+            clear: function () {
+                this.name = '';
+                this.address = '';
+                this.desc = '';
+            },
+            status: false
         };
 
                 }]);

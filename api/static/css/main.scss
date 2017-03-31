@@ -540,6 +540,24 @@ body {
             resize: none;
         }
     }
+    &.box-list{
+        background: 0;
+        box-shadow: none;
+        
+    }
+}
+
+.single-input {
+    width: 240px;
+    input[type=text] {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        border-radius: 3px;
+        border: 1px solid lighten(#ccc, 9%);
+        margin-bottom: 20px;
+    }
 }
 
 .row {

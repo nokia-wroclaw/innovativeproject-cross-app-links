@@ -445,6 +445,20 @@ body {
     .box.box-form textarea {
       height: 180px;
       resize: none; }
+  .box.box-list {
+    background: 0;
+    box-shadow: none; }
+
+.single-input {
+  width: 240px; }
+  .single-input input[type=text] {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #e3e3e3;
+    margin-bottom: 20px; }
 
 .row .row-buried {
   padding: 0; }

@@ -18,7 +18,7 @@
                 this.status = !this.status;
             },
             location: function () {
-                return $location.path().replace(/\//g, '').replace(/\ /g, 'sa');
+                return $location.path().replace(/\//g, '').replace(/\-/g, ' ');
             }
         }
 

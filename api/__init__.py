@@ -6,6 +6,6 @@ app.secret_key = os.urandom(12)
 
 
 import api.database
+import api.models
+import api.restfull
 import api.route
-
-

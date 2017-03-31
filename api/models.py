@@ -2,13 +2,85 @@ from flask_login import UserMixin
 from api.database import db
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+    
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(80), unique=True)
-    password = db.Column(db.String(80), unique=True)
+    email=db.Column(db.String(25), unique=True)
+    username=db.Column(db.String(30), unique=True)
+    password_hash=db.Column(db.String(128))
+    group_id=db.Column(db.Integer, db.ForeignKey('group.id'))
+    
+    applications=db.relationship('App', backref='creator', lazy='dynamic')
+    logs=db.relationship('Log', backref='author', lazy='dynamic')
 
-    def __init__(self, username, email, password):
-		self.username = username
-		self.email = email
-		self.password = password
+    def __init__(self, email, password_hash):
+        
+        self.email=email
+        self.password_hash=password_hash
+        self.username=email.split('@')[0]
+        
+    def is_authenticated():
+        return True
+    
+    def is_active():
+        return True
+    
+    def is_anonymous():
+        return False
+    
+    def get_id(self):
+        return unicode(self.id)
+
+            
+            
+class Group(db.Model):
+    
+    id=db.Column(db.Integer, primary_key=True)
+    name=db.Column(db.String(30), unique=True)
+    app_add=db.Column(db.Boolean)
+    app_edit=db.Column(db.Boolean)
+    app_drop=db.Column(db.Boolean)
+    user_add=db.Column(db.Boolean)
+    user_drop=db.Column(db.Boolean)
+    users=db.relationship('User', backref='group', lazy='dynamic')
+        
+    def __init__(self, name, app_add, app_edit, app_drop, user_add, user_drop):
+        
+        self.name=name
+        self.app_add=app_add
+        self.app_edit=app_edit
+        self.app_drop=app_drop
+        self.user_add=user_add
+        self.user_drop=user_drop
+
+            
+            
+class App(db.Model):
+    
+    id=db.Column(db.Integer, primary_key=True)
+    name=db.Column(db.String(30), unique=True)
+    link=db.Column(db.String(50), unique=True)
+    desc=db.Column(db.String(50))
+    creator_id=db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self, name, link, desc, creator_id):
+        
+        self.name=name
+        self.link=link
+        self.desc=desc
+        self.creator_id=creator_id
+            
+            
+            
+class Log(db.Model):
+    
+    id=db.Column(db.Integer,primary_key=True)
+    data_time=db.Column(db.TIMESTAMP)
+    content=db.Column(db.String(60),unique=True)
+    author_id=db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self, content, author_id):
+        
+        self.content=content
+        self.author=author_id
+        
+#db.create_all()

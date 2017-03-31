@@ -1,9 +1,17 @@
 from flask import Flask, make_response, jsonify, render_template, redirect, session, request, g
 from api import app
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from api.models import User, Group, App, Log
 from api.database import db
-from api.models import User
 from passlib.hash import sha256_crypt
+
+#-----------
+#FUNCTIONS
+#-----------
+
+#-----------
+#STATIC VAL
+#-----------
 
 #Registered list of available templates
 index_content_list = [
@@ -16,17 +24,6 @@ index_content_list = [
     'add-user',
     'settings',
     'ver'
-]
-#Registered list of available api data
-api_list =[
-    'site'
-    
-]
-
-#Registered list of available components
-components_list=[
-    'json',
-    'iframe'
 ]
 
 #Login manager
@@ -124,16 +121,6 @@ def main(content='dashboard', content_id=None):
             return make_response(open('api/templates/404.html').read())
    
     
-#Routes for REST API data
-@app.route('/api/<table>')
-@app.route('/api/<table>/<row_id>')
-def api(table, row_id = None):
-    
-    if table in api_list:
-        return jsonify({'name': 'cross-app-links', 'wlcm_txt': 'Hello World!'})
-    return None
-
-
 #Routes for components
 @app.route('/api/component/<component_type>/<component_id>')
 def component(component_type, component_id):

@@ -6,6 +6,7 @@
     <title>Cross-app-links</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800,900" rel="stylesheet">
     <!--        BOWER PCKG-->
     <link rel="stylesheet" href="../static/bower_components/dstyle_resetCSS/reset.min.css">
     <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -18,87 +19,97 @@
 <body ng-controller="mainCtrl">
     <div class="container-fluid">
         <div class="row">
-            <header class="main-header col-lg-12 col-md-11 col-sm-12 col-xs-12 pull-right row">
-                <div class="site-name col-lg-2 col-sm-1 col-xs-2 hidden-md pull-left">
-                    <a href="#" class="site-name ">cross app links</a>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-11 col-xs-10 pull-right text-right">
-                    <div class="user-section" ng-mouseover="navigation.usernav=true" ng-mouseleave="navigation.usernav=false">
-                        <span class="user-name">crossapp</span>
-                        <div class="user-avatar"><span class="glyphicon glyphicon-menu-hamburger"></span><img src="../static/img/default_avatar.jpg"></div>
-                        <nav class="user-menu" ng-show="navigation.usernav">
-                            <ul>
-                                <li><a href="/"><span class="glyphicon glyphicon-user"></span>My profile</a></li>
-                                <li><a href="/"><span class="glyphicon glyphicon-cog"></span>Account settings</a></li>
-                                <li><a href="/"><span class="glyphicon glyphicon-ok"></span>My permissions</a></li>
-                                <li>
-                                    <a href="api/auth/logout"> <span class="glyphicon glyphicon-log-out"></span>Logout</a>
-                                </li>
-                            </ul>
-                        </nav>
+            <header class="main-header col-sm-12 col-xs-12 pull-right row" ng-class="menu.status ? 'col-lg-10 col-md-11' : 'col-lg-12 col-md-12'">
+                <div class="col-lg-12 row header-cell">
+                    <div class="site-name col-lg-2 col-sm-1 col-xs-2 hidden-md hidden-sm hidden-xs pull-left" ng-show="menu.status">
+                        <a href="#">cross app links</a>
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-sm-1 col-xs-2">
+                        <div class="menu-toggle" ng-click="menu.hide()">
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-11 col-xs-10 pull-right text-right">
+                        <div class="user-section" ng-mouseover="navigation.usernav=true" ng-mouseleave="navigation.usernav=false">
+                            <span class="user-name">crossapp</span>
+                            <div class="user-avatar"><span class="glyphicon glyphicon-menu-hamburger"></span><img src="../static/img/default_avatar.jpg"></div>
+                            <nav class="user-menu" ng-show="navigation.usernav">
+                                <ul>
+                                    <li><a href="/"><span class="glyphicon glyphicon-user"></span>My profile</a></li>
+                                    <li><a href="/"><span class="glyphicon glyphicon-cog"></span>Account settings</a></li>
+                                    <li><a href="/"><span class="glyphicon glyphicon-ok"></span>My permissions</a></li>
+                                    <li><a href="/"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </header>
-
-            <nav class="main-navigation col-lg-2 col-md-1 col-sm-12 col-xs-12 pull-left">
-
-                <div class="main-navigation-overflow" ng-scrollbars ng-scrollbars-config="config">
-                    <ul>
-                        <h4 class="label hidden-md">Main</h4>
-                        <li>
-                            <a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span><span class="hidden-md">Dashboard</span></a>
-                        </li>
-                        <li>
-                            <a href="stats"><span class="glyphicon glyphicon glyphicon-stats"></span><span class="hidden-md">Statistics</span></a>
-                        </li>
-                        <li>
-                            <a href="action-log"><span class="glyphicon glyphicon-eye-open"></span><span class="hidden-md">Action log</span></a>
-                        </li>
-                        <li>
-                            <a href="/some-random-url"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-md">404 test</span></a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <h4 class="label hidden-md">Links</h4>
-                        <li>
-                            <a href="links"><span class="glyphicon glyphicon-link"></span><span class="hidden-md">My links</span></a>
-                        </li>
-                        <li class="hidden-md">
-                            <a href="add-link"><span class="glyphicon glyphicon-plus"></span><span class="hidden-md">Add link</span></a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <h4 class="label hidden-md">Users</h4>
-                        <li>
-                            <a href="users-permissions"><span class="glyphicon glyphicon-user"></span><span class="hidden-md">Permissions</span></a>
-                        </li>
-                        <li class="hidden-md">
-                            <a href="add-user"><span class="glyphicon glyphicon-plus"></span><span class="hidden-md">Add user</span></a>
-                        </li>
-
-                    </ul>
-                    <ul>
-                        <h4 class="label hidden-md">Other</h4>
-                        <li>
-                            <a href="settings"><span class="glyphicon glyphicon-cog"></span><span class="hidden-md">Settings</span></a>
-                        </li>
-                        <li>
-                            <a href="ver"><span class="glyphicon glyphicon-info-sign"></span><span class="hidden-md">Version</span></a>
-                        </li>
-                    </ul>
+                <div class="col-lg-12 col-md-12 row header-land hidden-sm hidden-xs">
+                    <h1 class="partial-name"><span class="glyphicon glyphicon-map-marker loc-icon"></span>Dashboard</h1>
                 </div>
+            </header>
+        </div>
+        <div class="container-fluid" ng-class="menu.status ? 'container-fluid' : 'container'">
+            <div class="row">
+                <nav class="main-navigation col-lg-2 col-md-1 col-sm-12 col-xs-12 pull-left" ng-show="menu.status">
 
-            </nav>
-            <!--    STATIC:END : NG-->
-            <div class="col-lg-10 col-md-11 col-sm-12 col-xs-12 pull-right row">
-                <div class="main-content col-lg-10" ng-view autoscroll="true">
-                    <!--    INCLUDE : NG-->
+                    <div class="main-navigation-overflow" ng-scrollbars ng-scrollbars-config="config">
+                        <ul>
+                            <h4 class="label hidden-md">Main</h4>
+                            <li>
+                                <a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span><span class="hidden-md">Dashboard</span></a>
+                            </li>
+                            <li>
+                                <a href="stats"><span class="glyphicon glyphicon glyphicon-stats"></span><span class="hidden-md">Statistics</span></a>
+                            </li>
+                            <li>
+                                <a href="action-log"><span class="glyphicon glyphicon-eye-open"></span><span class="hidden-md">Action log</span></a>
+                            </li>
+                            <li>
+                                <a href="/some-random-url"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-md">404 test</span></a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <h4 class="label hidden-md">Links</h4>
+                            <li>
+                                <a href="links"><span class="glyphicon glyphicon-link"></span><span class="hidden-md">My links</span></a>
+                            </li>
+                            <li class="hidden-md">
+                                <a href="add-link"><span class="glyphicon glyphicon-plus"></span><span class="hidden-md">Add link</span></a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <h4 class="label hidden-md">Users</h4>
+                            <li>
+                                <a href="users-permissions"><span class="glyphicon glyphicon-user"></span><span class="hidden-md">Permissions</span></a>
+                            </li>
+                            <li class="hidden-md">
+                                <a href="add-user"><span class="glyphicon glyphicon-plus"></span><span class="hidden-md">Add user</span></a>
+                            </li>
 
-                    <!--    INCLUDE:END : NG-->
+                        </ul>
+                        <ul>
+                            <h4 class="label hidden-md">Other</h4>
+                            <li>
+                                <a href="settings"><span class="glyphicon glyphicon-cog"></span><span class="hidden-md">Settings</span></a>
+                            </li>
+                            <li>
+                                <a href="ver"><span class="glyphicon glyphicon-info-sign"></span><span class="hidden-md">Version</span></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </nav>
+                <!--    STATIC:END : NG-->
+                <div class="col-sm-12 col-xs-12 pull-right row" ng-class="menu.status ? 'col-lg-10 col-md-11' : 'col-lg-12 col-md-12'">
+                    <div class="main-content " ng-view autoscroll="true" ng-class="menu.status ? 'col-lg-10' : 'col-lg-12'">
+                        <!--    INCLUDE : NG-->
+
+                        <!--    INCLUDE:END : NG-->
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
     <!--        BOWER PCKG-->
     <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
@@ -108,6 +119,7 @@
     <script src="../static/bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
     <!--        BOWER PCKG:END-->
     <script src="../static/js/config.js"></script>
+    <script src="../static/js/services.js"></script>
     <script src="../static/js/app.js"></script>
 
 </body>

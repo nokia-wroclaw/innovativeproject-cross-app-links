@@ -48,7 +48,7 @@ def api(table, row_id = None):
     return None
 
 #Routes for components data
-@app.route('/component/iframe')
+@app.route('/component_data/iframe')
 def component():
     return render_template('iframe-web-component.html')
 

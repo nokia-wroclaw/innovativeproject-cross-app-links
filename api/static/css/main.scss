@@ -69,6 +69,7 @@ body {
         box-sizing: border-box;
         padding: 20px;
         position: relative;
+        width: 100%;
         .partial-name {
             color: #fff;
             font-size: 26px;
@@ -540,10 +541,9 @@ body {
             resize: none;
         }
     }
-    &.box-list{
+    &.box-list {
         background: 0;
         box-shadow: none;
-        
     }
 }
 

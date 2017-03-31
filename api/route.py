@@ -1,6 +1,6 @@
 from flask import Flask, make_response, jsonify, render_template, redirect
 from api import app
-from api.models import User
+from api.models import #User, Group, App, Log
 
 #-----------
 #FUNCTIONS
@@ -22,19 +22,6 @@ index_content_list = [
     'settings',
     'ver'
 ]
-#Registered list of available api data
-api_list =[
-    'site'
-    
-]
-
-#Registered list of available components
-components_list=[
-    'json',
-    'iframe'
-]
-
-
 #-----------
 #ROUTING
 #-----------
@@ -49,15 +36,6 @@ def main(content='dashboard', content_id=None):
         return make_response(open('api/templates/index.html').read())
     return make_response(open('api/templates/404.html').read())
 
-#Routes for REST API data
-@app.route('/api/<table>')
-@app.route('/api/<table>/<row_id>')
-def api(table, row_id = None):
-    
-    if table in api_list:
-        return jsonify({'name': 'cross-app-links', 'wlcm_txt': 'Hello World!'})
-    return None
-
 #Routes for components
 @app.route('/api/component/<component_type>/<component_id>')
 def component(component_type, component_id):
@@ -66,7 +44,3 @@ def component(component_type, component_id):
     elif component_type=='json':
         return jsonify({'name': 'json-component', 'data': '755'})
     return None
-
-@app.route('/database/<table>')
-def database(table):
-    user = User.query.all()

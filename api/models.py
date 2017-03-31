@@ -17,6 +17,18 @@ class User(UserMixin, db.Model):
         self.email=email
         self.password_hash=password_hash
         self.username=email.split('@')[0]
+        
+    def is_authenticated():
+        return True
+    
+    def is_active():
+        return True
+    
+    def is_anonymous():
+        return False
+    
+    def get_id(self):
+        return unicode(self.id)
 
             
             
@@ -24,12 +36,21 @@ class Group(db.Model):
     
     id=db.Column(db.Integer, primary_key=True)
     name=db.Column(db.String(30), unique=True)
-    
+    app_add=db.Column(db.Boolean)
+    app_edit=db.Column(db.Boolean)
+    app_drop=db.Column(db.Boolean)
+    user_add=db.Column(db.Boolean)
+    user_drop=db.Column(db.Boolean)
     users=db.relationship('User', backref='group', lazy='dynamic')
         
-    def __init__(name):
+    def __init__(self, name, app_add, app_edit, app_drop, user_add, user_drop):
         
         self.name=name
+        self.app_add=app_add
+        self.app_edit=app_edit
+        self.app_drop=app_drop
+        self.user_add=user_add
+        self.user_drop=user_drop
 
             
             
@@ -39,7 +60,7 @@ class App(db.Model):
     name=db.Column(db.String(30), unique=True)
     link=db.Column(db.String(50), unique=True)
     desc=db.Column(db.String(50))
-    creator_id=db.Column(dbInteger, db.ForeignKey('user.id'))
+    creator_id=db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, name, link, desc, creator_id):
         
@@ -61,3 +82,5 @@ class Log(db.Model):
         
         self.content=content
         self.author=author_id
+        
+#db.create_all()

@@ -1,29 +1,11 @@
 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pull-left">
 
-    <div class="box link-box">
+    <div class="box link-box" ng-repeat='app in apps | limitTo: 3'>
         <div class="main-link-info">
-            <img src="../static/img/app-img/1.png">
-            <h3 class="main-link-heading">Application link name</h3>
+            <img src="../static/img/app-img/{{app.id}}.png">
+            <h3 class="main-link-heading">{{app.name}}</h3>
         </div>
-        <a class="settings-icon" href="#settings_this"><span class="glyphicon glyphicon-cog"></span></a>
-    </div>
-
-
-    <div class="box link-box">
-        <div class="main-link-info">
-            <img src="../static/img/app-img/2.png">
-            <h3 class="main-link-heading">One more here</h3>
-        </div>
-
-        <a class="settings-icon" href="#settings_this"><span class="glyphicon glyphicon-cog"></span></a>
-    </div>
-
-    <div class="box link-box">
-        <div class="main-link-info">
-            <img src="../static/img/app-img/3.png">
-            <h3 class="main-link-heading">And this one</h3>
-        </div>
-        <a class="settings-icon" href="#settings_this"><span class="glyphicon glyphicon-cog"></span></a>
+        <a class="settings-icon" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
     </div>
 
     <div class="box box-table">
@@ -56,9 +38,9 @@
     </div>
     <div class="box color-box green">
         <div class="date-time">
-            <span class="main-date">28 March 2017</span>
-            <span class="main-time">01:11</span>
-            <span class="time-zone">UTC+01:00</span>
+            <span class="main-date">{{clockDate.date() | date: 'longDate'}}</span>
+            <span class="main-time">{{clockDate.time()}}</span>
+            <span class="time-zone">{{clockDate.date() | date: 'Z'}}</span>
         </div>
     </div>
     <div class="box image-box">
@@ -93,37 +75,14 @@
                 <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
             </header>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Today 13:12</td>
-                    <td>bakowroc</td>
-                    <td>Application #21 was added</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Yesterday 17:04</td>
-                    <td>Jane Doe</td>
-                    <td>User #17 got new permissions</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>23.03.2017 12:10</td>
-                    <td>John Smith</td>
-                    <td>User #41 was removed</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>17.01.2010 8:00</td>
-                    <td>Mr. Lorem</td>
-                    <td>A note #9 was written</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>11.09.2001 7:15</td>
-                    <td>nameless</td>
-                    <td>An arrow was taken in the knee</td>
+                <tr ng-repeat='log in logs | limitTo : 5' ng-show='logs.length'>
+                    <td>{{log.id}}</td>
+                    <td>{{log.data_time}}</td>
+                    <td>{{log.author.username}}</td>
+                    <td>{{log.content}}</td>
                 </tr>
             </tbody>
+            <span class='warning-text' ng-hide='logs.length'>There're no activity yet</span>
         </table>
         <div href="action-log" class="full-width-button-area">
             <a href="#" class="button orange"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
@@ -136,25 +95,14 @@
                 <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
             </header>
             <tbody>
-                <tr>
-                    <td>4</td>
-                    <td>bakowroc</td>
+                <tr ng-repeat='user in users | limitTo : 5' ng-show='users.length'>
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
                     <td>87.128.21.11</td>
                     <td>Since 3 minutes</td>
                 </tr>
-                <tr>
-                    <td>332</td>
-                    <td>John Smith</td>
-                    <td>217.66.54.87</td>
-                    <td>Just now</td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td>Jane Doe</td>
-                    <td>122.33.44.11</td>
-                    <td>Since 1 hour</td>
-                </tr>
             </tbody>
+            <span class='warning-text' ng-hide='users.length'>No active users since last check</span>
         </table>
         <div href="action-log" class="full-width-button-area">
             <a href="#" class="button green"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>

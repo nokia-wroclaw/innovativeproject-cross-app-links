@@ -384,6 +384,16 @@
                     }
                 }
             }
+            .warning-text {
+                width: 100%;
+                float: left;
+                box-sizing: border-box;
+                padding: 20px;
+                text-align: center;
+                font-size: 24px;
+                font-weight: 400;
+                color: #ccc;
+            }
             .full-width-button-area {
                 float: left;
                 width: 100%;

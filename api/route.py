@@ -26,6 +26,18 @@ index_content_list = [
 #-----------
 #ROUTING
 #-----------
+@app.route('/create_all')
+def create_all():
+    app1 = App()
+    app2 = App()
+    app3 = App()
+    
+    group1 = Group()
+    group2 = Group()
+    group3 = Group()
+    
+    user1 = User()
+    user2 = User()
 
 #Default templates for Flask route
 @app.route('/')

@@ -325,6 +325,15 @@ body {
       .box.box-table .table thead tr td,
       .box.box-table .table tbody tr td {
         color: #888; }
+    .box.box-table .warning-text {
+      width: 100%;
+      float: left;
+      box-sizing: border-box;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 400;
+      color: #ccc; }
     .box.box-table .full-width-button-area {
       float: left;
       width: 100%;

@@ -11,7 +11,7 @@ class User(UserMixin, db.Model):
     
     applications=db.relationship('App', backref='creator', lazy='dynamic')
     logs=db.relationship('Log', backref='author', lazy='dynamic')
-
+    
     def __init__(self, email, password_hash):
         
         self.email=email

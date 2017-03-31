@@ -1,6 +1,20 @@
+/*For almost medium*/
+
+@media only screen and (max-width: 1440px) {
+    .container {
+        width: 90%;
+    
+    }
+}
+
 @media only screen and (max-width: 1200px) {
+    .container {
+        width: 100%;
+        padding: 0;
+    }
     .main-navigation {
         top: 0;
+        .main-navigation-overflow{
         ul {
             li {
                 a {
@@ -12,23 +26,25 @@
             }
         }
     }
+    }
 }
 
 
 /* Medium Devices, Desktops */
 
 @media only screen and (max-width: 992px) {
+    .container {
+        width: 100%;
+    }
     .main-header {
-        background: darken(#34313d,3%);
+        background: darken(#34313d, 3%);
         border: 0;
-        .site-name {
-            a {
-                font-size: 6px;
-            }
-        }
-        .user-section {
-            .user-name {
-                color: #fafafa;
+        box-shadow: none;
+        .header-cell {
+            .user-section {
+                .user-name {
+                    color: #fafafa;
+                }
             }
         }
     }

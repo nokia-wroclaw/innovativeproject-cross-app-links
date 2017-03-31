@@ -54,7 +54,7 @@ def auth():
     session.pop('user', None)
     user = User.query.filter_by(email=request.form['email']).first()
     if user:
-        if sha256_crypt.verify(request.form['password'], user.password):
+        if sha256_crypt.verify(request.form['password'], user.password_hash):
             login_user(user)
             session['user'] = user.username
             return redirect('/')
@@ -77,13 +77,10 @@ def logout():
 @login_required
 def register():
     if not User.query.filter_by(email=request.form['email']).first():
-        if not User.query.filter_by(username=request.form['username']).first():
-            new = User(request.form['username'],request.form['email'],sha256_crypt.encrypt(request.form['password']))
-            db.session.add(new)
-            db.session.commit()
-            return 'New user created.'
-        else:
-            return 'Error. Username already taken!'
+        new = User(request.form['email'],sha256_crypt.encrypt(request.form['password']))
+        db.session.add(new)
+        db.session.commit()
+        return 'New user created.'
     else:
         return 'Error. Email already in use!'
 
@@ -103,7 +100,7 @@ def registerpage():
 @app.route('/api/auth/checkifloggedin')
 @login_required
 def checkifloggedin():
-    return 'The current user is ' + current_user.username + ' / ' + current_user.email
+    return 'The current user is ' + current_user.email
 
     
 #Default templates for Flask route

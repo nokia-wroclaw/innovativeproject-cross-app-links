@@ -1,5 +1,6 @@
 from api import app
 from api.database import db
+from api.models import User, Group, App, Log
 from flask_restless import APIManager
 from flask_login import current_user
 

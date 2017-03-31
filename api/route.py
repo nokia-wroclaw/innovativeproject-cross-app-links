@@ -1,6 +1,6 @@
 from flask import Flask, make_response, jsonify, render_template, redirect
 from api import app
-from api.models import #User, Group, App, Log
+from api.models import User, Group, App, Log
 
 #-----------
 #FUNCTIONS

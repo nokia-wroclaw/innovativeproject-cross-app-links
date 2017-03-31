@@ -37,7 +37,7 @@ def main(content='dashboard', content_id=None):
         return make_response(open('api/templates/index.html').read())
     return make_response(open('api/templates/404.html').read())
 
-<<<<<<< HEAD
+
 #Routes for REST API data
 @app.route('/api/<table>')
 @app.route('/api/<table>/<row_id>')

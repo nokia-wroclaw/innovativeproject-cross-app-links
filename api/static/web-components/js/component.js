@@ -20,7 +20,7 @@
 
             var req = new XMLHttpRequest();
             // creating GET request to yahoo weather API
-            req.open('GET', "http://127.0.0.1:5000/api/component/json/1212", true);
+            req.open('GET', "http://127.0.0.1:5000/api/app", true);
             // sending a request
             req.send();
 
@@ -30,7 +30,7 @@
             function generateHTML() {
                 if (req.readyState == 4 && req.status == 200) {
                     var listGenerateString = '';
-                    var linkArray = JSON.parse(req.responseText);
+                    var linkArray = JSON.parse(req.responseText['objects']);
                     for (var i = 0; i < linkArray.length; i++) {
                         listGenerateString += '<li><a href="' + linkArray[i]['link'] + '"><span class="glyphicon glyphicon-link"></span>' + linkArray[i]['name'] + '</a></li>';
                     }

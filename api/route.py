@@ -58,13 +58,9 @@ def api(table, row_id = None):
     return None
 
 #Routes for components data
-@app.route('/api/component/<component_type>/<component_id>')
-def component(component_type, component_id):
-    if component_type=='iframe':
+@app.route('/component/iframe')
+def component():
         return render_template('iframe-web-component.html')
-    elif component_type=='json':
-        return jsonify([{'name': 'Office', 'link': 'http://www.google.pl'},{'name': 'Web', 'link': 'http://www.google.pl'}, {'name': 'Yahoo', 'link': 'http://www.google.pl'}])
-    return None
 
 
 #Routes for components test

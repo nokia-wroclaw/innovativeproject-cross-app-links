@@ -98,7 +98,7 @@
         var _logout = function () {
             var url = 'api/auth/logout';
             if (data)
-                return $http.post(url {
+                return $http.post(url, {
                         headers: {
                             'Content-Type': 'application/json'
                         }

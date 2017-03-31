@@ -11,7 +11,6 @@
             scrollInertia: 0,
             axis: 'y'
         };
-<<<<<<< HEAD
 
         $scope.menu = {
             status: true,
@@ -19,9 +18,6 @@
                 this.status = !this.status;
             }
         }
-=======
->>>>>>> feature/http-request
-
     }]);
 
 

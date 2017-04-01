@@ -11,7 +11,7 @@
                 templateUrl: 'static/partials/stats.html'
             }).when('/action-log', {
                 templateUrl: 'static/partials/action-log.html'
-            }).when('/link/:linkID', {
+            }).when('/links/:linkID', {
                 templateUrl: 'static/partials/link-management.html'
             }).when('/links', {
                 templateUrl: 'static/partials/links.html'

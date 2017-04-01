@@ -25,7 +25,7 @@
         $scope.filterParams = {
                 manage: function () {
                     if ($routeParams.linkID)
-                        return $routeParams.linkID;
+                        return parseInt($routeParams.linkID);
                     else return '';
                 }
             }
@@ -114,6 +114,12 @@
             },
             status: false
         };
+
+        $scope.$on('$routeChangeStart', function (next, current) {
+            $scope.newlink.clear();
+            $scope.newlink.status = false;
+        });
+
 
                 }]);
 

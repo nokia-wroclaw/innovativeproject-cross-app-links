@@ -1,5 +1,5 @@
-<h2>Dashboard static preview</h2>
-<p>For now it's only static part written in html/css. As soon as we connect the db and angular it will be edited.</p>
+<h2>Link management</h2>
+<p>You can now add and edit a link. But for now without img change</p>  
 <h2>HTTP requests- Angular</h2>
 <p>There are four types of request GET, POST, PUT, DELETE and they can be called like this:</p>
 

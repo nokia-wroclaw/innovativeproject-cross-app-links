@@ -1,6 +1,6 @@
 (function () {
     var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services']);
-    app.controller('mainCtrl', ['$scope', 'restful', '$location', function ($scope, restful, $location) {
+    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', function ($scope, restful, $location, $routeParams) {
         /*Custom Scrollbar Config*/
         $scope.config = {
             autoHideScrollbar: true,
@@ -21,6 +21,7 @@
                 return $location.path().replace(/\//g, '').replace(/\-/g, ' ');
             }
         }
+
 
         //Get data
 

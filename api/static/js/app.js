@@ -22,8 +22,14 @@
             }
         }
 
-
-        //Get data
+        $scope.filterParams = {
+                manage: function () {
+                    if ($routeParams.linkID)
+                        return $routeParams.linkID;
+                    else return '';
+                }
+            }
+            //Get data
 
         var update = {
             apps: function () {
@@ -72,6 +78,11 @@
             name: '',
             address: '',
             desc: '',
+            manageFill: function (name, link, desc) {
+                this.name = name;
+                this.address = link;
+                this.desc = desc;
+            },
             add: function () {
                 var post_object = {
                     name: this.name,
@@ -82,6 +93,17 @@
                 restful.post('app', post_object);
                 update.apps();
 
+                this.clear();
+                this.status = true;
+            },
+            update: function (app_id) {
+                var post_object = {
+                    name: this.name,
+                    link: this.address,
+                    desc: this.desc,
+                }
+                restful.update('app', app_id, post_object);
+                update.apps();
                 this.clear();
                 this.status = true;
             },

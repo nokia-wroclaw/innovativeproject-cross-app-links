@@ -1,1 +1,28 @@
-Action log
+<div class="box box-table">
+    <table class="table ">
+        <header>
+
+            <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
+
+
+        </header>
+        <thead>
+
+            <th>Log id</th>
+            <th>Date</th>
+            <th>User</th>
+            <th>Content</th>
+        </thead>
+
+        <tbody>
+
+            <tr ng-repeat='log in logs | limitTo : 25' ng-show='logs.length'>
+                <td>{{log.id}}</td>
+                <td>{{log.data_time}}</td>
+                <td>{{log.author.username}}</td>
+                <td>{{log.content}}</td>
+            </tr>
+        </tbody>
+        <span class='warning-text' ng-hide='logs.length'>There is no activity yet</span>
+    </table>
+</div>

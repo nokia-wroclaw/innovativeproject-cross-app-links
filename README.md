@@ -1,3 +1,5 @@
+<h1>Innovative cross-app-links</h1>
+<h3>It's online! <a href="https://cross-app-links.herokuapp.com">https://cross-app-links.herokuapp.com</a></h3>
 <h2>Link management</h2>
 <p>You can now add and edit a link. But for now without img change</p>  
 <h2>HTTP requests- Angular</h2>
@@ -12,7 +14,7 @@ restful.get(<i>string</i> table_name[, <i>integer</i> element_id]).then(function
 <br/>
 
 <code>
-restful.post(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Object </i> data);
+restful.post(<i>string</i> table_name, <i>JSON Object </i> data);
 </code>
 
 <br/>
@@ -78,9 +80,7 @@ restful.logout();
     </tbody>
 </table>
 <p>If you don't follow this restrictions the request will not be sent. But even if you somehow done that, Flask is also secured in a similar way.</p>
->>>>>>> feature/http-request
-<h2>Innovative cross-app-links</h2>
-<h3>It's online! <a href="https://cross-app-links.herokuapp.com">https://cross-app-links.herokuapp.com</a></h3>
+
 <h2>To run locally</h2>
 <p>We're using npm / bower so first you have to install them. Ofc python is also necessary(3.6 for best).</p>
 <p>Try <a href="https://nodejs.org/en/">this</a> to install node.js</p>

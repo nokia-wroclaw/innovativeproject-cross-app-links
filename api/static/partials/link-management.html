@@ -1,17 +1,19 @@
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
-    <div class="box color-box green error-form-box" ng-show="form.$submitted && form.$invalid || form.$dirty">
-        <span class='pull-left text-left error' ng-hide="form.$dirty"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
-        <span class='pull-left text-left error' ng-show="form.name.$error.required"><span class="glyphicon glyphicon-remove"></span>Required link name!</span>
-        <span class='pull-left text-left error' ng-show="form.name.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short link name!</span>
+    <div class="box error-form-box" ng-show="form.$submitted">
+        <span class='pull-left text-left error' ng-show="form.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
 
-        <span class='pull-left text-left error' ng-show="form.address.$error.required"><span class="glyphicon glyphicon-remove"></span>Required url!</span>
-        <span class='pull-left text-left error' ng-show="form.address.$error.linkformat"><span class="glyphicon glyphicon-remove"></span>Wrong url!</span>
+        <div class="form.$invalid">
+            <span class='pull-left text-left error' ng-show="form.name.$error.required"><span class="glyphicon glyphicon-remove"></span>Required link name!</span>
+            <span class='pull-left text-left error' ng-show="form.name.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short link name!</span>
 
-        <span class='pull-left text-left error' ng-show="form.desc.$error.required"><span class="glyphicon glyphicon-remove"></span>Required description!</span>
-        <span class='pull-left text-left error' ng-show="form.desc.$error.maxlength"><span class="glyphicon glyphicon-remove"></span>Too long description!</span>
-        <span class='pull-left text-left error' ng-show="form.desc.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short description!</span>
+            <span class='pull-left text-left error' ng-show="form.address.$error.required"><span class="glyphicon glyphicon-remove"></span>Required url!</span>
+            <!--        <span class='pull-left text-left error' ng-show="form.address.$error.linkformat"><span class="glyphicon glyphicon-remove"></span>Wrong url!</span>-->
 
+            <span class='pull-left text-left error' ng-show="form.desc.$error.required"><span class="glyphicon glyphicon-remove"></span>Required description!</span>
+            <span class='pull-left text-left error' ng-show="form.desc.$error.maxlength"><span class="glyphicon glyphicon-remove"></span>Too long description!</span>
+            <span class='pull-left text-left error' ng-show="form.desc.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short description!</span>
 
+        </div>
     </div>
     <form ng-init="newlink.manageFill(app.name,app.link,app.desc)" name='form' class="box box-form" ng-submit="form.$valid && form.$dirty && newlink.update(app.id)" novalidate>
         <header>

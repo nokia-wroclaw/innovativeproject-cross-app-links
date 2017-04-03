@@ -1,0 +1,10 @@
+.error-form-box span.error{
+        width: 100%;
+        margin: 5px 0;
+    
+}
+
+.error-form-box span.error .glyphicon{
+      margin: 10px;
+    
+}

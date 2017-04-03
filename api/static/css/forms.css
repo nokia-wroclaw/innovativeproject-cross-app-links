@@ -1,10 +1,20 @@
+.error-form-box {
+    float: left;
+    width: 100%;
+}
+
 .error-form-box span.error {
     width: 100%;
     padding: 10px;
-    background: red;
+    background: #D45A5A;
     margin: 5px 0;
+    color: white;
 }
 
 .error-form-box span.error .glyphicon {
     margin: 10px;
+}
+
+.no-shadow {
+    box-shadow: none;
 }

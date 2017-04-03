@@ -1,0 +1,26 @@
+.popup {
+    z-index: 120;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 15%;
+    box-sizing: border-box;
+    max-width: 500px;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.black-bg {
+    z-index: 119;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    float: left;
+    background: black;
+    opacity: 0.6;
+}

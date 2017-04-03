@@ -1,9 +1,12 @@
 from flask import Flask, make_response, jsonify, render_template, redirect, session, request, g
-from api import app
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from passlib.hash import sha256_crypt
+from api import app
 from api.models import User, Group, App, Log
 from api.database import db
-from passlib.hash import sha256_crypt
+from api.mail import sendmail
+
+
 
 #-----------
 #FUNCTIONS
@@ -97,9 +100,17 @@ def register():
         new = User(request.form['email'],sha256_crypt.encrypt(request.form['password']))
         db.session.add(new)
         db.session.commit()
-        return 'New user created.'
+        receiver = [request.form['email']]
+        email = request.form['email']
+        sendmail(receiver,email)
+        return 'User created. Email send to %s ' % email
     else:
-        return 'Error. Email already in use!'
+        receiver = [request.form['email']]
+        email = request.form['email']
+        sendmail(receiver,email)
+        return 'User created. Email send to %s ' % email
+
+#        return 'Error. Email already in use!'
 
 #Verify user and redirect to register form        
 @app.route('/register')
@@ -114,9 +125,11 @@ def registerpage():
 
 
 #Verify if user is logged in
-@app.route('/api/auth/checkifloggedin')
+@app.route('/api/auth/check')
 @login_required
 def checkifloggedin():
+    odbiorca = ['219258@student.pwr.edu.pl']
+    sendmail(odbiorca)
     return 'The current user is ' + current_user.email
 
     

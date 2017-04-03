@@ -5,10 +5,10 @@ from flask_mail import Message
 
 
 app.config.update(
-    MAIL_SERVER = '',
+    MAIL_SERVER = 'admin.example.com',
     MAIL_PORT = 587,    
-    MAIL_USERNAME = '',
-    MAIL_PASSWORD = '',
+    MAIL_USERNAME = 'admin@example.com',
+    MAIL_PASSWORD = 'password',
 )
 
 mail = Mail(app)
@@ -21,6 +21,6 @@ def sendmail(recip,email):
         msg = Message(recipients=recip,
                       body=message,
                       subject=subject,
-                      sender='')
+                      sender='admin@example.com')
 
         connection.send(msg)

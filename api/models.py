@@ -11,7 +11,8 @@ class User(UserMixin, db.Model):
     
     applications=db.relationship('App', backref='creator', lazy='dynamic')
     logs=db.relationship('Log', backref='author', lazy='dynamic')
-
+    #notes=db.relationship('Note', backref='owner', lazy='dynamic')
+    
     def __init__(self, email, password_hash):
         
         self.email=email
@@ -82,5 +83,14 @@ class Log(db.Model):
         
         self.content=content
         self.author=author_id
+        
+#To create
+
+class  Note(db.Model):
+    
+    id=db.Column(db.Integer, primary_key=True)
+    content=db.Column(db.Text)
+    tag=db.Column(db.String(20))
+    owner_id=db.Column(db.Integer, db.ForeignKey('user.id'))
         
 #db.create_all()

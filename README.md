@@ -1,5 +1,7 @@
-<h2>Dashboard static preview</h2>
-<p>For now it's only static part written in html/css. As soon as we connect the db and angular it will be edited.</p>
+<h1>Innovative cross-app-links</h1>
+<h3>It's online! <a href="https://cross-app-links.herokuapp.com">https://cross-app-links.herokuapp.com</a></h3>
+<h2>Link management</h2>
+<p>You can now add and edit a link. But for now without img change</p>  
 <h2>HTTP requests- Angular</h2>
 <p>There are four types of request GET, POST, PUT, DELETE and they can be called like this:</p>
 
@@ -12,7 +14,7 @@ restful.get(<i>string</i> table_name[, <i>integer</i> element_id]).then(function
 <br/>
 
 <code>
-restful.post(<i>string</i> table_name, <i>integer</i> element_id, <i>JSON Object </i> data);
+restful.post(<i>string</i> table_name, <i>JSON Object </i> data);
 </code>
 
 <br/>
@@ -78,10 +80,6 @@ restful.logout();
     </tbody>
 </table>
 <p>If you don't follow this restrictions the request will not be sent. But even if you somehow done that, Flask is also secured in a similar way.</p>
->>>>>>> feature/http-request
-<h2>Innovative cross-app-links</h2>
-<h3>It's online! <a href="https://cross-app-links.herokuapp.com">https://cross-app-links.herokuapp.com</a></h3>
-<p>You don't need any password or email. Just click the 'Sign in' button with empty fields. It's temporary solution! Just to see if it works :)</p>
 <h2>User verification, session handling.</h2>
 <p>
 <blockquote>On root we check if there is open session. If yes - response with index. If no - login page is displayed.</blockquote>
@@ -96,6 +94,7 @@ restful.logout();
 <blockquote>Admin will be notified if username/email is already taken.</blockquote>
 <blockquote>@login_required prevents from unauthorised access.</blockquote>
 </p>
+
 <h2>To run locally</h2>
 <p>We're using npm / bower so first you have to install them. Ofc python is also necessary(3.6 for best).</p>
 <p>Try <a href="https://nodejs.org/en/">this</a> to install node.js</p>

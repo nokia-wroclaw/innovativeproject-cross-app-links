@@ -1,1 +1,21 @@
-Links
+<div class="col-lg-12 col-md-12 col-sm12 col-xs-12 pull-left no-box-el">
+    <a href="add-link" class="button blue pull-left"><span class="glyphicon glyphicon-plus"></span>Add new link</a>
+    <div class="search-by single-input pull-right">
+        <input type='text' ng-model='searchBy' placeholder='Search link by name'>
+    </div>
+</div>
+<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" ng-repeat='app in apps | orderBy : id : true | filter: {name: searchBy}'>
+    <div class="box link-box">
+        <div class="main-link-info">
+            <img src="../static/img/app-img/{{app.id}}.png">
+            <h3 class="main-link-heading">{{app.name}}</h3>
+        </div>
+        <div class="main-link-href">
+            <a href="{{app.link}}" target="_blank">{{app.link}}</a>
+        </div>
+        <div class="main-link-desc">
+            <p>{{app.desc}}</p>
+        </div>
+        <a class="settings-icon" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
+    </div>
+</div>

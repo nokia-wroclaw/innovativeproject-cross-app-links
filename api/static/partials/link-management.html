@@ -1,7 +1,7 @@
-<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-    <form name='form' class="box box-form" ng-submit="form.$valid && newlink.add()" novalidate>
+<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
+    <form name='form' class="box box-form" ng-submit="form.$valid && newlink.update(app.id)" ng-init='newlink.manageFill(app.name, app.link, app.desc)' novalidate>
         <header>
-            <h3 class="blue">Add new link</h3>
+            <h3 class="blue">Edit link</h3>
         </header>
         <input type='text' name='name' ng-model='newlink.name' placeholder='Set a name for your link' required>
         <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required>
@@ -10,13 +10,6 @@
         <span class='button pure pull-right in-row'>Upload icon</span>
     </form>
 </div>
-<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-    <div class="box box-list">
-        <header>
-            <h3>Some rules to follow</h3>
-        </header>
-    </div>
-</div>
 <div class="success-bar" ng-show="newlink.status">
-    Success! You've just added a link.
+    Success! You've just edited a link.
 </div>

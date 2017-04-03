@@ -106,6 +106,7 @@
                 update.apps();
                 this.clear();
                 this.status = true;
+                $location.path('/links').replace();
             },
             clear: function () {
                 this.name = '';
@@ -120,6 +121,14 @@
             $scope.newlink.status = false;
         });
 
+        //popup model
+        $scope.popup = {
+            edit: {
+                close: function () {
+                    $location.path('/links').replace();
+                }
+            }
+        }
 
                 }]);
 

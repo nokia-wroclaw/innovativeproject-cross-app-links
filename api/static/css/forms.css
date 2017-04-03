@@ -14,3 +14,7 @@
 .error-form-box span.error .glyphicon {
     margin: 10px;
 }
+
+.no-shadow {
+    box-shadow: none;
+}

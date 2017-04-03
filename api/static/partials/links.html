@@ -43,7 +43,7 @@
 
         </div>
     </div>
-    <form ng-init="newlink.manageFill(app.name,app.link,app.desc)" name='form' class="box box-form" ng-submit="form.$valid && form.$dirty && newlink.update(app.id)" novalidate>
+    <form ng-init="newlink.manageFill(app.name,app.link,app.desc)" name='form' class="box box-form no-shadow" ng-submit="form.$valid && form.$dirty && newlink.update(app.id)" novalidate>
         <header>
             <h3 class="blue">Edit link</h3>
         </header>
@@ -59,4 +59,4 @@
     Success! You've just added a link.
 </div>
 
-<div class="black-bg" ng-if="filterParams.manage()>0"></div>
+<div class="black-bg" ng-if="filterParams.manage()>0" ng-click="popup.edit.close()"></div>

@@ -1,5 +1,5 @@
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
-    <div class="box error-form-box" ng-show="form.$submitted">
+    <div class="no-box-el error-form-box" ng-show="form.$submitted">
         <span class='pull-left text-left error' ng-show="form.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
 
         <div class="form.$invalid">

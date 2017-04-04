@@ -7,5 +7,4 @@ install:
 # command to run tests
 script: 
   - export FLASK_APP=run.py
-  - python route.py test
-
+  - python -m unittest -v api.test

@@ -93,6 +93,7 @@ def logout():
     return redirect('/')
 
 #Register new user in database
+#Send email after successful registration
 @app.route('/api/auth/register', methods=['POST'])
 @login_required
 def register():
@@ -106,17 +107,6 @@ def register():
         return 'User created. Email send to %s ' % email
     else:
         return 'Error. Email already in use!'
-
-#Verify user and redirect to register form        
-@app.route('/register')
-def registerpage():
-    if g.user:
-        if current_user.username == 'admin':
-            return make_response(open('api/templates/register-page.html').read())
-        else:
-            return redirect('/')
-    else:
-        return redirect('/')
 
 
 #Verify if user is logged in

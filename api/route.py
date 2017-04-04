@@ -113,8 +113,6 @@ def register():
 @app.route('/api/auth/check')
 @login_required
 def checkifloggedin():
-    odbiorca = ['219258@student.pwr.edu.pl']
-    sendmail(odbiorca)
     return 'The current user is ' + current_user.email
 
     

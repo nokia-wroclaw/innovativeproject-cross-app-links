@@ -89,8 +89,10 @@ restful.logout();
 </p>
 <h2>User registration.</h2>
 <p>
-<blockquote>Username, email and password hash will be added to the database after submiting form from "Add user"</blockquote>
-<blockquote>Admin will be notified if username/email is already taken.</blockquote>
+<blockquote>Administrator sends email invitation to join Cross-apps.</blockquote>
+<blockquote>Invited person receives an email with account activation link.</blockquote>
+<blockquote>After opening the link page prompts for password new user wants to be set.</blockquote>
+<blockquote>Once button is hit new user is created.</blockquote>
 <blockquote>@login_required prevents from unauthorised access.</blockquote>
 </p>
 

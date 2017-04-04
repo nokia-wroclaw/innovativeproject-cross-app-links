@@ -98,12 +98,12 @@ def logout():
 @login_required
 def register():
     if not User.query.filter_by(email=request.form['email']).first():
-        new = User(request.form['email'],sha256_crypt.encrypt(request.form['password']))
-        db.session.add(new)
-        db.session.commit()
         receiver = [request.form['email']]
         email = request.form['email']
         sendmail(receiver,email)
+        new = User(request.form['email'],sha256_crypt.encrypt(request.form['password']))
+        db.session.add(new)
+        db.session.commit()
         return 'User created. Email send to %s ' % email
     else:
         return 'Error. Email already in use!'

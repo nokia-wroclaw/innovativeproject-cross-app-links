@@ -2,7 +2,7 @@ from flask import Flask, make_response, jsonify, render_template, redirect, sess
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from passlib.hash import sha256_crypt
 from api import app
-from api.models import User, Group, App, Log
+from api.models import User, Group, App, Log, Invites
 from api.database import db
 from api.mail import sendmail
 
@@ -98,13 +98,13 @@ def logout():
 @login_required
 def register():
     if not User.query.filter_by(email=request.form['email']).first():
+        new = Invites(request.form['email'],current_user.id)
+        db.session.add(new)
+        db.session.commit()
         receiver = [request.form['email']]
         email = request.form['email']
         sendmail(receiver,email)
-        new = User(request.form['email'],sha256_crypt.encrypt(request.form['password']))
-        db.session.add(new)
-        db.session.commit()
-        return 'User created. Email send to %s ' % email
+        return 'Confirmation email send to %s ' % email
     else:
         return 'Error. Email already in use!'
 
@@ -115,7 +115,23 @@ def register():
 def checkifloggedin():
     return 'The current user is ' + current_user.email
 
-    
+
+# #Confirm account
+@app.route('/api/auth/setpassword', methods=['GET','POST'])
+def setpassword():
+    if request.method == 'POST':
+        temp = request.args.get('token')
+        userpassword = request.form['password']
+        new = Invites.query.filter_by(token = temp).first()
+        useremail = new.email
+        new = User(useremail,sha256_crypt.encrypt(userpassword))
+        db.session.add(new)
+        db.session.commit()
+        return 'Registration complete'
+    else:
+        return make_response(open('api/templates/create-user.html').read())
+
+
 #Default templates for Flask route
 @app.route('/')
 @app.route('/<content>')

@@ -105,12 +105,7 @@ def register():
         sendmail(receiver,email)
         return 'User created. Email send to %s ' % email
     else:
-        receiver = [request.form['email']]
-        email = request.form['email']
-        sendmail(receiver,email)
-        return 'User created. Email send to %s ' % email
-
-#        return 'Error. Email already in use!'
+        return 'Error. Email already in use!'
 
 #Verify user and redirect to register form        
 @app.route('/register')

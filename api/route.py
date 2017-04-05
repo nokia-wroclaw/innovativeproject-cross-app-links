@@ -20,7 +20,8 @@ index_content_list = [
     'action-log',
     'links',
     'add-link',
-    'users-permissions',
+    'users',
+    'groups',
     'add-user',
     'settings',
     'ver'

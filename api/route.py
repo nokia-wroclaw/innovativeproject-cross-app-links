@@ -11,6 +11,36 @@ from api.mail import sendmail
 #-----------
 #FUNCTIONS
 #-----------
+def commituser(token,userpassword):
+    new = Invites.query.filter_by(token = token).first()
+    useremail = new.email
+    new = User(useremail,sha256_crypt.encrypt(userpassword))
+    db.session.add(new)
+    db.session.commit()
+    removeinvite(useremail)
+
+
+def commitinvite(email,maker):
+    receiver = [email]
+    sendmail(receiver)
+    new = Invites(email,maker)
+    db.session.add(new)
+    db.session.commit()
+
+
+
+
+def removeuser(email):
+    sadman = User.query.filter_by(email = email).first()
+    db.session.delete(sadman)
+    db.session.commit()
+
+
+
+def removeinvite(email):
+    sadman = Invites.query.filter_by(email = email).first()
+    db.session.delete(sadman)
+    db.session.commit()
 
 #-----------
 #STATIC VAL
@@ -68,7 +98,6 @@ def create_all():
 
 #Auth route
 # User verification
-# pass: admin123
 @app.route('/api/auth', methods=['POST'])
 def auth():
     session.pop('user', None)
@@ -98,22 +127,10 @@ def logout():
 @login_required
 def register():
     if not User.query.filter_by(email=request.form['email']).first():
-        new = Invites(request.form['email'],current_user.id)
-        db.session.add(new)
-        db.session.commit()
-        receiver = [request.form['email']]
-        email = request.form['email']
-        sendmail(receiver)
+        commitinvite(request.form['email'],current_user.id)
         return redirect('/add-user')
     else:
         return 'Error. Email already in use!'
-
-
-#Verify if user is logged in
-@app.route('/api/auth/check')
-@login_required
-def checkifloggedin():
-    return 'The current user is ' + current_user.email
 
 
 # #Confirm account
@@ -121,12 +138,8 @@ def checkifloggedin():
 def setpassword():
     if request.method == 'POST':
         temp = request.args.get('token')
-        userpassword = request.form['password']
-        new = Invites.query.filter_by(token = temp).first()
-        useremail = new.email
-        new = User(useremail,sha256_crypt.encrypt(userpassword))
-        db.session.add(new)
-        db.session.commit()
+        givenpassword = request.form['password']
+        commituser(temp,givenpassword)
         return redirect('/')
     else:
         return make_response(open('api/templates/create-user.html').read())

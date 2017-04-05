@@ -17,8 +17,10 @@
                 templateUrl: 'static/partials/links.html'
             }).when('/add-link', {
                 templateUrl: 'static/partials/add-link.html'
-            }).when('/users-permissions', {
-                templateUrl: 'static/partials/users-permissions.html'
+            }).when('/users', {
+                templateUrl: 'static/partials/users.html'
+            }).when('/groups', {
+                templateUrl: 'static/partials/groups.html'
             }).when('/add-user', {
                 templateUrl: 'static/partials/add-user.html'
             }).when('/settings', {

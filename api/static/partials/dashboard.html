@@ -77,7 +77,7 @@
             <tbody>
                 <tr ng-repeat='log in logs | limitTo : 5' ng-show='logs.length'>
                     <td>{{log.id}}</td>
-                    <td>{{log.data_time}}</td>
+                    <td>{{log.data_time | date: 'short' }}</td>
                     <td>{{log.author.username}}</td>
                     <td>{{log.content}}</td>
                 </tr>

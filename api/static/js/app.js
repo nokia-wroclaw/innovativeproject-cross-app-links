@@ -11,11 +11,15 @@
             scrollInertia: 0,
             axis: 'y'
         };
+
+
         $scope.limit = {
             users: 5,
             group: 3,
             log: 5
         }
+
+
         $scope.menu = {
             status: true,
             hide: function () {
@@ -141,6 +145,7 @@
         $scope.$on('$routeChangeStart', function (next, current) {
             $scope.newlink.clear();
             $scope.newlink.status = false;
+            $scope.searchBy = '';
         });
 
         //popup model

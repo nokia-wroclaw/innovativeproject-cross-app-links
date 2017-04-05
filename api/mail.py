@@ -25,7 +25,7 @@ def sendmail(recip,email):
       msg = Message(recipients=recip,
                     body=message,
                     subject=subject,
-                    sender='219258@student.pwr.edu.pl')
+                    sender='cross-apps@yandex.com')
       connection.send(msg)
 
 

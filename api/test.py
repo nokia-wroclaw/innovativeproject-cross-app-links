@@ -40,6 +40,15 @@ class FlaskTestCase(unittest.TestCase):
         response = tester.get('/add-link', content_type='html/text')
         self.assertFalse(b'New link' in response.data)
 
+    def test_log_out(self):
+        tester=app.test_client(self)
+        tester.post('login',
+                           data=dict(username='admin', password='admin'),
+                           follow_redirects=True
+                           )
+        response=tester.get('/logout',follow_redirects=True)
+        self.assertEqual(response.status_code,200)
+
 
 
 #def test_apps(self):

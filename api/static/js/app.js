@@ -65,10 +65,10 @@
         $scope.clockDate = {
             setup: new Date(),
             time: function () {
-                if (this.setup.getMinutes() < 10)                     
-                    return this.setup.getHours()>9 ? this.setup.getHours() + ':0' + this.setup.getMinutes():  '0' + this.setup.getHours() + ':0' + this.setup.getMinutes();
-                else 
-                    return this.setup.getHours()>9 ? this.setup.getHours() + ':' + this.setup.getMinutes():  '0' + this.setup.getHours() + ':' + this.setup.getMinutes();
+                if (this.setup.getMinutes() < 10)
+                    return this.setup.getHours() > 9 ? this.setup.getHours() + ':0' + this.setup.getMinutes() : '0' + this.setup.getHours() + ':0' + this.setup.getMinutes();
+                else
+                    return this.setup.getHours() > 9 ? this.setup.getHours() + ':' + this.setup.getMinutes() : '0' + this.setup.getHours() + ':' + this.setup.getMinutes();
             },
             date: function () {
                 return this.setup.getTime();
@@ -105,8 +105,16 @@
                     link: this.address,
                     desc: this.desc,
                 }
-                restful.update('app', app_id, post_object);
+                restful.update('app', app_id, post_object).then(function (success) {
+                    var log_obj = {
+                        content: "Link #" + app_id + "was updated",
+                        date_time: "CURRENT_TIMESTAMP",
+                        author_id: 1
+                    }
+                    restful.post('log', log_obj);
+                });
                 update.apps();
+                update.logs();
                 this.clear();
                 this.status = true;
                 $location.path('/links').replace();

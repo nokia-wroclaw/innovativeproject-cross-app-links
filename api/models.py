@@ -79,10 +79,11 @@ class Log(db.Model):
     content=db.Column(db.String(60),unique=True)
     author_id=db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, content, author_id):
+    def __init__(self, content, data_time, author_id):
         
         self.content=content
-        self.author=author_id
+        self.data_time=data_time
+        self.author_id=author_id
         
 #To create
 

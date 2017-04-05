@@ -1,5 +1,5 @@
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-    <div class="no-box-el error-form-box" ng-show="form.$submitted && form.$invalid">
+    <div class="no-box-el error-form-box" ng-show="form.$submitted && form.$invalid && newlink.status==false">
 
         <span class='pull-left text-left error' ng-show="form.name.$error.required"><span class="glyphicon glyphicon-remove"></span>Required link name!</span>
         <span class='pull-left text-left error' ng-show="form.name.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short link name!</span>
@@ -33,5 +33,3 @@
 <div class="success-bar" ng-show="newlink.status">
     Success! You've just added a link.
 </div>
-
-{{form.address.$error.linkformat}}

@@ -115,7 +115,14 @@
                     link: this.address,
                     desc: this.desc,
                 }
-                restful.update('app', app_id, post_object);
+                restful.update('app', app_id, post_object).then(function (response) {
+                    var log_object = {
+                        content: 'A link #' + app_id + ' was updated',
+                        data_time: 'CURRENT_TIMESTAMP',
+                        author_id: 1
+                    }
+                    restful.post('log', log_object);
+                });
 
                 update.apps();
                 update.logs();

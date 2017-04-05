@@ -11,7 +11,11 @@
             scrollInertia: 0,
             axis: 'y'
         };
-
+        $scope.limit = {
+            users: 5,
+            group: 3,
+            log: 5
+        }
         $scope.menu = {
             status: true,
             hide: function () {

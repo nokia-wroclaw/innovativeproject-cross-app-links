@@ -27,13 +27,13 @@ class FlaskTestCase(unittest.TestCase):
         response = tester.get('/some-random-url', content_type='html/text')
         self.assertEqual(response.status_code,200)
 
-    # def test_dashboard(self):
-    #     tester = app.test_client(self)
-    #     response = tester.get('/dashboard', content_type='html/text')
-    #     self.assertTrue(b'Action log' in response.data)
-    #     #self.assertTrue(b'Notes' in response.data)
-    #     #self.assertTrue(b"Who's online" in response.data)
-    #     #self.assertTrue(b'cross app links' in response.data)
+    def test_dashboard(self):
+        tester = app.test_client(self)
+        response = tester.get('/dashboard', content_type='html/text')
+        self.assertTrue(b'Action log' in response.data)
+        #self.assertTrue(b'Notes' in response.data)
+        #self.assertTrue(b"Who's online" in response.data)
+        #self.assertTrue(b'cross app links' in response.data)
 
     def test_add_link(self):
         tester = app.test_client(self)
@@ -49,6 +49,18 @@ class FlaskTestCase(unittest.TestCase):
         response=tester.get('/logout',follow_redirects=True)
         self.assertEqual(response.status_code,200)
 
+    def test_correct_login(self):
+        tester=app.test_client(self)
+        response=tester.post('login',
+                           data=dict(username='admin', password='admin'),
+                           follow_redirects=True
+                           )
+        self.assertEqual(response.status_code,405)
+
+ #   def test_main_page_requiered(self):
+  #      tester=app.test_client(self)
+  #      response=tester.get('/',follow_redirects=True)
+  #      self.assertTrue(b'Sign in' in response.data)
 
 
 #def test_apps(self):

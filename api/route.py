@@ -103,7 +103,7 @@ def register():
         db.session.commit()
         receiver = [request.form['email']]
         email = request.form['email']
-        sendmail(receiver,email)
+        sendmail(receiver)
         return 'Confirmation email send to %s ' % email
     else:
         return 'Error. Email already in use!'

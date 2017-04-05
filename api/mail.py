@@ -16,8 +16,9 @@ app.config.update(
 
 mail = Mail(app)
 
-def sendmail(recip,email):
+def sendmail(recip):
     with mail.connect() as connection:
+      email = recip[0]
       username = email.split('@')[0]
       new = Invites.query.filter_by(email = email).first()
       message = 'Helllo %s!\n You have been invited to Cross-application shortcuts! \n Please activate your account by visiting this link 127.0.0.1:5000/api/auth/setpassword?token=%s \n  After registrarion is complete you can make yourself at home at https://cross-app-links.herokuapp.com/' % (username,new.token)
@@ -29,8 +30,9 @@ def sendmail(recip,email):
       connection.send(msg)
 
 
-def sendinfomail(recip,email):
+def sendinfomail(recip):
     with mail.connect() as connection:
+      email = recip[0]
       username = email.split('@')[0]
       message = 'Helllo %s!\n You have been logged in!' % (username)
       subject = "Cross-apps registration"

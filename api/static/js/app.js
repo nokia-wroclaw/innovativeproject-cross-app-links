@@ -138,14 +138,14 @@
 
             delete: function (app_id) {
                 var confirmResult = confirm("Do you want to remove this app?");
-                if (confitmResult) {
+                if (confirmResult) {
                     restful.delete("app", app_id).then(function (response) {
                         var log_object = {
-                            content: "A link #" + app_id + "was removed",
+                            content: "A link #" + app_id + " was removed",
                             data_time: "CURRENT_TIMESTAMP",
                             author_id: 1
                         }
-                        restul.post("log", log_object);
+                        restful.post("log", log_object);
                     });
                     update.apps();
                     update.logs();

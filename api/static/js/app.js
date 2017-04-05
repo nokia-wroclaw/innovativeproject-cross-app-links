@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services']);
+    var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives']);
     app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', function ($scope, restful, $location, $routeParams) {
         /*Custom Scrollbar Config*/
         $scope.config = {
@@ -23,13 +23,13 @@
         }
 
         $scope.filterParams = {
-                manage: function () {
-                    if ($routeParams.linkID)
-                        return parseInt($routeParams.linkID);
-                    else return '';
-                }
+            manage: function () {
+                if ($routeParams.linkID)
+                    return parseInt($routeParams.linkID);
+                else return '';
             }
-            //Get data
+        }
+        //Get data
 
         var update = {
             apps: function () {
@@ -109,6 +109,7 @@
                 update.apps();
                 this.clear();
                 this.status = true;
+                $location.path('/links').replace();
             },
             clear: function () {
                 this.name = '';
@@ -123,6 +124,14 @@
             $scope.newlink.status = false;
         });
 
+        //popup model
+        $scope.popup = {
+            edit: {
+                close: function () {
+                    $location.path('/links').replace();
+                }
+            }
+        }
 
                 }]);
 

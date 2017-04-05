@@ -80,6 +80,20 @@ restful.logout();
     </tbody>
 </table>
 <p>If you don't follow this restrictions the request will not be sent. But even if you somehow done that, Flask is also secured in a similar way.</p>
+<h2>User verification, session handling.</h2>
+<p>
+<blockquote>On root we check if there is open session. If yes - response with index. If no - login page is displayed.</blockquote>
+<blockquote>Visitor is asked for credentials. We look for a databse entry by email and then validate password with hash. </blockquote>
+<blockquote>If both email and password are correct, user will be logged in and session will be opened.</blockquote>
+<blockquote>In case password or email is incorrect, page will simply reload. Visitor won't be granted any rights.</blockquote>
+</p>
+<h2>User registration.</h2>
+<p>
+<blockquote>Admin is allowed to access /register path, which loads register form.</blockquote>
+<blockquote>Username, email and password hash will be added to the database after submit.</blockquote>
+<blockquote>Admin will be notified if username/email is already taken.</blockquote>
+<blockquote>@login_required prevents from unauthorised access.</blockquote>
+</p>
 
 <h2>To run locally</h2>
 <p>We're using npm / bower so first you have to install them. Ofc python is also necessary(3.6 for best).</p>

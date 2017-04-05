@@ -1,0 +1,147 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: #34313d url(../img/loginpage/background.png) center no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Lato';
+}
+
+.login-container {
+    width: 330px;
+    margin: 0 auto;
+    margin-top: 28vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.login-container>h1 {
+    margin: 20px 0;
+    color: white;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.login-container>.login-form {
+    float: left;
+    width: 100%;
+}
+
+.login-container>.login-form>.input-socket {
+    width: 100%;
+    box-sizing: border-box;
+    float: left;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 2px;
+    overflow: hidden;
+    height: 60px;
+    position: relative;
+}
+
+.login-container>.login-form>.input-socket>input[type="text"],
+.login-container>.login-form>.input-socket>input[type="password"],
+.login-container>.login-form>.input-socket>.input-icon,
+.login-container>.login-form>input[type="submit"] {
+    float: right;
+    width: 85%;
+    padding: 20px;
+    padding-left: 10px;
+    padding-top: 22px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 2px;
+    color: #b6b0c8;
+    height: 60px;
+    background: white;
+    display: inline;
+    transition: 0.3s ease all;
+}
+
+.login-container>.login-form>.input-socket>input[type="text"]:focus,
+.login-container>.login-form>.input-socket>input[type="password"]:focus {
+    width: 100%;
+    border: 0;
+    outline: none;
+    padding-left: 20px;
+    transition: 0.3s ease all;
+}
+
+.login-container>.login-form>.input-socket>input[type="text"]:focus + .input-icon,
+.login-container>.login-form>.input-socket>input[type="password"]:focus + .input-icon {
+    transform: translateX(-100%);
+    transition: 0.4s ease all;
+}
+
+.login-container>.login-form>.input-socket>.input-icon {
+    position: absolute;
+    text-align: center;
+    width: 15%;
+    float: left;
+    display: inline;
+    padding-left: 20px;
+    padding-top: 20px;
+    transition: 0.4s ease all;
+}
+
+.login-container>.login-form>.input-socket>input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #b6b0c8;
+}
+
+.login-container>.login-form>.input-socket>input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #b6b0c8;
+}
+
+.login-container>.login-form>.input-socket>input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: pink;
+}
+
+.login-container>.login-form>.input-socket>input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #b6b0c8;
+}
+
+.login-container>.login-form>input[type="submit"] {
+    padding: 8px 0;
+    float: right;
+    background: #D45A5A;
+    color: white;
+    width: 100px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.login-container>.login-form>input[type="submit"]:hover {
+    cursor: poiner;
+}
+
+.login-container>.login-form>.form-link {
+    font-size: 14px;
+    font-weight: 400;
+    float: left;
+}
+
+.login-container>.login-form>.form-link.forgotten-pass {
+    margin: 8px 0;
+}
+
+.login-container>.login-form>.form-link.new-account {
+    text-align: center;
+    width: 100%;
+}
+
+.login-container>.login-form>.form-link>a:link,
+.login-container>.login-form>.form-link>a:visited,
+.login-container>.login-form>.form-link>a:active {
+    color: rgb(130, 106, 200);
+    display: block;
+}

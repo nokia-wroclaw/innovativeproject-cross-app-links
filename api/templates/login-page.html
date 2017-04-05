@@ -20,12 +20,12 @@
         <h1>Sign in</h1>
         <form class="login-form" method="post" name="login_form" action="/api/auth">
             <div class="input-socket">
-                <input type="text" name="email" placeholder="Your e-mail">
+                <input type="email" name="email" placeholder="Your e-mail" required>
                 <span class="input-icon"><span class="glyphicon glyphicon-user"></span></span>
 
             </div>
             <div class="input-socket">
-                <input type="password" name="password" placeholder="Your password">
+                <input type="password" name="password" placeholder="Your password" required>
                 <span class="input-icon"><span class="glyphicon glyphicon-lock"></span></span>
             </div>
             <input type="submit" name="submit" value="Sign in">

@@ -1,6 +1,6 @@
 (function () {
     var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services']);
-    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', function ($scope, restful, $location, $routeParams) {
+    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', function ($scope, restful, $location, $routeParams, $interval) {
         /*Custom Scrollbar Config*/
         $scope.config = {
             autoHideScrollbar: true,
@@ -72,8 +72,13 @@
             },
             date: function () {
                 return this.setup.getTime();
-            }
-        }
+            },
+            update: function(){
+                this.setup = new Date();
+            }}
+            $interval(function(){
+                    $scope.clockDate.update()
+                }, 3000)
 
         //ADDING ITEMS MODELS
 

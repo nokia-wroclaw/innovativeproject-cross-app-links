@@ -31,13 +31,13 @@
         }
 
         $scope.filterParams = {
-                manage: function () {
-                    if ($routeParams.linkID)
-                        return parseInt($routeParams.linkID);
-                    else return '';
-                }
+            manage: function () {
+                if ($routeParams.linkID)
+                    return parseInt($routeParams.linkID);
+                else return '';
             }
-            //Get data
+        }
+        //Get data
 
         var update = {
             apps: function () {
@@ -119,6 +119,7 @@
                     link: this.address,
                     desc: this.desc,
                 }
+
                 restful.update('app', app_id, post_object).then(function (response) {
                     var log_object = {
                         content: 'A link #' + app_id + ' was updated',
@@ -134,6 +135,23 @@
                 this.status = true;
                 $location.path('/links').replace();
             },
+
+            delete: function (app_id) {
+                var confirmResult = confirm("Do you want to remove this app?");
+                if (confitmResult) {
+                    restful.delete("app", app_id).then(function (response) {
+                        var log_object = {
+                            content: "A link #" + app_id + "was removed",
+                            data_time: "CURRENT_TIMESTAMP",
+                            author_id: 1
+                        }
+                        restul.post("log", log_object);
+                    });
+                    update.apps();
+                    update.logs();
+                }
+            },
+
             clear: function () {
                 this.name = '';
                 this.address = '';
@@ -157,7 +175,7 @@
             }
         }
 
-        }]);
+                    }]);
 
 
 }());

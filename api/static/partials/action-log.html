@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat='log in logs | limitTo : limit.log' ng-show='logs.length'>
+                <tr ng-repeat='log in logs | orderBy: id : true | limitTo : limit.log' ng-show='logs.length'>
                     <td>{{log.id}}</td>
                     <td>{{log.data_time | date: 'short' }}</td>
                     <td>{{log.author.username}}</td>

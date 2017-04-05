@@ -7,10 +7,11 @@ from flask_mail import Message
 
 
 app.config.update(
-    MAIL_SERVER = 'admin.example.com',
-    MAIL_PORT = 587,    
-    MAIL_USERNAME = 'admin@example.com',
-    MAIL_PASSWORD = 'password',
+    MAIL_SERVER = 'smtp.yandex.com',
+    MAIL_PORT = 465,
+    MAIL_USE_SSL = True ,   
+    MAIL_USERNAME = 'cross-apps',
+    MAIL_PASSWORD = '',
 )
 
 mail = Mail(app)
@@ -27,4 +28,15 @@ def sendmail(recip,email):
                     sender='219258@student.pwr.edu.pl')
       connection.send(msg)
 
+
+def sendinfomail(recip,email):
+    with mail.connect() as connection:
+      username = email.split('@')[0]
+      message = 'Helllo %s!\n You have been logged in!' % (username)
+      subject = "Cross-apps registration"
+      msg = Message(recipients=recip,
+                    body=message,
+                    subject=subject,
+                    sender='cross-apps@yandex.com')
+      connection.send(msg)
 

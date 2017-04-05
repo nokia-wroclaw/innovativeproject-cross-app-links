@@ -1,5 +1,7 @@
 <h1>Innovative cross-app-links</h1>
 <h3>It's online! <a href="https://cross-app-links.herokuapp.com">https://cross-app-links.herokuapp.com</a></h3>
+<p>Email: admin@example.com</p>
+<p>Password: admin123</p>
 <h2>Link management</h2>
 <p>You can now add and edit a link. But for now without img change</p>  
 <h2>HTTP requests- Angular</h2>

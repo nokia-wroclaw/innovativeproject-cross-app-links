@@ -23,13 +23,13 @@
         }
 
         $scope.filterParams = {
-            manage: function () {
-                if ($routeParams.linkID)
-                    return parseInt($routeParams.linkID);
-                else return '';
+                manage: function () {
+                    if ($routeParams.linkID)
+                        return parseInt($routeParams.linkID);
+                    else return '';
+                }
             }
-        }
-        //Get data
+            //Get data
 
         var update = {
             apps: function () {
@@ -72,8 +72,14 @@
             },
             date: function () {
                 return this.setup.getTime();
+            },
+            update: function () {
+                this.setup = new Date();
             }
         }
+        $interval(function () {
+            $scope.clockDate.update()
+        }, 3000)
 
         //ADDING ITEMS MODELS
 

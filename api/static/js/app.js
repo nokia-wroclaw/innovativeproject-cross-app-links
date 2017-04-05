@@ -1,6 +1,6 @@
 (function () {
     var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives']);
-    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', function ($scope, restful, $location, $routeParams) {
+    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', function ($scope, restful, $location, $routeParams, $interval) {
         /*Custom Scrollbar Config*/
         $scope.config = {
             autoHideScrollbar: true,
@@ -111,14 +111,8 @@
                     link: this.address,
                     desc: this.desc,
                 }
-                restful.update('app', app_id, post_object).then(function (success) {
-                    var log_obj = {
-                        content: "Link #" + app_id + "was updated",
-                        date_time: "CURRENT_TIMESTAMP",
-                        author_id: 1
-                    }
-                    restful.post('log', log_obj);
-                });
+                restful.update('app', app_id, post_object);
+
                 update.apps();
                 update.logs();
                 this.clear();
@@ -147,7 +141,7 @@
             }
         }
 
-                }]);
+        }]);
 
 
 }());

@@ -21,11 +21,11 @@ def commituser(token,userpassword):
 
 
 def commitinvite(email,maker):
-    receiver = [email]
-    sendmail(receiver)
     new = Invites(email,maker)
     db.session.add(new)
     db.session.commit()
+    receiver = [email]
+    sendmail(receiver)
 
 
 

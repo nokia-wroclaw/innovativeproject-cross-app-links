@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 from api.database import db
-from flask.ext.uuid import FlaskUUID
+from flask_uuid import FlaskUUID
 from api import app
 import uuid
 

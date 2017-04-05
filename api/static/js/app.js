@@ -65,7 +65,10 @@
         $scope.clockDate = {
             setup: new Date(),
             time: function () {
-                return this.setup.getHours() + ':' + this.setup.getMinutes();
+                if (this.setup.getMinutes() < 10)                     
+                    return this.setup.getHours()>9 ? this.setup.getHours() + ':0' + this.setup.getMinutes():  '0' + this.setup.getHours() + ':0' + this.setup.getMinutes();
+                else 
+                    return this.setup.getHours()>9 ? this.setup.getHours() + ':' + this.setup.getMinutes():  '0' + this.setup.getHours() + ':' + this.setup.getMinutes();
             },
             date: function () {
                 return this.setup.getTime();

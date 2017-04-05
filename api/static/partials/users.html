@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-init="limitUser=3" ng-repeat="user in users | limitTo : limitUser | filter : {username : searchBy}" ng-show="users.length">
+                <tr ng-repeat="user in users | limitTo : limit.users| filter : {username : searchBy}" ng-show="users.length">
                     <td>{{user.id}}</td>
                     <td><a href="/profile/{{user.id}}">{{user.username}}</a></td>
                     <td>{{user.group.name}}</td>
@@ -29,7 +29,7 @@
         </table>
         <span class="warning-text" ng-hide="users.length">No users yet.</span>
         <div class="full-width-button-area">
-            <a href="#" class="button green pull-right" ng-click="limitUser=limitUser+2"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+            <a href="#" class="button green pull-right" ng-click="limit.users=limit.users+2"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
         </div>
     </div>
 </div>

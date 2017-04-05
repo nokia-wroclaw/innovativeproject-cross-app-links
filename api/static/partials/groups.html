@@ -7,7 +7,7 @@
     <div class="box box-table">
         <table class="table ">
             <header>
-                <h3 class="green">Groups</h3>
+                <h3 class="blue">Groups</h3>
                 <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
             </header>
             <thead>
@@ -18,9 +18,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-init="limitUser=3" ng-repeat="group in groups | limitTo : limitUser | filter : {username : searchBy}" ng-show="users.length">
+                <tr ng-repeat="group in groups | limitTo : limit.group | filter : {name : searchBy}" ng-show="groups.length">
                     <td>{{group.id}}</td>
-                    <td><a href="/profile/{{user.id}}">{{group.name}}</a></td>
+                    <td><a href="/groups/{{group.id}}">{{group.name}}</a></td>
                     <td>
                         <p ng-show="group.app_add">Adding applications</p>
                         <p ng-show="group.app_drop">Removing applications</p>
@@ -31,9 +31,9 @@
                 </tr>
             </tbody>
         </table>
-        <span class="warning-text" ng-hide="users.length">No users yet.</span>
+        <span class="warning-text" ng-hide="groups.length">No groups yet.</span>
         <div class="full-width-button-area">
-            <a href="#" class="button green pull-right" ng-click="limitUser=limitUser+2"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+            <a href="#" class="button blue pull-right" ng-click="limit.group=limit.group+2"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
         </div>
     </div>
 </div>

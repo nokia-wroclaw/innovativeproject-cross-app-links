@@ -11,7 +11,11 @@
             scrollInertia: 0,
             axis: 'y'
         };
-
+        $scope.limit = {
+            users: 5,
+            group: 3,
+            log: 5
+        }
         $scope.menu = {
             status: true,
             hide: function () {
@@ -23,13 +27,13 @@
         }
 
         $scope.filterParams = {
-                manage: function () {
-                    if ($routeParams.linkID)
-                        return parseInt($routeParams.linkID);
-                    else return '';
-                }
+            manage: function () {
+                if ($routeParams.linkID)
+                    return parseInt($routeParams.linkID);
+                else return '';
             }
-            //Get data
+        }
+        //Get data
 
         var update = {
             apps: function () {

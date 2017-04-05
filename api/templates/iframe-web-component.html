@@ -1,24 +1,23 @@
-<html lang="en">
+<html lang="en" ng-app="mainApp">
 
 <head>
 
     <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/iframe.css">
-
-
 </head>
 
-<body>
+<body ng-controller="mainCtrl">
     <nav class="iframe-nav">
         <ul>
-            <li><a target="_blank" href="http://www.weka.pwr.edu.pl"><span class="glyphicon glyphicon-link"></span>PWr</a></li>
-            <li><a target="_blank" href="http://www.google.com"><span class="glyphicon glyphicon-send"></span>Google</a></li>
-            <li><a target="_blank" href="http://www.yahoo.com"><span class="glyphicon glyphicon-stats"></span>Yahoo</a></li>
-            <li><a target="_blank" href="https://https://soundcloud.com"><span class="glyphicon glyphicon-headphones"></span>SoundCloud</a></li>
-            <li><a target="_blank" href="https://https://www.google.pl/maps"><span class="glyphicon glyphicon-map-marker"></span>Google Maps</a></li>
-            <li><a target="_blank" href="https://validator.w3.org"><span class="glyphicon glyphicon-hourglass"></span>W3C</a></li>
+                <li ng-repeat="link in app"><a target="_blank" href="{{ link.link }}">{{ link.name }}</a></li>
         </ul>
-    </nav>
+    </nav>  
+    <script src="../static/bower_components/angular/angular.min.js"></script>
+    <!-- <script src="../static/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../static/bower_components/ng-scrollbars/dist/scrollbars.min.js"></script> -->
+    <!--        BOWER PCKG:END-->
+    <script src="../static/js/services.js"></script>
+    <script src="../static/js/iframe.js"></script>
 </body>
 
 </html>

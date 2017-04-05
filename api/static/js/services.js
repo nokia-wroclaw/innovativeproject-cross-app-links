@@ -6,7 +6,7 @@
 
         var _get = function (table, row_id) {
             row_id = (row_id == undefined) ? '' : '/' + row_id
-            var url = 'api/' + table + row_id;
+            var url = '/api/' + table + row_id;
             return $http.get(url, {
                     headers: {
                         'Content-Type': 'application/json'
@@ -25,7 +25,7 @@
 
         var _post = function (table, row_id, data) {
             row_id = (row_id == undefined) ? false : '/' + row_id
-            var url = 'api/' + table + row_id;
+            var url = '/api/' + table + row_id;
             if (data && row_id)
                 return $http.post(url, data, {
                         headers: {
@@ -45,7 +45,7 @@
 
         var _update = function (table, row_id, data) {
             row_id = (row_id == undefined) ? false : '/' + row_id
-            var url = 'api/' + table + row_id;
+            var url = '/api/' + table + row_id;
             if (data && row_id)
                 return $http.put(url, data, {
                         headers: {
@@ -65,7 +65,7 @@
 
         var _delete = function (table, row_id) {
             row_id = (row_id == undefined) ? false : '/' + row_id
-            var url = 'api/' + table + row_id;
+            var url = '/api/' + table + row_id;
             if (row_id)
                 return $http.delete(url, {
                         headers: {
@@ -96,7 +96,7 @@
                     });
         };
         var _logout = function () {
-            var url = 'api/auth/logout';
+            var url = '/api/auth/logout';
             if (data)
                 return $http.post(url, {
                         headers: {

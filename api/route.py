@@ -32,7 +32,6 @@ index_content_list = [
 @app.route('/<content>')
 @app.route('/<content>/<content_id>')
 def main(content='dashboard', content_id=None):
-    
     if content in index_content_list:
         return make_response(open('api/templates/index.html').read())
     return make_response(open('api/templates/404.html').read())
@@ -41,8 +40,7 @@ def main(content='dashboard', content_id=None):
 #Routes for REST API data
 @app.route('/api/<table>')
 @app.route('/api/<table>/<row_id>')
-def api(table, row_id = None):
-    
+def api(table, row_id = None):   
     if table in api_list:
         return jsonify({'name': 'cross-app-links', 'wlcm_txt': 'Hello World!'})
     return None
@@ -50,7 +48,10 @@ def api(table, row_id = None):
 #Routes for components data
 @app.route('/component_data/iframe')
 def component():
-    return render_template('iframe-web-component.html')
+	# apps = App.query.all()
+    # return render_template('iframe-web-component.html')
+    return make_response(open('api/templates/iframe-web-component.html').read())
+
 
 
 #Routes for components test

@@ -104,7 +104,7 @@ def register():
         receiver = [request.form['email']]
         email = request.form['email']
         sendmail(receiver)
-        return 'Confirmation email send to %s ' % email
+        return redirect('/add-user')
     else:
         return 'Error. Email already in use!'
 
@@ -127,7 +127,7 @@ def setpassword():
         new = User(useremail,sha256_crypt.encrypt(userpassword))
         db.session.add(new)
         db.session.commit()
-        return 'Registration complete'
+        return redirect('/')
     else:
         return make_response(open('api/templates/create-user.html').read())
 

@@ -132,6 +132,7 @@ body {
             }
         }
         .user-section {
+            min-width: 180px;
             float: right;
             position: relative;
             padding: 20px;
@@ -141,7 +142,7 @@ body {
             .user-avatar {
                 position: relative;
                 display: inline-block;
-                float: left;
+                float: right;
                 overflow: hidden;
                 border-radius: 100%;
                 height: 50px;
@@ -171,7 +172,7 @@ body {
             }
             .user-name {
                 display: inline-block;
-                float: left;
+                float: right;
                 margin: 16px 20px;
                 margin-left: 5px;
                 font-weight: 800;

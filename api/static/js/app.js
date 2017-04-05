@@ -32,6 +32,11 @@
             //Get data
 
         var update = {
+            me: function () {
+                restful.get('me/user').then(function (response) {
+                    $scope.current_user = response['objects'][0];
+                });
+            },
             apps: function () {
                 restful.get('app').then(function (response) {
                     $scope.apps = response['objects'];
@@ -53,6 +58,7 @@
                 });
             },
             all: function () {
+                this.me();
                 this.apps();
                 this.users();
                 this.groups();
@@ -65,20 +71,21 @@
         $scope.clockDate = {
             setup: new Date(),
             time: function () {
-                if (this.setup.getMinutes() < 10)                     
-                    return this.setup.getHours()>9 ? this.setup.getHours() + ':0' + this.setup.getMinutes():  '0' + this.setup.getHours() + ':0' + this.setup.getMinutes();
-                else 
-                    return this.setup.getHours()>9 ? this.setup.getHours() + ':' + this.setup.getMinutes():  '0' + this.setup.getHours() + ':' + this.setup.getMinutes();
+                if (this.setup.getMinutes() < 10)
+                    return this.setup.getHours() > 9 ? this.setup.getHours() + ':0' + this.setup.getMinutes() : '0' + this.setup.getHours() + ':0' + this.setup.getMinutes();
+                else
+                    return this.setup.getHours() > 9 ? this.setup.getHours() + ':' + this.setup.getMinutes() : '0' + this.setup.getHours() + ':' + this.setup.getMinutes();
             },
             date: function () {
                 return this.setup.getTime();
             },
-            update: function(){
+            update: function () {
                 this.setup = new Date();
-            }}
-            $interval(function(){
-                    $scope.clockDate.update()
-                }, 3000)
+            }
+        }
+        $interval(function () {
+            $scope.clockDate.update()
+        }, 3000)
 
         //ADDING ITEMS MODELS
 
@@ -96,7 +103,7 @@
                     name: this.name,
                     link: this.address,
                     desc: this.desc,
-                    creator_id: 1
+                    creator_id: $scope.current_user.id
                 }
                 restful.post('app', post_object);
                 update.apps();

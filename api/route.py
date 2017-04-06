@@ -163,7 +163,6 @@ def remove():
 @app.route('/<content>')
 @app.route('/<content>/<content_id>')
 def main(content='dashboard', content_id=None):
-    
         if content in index_content_list:
             if not g.user:
                 return make_response(open('api/templates/login-page.html').read())
@@ -171,13 +170,23 @@ def main(content='dashboard', content_id=None):
                 return make_response(open('api/templates/index.html').read())
         else:    
             return make_response(open('api/templates/404.html').read())
-   
-    
-#Routes for components
-@app.route('/getcomponent/<component_type>/<component_id>')
-def component(component_type, component_id):
+        
+
+#Routes for components data
+@app.route('/component_data/iframe')
+def component():
+	# apps = App.query.all()
+    # return render_template('iframe-web-component.html')
+    return make_response(open('api/templates/iframe-web-component.html').read())
+
+
+#Routes for components test
+@app.route('/component/<component_type>')
+def component_test(component_type):
+>>>>>>> feature/web-components
     if component_type=='iframe':
-        return render_template('iframe-web-component.html')
+        return make_response(open('api/static/web-components/iframe/iframe-index.html').read())
     elif component_type=='json':
-        return jsonify({'name': 'json-component', 'data': '755'})
+        return make_response(open('api/static/web-components/json/json-index.html').read())
     return None
+

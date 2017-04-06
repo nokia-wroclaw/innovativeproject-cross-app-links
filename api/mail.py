@@ -11,7 +11,7 @@ app.config.update(
     MAIL_PORT = 465,
     MAIL_USE_SSL = True ,   
     MAIL_USERNAME = 'cross-apps@yandex.com',
-    MAIL_PASSWORD = '',
+    MAIL_PASSWORD = 'innovativeproject',
 )
 
 mail = Mail(app)

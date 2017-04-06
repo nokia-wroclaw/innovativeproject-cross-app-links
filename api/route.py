@@ -183,7 +183,6 @@ def component():
 #Routes for components test
 @app.route('/component/<component_type>')
 def component_test(component_type):
->>>>>>> feature/web-components
     if component_type=='iframe':
         return make_response(open('api/static/web-components/iframe/iframe-index.html').read())
     elif component_type=='json':

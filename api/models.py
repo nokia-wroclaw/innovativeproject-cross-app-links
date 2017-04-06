@@ -1,5 +1,11 @@
 from flask_login import UserMixin
 from api.database import db
+from flask_uuid import FlaskUUID
+from api import app
+import uuid
+
+flask_uuid = FlaskUUID()
+flask_uuid.init_app(app)
 
 class User(UserMixin, db.Model):
     
@@ -94,3 +100,18 @@ class  Note(db.Model):
     owner_id=db.Column(db.Integer, db.ForeignKey('user.id'))
         
 #db.create_all()
+
+class Invites(db.Model):
+    __tablename__ = 'Invites'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    email=db.Column(db.String(25), unique=True)
+    token = db.Column(db.String(50), unique=True)
+    maker = db.Column(db.Integer)
+    
+    def __init__(self, email, maker):
+        
+        self.email=email
+        self.maker=maker
+        self.token=str(uuid.uuid4())
+

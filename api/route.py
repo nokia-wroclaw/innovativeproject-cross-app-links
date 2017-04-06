@@ -1,13 +1,46 @@
 from flask import Flask, make_response, jsonify, render_template, redirect, session, request, g
-from api import app
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
-from api.models import User, Group, App, Log
-from api.database import db
 from passlib.hash import sha256_crypt
+from api import app
+from api.models import User, Group, App, Log, Invites
+from api.database import db
+from api.mail import send_email, send_email_register
+
+
 
 #-----------
 #FUNCTIONS
 #-----------
+def commituser(token,userpassword):
+    new = Invites.query.filter_by(token = token).first()
+    useremail = new.email
+    new = User(useremail,sha256_crypt.encrypt(userpassword))
+    db.session.add(new)
+    db.session.commit()
+    removeinvite(useremail)
+
+
+def commitinvite(email,maker):
+    new = Invites(email,maker.id)
+    db.session.add(new)
+    db.session.commit()
+    receiver = [email]
+    send_email_register(maker.email,receiver)
+
+
+
+
+def removeuser(email):
+    sadman = User.query.filter_by(email = email).first()
+    db.session.delete(sadman)
+    db.session.commit()
+
+
+
+def removeinvite(email):
+    sadman = Invites.query.filter_by(email = email).first()
+    db.session.delete(sadman)
+    db.session.commit()
 
 #-----------
 #STATIC VAL
@@ -65,7 +98,6 @@ def create_all():
 
 #Auth route
 # User verification
-# pass: admin123
 @app.route('/api/auth', methods=['POST'])
 def auth():
     session.pop('user', None)
@@ -90,36 +122,41 @@ def logout():
     return redirect('/')
 
 #Register new user in database
+#Send email after successful registration
 @app.route('/api/auth/register', methods=['POST'])
 @login_required
 def register():
     if not User.query.filter_by(email=request.form['email']).first():
-        new = User(request.form['email'],sha256_crypt.encrypt(request.form['password']))
-        db.session.add(new)
-        db.session.commit()
-        return 'New user created.'
+        commitinvite(request.form['email'],current_user)
+        return redirect('/add-user')
     else:
         return 'Error. Email already in use!'
 
-#Verify user and redirect to register form        
-@app.route('/register')
-def registerpage():
-    if g.user:
-        if current_user.username == 'admin':
-            return make_response(open('api/templates/register-page.html').read())
-        else:
-            return redirect('/')
-    else:
+
+# #Confirm account
+@app.route('/api/auth/setpassword', methods=['GET','POST'])
+def setpassword():
+    if request.method == 'POST':
+        temp = request.args.get('token')
+        givenpassword = request.form['password']
+        commituser(temp,givenpassword)
         return redirect('/')
+    else:
+        return make_response(open('api/templates/create-user.html').read())
 
 
-#Verify if user is logged in
-@app.route('/api/auth/checkifloggedin')
+# Delete user
+@app.route('/api/auth/remove', methods=['POST'])
 @login_required
-def checkifloggedin():
-    return 'The current user is ' + current_user.email
+def remove():
+    if User.query.filter_by(email=request.form['email']).first():
+        removeuser(request.form['email'])
+        if Invites.query.filter_by(email=request.form['email']).first():
+            removeinvite(request.form['email'])
+        return redirect('/add-user')
+    else:
+        return 'Error. Email not found!'
 
-    
 #Default templates for Flask route
 @app.route('/')
 @app.route('/<content>')

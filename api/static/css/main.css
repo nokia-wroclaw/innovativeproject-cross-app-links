@@ -53,7 +53,7 @@ body {
   position: relative; }
   .main-header .header-land {
     background: url(../img/header-land.jpg);
-    height: 200px;
+    height: 180px;
     overflow: hidden;
     box-sizing: border-box;
     padding: 20px;
@@ -322,6 +322,12 @@ body {
       padding: 15px 0;
       height: 45px;
       box-sizing: border-box; }
+    .box.link-box .bottom-nav {
+      float: left;
+      width: 100%;
+      margin-top: 15px; }
+      .box.link-box .bottom-nav a.creator-link {
+        color: #ccc; }
   .box.box-table {
     float: left;
     padding: 0; }
@@ -493,8 +499,20 @@ body {
     color: #333; }
     .button.pure:hover {
       color: #333; }
+  .button.red {
+    background: #D45A5A; }
   .button.in-row {
     margin-right: 10px; }
+  .button.small {
+    font-size: 12px;
+    padding: 4px;
+    box-sizing: border-box;
+    width: 23px;
+    height: 23px; }
+    .button.small .glyphicon {
+      margin-right: 0; }
+    .button.small.margined {
+      margin-left: 10px; }
 
 .no-box-el {
   margin-bottom: 20px; }

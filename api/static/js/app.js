@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services']);
+    var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives']);
     app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', function ($scope, restful, $location, $routeParams, $interval) {
         /*Custom Scrollbar Config*/
         $scope.config = {
@@ -12,6 +12,14 @@
             axis: 'y'
         };
 
+
+        $scope.limit = {
+            users: 5,
+            group: 3,
+            log: 5
+        }
+
+
         $scope.menu = {
             status: true,
             hide: function () {
@@ -23,13 +31,13 @@
         }
 
         $scope.filterParams = {
-                manage: function () {
-                    if ($routeParams.linkID)
-                        return parseInt($routeParams.linkID);
-                    else return '';
-                }
+            manage: function () {
+                if ($routeParams.linkID)
+                    return parseInt($routeParams.linkID);
+                else return '';
             }
-            //Get data
+        }
+        //Get data
 
         var update = {
             apps: function () {
@@ -65,20 +73,21 @@
         $scope.clockDate = {
             setup: new Date(),
             time: function () {
-                if (this.setup.getMinutes() < 10)                     
-                    return this.setup.getHours()>9 ? this.setup.getHours() + ':0' + this.setup.getMinutes():  '0' + this.setup.getHours() + ':0' + this.setup.getMinutes();
-                else 
-                    return this.setup.getHours()>9 ? this.setup.getHours() + ':' + this.setup.getMinutes():  '0' + this.setup.getHours() + ':' + this.setup.getMinutes();
+                if (this.setup.getMinutes() < 10)
+                    return this.setup.getHours() > 9 ? this.setup.getHours() + ':0' + this.setup.getMinutes() : '0' + this.setup.getHours() + ':0' + this.setup.getMinutes();
+                else
+                    return this.setup.getHours() > 9 ? this.setup.getHours() + ':' + this.setup.getMinutes() : '0' + this.setup.getHours() + ':' + this.setup.getMinutes();
             },
             date: function () {
                 return this.setup.getTime();
             },
-            update: function(){
+            update: function () {
                 this.setup = new Date();
-            }}
-            $interval(function(){
-                    $scope.clockDate.update()
-                }, 3000)
+            }
+        }
+        $interval(function () {
+            $scope.clockDate.update()
+        }, 3000)
 
         //ADDING ITEMS MODELS
 
@@ -110,11 +119,39 @@
                     link: this.address,
                     desc: this.desc,
                 }
-                restful.update('app', app_id, post_object);
+
+                restful.update('app', app_id, post_object).then(function (response) {
+                    var log_object = {
+                        content: 'A link #' + app_id + ' was updated',
+                        data_time: 'CURRENT_TIMESTAMP',
+                        author_id: 1
+                    }
+                    restful.post('log', log_object);
+                });
+
                 update.apps();
+                update.logs();
                 this.clear();
                 this.status = true;
+                $location.path('/links').replace();
             },
+
+            delete: function (app_id) {
+                var confirmResult = confirm("Do you want to remove this app?");
+                if (confirmResult) {
+                    restful.delete("app", app_id).then(function (response) {
+                        var log_object = {
+                            content: "A link #" + app_id + " was removed",
+                            data_time: "CURRENT_TIMESTAMP",
+                            author_id: 1
+                        }
+                        restful.post("log", log_object);
+                    });
+                    update.apps();
+                    update.logs();
+                }
+            },
+
             clear: function () {
                 this.name = '';
                 this.address = '';
@@ -126,10 +163,19 @@
         $scope.$on('$routeChangeStart', function (next, current) {
             $scope.newlink.clear();
             $scope.newlink.status = false;
+            $scope.searchBy = '';
         });
 
+        //popup model
+        $scope.popup = {
+            edit: {
+                close: function () {
+                    $location.path('/links').replace();
+                }
+            }
+        }
 
-                }]);
+                    }]);
 
 
 }());

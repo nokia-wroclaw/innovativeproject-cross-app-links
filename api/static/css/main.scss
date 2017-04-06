@@ -64,7 +64,7 @@ body {
     position: relative;
     .header-land {
         background: url(../img/header-land.jpg);
-        height: 200px;
+        height: 180px;
         overflow: hidden;
         box-sizing: border-box;
         padding: 20px;
@@ -383,6 +383,14 @@ body {
             height: 45px;
             box-sizing: border-box;
         }
+        .bottom-nav {
+            float: left;
+            width: 100%;
+            margin-top: 15px;
+            a.creator-link {
+                color: #ccc;
+            }
+        }
     }
     &.box-table {
         float: left;
@@ -604,8 +612,24 @@ body {
             color: #333;
         }
     }
+    &.red {
+        background: #D45A5A;
+    }
     &.in-row {
         margin-right: 10px;
+    }
+    &.small {
+        font-size: 12px;
+        padding: 4px;
+        box-sizing: border-box;
+        width: 23px;
+        height: 23px;
+        .glyphicon {
+            margin-right: 0;
+        }
+        &.margined {
+            margin-left: 10px;
+        }
     }
 }
 

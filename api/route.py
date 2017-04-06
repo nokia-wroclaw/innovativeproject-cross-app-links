@@ -4,7 +4,7 @@ from passlib.hash import sha256_crypt
 from api import app
 from api.models import User, Group, App, Log, Invites
 from api.database import db
-from api.mail import sendmail
+from api.mail import send_email, send_email_register
 
 
 
@@ -21,11 +21,11 @@ def commituser(token,userpassword):
 
 
 def commitinvite(email,maker):
-    new = Invites(email,maker)
+    new = Invites(email,maker.id)
     db.session.add(new)
     db.session.commit()
     receiver = [email]
-    sendmail(receiver)
+    send_email_register(maker.email,receiver)
 
 
 
@@ -127,7 +127,7 @@ def logout():
 @login_required
 def register():
     if not User.query.filter_by(email=request.form['email']).first():
-        commitinvite(request.form['email'],current_user.id)
+        commitinvite(request.form['email'],current_user)
         return redirect('/add-user')
     else:
         return 'Error. Email already in use!'
@@ -144,6 +144,18 @@ def setpassword():
     else:
         return make_response(open('api/templates/create-user.html').read())
 
+
+# Delete user
+@app.route('/api/auth/remove', methods=['POST'])
+@login_required
+def remove():
+    if User.query.filter_by(email=request.form['email']).first():
+        removeuser(request.form['email'])
+        if Invites.query.filter_by(email=request.form['email']).first():
+            removeinvite(request.form['email'])
+        return redirect('/add-user')
+    else:
+        return 'Error. Email not found!'
 
 #Default templates for Flask route
 @app.route('/')

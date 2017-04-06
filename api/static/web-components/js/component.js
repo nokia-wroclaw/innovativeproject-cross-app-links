@@ -20,7 +20,7 @@
 
             var req = new XMLHttpRequest();
             // creating GET request to yahoo weather API
-            req.open('GET', "http://127.0.0.1:5000/api/app", true);
+            req.open('GET', "http://127.0.0.1:5000/api/v2/app", true);
             // sending a request
             req.send();
 

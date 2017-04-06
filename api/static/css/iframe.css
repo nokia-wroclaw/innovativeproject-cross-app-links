@@ -3,12 +3,16 @@ ul,
 li {
   margin: 0;
   padding: 0;
-  background-color: #48b0f7; }
+  background-color: #fff; }
 
 .iframe-nav {
-  float: left;
-  width: auto;
   width: 340px;
+  height: 100%;
+  box-sizing: border-box;
+  float: left;
+  display: inline-block;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-family: 'Lato', sans-serif;
   padding: 10px; }
   .iframe-nav ul {
@@ -19,7 +23,7 @@ li {
     .iframe-nav ul li {
       display: inline-block;
       float: left;
-      width: 50%; }
+      width: 100%; }
       .iframe-nav ul li a {
         display: inline-block;
         float: left;
@@ -27,18 +31,18 @@ li {
         width: 100%;
         border-bottom: 1px solid rgba(182, 176, 200, 0.2);
         text-decoration: none;
-        color: #fff;
+        color: #222;
         opacity: 0.7;
         font-weight: 600;
         box-sizing: border-box;
-        text-align: center; }
+        text-align: left; }
         .iframe-nav ul li a:hover {
-          background: rgba(0, 0, 0, 0.1);
+          background: rgba(0, 0, 0, 0.05);
           opacity: 1; }
         .iframe-nav ul li a .glyphicon {
-          margin-bottom: 20px;
+          margin-righ: 20px;
           display: block;
-          clear: both;
+          float: left;
           font-size: 24px; }
 
 /*# sourceMappingURL=iframe.css.map */

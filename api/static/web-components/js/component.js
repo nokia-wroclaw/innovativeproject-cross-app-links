@@ -33,7 +33,7 @@
                     var linkArray = JSON.parse(req.responseText);
                     linkArray = linkArray['objects'];
                     for (var i = 0; i < linkArray.length; i++) {
-                        listGenerateString += '<li><a href="' + linkArray[i]['link'] + '"><span class="glyphicon glyphicon-link"></span>' + linkArray[i]['name'] + '</a></li>';
+                        listGenerateString += '<li><a href="' + linkArray[i]['link'] + '">' + linkArray[i]['name'] + '</a></li>';
                     }
                     navbar.insertAdjacentHTML('beforeend', listGenerateString);
                 }
@@ -50,6 +50,7 @@
             //Create square
             component.style.width = parseInt(pageNavbarHeight) + 'px';
             componentOverflow.style.top = parseInt(pageNavbarHeight) + 'px';
+            componentOverflow.style.paddingBottom = parseInt(pageNavbarHeight) + 'px';
             button.addEventListener('click', this.use.bind(this));
             this.request();
             component.style.visibility = 'visible';

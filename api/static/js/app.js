@@ -40,6 +40,11 @@
         //Get data
 
         var update = {
+            me: function () {
+                restful.get('me/user').then(function (response) {
+                    $scope.current_user = response['objects'][0];
+                });
+            },
             apps: function () {
                 restful.get('app').then(function (response) {
                     $scope.apps = response['objects'];
@@ -61,6 +66,7 @@
                 });
             },
             all: function () {
+                this.me();
                 this.apps();
                 this.users();
                 this.groups();
@@ -105,7 +111,7 @@
                     name: this.name,
                     link: this.address,
                     desc: this.desc,
-                    creator_id: 1
+                    creator_id: $scope.current_user.id
                 }
                 restful.post('app', post_object);
                 update.apps();

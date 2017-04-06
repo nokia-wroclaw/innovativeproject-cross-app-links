@@ -16,16 +16,13 @@
         <div class="main-link-desc">
             <p>{{app.desc}}</p>
         </div>
-        <a class="settings-icon" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
-        <a class="settings-icon pull-left" href="#" ng-click="newlink.delete(app.id)"><span class="glyphicon glyphicon-trash"></span></a>
+        <div class="bottom-nav">
+            <a class="creator-link pull-left text-left" href="profile/{{app.creator.id}}">{{app.creator.username}}</a>
+            <a class="button blue small  margined pull-right" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
+            <a class="button red small pull-right" href="#" ng-click="newlink.delete(app.id)"><span class="glyphicon glyphicon-trash"></span></a>
+        </div>
     </div>
 </div>
-
-
-
-
-
-
 
 <div ng-if="filterParams.manage()>0" class="popup" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
     <div class="no-box-el error-form-box" ng-show="form.$submitted">
@@ -36,7 +33,7 @@
             <span class='pull-left text-left error' ng-show="form.name.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short link name!</span>
 
             <span class='pull-left text-left error' ng-show="form.address.$error.required"><span class="glyphicon glyphicon-remove"></span>Required url!</span>
-            <!--        <span class='pull-left text-left error' ng-show="form.address.$error.linkformat"><span class="glyphicon glyphicon-remove"></span>Wrong url!</span>-->
+            <span class='pull-left text-left error' ng-show="form.address.$error.linkformat"><span class="glyphicon glyphicon-remove"></span>Wrong url!</span>
 
             <span class='pull-left text-left error' ng-show="form.desc.$error.required"><span class="glyphicon glyphicon-remove"></span>Required description!</span>
             <span class='pull-left text-left error' ng-show="form.desc.$error.maxlength"><span class="glyphicon glyphicon-remove"></span>Too long description!</span>
@@ -49,7 +46,7 @@
             <h3 class="blue">Edit link</h3>
         </header>
         <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
-        <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required>
+        <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
         <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>
 
         <button type="submit" class='button blue pull-right'>Confirm</button>

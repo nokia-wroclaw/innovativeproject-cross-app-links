@@ -12,9 +12,9 @@
             axis: 'y'
         };
 
-        restful.get('app').then(function(response){
+        restful.get('v2/app').then(function (response) {
             $scope.app = response['objects'];
             console.log(response);
-          });
+        });
     }]);
 }());

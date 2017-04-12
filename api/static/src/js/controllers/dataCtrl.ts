@@ -9,6 +9,5 @@ export default class dataCtrl {
         
         var data = this;
        
-    }
-    
+    }   
 }

@@ -4,24 +4,30 @@ export default class Restful{
     private url: string;
     
     constructor(private $http: ng.IHttpService){
-        this.url = 'http://127.0.0.1:5000/api';
+        
+        var restful = this;
+        
+        restful.url = '/api';
     }
     
     request(method: string, table: string, id?:any, dataobject?:Object): ng.IPromise<any>{
+        
+        var restful = this;
+        
         id = id<0 ? '' : '/' + id;
-        return this.$http({
+        return restful.$http({
             method : method, 
-            url : this.url + '/' + table,
+            url : restful.url + '/' + table,
             data: dataobject || {},
-            headers: {
-                'Content-Type': 'application/json',  
-                    }
-            })
-            .then(function (response) {
-                return response.data;
-            })
-             .catch(function (error) {
-                return error;
-            });
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(restful.RequestResponseSuccess)
+        .catch(restful.RequestResponseError);
+    }
+    private RequestResponseSuccess(response): Object{      
+        return response.data;
+    }
+    private RequestResponseError(error): String{      
+        return error.data;
     }
 }

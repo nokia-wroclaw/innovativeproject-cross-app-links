@@ -3,7 +3,6 @@ import User from '../services/user';
 
 export default class JSONData {
    
-    
     private apps: Array<Object>;
     private users: Array<Object>;
     private groups: Array<Object>;

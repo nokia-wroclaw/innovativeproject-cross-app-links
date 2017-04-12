@@ -1,3 +1,5 @@
+var webpack = require("webpack");
+
 module.exports = {
     entry: __dirname + '/api/static/src/js/app.ts',
     output: {
@@ -22,5 +24,11 @@ module.exports = {
             }
 
         ]
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
+    ]
 }

@@ -1,6 +1,6 @@
 export default class RouteConfig{
     
-    $inject: Array<string> = ['$routeProvider','$locationProvider'];
+    static $inject: Array<string> = ['$routeProvider','$locationProvider'];
     
     constructor(private $routeProvider: ng.route.IRouteProvider, private $locationProvider: ng.ILocationProvider){
         var rConfig = this;

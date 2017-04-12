@@ -12,6 +12,8 @@ import RouteConfig from './config/route'
 const angular = require('angular');
 
 import 'jquery';
+import 'jquery-mousewheel';
+import 'malihu-custom-scrollbar-plugin';
 import 'ng-scrollbars';
 import 'angular-route';
 

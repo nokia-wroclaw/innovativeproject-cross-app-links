@@ -3,6 +3,7 @@ import Limit from '../models/limit';
 import Menu from '../services/menu';
 
 export default class appCtrl{
+    
     private limit : Limit;
     private clock : Clock;
     

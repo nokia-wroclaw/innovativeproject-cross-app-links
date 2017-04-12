@@ -1,0 +1,19 @@
+<!doctype html>
+
+<html ng-app="mainApp">
+
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+</head>
+
+<body ng-controller="dataCtrl as data">
+    {{data.JSONData.current_user.email}}
+    <div ng-controller="appCtrl as app">
+        {{app.clock.time()}}
+    </div>
+</body>
+<script src="./static/dist/bundle.js"></script>
+
+</html>

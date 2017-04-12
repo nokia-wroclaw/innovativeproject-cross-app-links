@@ -1,0 +1,6 @@
+npm install
+pip install -r requirements.txt
+export FLASK_APP=run.py
+export FLASK_DEBUG=true
+webpack -w
+flask run

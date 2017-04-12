@@ -17,7 +17,13 @@ def get_logged_user(search_params=None, **kw):
     if 'filters' not in search_params:
         search_params['filters'] = []
     search_params['filters'].append(filt)
-        
+    
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = 'example.com'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    # Set whatever other headers you like...
+    return response
+
 manager = APIManager(app, flask_sqlalchemy_db=db, preprocessors=dict(POST=[auth_func], DELETE=[auth_func], PUT=[auth_func]))
 
 # /api/user , /api/user/<int>

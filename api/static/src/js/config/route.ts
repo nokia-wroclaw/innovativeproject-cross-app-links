@@ -1,8 +1,11 @@
-(function () {
-
-    var app = angular.module('config', []);
-    app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-        $routeProvider
+export default class RouteConfig{
+    
+    $inject: Array<string> = ['$routeProvider','$locationProvider'];
+    
+    constructor(private $routeProvider: ng.route.IRouteProvider, private $locationProvider: ng.ILocationProvider){
+        var rConfig = this;
+        
+        rConfig.$routeProvider
             .when('/', {
                 templateUrl: 'static/partials/dashboard.html'
             }).when('/dashboard', {
@@ -29,11 +32,12 @@
                 templateUrl: 'static/partials/ver.html'
             }).otherwise({
                 controller: function () {
-                    window.location.replace(window.location);
+                    window.location.replace(window.location.href);
                 },
                 template: ''
             });
-        $locationProvider.html5Mode(true);
-}]);
-
-}())
+        
+        rConfig.$locationProvider.html5Mode(true);        
+    }
+    
+}

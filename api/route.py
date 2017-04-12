@@ -30,8 +30,11 @@ def commitinvite(email,maker):
 
 
 
-def removeuser(email):
+def removeuser(email, current):
     sadman = User.query.filter_by(email = email).first()
+    if current.email == email:
+        logout_user()
+        session.pop('user', None)
     db.session.delete(sadman)
     db.session.commit()
 
@@ -151,7 +154,7 @@ def setpassword():
 @login_required
 def remove():
     if User.query.filter_by(email=request.form['email']).first():
-        removeuser(request.form['email'])
+        removeuser(request.form['email'], current_user)
         if Invites.query.filter_by(email=request.form['email']).first():
             removeinvite(request.form['email'])
         return redirect('/add-user')

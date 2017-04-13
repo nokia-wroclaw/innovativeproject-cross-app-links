@@ -24,10 +24,10 @@ export default class Restful{
         .then(restful.RequestResponseSuccess)
         .catch(restful.RequestResponseError);
     }
-    private RequestResponseSuccess(response): Object{      
+    private RequestResponseSuccess(response: ng.IHttpPromiseCallback<Object>): Object{      
         return response.data;
     }
-    private RequestResponseError(error): String{      
+    private RequestResponseError(error: ng.IHttpPromiseCallback<any>): String{      
         return error.data;
     }
 }

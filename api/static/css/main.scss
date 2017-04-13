@@ -545,6 +545,10 @@ body {
         background: 0;
         box-shadow: none;
     }
+    &.no-stylus {
+        background: none;
+        box-shadow: none;
+    }
 }
 
 .single-input {

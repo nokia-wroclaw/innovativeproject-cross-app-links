@@ -45,24 +45,6 @@ def before_request():
 #-----------
 #ROUTING
 #-----------
-@app.route('/create_all')
-def create_all():
-    app1 = App('Lorem ipsum app', 'http://9gag.com', 'Lorem ipsum dolor sit amet.', 1)
-    app2 = App('Calculator', 'https://www.online-calculator.com','Fusce in urna sem.', 1)
-    app3 = App('Dropbox', 'http://www.dropbox.com/', 'Dropbox is a file hosting service.', 1)
-    app4 = App('YouTube', 'https://www.youtube.com', 'YouTube is a free video sharing website.', 1)
-    db.session.add(app1)
-    db.session.add(app2)
-    db.session.add(app3)
-    db.session.add(app4)
-    #db.session.commit()
-    #group1 = Group()
-    #group2 = Group()
-    #group3 = Group()
-    
-    #user1 = User()
-    #user2 = User()
-
 #Auth route
 # User verification
 # pass: admin123
@@ -121,7 +103,11 @@ def checkifloggedin():
 
     
 #Default templates for Flask route
+
 @app.route('/')
+def index():
+    return make_response(open('api/templates/login-page.html').read())
+
 @app.route('/<content>')
 @app.route('/<content>/<content_id>')
 def main(content='dashboard', content_id=None):

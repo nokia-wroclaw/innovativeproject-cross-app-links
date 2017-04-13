@@ -449,6 +449,9 @@ body {
   .box.box-list {
     background: 0;
     box-shadow: none; }
+  .box.no-stylus {
+    background: none;
+    box-shadow: none; }
 
 .single-input {
   width: 240px; }

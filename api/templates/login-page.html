@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="mainApp">
 
 <head>
+    <base href="/">
     <title>Welcome to Cross App Links</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,14 +17,27 @@
 
 </head>
 
-<body>
-    <div class="col-lg-6 col-md-5 col-sm-12 col-xs-12 pull-left login-container">
-        <div class="login-overflow">
+<body ng-controller="mainCtrl">
+    <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 row pull-left row welcome-container">
+        <nav class="main-landing-menu pull-right text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <ul>
+                <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-left">
+                    <a href="#" class="logo"><img src="../static/img/logo.PNG"></a>
+                </li>
+                <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right"><a href="#">Github</a></li>
+                <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right"><a href="#">Privacy & License</a></li>
+                <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right"><a href="#">About project</a></li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Cross App Links</h1>
+            <h2>Keep all your places in one.</h2>
+        </header>
+        <div class="login-overflow" ng-if="!current_user.id">
             <header>
                 <h1>Sign in</h1>
             </header>
             <form class="login-form" method="post" name="login_form" action="/api/auth">
-
                 <div class="input-socket">
                     <input type="text" name="email" placeholder="Your e-mail">
                     <span class="input-icon"><span class="glyphicon glyphicon-user"></span></span>
@@ -39,24 +53,40 @@
             </form>
         </div>
     </div>
-    <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 pull-right row welcome-container">
-
-        <nav class="main-landing-menu pull-right text-center col-lg-12">
-            <ul>
-                <li class="col-lg-3 pull-right"><a href="#">Github</a></li>
-                <li class="col-lg-3 pull-right"><a href="#">Privacy & License</a></li>
-                <li class="col-lg-3 pull-right"><a href="#">About project</a></li>
-            </ul>
-        </nav>
-
-        <header>
-            <h1>Cross App Links</h1>
-            <h2>Keep all your places in one.</h2>
-            <div class="button green">What places? </div>
-        </header>
-
+    <div class="login-overflow" ng-if="current_user.id">
+        <div class="user-section">
+            <h2>Logged as {{current_user.email}}</h2>
+            <div class="button blue">Dashboard</div>
+        </div>
+    </div>
+    </div>
+    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 row pull-right main-application-container">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="app in apps">
+            <div class="box no-stylus main-app-link">
+                <header>
+                    <span class="link-img"><img src="../static/img/app-img/{{$index+1}}.png"></span>
+                    <h1 class="link-name">{{app.name}}</h1>
+                </header>
+                <article class="link-desc">
+                    {{app.desc}}
+                </article>
+                <div class="manage-area">
+                    <a href="{{app.link}}">Checkout</a>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!--        BOWER PCKG-->
+    <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../static/bower_components/angular/angular.min.js"></script>
+    <script src="../static/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../static/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../static/bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+    <!--        BOWER PCKG:END-->
+    <script src="../static/js/config.js"></script>
+    <script src="../static/js/services.js"></script>
+    <script src="../static/js/app.js"></script>
 </body>
 
 </html>

@@ -64,7 +64,7 @@ body {
     position: relative;
     .header-land {
         background: url(../img/header-land.jpg);
-        height: 200px;
+        height: 180px;
         overflow: hidden;
         box-sizing: border-box;
         padding: 20px;
@@ -132,6 +132,7 @@ body {
             }
         }
         .user-section {
+            min-width: 180px;
             float: right;
             position: relative;
             padding: 20px;
@@ -141,7 +142,7 @@ body {
             .user-avatar {
                 position: relative;
                 display: inline-block;
-                float: left;
+                float: right;
                 overflow: hidden;
                 border-radius: 100%;
                 height: 50px;
@@ -171,7 +172,7 @@ body {
             }
             .user-name {
                 display: inline-block;
-                float: left;
+                float: right;
                 margin: 16px 20px;
                 margin-left: 5px;
                 font-weight: 800;
@@ -382,6 +383,14 @@ body {
             padding: 15px 0;
             height: 45px;
             box-sizing: border-box;
+        }
+        .bottom-nav {
+            float: left;
+            width: 100%;
+            margin-top: 15px;
+            a.creator-link {
+                color: #ccc;
+            }
         }
     }
     &.box-table {
@@ -608,8 +617,24 @@ body {
             color: #333;
         }
     }
+    &.red {
+        background: #D45A5A;
+    }
     &.in-row {
         margin-right: 10px;
+    }
+    &.small {
+        font-size: 12px;
+        padding: 4px;
+        box-sizing: border-box;
+        width: 23px;
+        height: 23px;
+        .glyphicon {
+            margin-right: 0;
+        }
+        &.margined {
+            margin-left: 10px;
+        }
     }
 }
 

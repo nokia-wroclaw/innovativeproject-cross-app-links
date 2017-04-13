@@ -3,7 +3,6 @@
 @media only screen and (max-width: 1440px) {
     .container {
         width: 90%;
-    
     }
 }
 
@@ -14,18 +13,18 @@
     }
     .main-navigation {
         top: 0;
-        .main-navigation-overflow{
-        ul {
-            li {
-                a {
-                    text-align: center;
-                    .glyphicon {
-                        margin: 0;
+        .main-navigation-overflow {
+            ul {
+                li {
+                    a {
+                        text-align: center;
+                        .glyphicon {
+                            margin: 0;
+                        }
                     }
                 }
             }
         }
-    }
     }
 }
 
@@ -53,12 +52,14 @@
         min-height: none;
         max-height: none;
         position: static;
-        ul {
-            li {
-                a {
-                    text-align: left;
-                    .glyphicon {
-                        margin-right: 20px;
+        .main-navigation-overflow {
+            ul {
+                li {
+                    a {
+                        text-align: left;
+                        .glyphicon {
+                            margin-right: 20px;
+                        }
                     }
                 }
             }

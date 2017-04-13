@@ -7,6 +7,7 @@ api/models.pyc
 api/restfull.pyc
 api/database.pyc
 api/route.pyc
+api/mail.pyc
 run.pyc
 alembic.ini
 api/__init__.pyc

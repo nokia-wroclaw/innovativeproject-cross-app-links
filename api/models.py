@@ -1,5 +1,11 @@
 from flask_login import UserMixin
 from api.database import db
+from flask_uuid import FlaskUUID
+from api import app
+import uuid
+
+flask_uuid = FlaskUUID()
+flask_uuid.init_app(app)
 
 class User(UserMixin, db.Model):
     
@@ -79,10 +85,11 @@ class Log(db.Model):
     content=db.Column(db.String(60),unique=True)
     author_id=db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, content, author_id):
+    def __init__(self, content, data_time, author_id):
         
         self.content=content
-        self.author=author_id
+        self.data_time=data_time
+        self.author_id=author_id
         
 #To create
 
@@ -94,3 +101,18 @@ class  Note(db.Model):
     owner_id=db.Column(db.Integer, db.ForeignKey('user.id'))
         
 #db.create_all()
+
+class Invites(db.Model):
+    __tablename__ = 'Invites'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    email=db.Column(db.String(25), unique=True)
+    token = db.Column(db.String(50), unique=True)
+    maker = db.Column(db.Integer)
+    
+    def __init__(self, email, maker):
+        
+        self.email=email
+        self.maker=maker
+        self.token=str(uuid.uuid4())
+

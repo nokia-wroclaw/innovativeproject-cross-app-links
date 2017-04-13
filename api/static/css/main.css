@@ -73,6 +73,21 @@ body {
         margin-right: 20px; }
       .main-header .header-land .partial-name .location-name::first-letter {
         text-transform: uppercase; }
+    .main-header .header-land .header-nav-icon {
+      font-size: 36px;
+      padding: 20px 26px;
+      background: rgba(0, 0, 0, 0.1);
+      margin-top: 26px;
+      margin-right: 6px;
+      float: right;
+      width: auto;
+      text-align: center; }
+      .main-header .header-land .header-nav-icon a {
+        color: #fff;
+        display: block;
+        opacity: 0.8; }
+        .main-header .header-land .header-nav-icon a:hover {
+          opacity: 1; }
   .main-header .header-cell {
     height: 90px; }
     .main-header .header-cell .site-name {
@@ -102,13 +117,13 @@ body {
         .main-header .header-cell .site-name a:hover {
           background: #2ea4d2;
           color: #F0F0F0; }
-    .main-header .header-cell .menu-toggle {
+    .main-header .header-cell .main-nav-icon {
       color: #e3e3e3;
       font-size: 24px;
       box-sizing: border-box;
       height: 100%;
       padding: 30px 20px; }
-      .main-header .header-cell .menu-toggle:hover {
+      .main-header .header-cell .main-nav-icon:hover {
         color: #ddd;
         cursor: pointer; }
     .main-header .header-cell .user-section {

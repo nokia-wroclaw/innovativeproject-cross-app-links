@@ -3,9 +3,7 @@
     var app = angular.module('config', []);
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
-            .when('/', {
-                templateUrl: 'static/partials/dashboard.html'
-            }).when('/dashboard', {
+            .when('/dashboard', {
                 templateUrl: 'static/partials/dashboard.html'
             }).when('/stats', {
                 templateUrl: 'static/partials/stats.html'

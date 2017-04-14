@@ -14,7 +14,8 @@ from api.mail import send_email, send_email_register
 def commituser(token,userpassword):
     new = Invites.query.filter_by(token = token).first()
     useremail = new.email
-    new = User(useremail,sha256_crypt.encrypt(userpassword))
+    group = new.group
+    new = User(useremail,sha256_crypt.encrypt(userpassword),group)
     db.session.add(new)
     db.session.commit()
     removeinvite(useremail)

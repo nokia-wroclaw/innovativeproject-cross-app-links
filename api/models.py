@@ -19,10 +19,11 @@ class User(UserMixin, db.Model):
     logs=db.relationship('Log', backref='author', lazy='dynamic')
     notes=db.relationship('Note', backref='owner', lazy='dynamic')
     
-    def __init__(self, email, password_hash):
+    def __init__(self, email, password_hash,group):
         
         self.email=email
         self.password_hash=password_hash
+        self.group_id=group
         self.username=email.split('@')[0]
         
     def is_authenticated():

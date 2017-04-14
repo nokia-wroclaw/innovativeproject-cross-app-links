@@ -8,8 +8,13 @@
              <form class="login-form box box-form" method="POST" name="login_form" action="/api/auth/register">
                     <div class="input-socket">
                         <input type="text" name="email" placeholder="User e-mail" required>
-                        
                     </div>
+                    <p>Select user permission group:</p>
+             <select name="group">
+                  <option value="1">User</option>
+                  <option value="2">Application manager</option>
+                  <option value="3">Administrator</option>
+            </select>
                      <button type="submit" class='button blue pull-right'>Confirm</button>
              </form>
         </div>

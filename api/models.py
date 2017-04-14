@@ -110,10 +110,12 @@ class Invites(db.Model):
     email=db.Column(db.String(25), unique=True)
     token = db.Column(db.String(50), unique=True)
     maker = db.Column(db.Integer)
+    group = db.Column(db.Integer)
     
-    def __init__(self, email, maker):
+    def __init__(self, email, maker,group):
         
         self.email=email
         self.maker=maker
+        self.group=group
         self.token=str(uuid.uuid4())
 

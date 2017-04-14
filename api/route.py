@@ -20,8 +20,8 @@ def commituser(token,userpassword):
     removeinvite(useremail)
 
 
-def commitinvite(email,group,maker):
-    new = Invites(email,maker.id)
+def commitinvite(email,maker,group):
+    new = Invites(email,maker.id,group)
     db.session.add(new)
     db.session.commit()
     receiver = [email]
@@ -131,7 +131,7 @@ def logout():
 @login_required
 def register():
     if not User.query.filter_by(email=request.form['email']).first():
-        commitinvite(request.form['email'],request.form['group'],current_user)
+        commitinvite(request.form['email'],current_user,request.form['group'])
         return redirect('/add-user')
     else:
         return 'Error. Email already in use!'

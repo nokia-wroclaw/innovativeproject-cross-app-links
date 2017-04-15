@@ -1,8 +1,20 @@
-/*For almost medium*/
+    /*For almost medium*/
 
 @media only screen and (max-width: 1440px) {
     .container {
         width: 90%;
+    }
+    .main-application-container {
+        .main-app-link {
+            header {
+                .link-name {
+                    font-size: 17px;
+                }
+            }
+            .link-desc {
+                font-size: 15px;
+            }
+        }
     }
 }
 
@@ -65,19 +77,21 @@
             }
         }
     }
-}
-
-
-/* Small Devices, Tablets */
-
-@media only screen and (max-width: 768px) {}
-
-
-/* Extra Small Devices, Phones */
-
-@media only screen and (max-width: 480px) {}
-
-
-/* Custom, iPhone Retina */
-
-@media only screen and (max-width: 320px) {}
+    .welcome-container {
+        position: static;
+        header {
+            h1 {
+                font-size: 36px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+        }
+    }
+    }
+    /* Small Devices, Tablets */
+    @media only screen and (max-width: 768px) {}
+    /* Extra Small Devices, Phones */
+    @media only screen and (max-width: 480px) {}
+    /* Custom, iPhone Retina */
+    @media only screen and (max-width: 320px) {}

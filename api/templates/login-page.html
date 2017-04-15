@@ -35,7 +35,9 @@
         </header>
         <div class="login-overflow" ng-if="!current_user.id">
             <header>
-                <h1>Sign in <span class="errorBox" ng-show="loginFormError">Are you sure? Check again...</span></h1>
+                <h1>Sign in 
+                    <span class="errorBox" ng-show="loginFormError">Are you sure? Check again...</span>
+                </h1>
             </header>
             <form class="login-form" method="post" name="login_form" novalidate ng-submit="login_form.$valid && login(email, password)">
 

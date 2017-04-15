@@ -60,13 +60,13 @@ body {
 .welcome-container>header>h1 {
     font-weight: 800;
     text-transform: uppercase;
-    font-size: 56px;
+    font-size: 3.5vw;
 }
 
 .welcome-container>header>h2 {
     font-weight: 300;
     color: #ccc;
-    font-size: 32px;
+    font-size: 2vw;
 }
 
 .welcome-container>header>.button {
@@ -268,12 +268,11 @@ body {
 
 .main-application-container {
     background: #fff;
-    margin-top: 40px;
+    padding: 35px;
 }
 
 .main-application-container .main-app-link {
-    padding: 35px;
-    position: relative;
+    padding: 0 position: relative;
     height: 250px;
     margin-bottom: 50px;
 }
@@ -290,7 +289,7 @@ body {
 }
 
 .main-application-container .main-app-link>header>.link-name {
-    font-size: 24px;
+    font-size: 1.2vw;
     font-weight: 300;
     width: 100%;
     box-sizing: border-box;
@@ -310,7 +309,7 @@ body {
     color: #999;
     box-sizing: border-box;
     text-align: center;
-    font-size: 17px;
+    font-size: 1vw;
 }
 
 .main-application-container .main-app-link>.manage-area {

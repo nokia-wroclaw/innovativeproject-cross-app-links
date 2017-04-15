@@ -84,16 +84,17 @@ def before_request():
 @app.route('/api/auth', methods=['POST'])
 def auth():
     session.pop('user', None)
-    user = User.query.filter_by(email=request.form['email']).first()
+    data = request.get_json(force=True)
+    user = User.query.filter_by(email=data['email']).first()
     if user:
-        if sha256_crypt.verify(request.form['password'], user.password_hash):
+        if sha256_crypt.verify(data['password'], user.password_hash):
             login_user(user)
             session['user'] = user.username
-            return redirect('/')
+            return str(True)
         else:
-            return make_response(open('api/templates/login-page.html').read())
+            return str(False)
     else:
-        return make_response(open('api/templates/login-page.html').read())
+        return str(False)
 
 
 #Logout user and close session
@@ -109,11 +110,12 @@ def logout():
 @app.route('/api/auth/register', methods=['POST'])
 @login_required
 def register():
-    if not User.query.filter_by(email=request.form['email']).first():
-        commitinvite(request.form['email'],current_user)
-        return redirect('/add-user')
+    data = request.get_json(force=True)
+    if not User.query.filter_by(email=data['email']).first():
+        commitinvite(data['email'], current_user)
+        return str(True)
     else:
-        return 'Error. Email already in use!'
+        return str(False)
 
 
 # #Confirm account

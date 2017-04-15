@@ -1,34 +1,42 @@
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
     <div class="login-container">
-        <div class="box">
+        <div class="box box-form">
             <header>
                 <h3 class="orange">Invite new user!</h3>
                 <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
-             </header>
-             <form class="login-form box box-form" method="POST" name="login_form" action="/api/auth/register">
-                    <div class="input-socket">
-                        <input type="text" name="email" placeholder="User e-mail" required>
-                        
-                    </div>
-                     <button type="submit" class='button blue pull-right'>Confirm</button>
-             </form>
+            </header>
+
+
+            <form class="login-form " method="POST" name="login_form" action="/api/auth/register">
+                <div class="input-socket">
+                    <input type="text" name="email" placeholder="User e-mail" required>
+
+                </div>
+                <button type="submit" class='button blue pull-right'>Confirm</button>
+            </form>
+
+
         </div>
     </div>
 </div>
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
     <div class="login-container">
-        <div class="box">
+        <div class="box box-form">
             <header>
                 <h3 class="orange">Remove user from application.</h3>
                 <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
-             </header>
-             <form class="login-form box box-form" method="POST" name="login_form" action="/api/auth/remove">
-                    <div class="input-socket">
-                        <input type="text" name="email" placeholder="User e-mail" required>
-                        
-                    </div>
-                     <button type="submit" class='button orange pull-right'>Confirm</button>
-             </form>
+            </header>
+
+
+            <form class="login-form " method="POST" name="remove_form" novalidate ng-submit="remove_form.$valid && removeUser(removeEmail)">
+                <div class="input-socket">
+                    <input type="text" name="email" ng-model="removeEmail" placeholder="User e-mail" required>
+
+                </div>
+                <button type="submit" class='button orange pull-right'>Confirm</button>
+            </form>
+
+
         </div>
     </div>
 </div>

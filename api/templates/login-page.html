@@ -37,14 +37,14 @@
 			<header>
 				<h1>Sign in</h1>
 			</header>
-			<form class="login-form" method="post" name="login_form" action="/api/auth">
+			<form class="login-form" method="post" name="login_form" novalidate ng-submit="login_form.$valid && login(email, password)">
 				<div class="input-socket">
-					<input type="text" name="email" placeholder="Your e-mail" required>
+					<input type="text" name="email" ng-model="email" placeholder="Your e-mail" required>
 					<span class="input-icon"><span class="glyphicon glyphicon-user"></span></span>
 
 				</div>
 				<div class="input-socket">
-					<input type="password" name="password" placeholder="Your password" required>
+					<input type="password" name="password" ng-model="password" placeholder="Your password" required>
 					<span class="input-icon"><span class="glyphicon glyphicon-lock"></span></span>
 				</div>
 				<input type="submit" name="submit" value="Sign in">

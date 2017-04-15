@@ -17,6 +17,10 @@ module.exports = {
             },
             {
                 test: /\.js$/,
+                loader: 'ng-annotate-loader',
+            },
+            {
+                test: /\.js$/,
                 loader: 'babel-loader',
                 query: {
                     presets: ['es2015']

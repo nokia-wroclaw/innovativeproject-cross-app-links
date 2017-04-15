@@ -9,20 +9,19 @@ export default class User{
     logs: Array<Object>;
     applications: Array<Object>;
     
-    static $inject: ['restful'];
+    static $inject: Array<String> = ['restful'];
     
-    constructor(private restful: Restful){
-        var cuser = this;     
-        cuser.restful.request('GET', 'me/user').then(function(response){
-            var user = response['objects'][0];
-            
-            cuser.id = user.id;
-            cuser.email = user.email;
-            cuser.username = user.username;
-            cuser.group = user.group;
-            cuser.logs = user.logs;
-            cuser.applications = user.applications;
-            
-        });          
+    constructor(private restful: Restful){   
+        this.restful
+            .request('GET', 'me/user')
+            .then((response)=>{
+                const user = response['objects'][0];
+                this.id = user.id;
+                this.email = user.email;
+                this.username = user.username;
+                this.group = user.group;
+                this.logs = user.logs;
+                this.applications = user.applications;   
+            });          
     } 
 }

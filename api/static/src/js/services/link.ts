@@ -1,4 +1,5 @@
 import JSONData from '../services/JSONData';
+import User from '../services/user';
 
 export default class Link{
     
@@ -7,76 +8,55 @@ export default class Link{
     private desc: string;
     private status: boolean;
     
-    static $inject: Array<string> = ['JSONData','$location']
+    static $inject: Array<string> = ['JSONData','$location', 'current_user']
     
-    constructor(private JSONData: JSONData, private $location: ng.ILocationService){
-        var link = this;
-        link.name = '';
-        link.address = '';
-        link.desc = '';   
-        link.status = false;
+    constructor(private JSONData: JSONData, private $location: ng.ILocationService, private current_user: User){
+        this.name = '';
+        this.address = '';
+        this.desc = '';   
+        this.status = false;
+    }
+    
+    add(): ng.IPromise<any>{
+        const post= {
+            name: this.name,
+            link: this.address,
+            desc: this.desc,
+            creator_id: this.current_user.id
+        }
+        return this.JSONData.post('app', post);
+    }
+    
+    update(app_id): ng.IPromise<any> {
+        const put = {
+            name: this.name,
+            link: this.address,
+            desc: this.desc
+        }    
+        return this.JSONData
+                    .put('app', put, app_id)
+                    .then(()=>{
+                        this.clear();
+                        this.status = true;
+                        this.$location.path('/links').replace();
+                });
+    }
+    
+    delete(app_id): ng.IPromise<any> {
+        const confirmResult = confirm("Do you want to remove this app?");
+        if (confirmResult)
+            return this.JSONData.drop('app', app_id);
     }
     
     fill(name: string, address: string, desc: string): void{
-        var link = this;
-        link.name = name;
-        link.address = address;
-        link.desc = desc   
+        this.name = name;
+        this.address = address;
+        this.desc = desc   
     }
     
-    add(): void{
-        var link = this;
-        var post_object = {
-            name: link.name,
-            link: link.address,
-            desc: link.desc,
-            creator_id: link.JSONData.current_user.id
-        }
-        link.JSONData.restful.request('POST', 'app', null, post_object);
-        link.JSONData.update('app');
-    }
-    update(app_id): void {
-         var link = this;
-            var post_object = {
-                name: link.name,
-                link: link.address,
-                desc: link.desc
-            }
-           link.JSONData.restful.request('PUT', 'app', app_id, post_object).then(function(response){
-                var log_object = {
-                    content: 'A link #' + app_id + ' was updated',
-                    data_time: 'CURRENT_TIMESTAMP',
-                    author_id: link.JSONData.current_user.id
-                }
-                link.JSONData.restful.request('POST', 'log', null, log_object);
-            });
-
-            link.JSONData.update('app');
-            link.JSONData.update('log');
-            link.clear();
-            link.status = true;
-            link.$location.path('/links').replace();
-    }
-    delete(app_id): void {
-        var link = this;
-        var confirmResult = confirm("Do you want to remove this app?");
-        if (confirmResult) {
-            link.JSONData.restful.request('DELETE', 'app', app_id).then(function(response){
-                var log_object = {
-                    content: 'A link #' + app_id + ' was removed',
-                    data_time: 'CURRENT_TIMESTAMP',
-                    author_id: link.JSONData.current_user.id
-                }
-                 link.JSONData.restful.request('POST', 'log', null, log_object);
-            });
-            link.JSONData.update('app');
-            link.JSONData.update('log');
-        }
-    }
     clear(): void {
-        var link = this;
-        link.name = '';
-        link.address = '';
-        link.desc = '';   
+        this.name = '';
+        this.address = '';
+        this.desc = '';   
     }
 }

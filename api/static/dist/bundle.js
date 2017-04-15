@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -9900,7 +9900,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return jQuery;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)(module)))
 
 /***/ }),
 /* 1 */
@@ -10155,7 +10155,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 "use strict";
 
 
-__webpack_require__(14);
+__webpack_require__(13);
 module.exports = 'ngRoute';
 
 /***/ }),
@@ -10165,7 +10165,7 @@ module.exports = 'ngRoute';
 "use strict";
 
 
-__webpack_require__(15);
+__webpack_require__(14);
 module.exports = angular;
 
 /***/ }),
@@ -10228,7 +10228,7 @@ and dependencies (minified).
 	}
 })(function ($) {
 	(function (init) {
-		var _rjs = "function" === "function" && __webpack_require__(20),
+		var _rjs = "function" === "function" && __webpack_require__(19),
 		    /* RequireJS */
 		_njs = typeof module !== "undefined" && module.exports,
 		    /* NodeJS */
@@ -13086,59 +13086,8 @@ and dependencies (minified).
 "use strict";
 
 exports.__esModule = true;
-var RouteConfig = (function () {
-    function RouteConfig($routeProvider, $locationProvider) {
-        this.$routeProvider = $routeProvider;
-        this.$locationProvider = $locationProvider;
-        var rConfig = this;
-        rConfig.$routeProvider
-            .when('/', {
-            templateUrl: 'static/partials/dashboard.html'
-        }).when('/dashboard', {
-            templateUrl: 'static/partials/dashboard.html'
-        }).when('/stats', {
-            templateUrl: 'static/partials/stats.html'
-        }).when('/action-log', {
-            templateUrl: 'static/partials/action-log.html'
-        }).when('/links/:linkID', {
-            templateUrl: 'static/partials/links.html'
-        }).when('/links', {
-            templateUrl: 'static/partials/links.html'
-        }).when('/add-link', {
-            templateUrl: 'static/partials/add-link.html'
-        }).when('/users', {
-            templateUrl: 'static/partials/users.html'
-        }).when('/groups', {
-            templateUrl: 'static/partials/groups.html'
-        }).when('/add-user', {
-            templateUrl: 'static/partials/add-user.html'
-        }).when('/settings', {
-            templateUrl: 'static/partials/settings.html'
-        }).when('/ver', {
-            templateUrl: 'static/partials/ver.html'
-        }).otherwise({
-            controller: function () {
-                window.location.replace(window.location.href);
-            },
-            template: ''
-        });
-        rConfig.$locationProvider.html5Mode(true);
-    }
-    return RouteConfig;
-}());
-RouteConfig.$inject = ['$routeProvider', '$locationProvider'];
-exports["default"] = RouteConfig;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-var clock_1 = __webpack_require__(18);
-var limit_1 = __webpack_require__(19);
+var clock_1 = __webpack_require__(17);
+var limit_1 = __webpack_require__(18);
 var appCtrl = (function () {
     function appCtrl($interval, menu) {
         this.$interval = $interval;
@@ -13161,7 +13110,7 @@ exports["default"] = appCtrl;
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13179,7 +13128,7 @@ exports["default"] = dataCtrl;
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13189,34 +13138,106 @@ var JSONData = (function () {
     function JSONData(restful, current_user) {
         this.restful = restful;
         this.current_user = current_user;
-        var data = this;
-        data.updateAll();
+        this.updateAll();
     }
+    JSONData.prototype.post = function (table, data) {
+        var _this = this;
+        return this.restful
+            .request('POST', table, null, data)
+            .then(function (response) {
+            _this.update('app');
+            _this.createLog('p', table);
+        });
+    };
+    JSONData.prototype.put = function (table, data, el_id) {
+        var _this = this;
+        return this.restful
+            .request('PUT', table, el_id, data)
+            .then(function (response) {
+            _this.update('app');
+            _this.createLog('u', table, el_id);
+        });
+    };
+    JSONData.prototype.drop = function (table, el_id) {
+        var _this = this;
+        return this.restful
+            .request('DELETE', table, el_id, null)
+            .then(function (response) {
+            _this.update('app');
+            _this.createLog('d', table, el_id);
+        });
+    };
+    JSONData.prototype.createLog = function (method, table, el_id) {
+        var _this = this;
+        var content = '';
+        switch (table) {
+            case 'app':
+                content = el_id != undefined ? 'A link #' + el_id : 'A link';
+                break;
+            case 'user':
+                content = el_id != undefined ? 'An user #' + el_id : 'An user';
+                break;
+            case 'group':
+                content = el_id != undefined ? 'A group #' + el_id : 'A group';
+                break;
+        }
+        switch (method) {
+            case 'p':
+                content += ' was added';
+                break;
+            case 'u':
+                content += ' was updated';
+                break;
+            case 'd':
+                content += ' was removed';
+                break;
+        }
+        var log = {
+            content: content,
+            datatime: 'CURRENT_TIMESTAMP',
+            author_id: this.current_user.id
+        };
+        return this.restful
+            .request('POST', 'log', null, log)
+            .then(function (response) {
+            return _this.update('log');
+        });
+    };
     JSONData.prototype.updateAll = function () {
-        var data = this;
-        data.update('app');
-        data.update('user');
-        data.update('log');
-        data.update('group');
+        var _this = this;
+        var toUpdate = ['app', 'user', 'log', 'group'];
+        toUpdate
+            .map(function (table) {
+            return _this
+                .update(table)
+                .then(function (response) {
+                return _this;
+            });
+        });
     };
     JSONData.prototype.update = function (table) {
-        var data = this;
-        data.restful.request('GET', table).then(function (response) {
+        var _this = this;
+        return this.restful
+            .request('GET', table)
+            .then(function (response) {
             var jsondata = response['objects'];
             switch (table) {
                 case 'app':
-                    data.apps = jsondata;
+                    _this.apps = jsondata;
                     break;
                 case 'user':
-                    data.users = jsondata;
+                    _this.users = jsondata;
                     break;
                 case 'log':
-                    data.logs = jsondata;
+                    _this.logs = jsondata;
                     break;
                 case 'group':
-                    data.groups = jsondata;
+                    _this.groups = jsondata;
                     break;
             }
+            return _this;
+        })["catch"](function (error) {
+            console.log(error.data);
         });
     };
     return JSONData;
@@ -13226,90 +13247,69 @@ exports["default"] = JSONData;
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 exports.__esModule = true;
 var Link = (function () {
-    function Link(JSONData, $location) {
+    function Link(JSONData, $location, current_user) {
         this.JSONData = JSONData;
         this.$location = $location;
-        var link = this;
-        link.name = '';
-        link.address = '';
-        link.desc = '';
-        link.status = false;
+        this.current_user = current_user;
+        this.name = '';
+        this.address = '';
+        this.desc = '';
+        this.status = false;
     }
-    Link.prototype.fill = function (name, address, desc) {
-        var link = this;
-        link.name = name;
-        link.address = address;
-        link.desc = desc;
-    };
     Link.prototype.add = function () {
-        var link = this;
-        var post_object = {
-            name: link.name,
-            link: link.address,
-            desc: link.desc,
-            creator_id: link.JSONData.current_user.id
+        var post = {
+            name: this.name,
+            link: this.address,
+            desc: this.desc,
+            creator_id: this.current_user.id
         };
-        link.JSONData.restful.request('POST', 'app', null, post_object);
-        link.JSONData.update('app');
+        return this.JSONData.post('app', post);
     };
     Link.prototype.update = function (app_id) {
-        var link = this;
-        var post_object = {
-            name: link.name,
-            link: link.address,
-            desc: link.desc
+        var _this = this;
+        var put = {
+            name: this.name,
+            link: this.address,
+            desc: this.desc
         };
-        link.JSONData.restful.request('PUT', 'app', app_id, post_object).then(function (response) {
-            var log_object = {
-                content: 'A link #' + app_id + ' was updated',
-                data_time: 'CURRENT_TIMESTAMP',
-                author_id: link.JSONData.current_user.id
-            };
-            link.JSONData.restful.request('POST', 'log', null, log_object);
+        return this.JSONData
+            .put('app', put, app_id)
+            .then(function () {
+            _this.clear();
+            _this.status = true;
+            _this.$location.path('/links').replace();
         });
-        link.JSONData.update('app');
-        link.JSONData.update('log');
-        link.clear();
-        link.status = true;
-        link.$location.path('/links').replace();
     };
     Link.prototype["delete"] = function (app_id) {
-        var link = this;
         var confirmResult = confirm("Do you want to remove this app?");
-        if (confirmResult) {
-            link.JSONData.restful.request('DELETE', 'app', app_id).then(function (response) {
-                var log_object = {
-                    content: 'A link #' + app_id + ' was removed',
-                    data_time: 'CURRENT_TIMESTAMP',
-                    author_id: link.JSONData.current_user.id
-                };
-                link.JSONData.restful.request('POST', 'log', null, log_object);
-            });
-            link.JSONData.update('app');
-            link.JSONData.update('log');
-        }
+        if (confirmResult)
+            return this.JSONData.drop('app', app_id);
+    };
+    Link.prototype.fill = function (name, address, desc) {
+        this.name = name;
+        this.address = address;
+        this.desc = desc;
     };
     Link.prototype.clear = function () {
-        var link = this;
-        link.name = '';
-        link.address = '';
-        link.desc = '';
+        this.name = '';
+        this.address = '';
+        this.desc = '';
     };
     return Link;
 }());
-Link.$inject = ['JSONData', '$location'];
+Link.$inject = ['JSONData', '$location', 'current_user'];
 exports["default"] = Link;
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13320,11 +13320,13 @@ var Menu = (function () {
         this.$location = $location;
     }
     Menu.prototype.hide = function () {
-        var menu = this;
-        menu.status = !menu.status;
+        this.status = !this.status;
     };
     Menu.prototype.location = function () {
-        return this.$location.path().replace(/\//g, '').replace(/\-/g, ' ');
+        return this.$location
+            .path()
+            .replace(/\//g, '')
+            .replace(/\-/g, ' ');
     };
     return Menu;
 }());
@@ -13333,7 +13335,7 @@ exports["default"] = Menu;
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13342,19 +13344,18 @@ exports.__esModule = true;
 var Restful = (function () {
     function Restful($http) {
         this.$http = $http;
-        var restful = this;
-        restful.url = '/api';
+        this.url = '/api';
     }
     Restful.prototype.request = function (method, table, id, dataobject) {
-        var restful = this;
-        id = id < 0 ? '' : '/' + id;
-        return restful.$http({
+        var _this = this;
+        id = id == undefined ? '' : '/' + id;
+        return this.$http({
             method: method,
-            url: restful.url + '/' + table,
+            url: this.url + '/' + table + id,
             data: dataobject || {},
             headers: { 'Content-Type': 'application/json' }
         })
-            .then(restful.RequestResponseSuccess)["catch"](restful.RequestResponseError);
+            .then(function () { return _this.RequestResponseSuccess; })["catch"](function () { return _this.RequestResponseError; });
     };
     Restful.prototype.RequestResponseSuccess = function (response) {
         return response.data;
@@ -13369,7 +13370,7 @@ exports["default"] = Restful;
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13377,25 +13378,28 @@ exports["default"] = Restful;
 exports.__esModule = true;
 var User = (function () {
     function User(restful) {
+        var _this = this;
         this.restful = restful;
-        var cuser = this;
-        cuser.restful.request('GET', 'me/user').then(function (response) {
+        this.restful
+            .request('GET', 'me/user')
+            .then(function (response) {
             var user = response['objects'][0];
-            cuser.id = user.id;
-            cuser.email = user.email;
-            cuser.username = user.username;
-            cuser.group = user.group;
-            cuser.logs = user.logs;
-            cuser.applications = user.applications;
+            _this.id = user.id;
+            _this.email = user.email;
+            _this.username = user.username;
+            _this.group = user.group;
+            _this.logs = user.logs;
+            _this.applications = user.applications;
         });
     }
     return User;
 }());
+User.$inject = ['restful'];
 exports["default"] = User;
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14582,7 +14586,7 @@ exports["default"] = User;
 })(window, window.angular);
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32185,7 +32189,7 @@ if(window.console){console.log('WARNING: Tried to load angular more than once.')
 bindJQuery();publishExternalAPI(angular);angular.module("ngLocale",[],["$provide",function($provide){var PLURAL_CATEGORY={ZERO:"zero",ONE:"one",TWO:"two",FEW:"few",MANY:"many",OTHER:"other"};function getDecimals(n){n=n+'';var i=n.indexOf('.');return i==-1?0:n.length-i-1;}function getVF(n,opt_precision){var v=opt_precision;if(undefined===v){v=Math.min(getDecimals(n),3);}var base=Math.pow(10,v);var f=(n*base|0)%base;return{v:v,f:f};}$provide.value("$locale",{"DATETIME_FORMATS":{"AMPMS":["AM","PM"],"DAY":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"ERANAMES":["Before Christ","Anno Domini"],"ERAS":["BC","AD"],"FIRSTDAYOFWEEK":6,"MONTH":["January","February","March","April","May","June","July","August","September","October","November","December"],"SHORTDAY":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"SHORTMONTH":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"STANDALONEMONTH":["January","February","March","April","May","June","July","August","September","October","November","December"],"WEEKENDRANGE":[5,6],"fullDate":"EEEE, MMMM d, y","longDate":"MMMM d, y","medium":"MMM d, y h:mm:ss a","mediumDate":"MMM d, y","mediumTime":"h:mm:ss a","short":"M/d/yy h:mm a","shortDate":"M/d/yy","shortTime":"h:mm a"},"NUMBER_FORMATS":{"CURRENCY_SYM":"$","DECIMAL_SEP":".","GROUP_SEP":",","PATTERNS":[{"gSize":3,"lgSize":3,"maxFrac":3,"minFrac":0,"minInt":1,"negPre":"-","negSuf":"","posPre":"","posSuf":""},{"gSize":3,"lgSize":3,"maxFrac":2,"minFrac":2,"minInt":1,"negPre":'-\xA4',"negSuf":"","posPre":'\xA4',"posSuf":""}]},"id":"en-us","localeID":"en_US","pluralCat":function pluralCat(n,opt_precision){var i=n|0;var vf=getVF(n,opt_precision);if(i==1&&vf.v==0){return PLURAL_CATEGORY.ONE;}return PLURAL_CATEGORY.OTHER;}});}]);jqLite(function(){angularInit(window.document,bootstrap);});})(window);!window.angular.$$csp().noInlineStyle&&window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32215,20 +32219,21 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 exports.__esModule = true;
-var menu_1 = __webpack_require__(11);
-var link_1 = __webpack_require__(10);
-var user_1 = __webpack_require__(13);
-var restful_1 = __webpack_require__(12);
-var JSONData_1 = __webpack_require__(9);
-var appCtrl_1 = __webpack_require__(7);
-var dataCtrl_1 = __webpack_require__(8);
-var route_1 = __webpack_require__(6);
+var menu_1 = __webpack_require__(10);
+var link_1 = __webpack_require__(9);
+var user_1 = __webpack_require__(12);
+var restful_1 = __webpack_require__(11);
+var JSONData_1 = __webpack_require__(8);
+var linkValid_1 = __webpack_require__(21);
+var appCtrl_1 = __webpack_require__(6);
+var dataCtrl_1 = __webpack_require__(7);
+var route_1 = __webpack_require__(22);
 var angular = __webpack_require__(3);
 __webpack_require__(0);
 __webpack_require__(1);
@@ -32237,18 +32242,19 @@ __webpack_require__(5);
 __webpack_require__(2);
 var app = angular.module('mainApp', ['ngRoute', 'ngScrollbars']);
 app
+    .config(route_1["default"])
     .service('menu', menu_1["default"])
     .service('link', link_1["default"])
     .service('restful', restful_1["default"])
     .service('current_user', user_1["default"])
     .service('JSONData', JSONData_1["default"])
+    .directive(linkValid_1["default"])
     .controller('dataCtrl', dataCtrl_1["default"])
-    .controller('appCtrl', appCtrl_1["default"])
-    .config('RouteConfig', route_1["default"]);
+    .controller('appCtrl', appCtrl_1["default"]);
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32281,7 +32287,7 @@ exports["default"] = Clock;
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32299,13 +32305,97 @@ exports["default"] = Limit;
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
 module.exports = __webpack_amd_options__;
 
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
+
+/***/ }),
+/* 20 */,
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var LinkValid = (function () {
+    function LinkValid() {
+    }
+    LinkValid.prototype.contructor = function () {
+        return {
+            require: 'ngModel',
+            link: function (scope, element, attr, mCtrl) {
+                function linkvalidate(value) {
+                    if (/^(htt+(p|ps)+\:\/\/www+\.+[a-z0-9]+\.+[a-z0-9])/.test(value)) {
+                        mCtrl.$setValidity('linkformat', true);
+                    }
+                    else {
+                        mCtrl.$setValidity('linkformat', false);
+                    }
+                    return value;
+                }
+                mCtrl.$parsers.push(linkvalidate);
+            }
+        };
+    };
+    return LinkValid;
+}());
+exports["default"] = LinkValid;
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var RouteConfig = (function () {
+    function RouteConfig($routeProvider, $locationProvider) {
+        this.$routeProvider = $routeProvider;
+        this.$locationProvider = $locationProvider;
+        var viewsUrl = 'static/src/js/views/';
+        this.$routeProvider
+            .when('/', {
+            templateUrl: viewsUrl + 'dashboard.html'
+        }).when('/dashboard', {
+            templateUrl: viewsUrl + 'dashboard.html'
+        }).when('/stats', {
+            templateUrl: viewsUrl + 'stats.html'
+        }).when('/action-log', {
+            templateUrl: viewsUrl + 'action-log.html'
+        }).when('/links/:linkID', {
+            templateUrl: viewsUrl + 'links.html'
+        }).when('/links', {
+            templateUrl: viewsUrl + 'links.html'
+        }).when('/add-link', {
+            templateUrl: viewsUrl + 'add-link.html'
+        }).when('/users', {
+            templateUrl: viewsUrl + 'users.html'
+        }).when('/groups', {
+            templateUrl: viewsUrl + 'groups.html'
+        }).when('/add-user', {
+            templateUrl: viewsUrl + 'add-user.html'
+        }).when('/settings', {
+            templateUrl: viewsUrl + 'settings.html'
+        }).when('/ver', {
+            templateUrl: viewsUrl + 'ver.html'
+        }).otherwise({
+            controller: function () {
+                window.location.replace(window.location.href);
+            },
+            template: ''
+        });
+        this.$locationProvider.html5Mode(true);
+    }
+    return RouteConfig;
+}());
+RouteConfig.$inject = ['$routeProvider', '$locationProvider'];
+exports["default"] = RouteConfig;
+
 
 /***/ })
 /******/ ]);

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../static/src/css/popup.css">
 </head>
 
-<body ng-controller="mainCtrl">
+<body ng-controller="appCtrl as app">
     <div class="container-fluid">
         <div class="row">
             <header class="main-header col-sm-12 col-xs-12 pull-right row" ng-class="menu.status ? 'col-lg-10 col-md-11' : 'col-lg-12 col-md-12'">
@@ -27,14 +27,14 @@
                         <a href="#">cross app links</a>
                     </div>
                     <div class="col-lg-1 col-md-2 col-sm-1 col-xs-2">
-                        <div class="menu-toggle" ng-click="menu.hide()">
+                        <div class="menu-toggle" ng-click="app.menu.hide()">
                             <span class="glyphicon glyphicon-menu-hamburger"></span>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-11 col-xs-10 pull-right text-right">
                         <div class="user-section" ng-mouseover="navigation.usernav=true" ng-mouseleave="navigation.usernav=false">
                             <div class="user-avatar"><span class="glyphicon glyphicon-menu-hamburger"></span><img src="../static/img/default_avatar.jpg"></div>
-                            <span class="user-name">{{current_user.username}}</span>
+                            <span class="user-name">{{app.current_user.username}}</span>
 
                             <nav class="user-menu" ng-show="navigation.usernav">
                                 <ul>
@@ -51,20 +51,21 @@
 
                 <div class="col-lg-12 col-md-12 row hidden-sm hidden-xs header-land">
 
-                    <div ng-class="menu.status ? 'container-fluid' : 'container'">
+                    <div ng-class="app.menu.status ? 'container-fluid' : 'container'">
                         <h1 class="partial-name">
                             <span class="glyphicon glyphicon-map-marker loc-icon"></span>
-                            <span class="location-name">{{menu.location()}}</span>
+                            <span class="location-name">{{app.menu.location()}}</span>
                         </h1>
                     </div>
                 </div>
             </header>
         </div>
-        <div class="container-fluid" ng-class="menu.status ? 'container-fluid' : 'container'">
+        <div class="container-fluid" ng-class="app.menu.status ? 'container-fluid' : 'container'">
             <div class="row">
                 <nav class="main-navigation col-lg-2 col-md-1 col-sm-12 col-xs-12 pull-left" ng-show="menu.status">
 
-                    <div class="main-navigation-overflow" ng-scrollbars ng-scrollbars-config="config">
+                    <div class="main-navigation-overflow">
+                        <!--                        ng-scrollbars ng-scrollbars-config="config"-->
                         <ul>
                             <h4 class="label hidden-md">Main</h4>
                             <li>
@@ -115,8 +116,8 @@
 
                 </nav>
                 <!--    STATIC:END : NG-->
-                <div class="col-sm-12 col-xs-12 pull-right row" ng-class="menu.status ? 'col-lg-10 col-md-11' : 'col-lg-12 col-md-12'">
-                    <div class="main-content " ng-view autoscroll="true" ng-class="menu.status ? 'col-lg-10' : 'col-lg-12'">
+                <div class="col-sm-12 col-xs-12 pull-right row" ng-class="menu.status ? 'col-lg-10 col-md-11' : 'col-lg-12 col-md-12'" ng-controller="dataCtrl as data">
+                    <div class="main-content " ng-view autoscroll="true" ng-class="app.menu.status ? 'col-lg-10' : 'col-lg-12'">
                         <!--    INCLUDE : NG-->
 
                         <!--    INCLUDE:END : NG-->
@@ -126,16 +127,8 @@
         </div>
     </div>
     <!--        BOWER PCKG-->
-    <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../static/bower_components/angular/angular.min.js"></script>
-    <script src="../static/bower_components/angular-route/angular-route.min.js"></script>
-    <script src="../static/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="../static/bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
-    <!--        BOWER PCKG:END-->
-    <script src="../static/src/js/config.js"></script>
-    <script src="../static/src/js/services.js"></script>
-    <script src="../static/src/js/directives.js"></script>
-    <script src="../static/src/js/app.js"></script>
+
+    <script src="../static/dist/bundle.js"></script>
 
 </body>
 

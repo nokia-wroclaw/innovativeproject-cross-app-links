@@ -6,10 +6,12 @@ export default class Menu{
     constructor(private $location: ng.ILocationService){}
     
     hide(): void{
-        var menu = this;
-        menu.status = !menu.status;
+        this.status = !this.status;
     } 
     location(): string{
-      return this.$location.path().replace(/\//g, '').replace(/\-/g, ' ');
+      return this.$location
+                    .path()
+                    .replace(/\//g, '')
+                    .replace(/\-/g, ' ');
     }
 }

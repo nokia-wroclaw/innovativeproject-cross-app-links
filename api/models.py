@@ -69,13 +69,20 @@ class App(db.Model):
     link=db.Column(db.String(50), unique=True)
     desc=db.Column(db.String(50))
     creator_id=db.Column(db.Integer, db.ForeignKey('user.id'))
+    img_link=db.Column(db.String(50))
+    order_id=db.Column(db.Integer)
+    status=db.Column(db.Boolean)
+    click_num=db.Column(db.Integer)
+    beta=db.Column(db.Boolean)
+
 
     def __init__(self, name, link, desc, creator_id):
-        
         self.name=name
         self.link=link
         self.desc=desc
         self.creator_id=creator_id
+        self.status= True
+        self.beta= False
             
             
             

@@ -32248,7 +32248,7 @@ app
     .service('restful', restful_1["default"])
     .service('current_user', user_1["default"])
     .service('JSONData', JSONData_1["default"])
-    .directive(linkValid_1["default"])
+    .directive('linkValid', linkValid_1["default"])
     .controller('dataCtrl', dataCtrl_1["default"])
     .controller('appCtrl', appCtrl_1["default"]);
 

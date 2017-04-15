@@ -29,7 +29,7 @@ app
     .service('restful', Restful)
     .service('current_user', User)
     .service('JSONData', JSONData)
-    .directive(LinkValid)
+    .directive('linkValid', LinkValid)
     .controller('dataCtrl', dataCtrl)
     .controller('appCtrl', appCtrl);
    

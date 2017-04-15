@@ -2,92 +2,94 @@
 <html lang="en" ng-app="mainApp">
 
 <head>
-	<base href="/">
-	<title>Welcome to Cross App Links</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800,900" rel="stylesheet">
-	<!--        BOWER PCKG-->
-	<link rel="stylesheet" href="../static/bower_components/dstyle_resetCSS/reset.min.css">
-	<link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
-	<!--        BOWER PCKG:END-->
-	<link rel="stylesheet" href="../static/css/main.css">
-	<link rel="stylesheet" href="../static/css/loginpage.css">
-	<link rel="stylesheet" href="../static/css/media.css">
+    <base href="/">
+    <title>Welcome to Cross App Links</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800,900" rel="stylesheet">
+    <!--        BOWER PCKG-->
+    <link rel="stylesheet" href="../static/bower_components/dstyle_resetCSS/reset.min.css">
+    <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!--        BOWER PCKG:END-->
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/loginpage.css">
+    <link rel="stylesheet" href="../static/css/media.css">
 
 </head>
 
 <body ng-controller="loginCtrl" ng-cloak>
-	<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 row pull-left row welcome-container">
-		<nav class="main-landing-menu pull-right text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<ul>
-				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-left">
-					<a href="#" class="logo"><img src="../static/img/logo.PNG"></a>
-				</li>
-				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right"><a href="#">Github</a></li>
-				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right"><a href="#">Privacy & License</a></li>
-				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right"><a href="#">About project</a></li>
-			</ul>
-		</nav>
-		<header>
-			<h1>Cross App Links</h1>
-			<h2>Keep all your places in one.</h2>
-		</header>
-		<div class="login-overflow" ng-if="!current_user.id">
-			<header>
-				<h1>Sign in</h1>
-			</header>
-			<form class="login-form" method="post" name="login_form" novalidate ng-submit="login_form.$valid && login(email, password)">
-				<div class="input-socket">
-					<input type="text" name="email" ng-model="email" placeholder="Your e-mail" required>
-					<span class="input-icon"><span class="glyphicon glyphicon-user"></span></span>
+    <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 row pull-left row welcome-container">
+        <nav class="main-landing-menu pull-right text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <ul>
+                <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-left">
+                    <a href="#" class="logo"><img src="../static/img/logo.PNG"></a>
+                </li>
+                <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right"><a href="#">Github</a></li>
+                <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right"><a href="#">Privacy & License</a></li>
+                <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right"><a href="#">About project</a></li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Cross App Links</h1>
+            <h2>Keep all your places in one.</h2>
+        </header>
+        <div class="login-overflow" ng-if="!current_user.id">
+            <header>
+                <h1>Sign in <span class="errorBox" ng-show="loginFormError">Are you sure? Check again...</span></h1>
+            </header>
+            <form class="login-form" method="post" name="login_form" novalidate ng-submit="login_form.$valid && login(email, password)">
 
-				</div>
-				<div class="input-socket">
-					<input type="password" name="password" ng-model="password" placeholder="Your password" required>
-					<span class="input-icon"><span class="glyphicon glyphicon-lock"></span></span>
-				</div>
-				<input type="submit" name="submit" value="Sign in">
-				<span class="form-link forgotten-pass"><a href="#forgot">Forgot your password?</a></span>
-				<span class="form-link new-account"><a href="/register">I'd like to register a new account</a></span>
-			</form>
-		</div>
-		<div class="login-overflow" ng-if="current_user.id">
-			<div class="user-section">
-				<h4 class="logged-as">Logged as <span>@{{current_user.username}}</span></h4>
-				<a href="/dashboard" target="_self" class="button blue">Dashboard</a>
-				<a href="/api/auth/logout" target="_self" class="button pure">Logout</a>
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 row pull-right main-application-container">
-		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="app in apps">
-			<div class="box no-stylus main-app-link">
-				<header>
-					<span class="link-img"><img src="../static/img/app-img/{{$index+1}}.png"></span>
-					<h1 class="link-name">{{app.name}}</h1>
-				</header>
-				<article class="link-desc">
-					{{app.desc}}
-				</article>
-				<div class="manage-area">
-					<a href="{{app.link}}">Checkout</a>
-				</div>
-			</div>
+                <div class="input-socket">
+                    <input type="text" name="email" ng-model="email" placeholder="Your e-mail" required>
+                    <span class="input-icon"><span class="glyphicon glyphicon-user"></span></span>
 
-		</div>
+                </div>
+                <div class="input-socket">
+                    <input type="password" name="password" ng-model="password" placeholder="Your password" required>
+                    <span class="input-icon"><span class="glyphicon glyphicon-lock"></span></span>
+                </div>
+                <input type="submit" name="submit" value="Sign in">
+                <span class="form-link forgotten-pass"><a href="#forgot">Forgot your password?</a></span>
+                <span class="form-link new-account"><a href="/register">I'd like to register a new account</a></span>
+            </form>
+            <span class="loadingForm" ng-show="loginFormLoading"></span>
+        </div>
+        <div class="login-overflow" ng-if="current_user.id">
+            <div class="user-section">
+                <h4 class="logged-as">Logged as <span>@{{current_user.username}}</span></h4>
+                <a href="/dashboard" target="_self" class="button blue">Dashboard</a>
+                <a href="/api/auth/logout" target="_self" class="button pure">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 row pull-right main-application-container">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="app in apps">
+            <div class="box no-stylus main-app-link">
+                <header>
+                    <span class="link-img"><img src="../static/img/app-img/{{$index+1}}.png"></span>
+                    <h1 class="link-name">{{app.name}}</h1>
+                </header>
+                <article class="link-desc">
+                    {{app.desc}}
+                </article>
+                <div class="manage-area">
+                    <a href="{{app.link}}">Checkout</a>
+                </div>
+            </div>
 
-		<!--        BOWER PCKG-->
-		<script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
-		<script src="../static/bower_components/angular/angular.min.js"></script>
-		<script src="../static/bower_components/angular-route/angular-route.min.js"></script>
-		<script src="../static/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-		<script src="../static/bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
-		<!--        BOWER PCKG:END-->
-		<script src="../static/js/directives.js"></script>
-		<script src="../static/js/config.js"></script>
-		<script src="../static/js/services.js"></script>
-		<script src="../static/js/loginpage.controller.js"></script>
+        </div>
+
+        <!--        BOWER PCKG-->
+        <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../static/bower_components/angular/angular.min.js"></script>
+        <script src="../static/bower_components/angular-route/angular-route.min.js"></script>
+        <script src="../static/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="../static/bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+        <!--        BOWER PCKG:END-->
+        <script src="../static/js/directives.js"></script>
+        <script src="../static/js/config.js"></script>
+        <script src="../static/js/services.js"></script>
+        <script src="../static/js/loginpage.controller.js"></script>
 </body>
 
 </html>

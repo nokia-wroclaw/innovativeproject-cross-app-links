@@ -6,9 +6,12 @@
             $scope.apps = response['objects'];
         });
 
-
+        restful.get('me/user').then(function (response) {
+            $scope.current_user = response['objects'][0];
+        });
 
         $scope.login = function (email, password) {
+            $scope.loginFormLoading = true;
             var data = {
                 email: email,
                 password: password
@@ -18,6 +21,9 @@
                     restful.get('me/user').then(function (response) {
                         $scope.current_user = response['objects'][0];
                     });
+                else
+                    $scope.loginFormError = true;
+                $scope.loginFormLoading = false;
             }).catch(function (response) {
                 console.log(response);
             });

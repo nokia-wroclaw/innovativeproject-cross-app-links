@@ -41,11 +41,15 @@
         margin-right: 20px; }
 
   .welcome-container {
-    position: static; }
-    .welcome-container header h1 {
-      font-size: 36px; }
-    .welcome-container header h2 {
-      font-size: 20px; } }
+    position: static;
+    padding-bottom: 60px;
+    height: auto; }
+    .welcome-container header {
+      margin-bottom: 5vh; }
+      .welcome-container header h1 {
+        font-size: 36px; }
+      .welcome-container header h2 {
+        font-size: 20px; } }
 /* Small Devices, Tablets */
 /* Extra Small Devices, Phones */
 /* Custom, iPhone Retina */

@@ -20,10 +20,12 @@
                 if (response == 'True')
                     restful.get('me/user').then(function (response) {
                         $scope.current_user = response['objects'][0];
+                        $scope.loginFormLoading = false;
                     });
-                else
+                else {
                     $scope.loginFormError = true;
-                $scope.loginFormLoading = false;
+                    $scope.loginFormLoading = false;
+                }
             }).catch(function (response) {
                 console.log(response);
             });

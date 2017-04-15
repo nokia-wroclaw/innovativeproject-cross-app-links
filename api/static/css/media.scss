@@ -1,97 +1,101 @@
     /*For almost medium*/
-
-@media only screen and (max-width: 1440px) {
-    .container {
-        width: 90%;
+    
+    @media only screen and (max-width: 1440px) {
+        .container {
+            width: 90%;
+        }
+        .main-application-container {
+            .main-app-link {
+                header {
+                    .link-name {
+                        font-size: 17px;
+                    }
+                }
+                .link-desc {
+                    font-size: 15px;
+                }
+            }
+        }
     }
-    .main-application-container {
-        .main-app-link {
+    
+    @media only screen and (max-width: 1200px) {
+        .container {
+            width: 100%;
+            padding: 0;
+        }
+        .main-navigation {
+            top: 0;
+            .main-navigation-overflow {
+                ul {
+                    li {
+                        a {
+                            text-align: center;
+                            .glyphicon {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /* Medium Devices, Desktops */
+    
+    @media only screen and (max-width: 992px) {
+        .container {
+            width: 100%;
+        }
+        .main-header {
+            background: darken(#34313d, 3%);
+            border: 0;
+            box-shadow: none;
+            .header-cell {
+                .user-section {
+                    .user-name {
+                        color: #fafafa;
+                    }
+                }
+            }
+        }
+        .main-navigation {
+            height: auto;
+            min-height: none;
+            max-height: none;
+            position: static;
+            .main-navigation-overflow {
+                ul {
+                    li {
+                        a {
+                            text-align: left;
+                            .glyphicon {
+                                margin-right: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .welcome-container {
+            position: static;
+            padding-bottom: 60px;
+            height: auto;
             header {
-                .link-name {
-                    font-size: 17px;
+                 margin-bottom: 5vh;
+                h1 {
+                    font-size: 36px;
                 }
-            }
-            .link-desc {
-                font-size: 15px;
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    .container {
-        width: 100%;
-        padding: 0;
-    }
-    .main-navigation {
-        top: 0;
-        .main-navigation-overflow {
-            ul {
-                li {
-                    a {
-                        text-align: center;
-                        .glyphicon {
-                            margin: 0;
-                        }
-                    }
+                h2 {
+                    font-size: 20px;
                 }
             }
         }
-    }
-}
-
-
-/* Medium Devices, Desktops */
-
-@media only screen and (max-width: 992px) {
-    .container {
-        width: 100%;
-    }
-    .main-header {
-        background: darken(#34313d, 3%);
-        border: 0;
-        box-shadow: none;
-        .header-cell {
-            .user-section {
-                .user-name {
-                    color: #fafafa;
-                }
-            }
-        }
-    }
-    .main-navigation {
-        height: auto;
-        min-height: none;
-        max-height: none;
-        position: static;
-        .main-navigation-overflow {
-            ul {
-                li {
-                    a {
-                        text-align: left;
-                        .glyphicon {
-                            margin-right: 20px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    .welcome-container {
-        position: static;
-        header {
-            h1 {
-                font-size: 36px;
-            }
-            h2 {
-                font-size: 20px;
-            }
-        }
-    }
     }
     /* Small Devices, Tablets */
+    
     @media only screen and (max-width: 768px) {}
     /* Extra Small Devices, Phones */
+    
     @media only screen and (max-width: 480px) {}
     /* Custom, iPhone Retina */
+    
     @media only screen and (max-width: 320px) {}

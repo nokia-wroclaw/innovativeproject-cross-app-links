@@ -30,9 +30,9 @@
     min-height: none;
     max-height: none;
     position: static; }
-    .main-navigation ul li a {
+    .main-navigation .main-navigation-overflow ul li a {
       text-align: left; }
-      .main-navigation ul li a .glyphicon {
+      .main-navigation .main-navigation-overflow ul li a .glyphicon {
         margin-right: 20px; } }
 /* Small Devices, Tablets */
 /* Extra Small Devices, Phones */

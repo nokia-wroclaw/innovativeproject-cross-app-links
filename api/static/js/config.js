@@ -12,13 +12,15 @@
             }).when('/action-log', {
                 templateUrl: 'static/partials/action-log.html'
             }).when('/links/:linkID', {
-                templateUrl: 'static/partials/link-management.html'
+                templateUrl: 'static/partials/links.html'
             }).when('/links', {
                 templateUrl: 'static/partials/links.html'
             }).when('/add-link', {
                 templateUrl: 'static/partials/add-link.html'
-            }).when('/users-permissions', {
-                templateUrl: 'static/partials/users-permissions.html'
+            }).when('/users', {
+                templateUrl: 'static/partials/users.html'
+            }).when('/groups', {
+                templateUrl: 'static/partials/groups.html'
             }).when('/add-user', {
                 templateUrl: 'static/partials/add-user.html'
             }).when('/settings', {

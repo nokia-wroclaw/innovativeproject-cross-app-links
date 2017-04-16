@@ -1,11 +1,24 @@
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+    <div class="no-box-el error-form-box" ng-show="form.$submitted && form.$invalid && newlink.status==false">
+
+        <span class='pull-left text-left error' ng-show="form.name.$error.required"><span class="glyphicon glyphicon-remove"></span>Required link name!</span>
+        <span class='pull-left text-left error' ng-show="form.name.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short link name!</span>
+
+        <span class='pull-left text-left error' ng-show="form.address.$error.required"><span class="glyphicon glyphicon-remove"></span>Required url!</span>
+        <span class='pull-left text-left error' ng-show="form.address.$error.linkformat"><span class="glyphicon glyphicon-remove"></span>Wrong url!</span>
+
+        <span class='pull-left text-left error' ng-show="form.desc.$error.required"><span class="glyphicon glyphicon-remove"></span>Required description!</span>
+        <span class='pull-left text-left error' ng-show="form.desc.$error.maxlength"><span class="glyphicon glyphicon-remove"></span>Too long description!</span>
+        <span class='pull-left text-left error' ng-show="form.desc.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short description!</span>
+    </div>
     <form name='form' class="box box-form" ng-submit="form.$valid && newlink.add()" novalidate>
         <header>
             <h3 class="blue">Add new link</h3>
         </header>
-        <input type='text' name='name' ng-model='newlink.name' placeholder='Set a name for your link' required>
-        <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required>
-        <textarea name='desc' ng-model='newlink.desc' placeholder="Write a little bit about it" required></textarea>
+        <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
+        <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
+        <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>
+
         <button type="submit" class='button blue pull-right'>Confirm</button>
         <span class='button pure pull-right in-row'>Upload icon</span>
     </form>

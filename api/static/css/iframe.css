@@ -1,30 +1,48 @@
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  background-color: #fff; }
+
 .iframe-nav {
+  width: 340px;
+  height: 100%;
+  box-sizing: border-box;
   float: left;
-  width: auto;
-  max-width: 180px;
-  font-family: 'Lato', sans-serif; }
+  display: inline-block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: 'Lato', sans-serif;
+  padding: 10px; }
   .iframe-nav ul {
     width: 100%;
     box-sizing: border-box;
     float: left;
     display: inline-block; }
     .iframe-nav ul li {
-      display: block;
+      display: inline-block;
       float: left;
       width: 100%; }
       .iframe-nav ul li a {
-        display: block;
+        display: inline-block;
         float: left;
         padding: 20px;
         width: 100%;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid rgba(182, 176, 200, 0.2);
         text-decoration: none;
-        color: black;
+        color: #222;
+        opacity: 0.7;
         font-weight: 600;
-        box-sizing: border-box; }
+        box-sizing: border-box;
+        text-align: left; }
         .iframe-nav ul li a:hover {
-          background: #f0f0f0; }
+          background: rgba(0, 0, 0, 0.05);
+          opacity: 1; }
         .iframe-nav ul li a .glyphicon {
-          margin-right: 20px; }
+          margin-righ: 20px;
+          display: block;
+          float: left;
+          font-size: 24px; }
 
 /*# sourceMappingURL=iframe.css.map */

@@ -75,17 +75,17 @@
                 <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
             </header>
             <tbody>
-                <tr ng-repeat='log in logs | limitTo : 5' ng-show='logs.length'>
+                <tr ng-repeat='log in logs | orderBy: id : true | limitTo : 5' ng-show='logs.length'>
                     <td>{{log.id}}</td>
-                    <td>{{log.data_time}}</td>
+                    <td>{{log.data_time | date: 'short' }}</td>
                     <td>{{log.author.username}}</td>
                     <td>{{log.content}}</td>
                 </tr>
             </tbody>
-            <span class='warning-text' ng-hide='logs.length'>There're no activity yet</span>
+            <span class='warning-text' ng-hide='logs.length'>There is no activity yet</span>
         </table>
         <div href="action-log" class="full-width-button-area">
-            <a href="#" class="button orange pull-right"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+            <a href="action-log" class="button orange pull-right"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
         </div>
     </div>
     <div class="box box-table">
@@ -105,7 +105,7 @@
             <span class='warning-text' ng-hide='users.length'>No active users since last check</span>
         </table>
         <div href="action-log" class="full-width-button-area">
-            <a href="#" class="button green pull-right"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+            <a href="users" class="button green pull-right"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
         </div>
     </div>
 

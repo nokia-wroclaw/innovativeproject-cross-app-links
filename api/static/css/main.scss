@@ -398,8 +398,6 @@ body {
                 float: left;
                 display: inline-block;
                 width: 45px;
-                height: 45px;
-                border-radius: 100%;
             }
             .main-link-heading {
                 text-transform: uppercase;
@@ -628,15 +626,23 @@ body {
 }
 
 .single-input {
-    width: 240px;
+    width: 340px;
     input[type=text] {
-        display: block;
-        width: 100%;
+        float: right;
         box-sizing: border-box;
-        padding: 10px;
-        border-radius: 3px;
-        border: 1px solid lighten(#ccc, 9%);
+        padding: 10px 0px;
+        border: 0;
+        background: transparent;
+        border-bottom: 2px solid lighten(#ccc, 9%);
         margin-bottom: 20px;
+        transition: 0.3s ease;
+        &:focus {
+            padding-top: 15px;
+            padding-bottom: 5px;
+            outline: none;
+            border-color: #2ea4d2;
+            transition: 0.3s ease;
+        }
     }
 }
 

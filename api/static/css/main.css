@@ -335,9 +335,7 @@ body {
       .box.link-box .main-link-info img {
         float: left;
         display: inline-block;
-        width: 45px;
-        height: 45px;
-        border-radius: 100%; }
+        width: 45px; }
       .box.link-box .main-link-info .main-link-heading {
         text-transform: uppercase;
         font-weight: 800;
@@ -515,15 +513,22 @@ body {
     box-shadow: none; }
 
 .single-input {
-  width: 240px; }
+  width: 340px; }
   .single-input input[type=text] {
-    display: block;
-    width: 100%;
+    float: right;
     box-sizing: border-box;
-    padding: 10px;
-    border-radius: 3px;
-    border: 1px solid #e3e3e3;
-    margin-bottom: 20px; }
+    padding: 10px 0px;
+    border: 0;
+    background: transparent;
+    border-bottom: 2px solid #e3e3e3;
+    margin-bottom: 20px;
+    transition: 0.3s ease; }
+    .single-input input[type=text]:focus {
+      padding-top: 15px;
+      padding-bottom: 5px;
+      outline: none;
+      border-color: #2ea4d2;
+      transition: 0.3s ease; }
 
 .row .row-buried {
   padding: 0; }

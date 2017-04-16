@@ -62,6 +62,13 @@ class FlaskTestCase(unittest.TestCase):
         response=tester.get('/groups',follow_redirects=True)
         self.assertEqual(response.status_code,200)
 
+    def test_sign_in(self):
+        tester = app.test_client(self)
+        response = tester.get('/', content_type='html/text')
+        self.assertTrue(b'Sign in' in response.data)
+    
+
+
 
 
  #   def test_main_page_requiered(self):

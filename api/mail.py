@@ -27,7 +27,7 @@ def send_email_register(sender,recip):
     username = email.split('@')[0]
     admin = sender.split('@')[0]
     new = Invites.query.filter_by(email = email).first()
-    url = 'http://127.0.0.1:5000/api/auth/setpassword?token=' + str(new.token)
+    url = 'https://cross-app-links.herokuapp.com/api/auth/setpassword?token=' + str(new.token)
     send_email("Cross-apps registration",'cross-apps@yandex.com', recip, render_template("email_template.html", user=username,sender=admin, url=url))
 
 

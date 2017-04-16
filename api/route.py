@@ -14,14 +14,15 @@ from api.mail import send_email, send_email_register
 def commituser(token,userpassword):
     new = Invites.query.filter_by(token = token).first()
     useremail = new.email
-    new = User(useremail,sha256_crypt.encrypt(userpassword))
+    group = new.group
+    new = User(useremail,sha256_crypt.encrypt(userpassword),group)
     db.session.add(new)
     db.session.commit()
     removeinvite(useremail)
 
 
-def commitinvite(email,maker):
-    new = Invites(email,maker.id)
+def commitinvite(email,maker,group):
+    new = Invites(email,maker.id,group)
     db.session.add(new)
     db.session.commit()
     receiver = [email]
@@ -30,8 +31,11 @@ def commitinvite(email,maker):
 
 
 
-def removeuser(email):
+def removeuser(email, current):
     sadman = User.query.filter_by(email = email).first()
+    if current.email == email:
+        logout_user()
+        session.pop('user', None)
     db.session.delete(sadman)
     db.session.commit()
 
@@ -57,7 +61,8 @@ index_content_list = [
     'groups',
     'add-user',
     'settings',
-    'ver'
+    'ver',
+    'profile'
 ]
 
 #Login manager
@@ -110,10 +115,9 @@ def logout():
 @app.route('/api/auth/register', methods=['POST'])
 @login_required
 def register():
-    data = request.get_json(force=True)
-    if not User.query.filter_by(email=data['email']).first():
-        commitinvite(data['email'], current_user)
-        return str(True)
+    if not User.query.filter_by(email=request.form['email']).first():
+        commitinvite(request.form['email'],current_user,request.form['group'])
+        return redirect('/add-user')
     else:
         return str(False)
 
@@ -135,7 +139,7 @@ def setpassword():
 @login_required
 def remove():
     if User.query.filter_by(email=request.form['email']).first():
-        removeuser(request.form['email'])
+        removeuser(request.form['email'], current_user)
         if Invites.query.filter_by(email=request.form['email']).first():
             removeinvite(request.form['email'])
         return redirect('/add-user')

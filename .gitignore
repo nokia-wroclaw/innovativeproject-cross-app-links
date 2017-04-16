@@ -11,5 +11,6 @@ api/mail.pyc
 run.pyc
 alembic.ini
 api/__init__.pyc
-scripts/
+scripts/*
 node_modules/*
+

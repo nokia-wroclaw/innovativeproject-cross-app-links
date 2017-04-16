@@ -61,7 +61,8 @@ index_content_list = [
     'groups',
     'add-user',
     'settings',
-    'ver'
+    'ver',
+    'profile'
 ]
 
 #Login manager

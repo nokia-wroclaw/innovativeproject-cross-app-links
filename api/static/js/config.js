@@ -27,6 +27,8 @@
                 templateUrl: 'static/partials/settings.html'
             }).when('/ver', {
                 templateUrl: 'static/partials/ver.html'
+            }).when('/profile/:userID', {
+                templateUrl: 'static/partials/profile.html'
             }).otherwise({
                 controller: function () {
                     window.location.replace(window.location);

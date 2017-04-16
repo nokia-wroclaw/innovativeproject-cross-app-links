@@ -1,3 +1,30 @@
+<div class="col-lg-4 col-md-12">
+    <div class="box color-box orange">
+        <div class="site-stat">
+            <span class="stat-number">{{apps.length}}</span>
+            <span class="stat-desc">Registered applications</span>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-md-12">
+    <div class="box color-box green">
+        <div class="site-stat">
+            <span class="stat-number">{{users.length}}</span>
+            <span class="stat-desc">Registered users</span>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-md-12">
+    <div class="box color-box blue">
+        <div class="site-stat">
+            <span class="stat-number">17</span>
+            <span class="stat-desc">Components in use</span>
+        </div>
+    </div>
+</div>
+
 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pull-left">
     <div class="box link-box" ng-repeat='app in apps | orderBy : id : true | limitTo: 3'>
         <div class="main-link-info">
@@ -39,7 +66,7 @@
         <div class="date-time">
             <span class="main-date">{{clockDate.date() | date: 'longDate'}}</span>
             <span class="main-time">{{clockDate.time()}}</span>
-            <span class="time-zone">{{clockDate.date() | date: 'Z'}}</span>
+            <span class="time-zone">{{clockDate.date() | date: 'EEEE'}}</span>
         </div>
     </div>
     <div class="box image-box">
@@ -49,24 +76,6 @@
 </div>
 
 <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 pull-left">
-    <div class="row">
-        <div class="col-lg-6 col-md-12 row-buried">
-            <div class="box color-border-box blue">
-                <div class="site-stat">
-                    <span class="stat-number">{{apps.length}}</span>
-                    <span class="stat-desc">Registered applications</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-12 row-buried">
-            <div class="box color-border-box green">
-                <div class="site-stat">
-                    <span class="stat-number">17</span>
-                    <span class="stat-desc">Components in use</span>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="box box-table">
         <table class="table ">
             <header>

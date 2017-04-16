@@ -60,11 +60,12 @@ body {
     height: auto;
     background: darken(white, 2%);
     box-sizing: border-box;
-    box-shadow: 0 3px 7px lighten(#ccc, 10%);
+    box-shadow: 0 1px 3px lighten(#ccc, 10%);
     position: relative;
     .header-land {
-        background: url(../img/header-land.jpg);
+        background: #2ea4d2 url(../img/header-land.png);
         height: 180px;
+        display: none;
         overflow: hidden;
         box-sizing: border-box;
         padding: 20px;
@@ -108,14 +109,14 @@ body {
                 opacity: 1;
                 box-sizing: border-box;
                 height: 90px;
-                background: #34313d;
+                background: lighten(#34313d, 5%);
                 font-size: 16px;
                 text-transform: uppercase;
                 padding-top: 35px;
                 font-weight: 800;
                 text-align: center;
                 &:hover {
-                    background: #34313d;
+                    background: lighten(#34313d, 5%);
                     color: #F0F0F0;
                 }
             }
@@ -347,10 +348,11 @@ body {
     padding: 20px;
     box-sizing: border-box;
     background: darken(white, 2%);
-    box-shadow: 0 3px 7px lighten(#ccc, 10%);
+    box-shadow: 0 1px 3px lighten(#ccc, 10%);
     margin-bottom: 20px;
     width: 100%;
     float: left;
+    border-radius: 3px;
     overflow: hidden;
     position: relative;
     header {
@@ -546,6 +548,14 @@ body {
                 float: left;
             }
         }
+        .site-stat {
+            .stat-number {
+                color: #fff;
+            }
+            .stat-desc {
+                color: #fff;
+            }
+        }
     }
     &.image-box {
         padding: 0;
@@ -593,10 +603,19 @@ body {
             float: left;
             width: 100%;
             box-sizing: border-box;
-            padding: 10px;
-            border-radius: 3px;
-            border: 1px solid lighten(#ccc, 9%);
+            padding: 10px 0px;
+            border: 0;
+            background: transparent;
+            border-bottom: 2px solid lighten(#ccc, 9%);
             margin-bottom: 20px;
+            transition: 0.3s ease;
+            &:focus {
+                padding-top: 15px;
+                padding-bottom: 5px;
+                outline: none;
+                border-color: #2ea4d2;
+                transition: 0.3s ease;
+            }
         }
         textarea {
             height: 180px;

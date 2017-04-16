@@ -57,7 +57,7 @@ body {
 /*WEBSITE */
 
 .main-header {
-   height: auto;
+    height: auto;
     background: darken(white, 2%);
     box-sizing: border-box;
     box-shadow: 0 1px 3px lighten(#ccc, 10%);
@@ -65,29 +65,11 @@ body {
     .header-land {
         background: #2ea4d2 url(../img/header-land.png);
         height: 180px;
-        display: none;
         overflow: hidden;
         box-sizing: border-box;
         padding: 20px;
         position: relative;
         width: 100%;
-        .partial-name {
-            color: #fff;
-            font-size: 26px;
-            font-weight: 300;
-            float: left;
-            text-align: left;
-            width: auto;
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            .loc-icon {
-                margin-right: 20px;
-            }
-            .location-name::first-letter {
-                text-transform: uppercase;
-            }
-        }
     }
     .header-cell {
         height: 90px;
@@ -219,6 +201,23 @@ body {
                             }
                         }
                     }
+                }
+            }
+        }
+        .header-nav-icon {
+            margin-right: 60px;
+            float: right;
+            a {
+                margin-left: 20px;
+                float: left;
+                color: lighten(#ccc, 9%);
+                font-size: 24px;
+                box-sizing: border-box;
+                height: 100%;
+                padding: 30px 20px;
+                &:hover {
+                    color: #ddd;
+                    cursor: pointer;
                 }
             }
         }
@@ -708,6 +707,11 @@ body {
 
 .no-box-el {
     margin-bottom: 20px;
+}
+
+.no-stylus {
+    background: none;
+    box-shadow: none;
 }
 
 .success-bar {

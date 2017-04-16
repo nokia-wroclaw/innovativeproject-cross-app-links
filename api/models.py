@@ -17,12 +17,13 @@ class User(UserMixin, db.Model):
     
     applications=db.relationship('App', backref='creator', lazy='dynamic')
     logs=db.relationship('Log', backref='author', lazy='dynamic')
-    #notes=db.relationship('Note', backref='owner', lazy='dynamic')
+    notes=db.relationship('Note', backref='owner', lazy='dynamic')
     
-    def __init__(self, email, password_hash):
+    def __init__(self, email, password_hash,group):
         
         self.email=email
         self.password_hash=password_hash
+        self.group_id=group
         self.username=email.split('@')[0]
         
     def is_authenticated():
@@ -68,13 +69,20 @@ class App(db.Model):
     link=db.Column(db.String(50), unique=True)
     desc=db.Column(db.String(50))
     creator_id=db.Column(db.Integer, db.ForeignKey('user.id'))
+    img_link=db.Column(db.String(50))
+    order_id=db.Column(db.Integer)
+    status=db.Column(db.Boolean)
+    click_num=db.Column(db.Integer)
+    beta=db.Column(db.Boolean)
+
 
     def __init__(self, name, link, desc, creator_id):
-        
         self.name=name
         self.link=link
         self.desc=desc
         self.creator_id=creator_id
+        self.status= True
+        self.beta= False
             
             
             
@@ -94,6 +102,7 @@ class Log(db.Model):
 #To create
 
 class  Note(db.Model):
+    __tablename__ = 'Note'
     
     id=db.Column(db.Integer, primary_key=True)
     content=db.Column(db.Text)
@@ -109,10 +118,12 @@ class Invites(db.Model):
     email=db.Column(db.String(25), unique=True)
     token = db.Column(db.String(50), unique=True)
     maker = db.Column(db.Integer)
+    group = db.Column(db.Integer)
     
-    def __init__(self, email, maker):
+    def __init__(self, email, maker,group):
         
         self.email=email
         self.maker=maker
+        self.group=group
         self.token=str(uuid.uuid4())
 

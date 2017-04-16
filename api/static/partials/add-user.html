@@ -8,8 +8,11 @@
              <form class="login-form box box-form" method="POST" name="login_form" action="/api/auth/register">
                     <div class="input-socket">
                         <input type="text" name="email" placeholder="User e-mail" required>
-                        
                     </div>
+                    <p>Select user permission group:</p>
+             <select name="group">
+                  <option ng-repeat="group in groups | orderBy:'-id'" value={{group.id}}>{{group.name}}</option>
+            </select>
                      <button type="submit" class='button blue pull-right'>Confirm</button>
              </form>
         </div>

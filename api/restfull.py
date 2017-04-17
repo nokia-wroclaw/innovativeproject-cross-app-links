@@ -2,13 +2,14 @@ from api import app
 from api.database import db
 from api.models import User, Group, App, Log
 from flask_restless import APIManager, ProcessingException
-from api.route import current_user
-
+from flask_login import current_user, login_fresh
+from flask import session
 
 
 def auth_func(*args, **kw):
-    if not current_user.is_authenticated:
-        raise ProcessingException(description='Not authenticated!', code=401)
+    if not login_fresh() and not current_user.is_authenticated:
+        if not 'user' in session:
+            raise ProcessingException(description='Not authenticated!', code=401)
 
 def get_logged_user(search_params=None, **kw):
     if search_params is None:

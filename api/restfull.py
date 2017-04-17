@@ -3,11 +3,12 @@ from api.database import db
 from api.models import User, Group, App, Log
 from flask_restless import APIManager, ProcessingException
 from flask_login import current_user
+from flask import session
 
 
 
 def auth_func(*args, **kw):
-    if not hasattr(current_user,'username'):
+    if not 'user' in session:
         raise ProcessingException(description='Not authenticated!', code=401)
 
 def get_logged_user(search_params=None, **kw):

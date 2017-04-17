@@ -100,10 +100,12 @@
             name: '',
             address: '',
             desc: '',
-            manageFill: function (name, link, desc) {
+            img_link: '',
+            manageFill: function (name, link, desc, img_link) {
                 this.name = name;
                 this.address = link;
                 this.desc = desc;
+                this.img_link = img_link
             },
             add: function () {
                 var img_link = $scope.clockDate.date();
@@ -129,7 +131,7 @@
                 var img_link = $scope.clockDate.date();
                 this.uploader.onBeforeUploadItem = function (item) {
                     item.formData.push({
-                        filename: img_link
+                        filename: this.img_link
                     });
                 }
                 this.uploader.uploadAll()

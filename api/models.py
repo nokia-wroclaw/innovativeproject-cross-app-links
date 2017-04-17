@@ -20,12 +20,13 @@ class User(UserMixin, db.Model):
     logs = db.relationship('Log', backref='author', lazy='dynamic')
     notes = db.relationship('Note', backref='owner', lazy='dynamic')
     
-    def __init__(self, email, password_hash,group):
+    def __init__(self, email, password_hash,group,date):
         
         self.email = email
         self.password_hash = password_hash
         self.group_id = group
         self.username = email.split('@')[0]
+        self.date = date
         
     def is_authenticated():
         return True
@@ -78,13 +79,14 @@ class App(db.Model):
     date = db.Column(db.TIMESTAMP)
 
 
-    def __init__(self, name, link, desc, creator_id):
+    def __init__(self, name, link, desc, creator_id,date):
         self.name = name
         self.link = link
         self.desc = desc
         self.creator_id = creator_id
         self.status = True
         self.beta = False
+        self.date = date
             
             
             
@@ -111,6 +113,12 @@ class  Note(db.Model):
     tag = db.Column(db.String(20))
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     date = db.Column(db.TIMESTAMP)
+
+    def __init__(self,content,tag,owner_id,date):
+        self.content = content
+        self.tag = tag
+        self.owner_id = owner_id
+        self.date = date
         
 #db.create_all()
 
@@ -124,12 +132,13 @@ class Invites(db.Model):
     group = db.Column(db.Integer)
     date = db.Column(db.TIMESTAMP)
     
-    def __init__(self, email, maker,group):
+    def __init__(self, email, maker,group,date):
         
         self.email = email
         self.maker = maker
         self.group = group
         self.token = str(uuid.uuid4())
+        self.date = date
 
 
 class Stats(db.Model):
@@ -142,7 +151,7 @@ class Stats(db.Model):
     clicks = db.Column(db.Integer)
 
 
-    def __init__(self, timestamp,users,apps.clicks)
+    def __init__(self, timestamp,users,apps.clicks):
 
     self.timestamp = timestamp
     self.users = users

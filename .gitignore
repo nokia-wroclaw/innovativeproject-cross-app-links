@@ -12,3 +12,4 @@ run.pyc
 alembic.ini
 api/__init__.pyc
 scripts/
+alembic/

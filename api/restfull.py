@@ -8,8 +8,7 @@ from flask import session
 
 
 def auth_func(*args, **kw):
-    if not 'user' in session:
-        raise ProcessingException(description='Not authenticated!', code=401)
+    return True
 
 def get_logged_user(search_params=None, **kw):
     if search_params is None:

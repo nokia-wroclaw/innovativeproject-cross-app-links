@@ -8,7 +8,7 @@ from flask import g
 
 
 def auth_func(*args, **kw):
-    if not hasattr(g,'user'):
+    if not hasattr(current_user, 'id') and current_user.is_authenticated():
         raise ProcessingException(description='Not authenticated!', code=401)
 
 def get_logged_user(search_params=None, **kw):

@@ -433,6 +433,10 @@ body {
       background: #2ea4d2; }
     .box.color-box.orange {
       background: #F4B759; }
+    .box.color-box.red {
+      background: #f55753; }
+    .box.color-box.lightgreen {
+      background: #10cfbd; }
     .box.color-box .date-time .main-date {
       font-size: 18px;
       font-weight: 800;
@@ -471,19 +475,34 @@ body {
       border-color: #F4B759; }
     .box.color-border-box.green {
       border-color: #3fce91; }
-  .box .site-stat .stat-number {
-    font-size: 56px;
-    font-weight: 400;
+  .box .site-stat {
+    position: relative;
     width: 100%;
-    text-align: center;
     float: left; }
-  .box .site-stat .stat-desc {
-    font-size: 14px;
-    font-weight: 400;
-    width: 100%;
-    text-align: center;
-    float: left;
-    color: #888; }
+    .box .site-stat.no-color .stat-desc {
+      opacity: 0.3; }
+    .box .site-stat .stat-icon {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 48px;
+      color: #000;
+      opacity: 0.07; }
+    .box .site-stat .stat-number {
+      font-size: 32px;
+      font-weight: 600;
+      width: 100%;
+      text-align: left;
+      float: left;
+      color: #34313d; }
+    .box .site-stat .stat-desc {
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      width: 100%;
+      text-align: left;
+      float: left;
+      color: #34313d; }
   .box.box-form {
     float: left;
     margin: 0; }

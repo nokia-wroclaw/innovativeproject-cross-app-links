@@ -521,6 +521,12 @@ body {
         &.orange {
             background: #F4B759;
         }
+        &.red {
+            background: #f55753;
+        }
+        &.lightgreen {
+            background: #10cfbd;
+        }
         .date-time {
             .main-date {
                 font-size: 18px;
@@ -576,20 +582,38 @@ body {
         }
     }
     .site-stat {
+        position: relative;
+        width: 100%;
+        float: left;
+        &.no-color{
+            .stat-desc{
+                opacity: 0.3;
+            }
+        }
+        .stat-icon {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 48px;
+            color: #000;
+            opacity: 0.07;
+        }
         .stat-number {
-            font-size: 56px;
-            font-weight: 400;
+            font-size: 32px;
+            font-weight: 600;
             width: 100%;
-            text-align: center;
+            text-align: left;
             float: left;
+            color: #34313d;
         }
         .stat-desc {
-            font-size: 14px;
-            font-weight: 400;
+            font-size: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
             width: 100%;
-            text-align: center;
+            text-align: left;
             float: left;
-            color: #888;
+            color: #34313d;
         }
     }
     &.box-form {

@@ -61,7 +61,8 @@ index_content_list = [
     'groups',
     'add-user',
     'settings',
-    'ver'
+    'ver',
+    'profile'
 ]
 
 #Login manager
@@ -83,39 +84,22 @@ def before_request():
 #-----------
 #ROUTING
 #-----------
-@app.route('/create_all')
-def create_all():
-    app1 = App('Lorem ipsum app', 'http://9gag.com', 'Lorem ipsum dolor sit amet.', 1)
-    app2 = App('Calculator', 'https://www.online-calculator.com','Fusce in urna sem.', 1)
-    app3 = App('Dropbox', 'http://www.dropbox.com/', 'Dropbox is a file hosting service.', 1)
-    app4 = App('YouTube', 'https://www.youtube.com', 'YouTube is a free video sharing website.', 1)
-    db.session.add(app1)
-    db.session.add(app2)
-    db.session.add(app3)
-    db.session.add(app4)
-    #db.session.commit()
-    #group1 = Group()
-    #group2 = Group()
-    #group3 = Group()
-    
-    #user1 = User()
-    #user2 = User()
-
 #Auth route
 # User verification
 @app.route('/api/auth', methods=['POST'])
 def auth():
     session.pop('user', None)
-    user = User.query.filter_by(email=request.form['email']).first()
+    data = request.get_json(force=True)
+    user = User.query.filter_by(email=data['email']).first()
     if user:
-        if sha256_crypt.verify(request.form['password'], user.password_hash):
+        if sha256_crypt.verify(data['password'], user.password_hash):
             login_user(user)
             session['user'] = user.username
-            return redirect('/')
+            return str(True)
         else:
-            return make_response(open('api/templates/login-page.html').read())
+            return str(False)
     else:
-        return make_response(open('api/templates/login-page.html').read())
+        return str(False)
 
 
 #Logout user and close session
@@ -135,7 +119,7 @@ def register():
         commitinvite(request.form['email'],current_user,request.form['group'])
         return redirect('/add-user')
     else:
-        return 'Error. Email already in use!'
+        return str(False)
 
 
 # #Confirm account
@@ -163,7 +147,11 @@ def remove():
         return 'Error. Email not found!'
 
 #Default templates for Flask route
+
 @app.route('/')
+def index():
+    return make_response(open('api/templates/login-page.html').read())
+
 @app.route('/<content>')
 @app.route('/<content>/<content_id>')
 def main(content='dashboard', content_id=None):

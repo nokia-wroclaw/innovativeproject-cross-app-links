@@ -3,9 +3,7 @@
     var app = angular.module('config', []);
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
-            .when('/', {
-                templateUrl: 'static/partials/dashboard.html'
-            }).when('/dashboard', {
+            .when('/dashboard', {
                 templateUrl: 'static/partials/dashboard.html'
             }).when('/stats', {
                 templateUrl: 'static/partials/stats.html'
@@ -27,6 +25,8 @@
                 templateUrl: 'static/partials/settings.html'
             }).when('/ver', {
                 templateUrl: 'static/partials/ver.html'
+            }).when('/profile/:userID', {
+                templateUrl: 'static/partials/profile.html'
             }).otherwise({
                 controller: function () {
                     window.location.replace(window.location);

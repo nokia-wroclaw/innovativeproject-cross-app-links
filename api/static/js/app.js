@@ -1,6 +1,6 @@
 (function () {
-    var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives', 'chart.js']);
-    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', function ($scope, restful, $location, $routeParams, $interval) {
+    var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives', 'chart.js', 'angularFileUpload']);
+    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', 'FileUploader', function ($scope, restful, $location, $routeParams, $interval, FileUploader) {
         /*Limits for lists*/
         $scope.limit = {
             users: 5,
@@ -91,7 +91,12 @@
         }, 3000)
 
         /*Applications methods*/
+
         $scope.newlink = {
+            uploader: new FileUploader({
+                url: 'api/upload',
+                formData: []
+            }),
             name: '',
             address: '',
             desc: '',
@@ -101,11 +106,19 @@
                 this.desc = desc;
             },
             add: function () {
+                var img_link = $scope.clockDate.date();
+                this.uploader.onBeforeUploadItem = function (item) {
+                    item.formData.push({
+                        filename: img_link
+                    });
+                }
+                this.uploader.uploadAll()
                 var post_object = {
                     name: this.name,
                     link: this.address,
                     desc: this.desc,
-                    creator_id: $scope.current_user.id
+                    creator_id: $scope.current_user.id,
+                    img_link: img_link
                 }
                 restful.post('app', post_object);
                 update.apps();
@@ -113,10 +126,18 @@
                 this.status = true;
             },
             update: function (app_id) {
+                var img_link = $scope.clockDate.date();
+                this.uploader.onBeforeUploadItem = function (item) {
+                    item.formData.push({
+                        filename: img_link
+                    });
+                }
+                this.uploader.uploadAll()
                 var post_object = {
                     name: this.name,
                     link: this.address,
                     desc: this.desc,
+                    img_link: img_link,
                 }
                 restful.update('app', app_id, post_object).then(function (response) {
                     var log_object = {
@@ -247,7 +268,7 @@
         };
 
 
-                    }]);
+                }]);
 
 
 }());

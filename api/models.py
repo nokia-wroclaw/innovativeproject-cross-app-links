@@ -76,11 +76,12 @@ class App(db.Model):
     beta=db.Column(db.Boolean)
 
 
-    def __init__(self, name, link, desc, creator_id):
+    def __init__(self, name, link, desc, creator_id, img_link):
         self.name=name
         self.link=link
         self.desc=desc
         self.creator_id=creator_id
+        self.img_link=img_link
         self.status= True
         self.beta= False
             

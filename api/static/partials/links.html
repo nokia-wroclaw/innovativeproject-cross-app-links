@@ -7,7 +7,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" ng-repeat='app in apps | orderBy : id : true | filter: {name: searchBy}'>
     <div class="box link-box">
         <div class="main-link-info">
-            <img src="../static/img/app-img/{{app.id}}.png">
+            <img src="../static/img/app-img/{{app.img_link}}.png">
             <h3 class="main-link-heading">{{app.name}}</h3>
         </div>
         <div class="main-link-href">
@@ -50,7 +50,7 @@
         <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>
 
         <button type="submit" class='button blue pull-right'>Confirm</button>
-        <span class='button pure pull-right in-row'>Upload icon</span>
+        <input type="file" nv-file-select="" uploader="newlink.uploader" requried>
     </form>
 </div>
 <div class="success-bar" ng-show="newlink.status">

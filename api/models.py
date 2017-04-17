@@ -127,3 +127,22 @@ class Invites(db.Model):
         self.group=group
         self.token=str(uuid.uuid4())
 
+
+class Stats(db.Model):
+    __tablename__ = 'Stats'
+
+    id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.TIMESTAMP)
+    users = db.Column(db.Integer)
+    apps = db.Column(db.Integer)
+    clicks = db.Column(db.Integer)
+
+
+    def __init__(self, timestamp,users,apps.clicks)
+
+    self.timestamp=timestamp
+    self.users=users
+    self.apps=apps
+    self.clicks=clicks
+
+

@@ -1,6 +1,6 @@
 (function () {
-    var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives']);
-    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', function ($scope, restful, $location, $routeParams, $interval) {
+    var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives', 'chart.js', 'angularFileUpload']);
+    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', 'FileUploader', function ($scope, restful, $location, $routeParams, $interval, FileUploader) {
         /*Limits for lists*/
         $scope.limit = {
             users: 5,
@@ -16,7 +16,11 @@
             },
             location: function () {
                 return $location.path().replace(/\//g, '').replace(/\-/g, ' ');
+            },
+            active: function () {
+
             }
+
         };
         /*Filter apps by params in a route*/
         $scope.filterParams = {
@@ -87,21 +91,36 @@
         }, 3000)
 
         /*Applications methods*/
+
         $scope.newlink = {
+            uploader: new FileUploader({
+                url: 'api/upload',
+                formData: []
+            }),
             name: '',
             address: '',
             desc: '',
-            manageFill: function (name, link, desc) {
+            img_link: '',
+            manageFill: function (name, link, desc, img_link) {
                 this.name = name;
                 this.address = link;
                 this.desc = desc;
+                this.img_link = img_link
             },
             add: function () {
+                var img_link = $scope.clockDate.date();
+                this.uploader.onBeforeUploadItem = function (item) {
+                    item.formData.push({
+                        filename: img_link
+                    });
+                }
+                this.uploader.uploadAll()
                 var post_object = {
                     name: this.name,
                     link: this.address,
                     desc: this.desc,
-                    creator_id: $scope.current_user.id
+                    creator_id: $scope.current_user.id,
+                    img_link: img_link
                 }
                 restful.post('app', post_object);
                 update.apps();
@@ -109,10 +128,20 @@
                 this.status = true;
             },
             update: function (app_id) {
+                if (this.uploader.queue.length > 0)
+                    this.img_link = $scope.clockDate.date();
+                var img_link = this.img_link;
+                this.uploader.onBeforeUploadItem = function (item) {
+                    item.formData.push({
+                        filename: img_link
+                    });
+                }
+                this.uploader.uploadAll()
                 var post_object = {
                     name: this.name,
                     link: this.address,
                     desc: this.desc,
+                    img_link: img_link,
                 }
                 restful.update('app', app_id, post_object).then(function (response) {
                     var log_object = {
@@ -183,6 +212,54 @@
                 //320
         };
 
+        /*Stats chart settings and data*/
+
+        $scope.stats = {
+            users: {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                series: ['Number of users'],
+                data: [[3, 7, 2, 10, 6]]
+            },
+            invitations: {
+                labels: ['Accepted', 'Unaccepted'],
+                data: [17, 5]
+            },
+            apps: {
+                labels: ['Yesterday', 'Today'],
+                series: ['Registered', 'Beta'],
+                data: [
+                    [65, 59],
+                    [28, 48]
+                  ]
+            },
+            components: {
+                labels: ['Usage'],
+                series: ['Iframe', 'JSON', 'Polymer'],
+                data: [
+                    [17],
+                    [3],
+                    [7]
+                  ]
+            }
+        }
+        $scope.datasetOverride = [{
+            yAxisID: 'y-axis-1'
+        }, {
+            yAxisID: 'y-axis-2'
+            }];
+        $scope.options = {
+            scales: {
+                yAxes: [
+                    {
+                        id: 'y-axis-1',
+                        type: 'linear',
+                        display: true,
+                        position: 'left'
+                    }
+                        ]
+            }
+        };
+
         /*Custom Scrollbar Config*/
         $scope.config = {
             autoHideScrollbar: true,
@@ -195,7 +272,7 @@
         };
 
 
-                    }]);
+                }]);
 
 
 }());

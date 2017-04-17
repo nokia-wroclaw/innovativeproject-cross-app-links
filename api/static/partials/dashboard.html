@@ -1,8 +1,37 @@
-<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pull-left">
+<div class="col-lg-4 col-md-12">
+    <div class="box color-box lightgreen">
+        <div class="site-stat">
+            <span class="stat-desc">Applications</span>
+            <span class="stat-number">{{apps.length}}</span>
+            <span class="stat-icon glyphicon glyphicon-link"></span>
+        </div>
+    </div>
+</div>
 
+<div class="col-lg-4 col-md-12">
+    <div class="box color-box green">
+        <div class="site-stat">
+            <span class="stat-desc">Registered users</span>
+            <span class="stat-number">{{users.length}}</span>
+            <span class="stat-icon glyphicon glyphicon-user"></span>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-md-12">
+    <div class="box color-box blue">
+        <div class="site-stat">
+            <span class="stat-desc">Components in use</span>
+            <span class="stat-number">17</span>
+            <span class="stat-icon glyphicon glyphicon-tasks"></span>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pull-left">
     <div class="box link-box" ng-repeat='app in apps | orderBy : id : true | limitTo: 3'>
         <div class="main-link-info">
-            <img src="../static/img/app-img/{{app.id}}.png">
+            <img src="../static/img/app-img/{{app.img_link}}.png">
             <h3 class="main-link-heading">{{app.name}}</h3>
         </div>
         <a class="settings-icon" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
@@ -40,7 +69,7 @@
         <div class="date-time">
             <span class="main-date">{{clockDate.date() | date: 'longDate'}}</span>
             <span class="main-time">{{clockDate.time()}}</span>
-            <span class="time-zone">{{clockDate.date() | date: 'Z'}}</span>
+            <span class="time-zone">{{clockDate.date() | date: 'EEEE'}}</span>
         </div>
     </div>
     <div class="box image-box">
@@ -50,24 +79,6 @@
 </div>
 
 <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 pull-left">
-    <div class="row">
-        <div class="col-lg-6 col-md-12 row-buried">
-            <div class="box color-border-box blue">
-                <div class="site-stat">
-                    <span class="stat-number">{{apps.length}}</span>
-                    <span class="stat-desc">Registered applications</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-12 row-buried">
-            <div class="box color-border-box green">
-                <div class="site-stat">
-                    <span class="stat-number">17</span>
-                    <span class="stat-desc">Components in use</span>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="box box-table">
         <table class="table ">
             <header>

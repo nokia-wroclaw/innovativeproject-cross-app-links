@@ -49,30 +49,16 @@ body {
   height: auto;
   background: #fafafa;
   box-sizing: border-box;
-  box-shadow: 0 3px 7px #e6e6e6;
+  box-shadow: 0 1px 3px #e6e6e6;
   position: relative; }
   .main-header .header-land {
-    background: url(../img/header-land.jpg);
+    background: #2ea4d2 url(../img/header-land.png);
     height: 180px;
     overflow: hidden;
     box-sizing: border-box;
     padding: 20px;
     position: relative;
     width: 100%; }
-    .main-header .header-land .partial-name {
-      color: #fff;
-      font-size: 26px;
-      font-weight: 300;
-      float: left;
-      text-align: left;
-      width: auto;
-      position: absolute;
-      bottom: 20px;
-      left: 20px; }
-      .main-header .header-land .partial-name .loc-icon {
-        margin-right: 20px; }
-      .main-header .header-land .partial-name .location-name::first-letter {
-        text-transform: uppercase; }
   .main-header .header-cell {
     height: 90px; }
     .main-header .header-cell .site-name {
@@ -93,14 +79,14 @@ body {
         opacity: 1;
         box-sizing: border-box;
         height: 90px;
-        background: #2ea4d2;
+        background: #403c4b;
         font-size: 16px;
         text-transform: uppercase;
         padding-top: 35px;
         font-weight: 800;
         text-align: center; }
         .main-header .header-cell .site-name a:hover {
-          background: #2ea4d2;
+          background: #403c4b;
           color: #F0F0F0; }
     .main-header .header-cell .menu-toggle {
       color: #e3e3e3;
@@ -187,6 +173,20 @@ body {
               .main-header .header-cell .user-section .user-menu ul li a .glyphicon {
                 font-size: 11px;
                 margin-right: 15px; }
+    .main-header .header-cell .header-nav-icon {
+      margin-right: 60px;
+      float: right; }
+      .main-header .header-cell .header-nav-icon a {
+        margin-left: 20px;
+        float: left;
+        color: #e3e3e3;
+        font-size: 24px;
+        box-sizing: border-box;
+        height: 100%;
+        padding: 30px 20px; }
+        .main-header .header-cell .header-nav-icon a:hover {
+          color: #ddd;
+          cursor: pointer; }
 
 .main-navigation {
   position: fixed;
@@ -248,15 +248,55 @@ body {
   padding: 20px 10px;
   box-sizing: border-box; }
 
+.user-profile-main {
+  padding: 20px; }
+  .user-profile-main .user-profile-avatar {
+    float: left;
+    display: inline-block;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    overflow: hidden; }
+    .user-profile-main .user-profile-avatar img {
+      width: 100%; }
+  .user-profile-main .user-profile-info {
+    float: left;
+    display: inline-block;
+    color: #34313d;
+    margin-left: 40px; }
+    .user-profile-main .user-profile-info .user-profile-username {
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: 800;
+      clear: both;
+      float: left;
+      width: 100%; }
+    .user-profile-main .user-profile-info .user-profile-usergroup {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #8a849c;
+      font-weight: 400;
+      clear: both;
+      float: left;
+      width: 100%; }
+    .user-profile-main .user-profile-info .user-profile-email {
+      margin-top: 10px;
+      float: left;
+      color: #b3afbe; }
+      .user-profile-main .user-profile-info .user-profile-email .glyphicon {
+        color: #3fce91;
+        margin-right: 20px; }
+
 /*BOX STYLESHEET*/
 .box {
   padding: 20px;
   box-sizing: border-box;
   background: #fafafa;
-  box-shadow: 0 3px 7px #e6e6e6;
+  box-shadow: 0 1px 3px #e6e6e6;
   margin-bottom: 20px;
   width: 100%;
   float: left;
+  border-radius: 3px;
   overflow: hidden;
   position: relative; }
   .box header {
@@ -295,9 +335,7 @@ body {
       .box.link-box .main-link-info img {
         float: left;
         display: inline-block;
-        width: 45px;
-        height: 45px;
-        border-radius: 100%; }
+        width: 45px; }
       .box.link-box .main-link-info .main-link-heading {
         text-transform: uppercase;
         font-weight: 800;
@@ -391,6 +429,14 @@ body {
     box-sizing: border-box; }
     .box.color-box.green {
       background: #3fce91; }
+    .box.color-box.blue {
+      background: #2ea4d2; }
+    .box.color-box.orange {
+      background: #F4B759; }
+    .box.color-box.red {
+      background: #f55753; }
+    .box.color-box.lightgreen {
+      background: #10cfbd; }
     .box.color-box .date-time .main-date {
       font-size: 18px;
       font-weight: 800;
@@ -410,6 +456,10 @@ body {
       width: 100%;
       text-align: center;
       float: left; }
+    .box.color-box .site-stat .stat-number {
+      color: #fff; }
+    .box.color-box .site-stat .stat-desc {
+      color: #fff; }
   .box.image-box {
     padding: 0;
     border: 0;
@@ -425,19 +475,34 @@ body {
       border-color: #F4B759; }
     .box.color-border-box.green {
       border-color: #3fce91; }
-    .box.color-border-box .site-stat .stat-number {
-      font-size: 56px;
-      font-weight: 800;
+  .box .site-stat {
+    position: relative;
+    width: 100%;
+    float: left; }
+    .box .site-stat.no-color .stat-desc {
+      opacity: 0.3; }
+    .box .site-stat .stat-icon {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 48px;
+      color: #000;
+      opacity: 0.07; }
+    .box .site-stat .stat-number {
+      font-size: 32px;
+      font-weight: 600;
       width: 100%;
-      text-align: center;
-      float: left; }
-    .box.color-border-box .site-stat .stat-desc {
-      font-size: 14px;
-      font-weight: 400;
-      width: 100%;
-      text-align: center;
+      text-align: left;
       float: left;
-      color: #888; }
+      color: #34313d; }
+    .box .site-stat .stat-desc {
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      width: 100%;
+      text-align: left;
+      float: left;
+      color: #34313d; }
   .box.box-form {
     float: left;
     margin: 0; }
@@ -446,10 +511,19 @@ body {
       float: left;
       width: 100%;
       box-sizing: border-box;
-      padding: 10px;
-      border-radius: 3px;
-      border: 1px solid #e3e3e3;
-      margin-bottom: 20px; }
+      padding: 10px 0px;
+      border: 0;
+      background: transparent;
+      border-bottom: 2px solid #e3e3e3;
+      margin-bottom: 20px;
+      transition: 0.3s ease; }
+      .box.box-form input[type=text]:focus,
+      .box.box-form textarea:focus {
+        padding-top: 15px;
+        padding-bottom: 5px;
+        outline: none;
+        border-color: #2ea4d2;
+        transition: 0.3s ease; }
     .box.box-form textarea {
       height: 180px;
       resize: none; }
@@ -458,15 +532,22 @@ body {
     box-shadow: none; }
 
 .single-input {
-  width: 240px; }
+  width: 340px; }
   .single-input input[type=text] {
-    display: block;
-    width: 100%;
+    float: right;
     box-sizing: border-box;
-    padding: 10px;
-    border-radius: 3px;
-    border: 1px solid #e3e3e3;
-    margin-bottom: 20px; }
+    padding: 10px 0px;
+    border: 0;
+    background: transparent;
+    border-bottom: 2px solid #e3e3e3;
+    margin-bottom: 20px;
+    transition: 0.3s ease; }
+    .single-input input[type=text]:focus {
+      padding-top: 15px;
+      padding-bottom: 5px;
+      outline: none;
+      border-color: #2ea4d2;
+      transition: 0.3s ease; }
 
 .row .row-buried {
   padding: 0; }
@@ -518,6 +599,10 @@ body {
 .no-box-el {
   margin-bottom: 20px; }
 
+.no-stylus {
+  background: none;
+  box-shadow: none; }
+
 .success-bar {
   background: #3fce91;
   position: fixed;
@@ -533,33 +618,5 @@ body {
   padding: 20px;
   box-sizing: border-box;
   z-index: 105; }
-
-  select {
-  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50px' height='50px'><polyline points='46.139,15.518 25.166,36.49 4.193,15.519'/></svg>");
-  background-color:#2ea4d2;
-  background-repeat:no-repeat;
-  background-position: right 10px top 15px;
-  background-size: 15px 15px;
-  color:white;
-  padding:10px;
-  width:auto;
-  text-align:center;
-  text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
-  border-radius:3px;
-  -webkit-border-radius:3px;
-  -webkit-appearance: none;
-  border:0;
-  outline:0;
-  -webkit-transition:0.3s ease all;
-     -moz-transition:0.3s ease all;
-      -ms-transition:0.3s ease all;
-       -o-transition:0.3s ease all;
-          transition:0.3s ease all;
-}
-
-select:focus, select:active {
-  border:0;
-  outline:0;
-}
 
 /*# sourceMappingURL=main.css.map */

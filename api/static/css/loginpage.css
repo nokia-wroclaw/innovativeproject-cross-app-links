@@ -4,34 +4,153 @@ body {
 }
 
 body {
-    background: #34313d url(../img/loginpage/background.png) center no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
     font-family: 'Lato';
+    background: #fff;
 }
 
-.login-container {
-    width: 330px;
+.welcome-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    background: #34313d;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.welcome-container>.main-landing-menu {
+    margin-top: 40px;
+}
+
+.welcome-container>.main-landing-menu>ul>li>a {
+    display: block;
+    color: #f0f0f0;
+    box-sizing: border-box;
+    padding-top: 15px;
+}
+
+.welcome-container>.main-landing-menu>ul>li>a.logo {
+    padding: 0;
+    text-align: center;
+}
+
+.welcome-container>header {
+    margin-top: 10vh;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    position: relative;
+    margin-bottom: 15vh;
+}
+
+.welcome-container>header>h1,
+.welcome.container>header>h2 {
+    color: #f0f0f0;
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.welcome-container>header>h1 {
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 3.5vw;
+}
+
+.welcome-container>header>h2 {
+    font-weight: 300;
+    color: #ccc;
+    font-size: 2vw;
+}
+
+.welcome-container>header>.button {
     margin: 0 auto;
-    margin-top: 28vh;
+    margin-top: 90px;
+    width: 35%;
+    min-width: 300px;
+    max-width: 500px;
+    font-size: 26px;
+    font-weight: 500;
     position: absolute;
     left: 0;
     right: 0;
+    padding: 25px 15px;
+    border-bottom: 3px solid #32a474;
 }
 
-.login-container>h1 {
-    margin: 20px 0;
+.welcome-container>.login-overflow {
+    margin: 0 auto;
+    width: 40%;
+    min-width: 300px;
+    position: relative;
+}
+
+.welcome-container>.login-overflow>.user-section {
+    width: 100%;
+    float: left;
+}
+
+.welcome-container>.login-overflow>.user-section>.logged-as {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 15px;
+    margin-bottom: 30px;
+    text-align: center;
+    float: left;
+    color: #fff;
+}
+
+.welcome-container>.login-overflow>.user-section>.logged-as>span {
+    color: #b6b0c8;
+    font-weight: 800;
+}
+
+.welcome-container>.login-overflow>.user-section>a.button {
+    width: 100%;
+    float: left;
+    opacity: 1;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.welcome-container>.login-overflow>.user-section>a.button:hover {
+    opacity: 0.8;
+}
+
+.welcome-container>.login-overflow>header>h1 {
+    margin: 0;
+    margin-bottom: 20px;
     color: white;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 24px;
 }
 
-.login-container>.login-form {
-    float: left;
-    width: 100%;
+.welcome-container>.login-overflow>header>h1>span {
+    float: right;
+    font-size: 12px;
+    font-weight: 400;
+    color: #f55753;
+    position: relative;
+    top: 8px;
 }
 
-.login-container>.login-form>.input-socket {
+.welcome-container>.login-overflow>.login-form {
+    background: none;
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+    padding: 0;
+    border-radius: 3px;
+}
+
+.welcome-container>.login-overflow>.login-form>.input-socket {
     width: 100%;
     box-sizing: border-box;
     float: left;
@@ -43,10 +162,10 @@ body {
     position: relative;
 }
 
-.login-container>.login-form>.input-socket>input[type="email"],
-.login-container>.login-form>.input-socket>input[type="password"],
-.login-container>.login-form>.input-socket>.input-icon,
-.login-container>.login-form>input[type="submit"] {
+.welcome-container>.login-overflow>.login-form>.input-socket>input[type="text"],
+.welcome-container>.login-overflow>.login-form>.input-socket>input[type="password"],
+.welcome-container>.login-overflow>.login-form>.input-socket>.input-icon,
+.welcome-container>.login-overflow>.login-form>input[type="submit"] {
     float: right;
     width: 85%;
     padding: 20px;
@@ -64,8 +183,8 @@ body {
     transition: 0.3s ease all;
 }
 
-.login-container>.login-form>.input-socket>input[type="email"]:focus,
-.login-container>.login-form>.input-socket>input[type="password"]:focus {
+.welcome-container>.login-overflow>.login-form>.input-socket>input[type="text"]:focus,
+.welcome-container>.login-overflow>.login-form>.input-socket>input[type="password"]:focus {
     width: 100%;
     border: 0;
     outline: none;
@@ -73,13 +192,13 @@ body {
     transition: 0.3s ease all;
 }
 
-.login-container>.login-form>.input-socket>input[type="email"]:focus + .input-icon,
-.login-container>.login-form>.input-socket>input[type="password"]:focus + .input-icon {
+.welcome-container>.login-overflow>.login-form>.input-socket>input[type="text"]:focus + .input-icon,
+.welcome-container>.login-overflow>.login-form>.input-socket>input[type="password"]:focus + .input-icon {
     transform: translateX(-100%);
     transition: 0.4s ease all;
 }
 
-.login-container>.login-form>.input-socket>.input-icon {
+.welcome-container>.login-overflow>.login-form>.input-socket>.input-icon {
     position: absolute;
     text-align: center;
     width: 15%;
@@ -90,58 +209,160 @@ body {
     transition: 0.4s ease all;
 }
 
-.login-container>.login-form>.input-socket>input::-webkit-input-placeholder {
+.welcome-container>.login-overflow>.login-form>.input-socket>input::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     color: #b6b0c8;
 }
 
-.login-container>.login-form>.input-socket>input::-moz-placeholder {
+.welcome-container>.login-overflow>.login-form>.input-socket>input::-moz-placeholder {
     /* Firefox 19+ */
     color: #b6b0c8;
 }
 
-.login-container>.login-form>.input-socket>input:-ms-input-placeholder {
+.welcome-container>.login-overflow>.login-form>.input-socket>input:-ms-input-placeholder {
     /* IE 10+ */
-    color: pink;
+    color: #b6b0c8;
 }
 
-.login-container>.login-form>.input-socket>input:-moz-placeholder {
+.welcome-container>.login-overflow>.login-form>.input-socket>input:-moz-placeholder {
     /* Firefox 18- */
     color: #b6b0c8;
 }
 
-.login-container>.login-form>input[type="submit"] {
+.welcome-container>.login-overflow>.login-form>input[type="submit"] {
     padding: 8px 0;
     float: right;
-    background: #D45A5A;
+    background: #2ea4d2;
     color: white;
     width: 100px;
     height: 40px;
     margin-bottom: 20px;
 }
 
-.login-container>.login-form>input[type="submit"]:hover {
+.welcome-container>.login-overflow>.login-form>input[type="submit"]:hover {
     cursor: poiner;
 }
 
-.login-container>.login-form>.form-link {
+.welcome-container>.login-overflow>.login-form>.form-link {
     font-size: 14px;
     font-weight: 400;
     float: left;
 }
 
-.login-container>.login-form>.form-link.forgotten-pass {
+.welcome-container>.login-overflow>.login-form>.form-link.forgotten-pass {
     margin: 8px 0;
 }
 
-.login-container>.login-form>.form-link.new-account {
+.welcome-container>.login-overflow>.login-form>.form-link.new-account {
     text-align: center;
     width: 100%;
 }
 
-.login-container>.login-form>.form-link>a:link,
-.login-container>.login-form>.form-link>a:visited,
-.login-container>.login-form>.form-link>a:active {
-    color: rgb(130, 106, 200);
+.welcome-container>.login-overflow>.login-form>.form-link>a:link,
+.welcome-container>.login-overflow>.login-form>.form-link>a:visited,
+.welcome-container>.login-overflow>.login-form>.form-link>a:active {
+    color: #b6b0c8;
     display: block;
+}
+
+.main-application-container {
+    background: #fff;
+    padding: 35px;
+}
+
+.main-application-container .main-app-link {
+    padding: 0 position: relative;
+    height: 250px;
+    margin-bottom: 50px;
+}
+
+.main-application-container .main-app-link>header>.link-img {
+    margin: 0 auto;
+    text-align: center;
+    height: 60px;
+    overflow: hidden;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.main-application-container .main-app-link>header>.link-name {
+    font-size: 1.2vw;
+    font-weight: 300;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 20px;
+    float: left;
+}
+
+.main-application-container .main-app-link>header>.link-img>img {
+    height: 100%;
+}
+
+.main-application-container .main-app-link>.link-desc {
+    width: 100%;
+    float: left;
+    font-weight: 300;
+    color: #999;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1vw;
+}
+
+.main-application-container .main-app-link>.manage-area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    float: left;
+    width: 100%;
+}
+
+.main-application-container .main-app-link>.manage-area>a {
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
+    color: #32a474;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main-application-container .main-app-link>.manage-area>a>.glyphicon {
+    margin-right: 20px;
+}
+
+
+/*Loading*/
+
+.loadingForm {
+    display: block;
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    top: 300px;
+    background: transparent;
+    box-sizing: border-box;
+    border: 6px solid white;
+    border-radius: 7px;
+    animation: spinner infinite 0.7s linear;
+    transition: 0.4s ease;
+}
+
+@keyframes spinner {
+    from {
+        transform: rotateZ(0);
+        border-width: 7px;
+        opacity: 0.1;
+        border-radius: 7px;
+    }
+    to {
+        transform: rotateZ(360deg);
+        border-width: 1px;
+        opacity: 0.05;
+        border-radius: 100%;
+    }
 }

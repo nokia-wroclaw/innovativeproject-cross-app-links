@@ -151,11 +151,11 @@ class Stats(db.Model):
     clicks = db.Column(db.Integer)
 
 
-    def __init__(self, timestamp,users,apps.clicks):
+    def __init__(self, timestamp,users,apps,clicks):
 
-    self.timestamp = timestamp
-    self.users = users
-    self.apps = apps
-    self.clicks = clicks
+        self.timestamp = timestamp
+        self.users = users
+        self.apps = apps
+        self.clicks = clicks
 
 

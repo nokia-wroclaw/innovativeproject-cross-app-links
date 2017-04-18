@@ -1,5 +1,19 @@
 from api import app
+from api.database import db
+from flask_testing import TestCase
 import unittest
+
+class BaseTestCase(TestCase):
+    def create_app(self):
+        app.config.from_object('config.TestConfig')
+        return app
+
+    def setUp(self):
+        db.create_all()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
 
 class FlaskTestCase(unittest.TestCase):
     def test_index(self):
@@ -66,7 +80,11 @@ class FlaskTestCase(unittest.TestCase):
         tester = app.test_client(self)
         response = tester.get('/', content_type='html/text')
         self.assertTrue(b'Sign in' in response.data)
-    
+
+    def test_register(self):
+        tester = app.test_client(self)
+        response = tester.get('/register', follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
 
 
 

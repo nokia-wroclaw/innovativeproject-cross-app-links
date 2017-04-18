@@ -169,7 +169,7 @@ def setnewpassword():
         updatepassword(temp,givenpassword)
         return redirect('/')
     else:
-        return make_response(open('api/templates/create-user.html').read())
+        return make_response(open('api/templates/create-password.html').read())
 
 # Delete user
 @app.route('/api/auth/remove', methods=['POST'])

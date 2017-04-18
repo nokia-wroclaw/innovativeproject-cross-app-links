@@ -107,7 +107,7 @@
                 this.address = link;
                 this.desc = desc;
                 this.img_link = img_link;
-                this.order_id = order_id
+                this.order_id = order_id;
             },
             add: function () {
                 var img_link = $scope.clockDate.date();
@@ -212,7 +212,7 @@
             },
             status: false
         };
-
+        $scope.orderArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         /*
         If you use some variables in a couple places you probably 
         want to reset them when you leave a page. That's why you should put
@@ -237,11 +237,11 @@
             resl: document.body.innerWidth,
             onchange: function () {
 
-            }
-            //1200
-            //768
-            //480
-            //320
+                }
+                //1200
+                //768
+                //480
+                //320
         };
 
         /*Stats chart settings and data*/

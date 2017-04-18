@@ -50,10 +50,8 @@
         <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
         <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
         <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>
+        <select ng-model="newlink.order_id" ng-options="i as i for i in orderArray" required>
 
-        <select name="order" ng-model="newlink.order_id" required>
-            <option selected value="newlink.order_id">{{newlink.order_id}}</option>
-            <option ng-repeat="i in apps" value="{{$index + 1}}">{{$index + 1}}</option>
         </select>
 
         <button type="submit" class='button blue pull-right'>Confirm</button>

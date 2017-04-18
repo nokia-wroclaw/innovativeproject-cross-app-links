@@ -89,17 +89,16 @@ def before_request():
 @app.route('/api/auth', methods=['POST'])
 def auth():
     session.pop('user', None)
-    data = request.get_json(force=True)
-    user = User.query.filter_by(email=data['email']).first()
+    user = User.query.filter_by(email=request.form['email']).first()
     if user:
-        if sha256_crypt.verify(data['password'], user.password_hash):
+        if sha256_crypt.verify(request.form['password'], user.password_hash):
             login_user(user)
             session['user'] = user.username
-            return str(True)
+            return redirect('/')
         else:
-            return str(False)
+            return make_response(open('api/templates/login-page.html').read())
     else:
-        return str(False)
+        return make_response(open('api/templates/login-page.html').read())
 
 
 #Logout user and close session

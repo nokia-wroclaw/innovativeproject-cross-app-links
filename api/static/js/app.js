@@ -101,11 +101,13 @@
             address: '',
             desc: '',
             img_link: '',
-            manageFill: function (name, link, desc, img_link) {
+            order_id: '',
+            manageFill: function (name, link, desc, img_link, order_id) {
                 this.name = name;
                 this.address = link;
                 this.desc = desc;
-                this.img_link = img_link
+                this.img_link = img_link;
+                this.order_id = order_id
             },
             add: function () {
                 var img_link = $scope.clockDate.date();
@@ -144,7 +146,10 @@
                     link: this.address,
                     desc: this.desc,
                     img_link: img_link,
+                    order_id: this.order_id
                 }
+
+                console.log(this.order_id);
                 restful.update('app', app_id, post_object).then(function (response) {
                     var log_object = {
                         content: 'A link #' + app_id + ' was updated',

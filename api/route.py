@@ -2,9 +2,9 @@ from flask import Flask, make_response, jsonify, render_template, redirect, sess
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from passlib.hash import sha256_crypt
 from api import app
-from api.models import User, Group, App, Log, Invites
+from api.models import User, Group, App, Log, Invites, Reset
 from api.database import db
-from api.mail import send_email, send_email_register
+from api.mail import send_email, send_email_register, send_email_reset
 
 
 
@@ -29,6 +29,20 @@ def commitinvite(email,maker,group):
     send_email_register(maker.email,receiver)
 
 
+def askforreset(email):
+    new = Reset(email)
+    db.session.add(new)
+    db.session.commit()
+    receiver = [email]
+    send_email_reset(receiver)
+
+def updatepassword(token,userpassword):
+    new = Reset.query.filter_by(token = token).first()
+    useremail = new.email
+    user = User.query.filter_by(email=useremail).first()
+    user.password_hash = sha256_crypt.encrypt(userpassword)
+    db.session.commit()
+    removereset(useremail)
 
 
 def removeuser(email, current):
@@ -39,10 +53,13 @@ def removeuser(email, current):
     db.session.delete(sadman)
     db.session.commit()
 
-
-
 def removeinvite(email):
     sadman = Invites.query.filter_by(email = email).first()
+    db.session.delete(sadman)
+    db.session.commit()
+
+def removereset(email):
+    sadman = Reset.query.filter_by(email = email).first()
     db.session.delete(sadman)
     db.session.commit()
 
@@ -121,7 +138,7 @@ def register():
         return str(False)
 
 
-# #Confirm account
+# Confirm account
 @app.route('/api/auth/setpassword', methods=['GET','POST'])
 def setpassword():
     if request.method == 'POST':
@@ -132,6 +149,27 @@ def setpassword():
     else:
         return make_response(open('api/templates/create-user.html').read())
 
+# Ask for reset password link
+@app.route('/api/auth/resetpassword', methods=['GET','POST'])
+def resetpassword():
+    if request.method == 'POST':
+        givenemail = request.form['email']
+        askforreset(givenemail)
+        return redirect('/')
+    else:
+        return make_response(open('api/templates/reset-password.html').read())
+
+
+# Set new password
+@app.route('/api/auth/setnewpassword', methods=['GET','POST'])
+def setnewpassword():
+    if request.method == 'POST':
+        temp = request.args.get('token')
+        givenpassword = request.form['password']
+        updatepassword(temp,givenpassword)
+        return redirect('/')
+    else:
+        return make_response(open('api/templates/create-user.html').read())
 
 # Delete user
 @app.route('/api/auth/remove', methods=['POST'])

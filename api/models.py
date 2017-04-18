@@ -141,6 +141,20 @@ class Invites(db.Model):
         self.date = date
 
 
+class Reset(db.Model):
+    __tablename__ = 'Reset'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(25), unique=True)
+    token = db.Column(db.String(50), unique=True)
+    
+    def __init__(self, email):
+        
+        self.email = email
+        self.token = str(uuid.uuid4())
+
+
+
 class Stats(db.Model):
     __tablename__ = 'Stats'
 

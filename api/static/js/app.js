@@ -122,8 +122,10 @@
                     creator_id: $scope.current_user.id,
                     img_link: img_link
                 }
-                restful.post('app', post_object);
-                update.apps();
+                restful.post('app', post_object).then(function (response) {
+                    update.apps();
+                });
+
                 this.clear();
                 this.status = true;
             },
@@ -150,14 +152,38 @@
                         author_id: $scope.current_user.id
                     }
                     restful.post('log', log_object);
+                    update.apps();
+                    update.logs();
                 });
 
-                update.apps();
-                update.logs();
+
                 this.clear();
                 this.status = true;
                 $location.path('/links').replace();
             },
+
+            hide: function (app_id, app_status) {
+                var confirmResult = confirm("Do you want to change visibility of this app?");
+                if (confirmResult) {
+
+                    var hide = {
+                        status: !app_status
+
+                    }
+                    restful.update('app', app_id, hide).then(function (response) {
+                        var log_object = {
+                            content: 'A link #' + app_id + ' was updated',
+                            data_time: 'CURRENT_TIMESTAMP',
+                            author_id: $scope.current_user.id
+                        }
+                        restful.post('log', log_object);
+                        update.apps();
+                        update.logs();
+                    });
+
+                };
+            },
+
             delete: function (app_id) {
                 var confirmResult = confirm("Do you want to remove this app?");
                 if (confirmResult) {
@@ -168,9 +194,10 @@
                             author_id: $scope.current_user.id
                         }
                         restful.post("log", log_object);
+                        update.apps();
+                        update.logs();
                     });
-                    update.apps();
-                    update.logs();
+
                 }
             },
             clear: function () {
@@ -205,11 +232,11 @@
             resl: document.body.innerWidth,
             onchange: function () {
 
-                }
-                //1200
-                //768
-                //480
-                //320
+            }
+            //1200
+            //768
+            //480
+            //320
         };
 
         /*Stats chart settings and data*/

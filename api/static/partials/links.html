@@ -18,6 +18,8 @@
         </div>
         <div class="bottom-nav">
             <a class="creator-link pull-left text-left" href="profile/{{app.creator.id}}">{{app.creator.username}}</a>
+            <a class="button small  margined pull-right" ng-class="app.status ? 'green' : 'pure'" href="#" ng-click="newlink.hide(app.id,app.status)">
+                <span class="glyphicon" ng-class="app.status ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"></span></a>
             <a class="button blue small  margined pull-right" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
             <a class="button red small pull-right" href="#" ng-click="newlink.delete(app.id)"><span class="glyphicon glyphicon-trash"></span></a>
         </div>

@@ -10,6 +10,15 @@ class BaseTestCase(TestCase):
 
     def setUp(self):
         db.create_all()
+        app1 = App('Lorem ipsum app', 'http://9gag.com', 'Lorem ipsum dolor sit amet.', 1)
+        app2 = App('Calculator', 'https://www.online-calculator.com', 'Fusce in urna sem.', 1)
+        app3 = App('Dropbox', 'http://www.dropbox.com/', 'Dropbox is a file hosting service.', 1)
+        app4 = App('YouTube', 'https://www.youtube.com', 'YouTube is a free video sharing website.', 1)
+        db.session.add(app1)
+        db.session.add(app2)
+        db.session.add(app3)
+        db.session.add(app4)
+        db.session.commit()
 
     def tearDown(self):
         db.session.remove()

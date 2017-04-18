@@ -56,7 +56,7 @@
             </form>
             <span class="loadingForm" ng-show="loginFormLoading"></span>
         </div>
-        <div class="login-overflow" ng-show="current_user.id">
+        <div class="login-overflow" ng-if="current_user.id">
             <div class="user-section">
                 <h4 class="logged-as">Logged as <span>@{{current_user.username}}</span></h4>
                 <a href="/dashboard" target="_self" class="button blue">Dashboard</a>

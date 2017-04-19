@@ -47,7 +47,7 @@ def send_email_register(sender,recip):
             sender=admin,
             url=url,
             subject=subject,
-            buttonText="Sign up",
+            buttonText="Register",
             headerText=headerText,
             freeText=freeText,
             userTextBold=userTextBold,

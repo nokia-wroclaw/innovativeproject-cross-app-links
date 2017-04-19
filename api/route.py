@@ -24,6 +24,8 @@ def commituser(token,userpassword):
         db.session.add(new)
         db.session.commit()
         removeinvite(useremail)
+        if not User.query.filter_by(email = useremail).first():
+            return "Error while creating user."
     else:
         return "Error invite not found."
 

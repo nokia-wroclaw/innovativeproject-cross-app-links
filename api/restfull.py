@@ -43,7 +43,7 @@ manager.create_api(Group, exclude_columns=['users.password_hash', 'users.group_i
 manager.create_api(App, exclude_columns=['creator.password_hash'], methods=['GET', 'POST', 'DELETE','PUT'], preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]), results_per_page=0)
 
 # /api/v2/app , /api/v2/app/<int>
-manager.create_api(App, include_columns=['name','link','desc', 'img_link', 'order_id'], url_prefix='/api/v2', methods=['GET'],
+manager.create_api(App, include_columns=['id','name','link','desc', 'img_link', 'order_id'], url_prefix='/api/v2', methods=['GET'],
 preprocessors=dict(GET_SINGLE=[get_app_visible], GET_MANY=[get_app_visible]), results_per_page=0)
 
 # /api/log , /api/log/<int>

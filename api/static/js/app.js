@@ -135,11 +135,9 @@
             },
             update: function (app_id) {
                 if (this.uploader.queue.length > 0) {
-                    alert(this.uploader.queue.length)
                     this.img_link = $scope.clockDate.date();
                 }
                 var img_link = this.img_link;
-                alert(img_link);
                 this.uploader.onBeforeUploadItem = function (item) {
                     item.formData.push({
                         filename: img_link

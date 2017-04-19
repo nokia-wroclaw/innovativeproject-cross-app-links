@@ -1,8 +1,8 @@
 <link rel="import" href="/static/bower_components/polymer/polymer.html">
 <link rel="import" href="/static/bower_components/iron-ajax/iron-ajax.html">
+<script src="/static/bower_components/color-thief/dist/color-thief.min.js"></script>
 
-<dom-module id="web-component">
-
+<dom-module id="web-component" id='component'>
     <template>
         <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/web-components/css/component.css">
@@ -13,14 +13,12 @@
                 <button class="burger-icon"><span class="glyphicon glyphicon-th"></span> </button>
                 <section class="component-overflow c-hidden">
                     <ul class="component-ul">
-                        <template is="dom-repeat" items="{{response.objects}}">
+                        <template id="elements" is="dom-repeat" items="{{response.objects}}">
                             <li>
                                 <div class="option-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
                                 <a target="_blank" href="{{item.link }}">
-                                    <img src="/static/img/app-img/{{item.img_link}}.png" />
+                                    <img src="/static/img/app-img/{{item.img_link}}.png" on-load='_getColor' />
                                     <span class="text">{{item.name }}</span>
-
-                                    <img class="overflow-background" src="/static/img/app-img/{{item.img_link}}.png">
                                 </a>
                             </li>
                         </template>
@@ -28,17 +26,35 @@
                 </section>
             </aside>
         </nav>
+
         <script src="/static/web-components/js/component.js"></script>
+        <script>
+        </script>
     </template>
 
     <script>
         Polymer({
             is: "web-component",
+            behavior: ['ColorThief'],
             properties: {
 
             },
             ready: function () {
-                console.log('ready');
+
+            },
+            _getColor: function (e) {
+                var colorThief = new ColorThief();
+                var background = colorThief.getColor(e.target);
+                var red = background[0] + 120;
+                var green = background[1] + 50;
+                var blue = background[2] + 90;
+                if ((red * 0.299 + green * 0.587 + blue * 0.114) > 186) ld = 1;
+                else ld = 0;
+                background = [red, green, blue];
+                background = 'rgba(' + background.toString() + ',1)';
+                e.path[1].childNodes[3].style.color = ld == 1 ? '#000' : '#fff';
+                e.path[1].style.background = background;
+
             }
         });
     </script>

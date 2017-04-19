@@ -107,18 +107,7 @@ body {
     text-align: left;
     clear: both;
     position: relative;
-    border-radius: 2px;
     overflow: hidden;
-}
-
-.component-ul li a .overflow-background {
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    top: -65px;
-    left: -65px;
-    opacity: 0.035;
-    z-index: 99;
 }
 
 .component-ul li a:hover {
@@ -140,6 +129,9 @@ body {
     position: absolute;
     bottom: 10px;
     left: 10px;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+    opacity: 0.8;
 }
 
 .component-ul li .option-icon {

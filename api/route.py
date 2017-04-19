@@ -1,4 +1,4 @@
-from flask import Flask, make_response, jsonify, render_template, redirect, session, request, g
+from flask import Flask, make_response, jsonify, render_template, redirect, session, request, g, send_from_directory
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from passlib.hash import sha256_crypt
 from api import app
@@ -255,6 +255,11 @@ def main(content='dashboard', content_id=None):
             return make_response(open('api/templates/404.html').read())
         
 
+@app.route('/static/bower_components/<path:path>')
+@cross_origin()
+def static_file(path):
+    return send_from_directory('static/bower_components', path)
+        
 #Routes for components data
 @app.route('/component/<component_type>')
 @cross_origin()

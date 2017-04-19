@@ -8,10 +8,16 @@
 
 <body ng-controller="mainCtrl">
     <nav class="iframe-nav">
-        <ul>
-                <li ng-repeat="link in app"><a target="_blank" href="{{ link.link }}">{{ link.name }}</a></li>
+        <ul class="component-ul">
+            <li ng-repeat="link in app">
+                <div class="option-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
+                <a target="_blank" href="{{ link.link }}">
+                    <img src="/static/img/app-img/{{link.img_link}}.png" />
+                    <span class="text">{{ link.name }}</span>
+                </a>
+            </li>
         </ul>
-    </nav>  
+    </nav>
     <script src="../static/bower_components/angular/angular.min.js"></script>
     <!-- <script src="../static/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="../static/bower_components/ng-scrollbars/dist/scrollbars.min.js"></script> -->

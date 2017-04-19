@@ -507,26 +507,78 @@ body {
     float: left;
     margin: 0; }
     .box.box-form input[type=text],
-    .box.box-form textarea {
+    .box.box-form textarea,
+    .box.box-form select {
       float: left;
       width: 100%;
       box-sizing: border-box;
       padding: 10px 0px;
       border: 0;
       background: transparent;
-      border-bottom: 2px solid #e3e3e3;
+      border-bottom: 2px solid #e2f7ee;
       margin-bottom: 20px;
-      transition: 0.3s ease; }
+      transition: 0.3s ease;
+      font-weight: 600;
+      font-size: 18px; }
+      .box.box-form input[type=text].input-file-choose,
+      .box.box-form textarea.input-file-choose,
+      .box.box-form select.input-file-choose {
+        opacity: 0.8; }
+        .box.box-form input[type=text].input-file-choose:hover,
+        .box.box-form textarea.input-file-choose:hover,
+        .box.box-form select.input-file-choose:hover {
+          opacity: 0.8; }
       .box.box-form input[type=text]:focus,
-      .box.box-form textarea:focus {
-        padding-top: 15px;
-        padding-bottom: 5px;
+      .box.box-form textarea:focus,
+      .box.box-form select:focus {
+        padding-top: 13px;
+        padding-bottom: 7px;
         outline: none;
-        border-color: #2ea4d2;
+        border-color: #3fce91;
         transition: 0.3s ease; }
+      .box.box-form input[type=text]::-webkit-input-placeholder,
+      .box.box-form textarea::-webkit-input-placeholder,
+      .box.box-form select::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        font-weight: 400;
+        color: #999; }
+      .box.box-form input[type=text]::-moz-placeholder,
+      .box.box-form textarea::-moz-placeholder,
+      .box.box-form select::-moz-placeholder {
+        /* Firefox 19+ */
+        font-weight: 400;
+        color: #999; }
+    .box.box-form input[type=file] {
+      clear: left; }
     .box.box-form textarea {
       height: 180px;
       resize: none; }
+    .box.box-form .input-description {
+      float: left;
+      margin-right: 20px;
+      font-size: 18px;
+      font-weight: 400;
+      color: #c0c0c0;
+      margin-top: 7px; }
+    .box.box-form select {
+      opacity: 0.6;
+      min-width: 100px;
+      width: auto;
+      padding: 7px;
+      clear: right; }
+      .box.box-form select option {
+        border: 0; }
+        .box.box-form select option:hover {
+          background: #ddd; }
+      .box.box-form select:focus {
+        padding: 7px; }
+    .box.box-form .input-imglink {
+      float: left;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px; }
+      .box.box-form .input-imglink img {
+        width: 180px; }
   .box.box-list {
     background: 0;
     box-shadow: none; }
@@ -557,6 +609,7 @@ body {
     padding-left: 10px; }
 
 .button {
+  outline: none;
   padding: 10px;
   color: #fff;
   border-radius: 3px;
@@ -570,6 +623,10 @@ body {
     cursor: pointer; }
   .button .glyphicon {
     margin-right: 10px; }
+  .button.single-icon {
+    padding: 10px 14px; }
+    .button.single-icon .glyphicon {
+      margin-right: 0; }
   .button.blue {
     background: #2ea4d2; }
   .button.orange {
@@ -581,6 +638,8 @@ body {
     color: #333; }
     .button.pure:hover {
       color: #333; }
+  .button.grey {
+    background: #666; }
   .button.red {
     background: #D45A5A; }
   .button.in-row {

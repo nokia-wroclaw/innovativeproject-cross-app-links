@@ -18,6 +18,8 @@
         </div>
         <div class="bottom-nav">
             <a class="creator-link pull-left text-left" href="profile/{{app.creator.id}}">{{app.creator.username}}</a>
+            <a class="button small  margined pull-right" ng-class="app.status ? 'green' : 'pure'" href="#" ng-click="newlink.hide(app.id,app.status)">
+                <span class="glyphicon" ng-class="app.status ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"></span></a>
             <a class="button blue small  margined pull-right" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
             <a class="button red small pull-right" href="#" ng-click="newlink.delete(app.id)"><span class="glyphicon glyphicon-trash"></span></a>
         </div>
@@ -41,17 +43,16 @@
 
         </div>
     </div>
-    <form ng-init="newlink.manageFill(app.name,app.link,app.desc, app.img_link)" name='form' class="box box-form no-shadow" ng-submit="form.$valid && form.$dirty && newlink.update(app.id)" novalidate>
-        <header>
-            <h3 class="blue">Edit link</h3>
-        </header>
+    <form ng-init="newlink.manageFill(app.name,app.link,app.desc, app.img_link, app.order_id)" name='form' class="box box-form no-shadow" ng-submit="form.$valid && form.$dirty && newlink.update(app.id)" novalidate>
+        <div class="input-imglink"><img src="/static/img/app-img/{{newlink.img_link}}.png"></div>
         <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
         <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
         <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>
-
-        <button type="submit" class='button blue pull-right'>Confirm</button>
-        <img width="40px" src="/static/img/app-img/{{newlink.img_link}}.png">
-        <input type="file" nv-file-select="" uploader="newlink.uploader" requried>
+        <label class="input-description">Choose order</label>
+        <select ng-model="newlink.order_id" ng-options="i as i for i in orderArray" required>
+        </select>
+        <input class="button pure input-file-choose pull-left" type="file" nv-file-select="" uploader="newlink.uploader" requried>
+        <button type="submit" class='button green single-icon pull-right'><span class="glyphicon glyphicon-ok"></span></button>
     </form>
 </div>
 <div class="success-bar" ng-show="newlink.status">

@@ -6,6 +6,7 @@ from api.models import User, Group, App, Log, Invites
 from api.database import db
 from api.mail import send_email, send_email_register
 
+from flask_cors import CORS, cross_origin 
 
 
 #-----------
@@ -164,19 +165,20 @@ def main(content='dashboard', content_id=None):
         
 
 #Routes for components data
-@app.route('/component_data/iframe')
-def component():
-	# apps = App.query.all()
-    # return render_template('iframe-web-component.html')
-    return make_response(open('api/templates/iframe-web-component.html').read())
-
-
-#Routes for components test
 @app.route('/component/<component_type>')
+@cross_origin()
+def component(component_type):
+    if component_type =='iframe':
+        return make_response(open('api/static/web-components/iframe/component-template.html').read())
+    elif component_type =='polymer':
+        return make_response(open('api/static/web-components/polymer/component-template.html').read())
+    
+#Routes for components test
+@app.route('/get-components/<component_type>')
 def component_test(component_type):
     if component_type=='iframe':
         return make_response(open('api/static/web-components/iframe/iframe-index.html').read())
-    elif component_type=='json':
-        return make_response(open('api/static/web-components/json/json-index.html').read())
+    elif component_type=='polymer':
+        return make_response(open('api/static/web-components/polymer/polymer-index.html').read())
     return None
 

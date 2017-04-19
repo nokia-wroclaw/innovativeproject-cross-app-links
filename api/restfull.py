@@ -4,7 +4,9 @@ from api.models import User, Group, App, Log
 from flask_restless import APIManager, ProcessingException
 from flask_login import current_user, login_fresh
 from flask import session
+from flask_cors import CORS
 
+cors = CORS(app, resources={r"/api/v2*": {"origins": "*"}})
 
 def auth_func(*args, **kw):
     if not login_fresh() and not current_user.is_authenticated:
@@ -15,6 +17,14 @@ def get_logged_user(search_params=None, **kw):
     if search_params is None:
         return
     filt = dict(name='id', op='eq', val=current_user.get_id())
+    if 'filters' not in search_params:
+        search_params['filters'] = []
+    search_params['filters'].append(filt)
+    
+def get_app_visible(search_params=None, **kw):
+    if search_params is None:
+        return
+    filt = dict(name='status', op='eq', val=True)
     if 'filters' not in search_params:
         search_params['filters'] = []
     search_params['filters'].append(filt)
@@ -33,7 +43,8 @@ manager.create_api(Group, exclude_columns=['users.password_hash', 'users.group_i
 manager.create_api(App, exclude_columns=['creator.password_hash'], methods=['GET', 'POST', 'DELETE','PUT'], preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]), results_per_page=0)
 
 # /api/v2/app , /api/v2/app/<int>
-manager.create_api(App, include_columns=['name','link','desc', 'img_link'], url_prefix='/api/v2', methods=['GET'], results_per_page=0)
+manager.create_api(App, include_columns=['id','name','link','desc', 'img_link', 'order_id'], url_prefix='/api/v2', methods=['GET'],
+preprocessors=dict(GET_SINGLE=[get_app_visible], GET_MANY=[get_app_visible]), results_per_page=0)
 
 # /api/log , /api/log/<int>
 manager.create_api(Log, exclude_columns=['author.password_hash'], methods=['GET', 'POST'], preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]), results_per_page=0)

@@ -7,7 +7,7 @@ from api.database import db
 from api.mail import send_email, send_email_register, send_email_reset
 from flask_cors import CORS, cross_origin 
 
-cors = CORS(app, resources={r"/static/bower_components/*": {"origins": "*"}})
+cors = CORS(app, resources={r"api/static/bower_components/*": {"origins": "*"}})
 
 #-----------
 #FUNCTIONS

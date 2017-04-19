@@ -25,7 +25,7 @@
             req.send();
 
             req.onreadystatechange = generateHTML;
-            var navbar = document.querySelector('.component-overflow ul');
+            var navbar = document.querySelector('.component-overflow .component-ul');
 
             function generateHTML() {
                 if (req.readyState == 4 && req.status == 200) {
@@ -33,7 +33,7 @@
                     var linkArray = JSON.parse(req.responseText);
                     linkArray = linkArray['objects'];
                     for (var i = 0; i < linkArray.length; i++) {
-                        listGenerateString += '<li><a href="' + linkArray[i]['link'] + '">' + linkArray[i]['name'] + '</a></li>';
+                        listGenerateString += '<li><a href="' + linkArray[i]['link'] + '"> <div class="option-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div><img src="/static/img/app-img/' + linkArray[i]['img_link'] + '.png" /><span class="text">' + linkArray[i]['name'] + '</span></a></li>';
                     }
                     navbar.insertAdjacentHTML('beforeend', listGenerateString);
                 }

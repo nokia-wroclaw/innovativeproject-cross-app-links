@@ -116,7 +116,8 @@
                         filename: img_link
                     });
                 }
-                this.uploader.uploadAll()
+                this.uploader.uploadAll();
+                this.uploader.clearQueue();
                 var post_object = {
                     name: this.name,
                     link: this.address,
@@ -133,15 +134,19 @@
                 this.status = true;
             },
             update: function (app_id) {
-                if (this.uploader.queue.length > 0)
+                if (this.uploader.queue.length > 0) {
+                    alert(this.uploader.queue.length)
                     this.img_link = $scope.clockDate.date();
+                }
                 var img_link = this.img_link;
+                alert(img_link);
                 this.uploader.onBeforeUploadItem = function (item) {
                     item.formData.push({
                         filename: img_link
                     });
                 }
-                this.uploader.uploadAll()
+                this.uploader.uploadAll();
+                this.uploader.clearQueue();
                 var post_object = {
                     name: this.name,
                     link: this.address,
@@ -149,8 +154,6 @@
                     img_link: img_link,
                     order_id: this.order_id
                 }
-
-                console.log(this.order_id);
                 restful.update('app', app_id, post_object).then(function (response) {
                     var log_object = {
                         content: 'A link #' + app_id + ' was updated',

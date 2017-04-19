@@ -20,6 +20,14 @@ def get_logged_user(search_params=None, **kw):
     if 'filters' not in search_params:
         search_params['filters'] = []
     search_params['filters'].append(filt)
+    
+def get_app_visible(search_params=None, **kw):
+    if search_params is None:
+        return
+    filt = dict(name='status', op='eq', val=True)
+    if 'filters' not in search_params:
+        search_params['filters'] = []
+    search_params['filters'].append(filt)
         
 manager = APIManager(app, flask_sqlalchemy_db=db, preprocessors=dict(POST=[auth_func], DELETE=[auth_func], PUT=[auth_func]))
 
@@ -35,7 +43,8 @@ manager.create_api(Group, exclude_columns=['users.password_hash', 'users.group_i
 manager.create_api(App, exclude_columns=['creator.password_hash'], methods=['GET', 'POST', 'DELETE','PUT'], preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]), results_per_page=0)
 
 # /api/v2/app , /api/v2/app/<int>
-manager.create_api(App, include_columns=['name','link','desc', 'img_link'], url_prefix='/api/v2', methods=['GET'], results_per_page=0)
+manager.create_api(App, include_columns=['name','link','desc', 'img_link', 'order_id'], url_prefix='/api/v2', methods=['GET'],
+preprocessors=dict(GET_SINGLE=[get_app_visible], GET_MANY=[get_app_visible]), results_per_page=0)
 
 # /api/log , /api/log/<int>
 manager.create_api(Log, exclude_columns=['author.password_hash'], methods=['GET', 'POST'], preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]), results_per_page=0)

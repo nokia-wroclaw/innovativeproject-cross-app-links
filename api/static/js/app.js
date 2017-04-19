@@ -101,11 +101,13 @@
             address: '',
             desc: '',
             img_link: '',
-            manageFill: function (name, link, desc, img_link) {
+            order_id: '',
+            manageFill: function (name, link, desc, img_link, order_id) {
                 this.name = name;
                 this.address = link;
                 this.desc = desc;
-                this.img_link = img_link
+                this.img_link = img_link;
+                this.order_id = order_id;
             },
             add: function () {
                 var img_link = $scope.clockDate.date();
@@ -122,8 +124,10 @@
                     creator_id: $scope.current_user.id,
                     img_link: img_link
                 }
-                restful.post('app', post_object);
-                update.apps();
+                restful.post('app', post_object).then(function (response) {
+                    update.apps();
+                });
+
                 this.clear();
                 this.status = true;
             },
@@ -142,7 +146,10 @@
                     link: this.address,
                     desc: this.desc,
                     img_link: img_link,
+                    order_id: this.order_id
                 }
+
+                console.log(this.order_id);
                 restful.update('app', app_id, post_object).then(function (response) {
                     var log_object = {
                         content: 'A link #' + app_id + ' was updated',
@@ -150,14 +157,38 @@
                         author_id: $scope.current_user.id
                     }
                     restful.post('log', log_object);
+                    update.apps();
+                    update.logs();
                 });
 
-                update.apps();
-                update.logs();
+
                 this.clear();
                 this.status = true;
                 $location.path('/links').replace();
             },
+
+            hide: function (app_id, app_status) {
+                var confirmResult = confirm("Do you want to change visibility of this app?");
+                if (confirmResult) {
+
+                    var hide = {
+                        status: !app_status
+
+                    }
+                    restful.update('app', app_id, hide).then(function (response) {
+                        var log_object = {
+                            content: 'A link #' + app_id + ' was updated',
+                            data_time: 'CURRENT_TIMESTAMP',
+                            author_id: $scope.current_user.id
+                        }
+                        restful.post('log', log_object);
+                        update.apps();
+                        update.logs();
+                    });
+
+                };
+            },
+
             delete: function (app_id) {
                 var confirmResult = confirm("Do you want to remove this app?");
                 if (confirmResult) {
@@ -168,9 +199,10 @@
                             author_id: $scope.current_user.id
                         }
                         restful.post("log", log_object);
+                        update.apps();
+                        update.logs();
                     });
-                    update.apps();
-                    update.logs();
+
                 }
             },
             clear: function () {
@@ -180,7 +212,7 @@
             },
             status: false
         };
-
+        $scope.orderArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         /*
         If you use some variables in a couple places you probably 
         want to reset them when you leave a page. That's why you should put

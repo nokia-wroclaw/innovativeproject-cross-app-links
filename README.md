@@ -3,10 +3,14 @@
 <h3>It's online! <a href="https://cross-app-links.herokuapp.com">https://cross-app-links.herokuapp.com</a></h3>
 <p>Email: admin@example.com</p>
 <p>Password: admin123</p>
-<h2>JSON component</h2>
-<p>It's available on your computer here(probably): <a href="http://127.0.0.1:5000/component/json">http://127.0.0.1:5000/component/json</a></p>
-<h2>Iframe component</h2>
-<p>It's available on your computer here(probably): <a href="http://127.0.0.1:5000/component/iframe">http://127.0.0.1:5000/component/iframe</a></p>
+<h2>Components</h2>
+<p>Available on your computer here(probably):</p>
+<p>
+<a href="http://127.0.0.1:5000/get-components/polymer">http://127.0.0.1:5000/get-components/polymer</a>
+</p>
+<p>
+<a href="http://127.0.0.1:5000/get-components/iframe">http://127.0.0.1:5000/get-components/iframe</a>
+</p>
 <h2>User verification, session handling.</h2>
 <p>
 <blockquote>On root we check if there is open session. If yes - response with index. If no - login page is displayed.</blockquote>

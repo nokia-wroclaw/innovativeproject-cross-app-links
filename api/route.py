@@ -7,7 +7,6 @@ from api.database import db
 from api.mail import send_email, send_email_register, send_email_reset
 from flask_cors import CORS, cross_origin 
 
-cors = CORS(app, resources={r"api/static/bower_components/*": {"origins": "*"}})
 
 #-----------
 #FUNCTIONS
@@ -265,6 +264,12 @@ def component(component_type):
     elif component_type =='polymer':
         return make_response(open('api/static/web-components/polymer/component-template.html').read())
     
+    
+@app.route('/bower/<path>')
+@cross_origin()
+def bower(path):
+     return make_response(open('api/static/bower_components/{}'.format(path)).read())
+
 @app.route('/get-components/<component_type>')
 def component_test(component_type):
     """

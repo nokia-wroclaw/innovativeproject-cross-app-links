@@ -28,7 +28,7 @@
             </header>
 
 
-            <form class="login-form " method="POST" name="remove_form" novalidate ng-submit="remove_form.$valid && removeUser(removeEmail)">
+            <form class="login-form " method="POST" name="remove_form" novalidate ng-submit="remove_form.$valid && removeUser(removeEmail)" action="/api/auth/remove">
                 <div class="input-socket">
                     <input type="text" name="email" ng-model="removeEmail" placeholder="User e-mail" required>
 

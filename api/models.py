@@ -20,13 +20,13 @@ class User(UserMixin, db.Model):
     logs = db.relationship('Log', backref='author', lazy='dynamic')
     notes = db.relationship('Note', backref='owner', lazy='dynamic')
     
-    def __init__(self, email, password_hash,group,date):
+    def __init__(self, email, password_hash,group):
         
         self.email = email
         self.password_hash = password_hash
         self.group_id = group
         self.username = email.split('@')[0]
-        self.date = date
+#        self.date = date
         
     def is_authenticated():
         return True
@@ -132,13 +132,27 @@ class Invites(db.Model):
     group = db.Column(db.Integer)
     date = db.Column(db.TIMESTAMP)
     
-    def __init__(self, email, maker,group,date):
+    def __init__(self, email, maker,group):
         
         self.email = email
         self.maker = maker
         self.group = group
         self.token = str(uuid.uuid4())
-        self.date = date
+#        self.date = date
+
+
+class Reset(db.Model):
+    __tablename__ = 'Reset'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(25), unique=True)
+    token = db.Column(db.String(50), unique=True)
+    
+    def __init__(self, email):
+        
+        self.email = email
+        self.token = str(uuid.uuid4())
+
 
 
 class Stats(db.Model):

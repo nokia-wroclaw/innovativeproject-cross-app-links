@@ -5,9 +5,9 @@ from api import app
 from api.models import User, Group, App, Log, Invites, Reset
 from api.database import db
 from api.mail import send_email, send_email_register, send_email_reset
-
 from flask_cors import CORS, cross_origin 
 
+cors = CORS(app, resources={r"/static/*": {"origins": "*"}})
 
 #-----------
 #FUNCTIONS

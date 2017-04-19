@@ -1,21 +1,30 @@
 <link rel="import" href="/static/bower_components/polymer/polymer.html">
-
+<link rel="import" href="/static/bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="web-component">
 
     <template>
         <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/web-components/css/component.css">
+
+        <iron-ajax auto url="/api/v2/app" handle-as="json" last-response="{{response}}"></iron-ajax>
         <nav class="main-nav">
-            <!--        COMPONENT: START-->
             <aside class="component-navbar c-hidden" id="web-component-navbar">
                 <button class="burger-icon"><span class="glyphicon glyphicon-th"></span> </button>
                 <section class="component-overflow c-hidden">
-                    <ul class="component-ul"></ul>
+                    <ul class="component-ul">
+                        <template is="dom-repeat" items="{{response.objects}}">
+                            <li>
+                                <div class="option-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
+                                <a target="_blank" href="{{item.link }}">
+                                    <img src="/static/img/app-img/{{item.img_link}}.png" />
+                                    <span class="text">{{item.name }}</span>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
                 </section>
             </aside>
-
-            <!--        COMPONENT: END-->
         </nav>
         <script src="/static/web-components/js/component.js"></script>
     </template>

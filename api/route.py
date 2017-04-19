@@ -265,11 +265,6 @@ def component(component_type):
         return make_response(open('api/static/web-components/polymer/component-template.html').read())
     
     
-@app.route('/bower/<path>')
-@cross_origin()
-def bower(path):
-     return make_response(open('api/static/bower_components/{}'.format(path)).read())
-
 @app.route('/get-components/<component_type>')
 def component_test(component_type):
     """

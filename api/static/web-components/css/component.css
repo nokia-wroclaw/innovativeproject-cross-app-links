@@ -89,6 +89,7 @@ body {
     padding: 5px;
     box-sizing: border-box;
     position: relative;
+    overflow: hidden;
 }
 
 .component-ul li a {
@@ -106,6 +107,18 @@ body {
     text-align: left;
     clear: both;
     position: relative;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.component-ul li a .overflow-background {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -65px;
+    left: -65px;
+    opacity: 0.035;
+    z-index: 99;
 }
 
 .component-ul li a:hover {
@@ -113,11 +126,11 @@ body {
 }
 
 .component-ul li a img {
-    width: 70px;
     height: 70px;
     margin: 0 auto;
     margin-top: 20px;
     display: block;
+    z-index: 105;
 }
 
 .component-ul li a .text {
@@ -131,8 +144,10 @@ body {
 
 .component-ul li .option-icon {
     position: absolute;
-    top: 8px;
-    right: 15px;
+    top: 5px;
+    right: 5px;
+    padding: 5px 5px 1px 5px;
+    background: rgba(0, 0, 0, 0.1);
     color: #666;
     font-size: 14px;
     z-index: 99999;

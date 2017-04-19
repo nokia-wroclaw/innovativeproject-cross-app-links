@@ -11,9 +11,9 @@
     padding: 7px;
     border-radius: 2px;
     background: #D45A5A;
-    margin: 5px;
-    margin-left: 0;
+    margin-bottom: 20px;
     color: white;
+    clear: both;
 }
 
 .error-form-box span.error .glyphicon {

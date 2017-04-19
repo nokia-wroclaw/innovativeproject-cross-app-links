@@ -620,27 +620,82 @@ body {
         float: left;
         margin: 0;
         input[type=text],
-        textarea {
+        textarea,
+        select {
             float: left;
             width: 100%;
             box-sizing: border-box;
             padding: 10px 0px;
             border: 0;
             background: transparent;
-            border-bottom: 2px solid lighten(#ccc, 9%);
+            border-bottom: 2px solid lighten(#3fce91, 40%);
             margin-bottom: 20px;
             transition: 0.3s ease;
+            font-weight: 600;
+            font-size: 18px;
+            &.input-file-choose {
+                opacity: 0.8;
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
             &:focus {
-                padding-top: 15px;
-                padding-bottom: 5px;
+                padding-top: 13px;
+                padding-bottom: 7px;
                 outline: none;
-                border-color: #2ea4d2;
+                border-color: #3fce91;
                 transition: 0.3s ease;
             }
+            &::-webkit-input-placeholder {
+                /* Chrome/Opera/Safari */
+                font-weight: 400;
+                color: #999;
+            }
+            &::-moz-placeholder {
+                /* Firefox 19+ */
+                font-weight: 400;
+                color: #999;
+            }
+        }
+        input[type=file] {
+            clear: left;
         }
         textarea {
             height: 180px;
             resize: none;
+        }
+        .input-description {
+            float: left;
+            margin-right: 20px;
+            font-size: 18px;
+            font-weight: 400;
+            color: #c0c0c0;
+            margin-top: 7px;
+        }
+        select {
+            opacity: 0.6;
+            min-width: 100px;
+            width: auto;
+            padding: 7px;
+            clear: right;
+            option {
+                border: 0;
+                &:hover {
+                    background: #ddd;
+                }
+            }
+            &:focus {
+                padding: 7px;
+            }
+        }
+        .input-imglink {
+            float: left;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            img {
+                width: 180px;
+            }
         }
     }
     &.box-list {
@@ -683,6 +738,7 @@ body {
 }
 
 .button {
+    outline: none;
     padding: 10px;
     color: #fff;
     border-radius: 3px;
@@ -697,6 +753,12 @@ body {
     }
     .glyphicon {
         margin-right: 10px;
+    }
+    &.single-icon {
+        padding: 10px 14px;
+        .glyphicon {
+            margin-right: 0;
+        }
     }
     &.blue {
         background: #2ea4d2;

@@ -79,15 +79,15 @@ class App(db.Model):
     date = db.Column(db.TIMESTAMP)
 
 
-    def __init__(self, name, link, desc, creator_id,date):
+    def __init__(self, name, link, desc, creator_id, img_link, date):
         self.name = name
         self.link = link
         self.desc = desc
         self.creator_id = creator_id
+        self.img_link = img_link
+        self.date = date
         self.status = True
         self.beta = False
-        self.date = date
-            
             
             
 class Log(db.Model):

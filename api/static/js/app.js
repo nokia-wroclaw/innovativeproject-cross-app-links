@@ -122,7 +122,8 @@
                     link: this.address,
                     desc: this.desc,
                     creator_id: $scope.current_user.id,
-                    img_link: img_link
+                    img_link: img_link,
+                    date: 'CURRENT_TIMESTAMP'
                 }
                 restful.post('app', post_object).then(function (response) {
                     update.apps();

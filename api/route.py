@@ -178,5 +178,7 @@ def component_test(component_type):
         return make_response(open('api/static/web-components/iframe/iframe-index.html').read())
     elif component_type=='json':
         return make_response(open('api/static/web-components/json/json-index.html').read())
+    elif component_type=='polymer':
+        return make_response(open('api/static/web-components/polymer/polymer-index.html').read())
     return None
 

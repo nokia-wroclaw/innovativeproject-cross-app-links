@@ -20,7 +20,7 @@
 
             var req = new XMLHttpRequest();
             // creating GET request to yahoo weather API
-            req.open('GET', "https://cross-app-links.herokuapp.com/api/v2/app", true);
+            req.open('GET', "/api/v2/app", true);
             // sending a request
             req.send();
 

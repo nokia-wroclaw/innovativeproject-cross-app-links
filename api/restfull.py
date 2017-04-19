@@ -4,7 +4,9 @@ from api.models import User, Group, App, Log
 from flask_restless import APIManager, ProcessingException
 from flask_login import current_user, login_fresh
 from flask import session
+from flask_cors import CORS
 
+cors = CORS(app, resources={r"/api/v2*": {"origins": "*"}})
 
 def auth_func(*args, **kw):
     if not login_fresh() and not current_user.is_authenticated:

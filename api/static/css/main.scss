@@ -706,8 +706,8 @@ body {
 
 .single-input {
     width: 340px;
-    input[type=text] {
-        float: right;
+    input[type=text],
+    select {
         box-sizing: border-box;
         padding: 10px 0px;
         border: 0;
@@ -722,6 +722,10 @@ body {
             border-color: #2ea4d2;
             transition: 0.3s ease;
         }
+    }
+    select {
+        margin-top: 1px;
+        padding: 10px;
     }
 }
 

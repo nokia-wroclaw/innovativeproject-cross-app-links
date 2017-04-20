@@ -42,21 +42,21 @@
             <h3 class="blue">Notes</h3>
             <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal" ng-click="showlist = !showlist"></span>
             </div>
-            <div class="noteform">
-                <form name="notes" ng-show="showlist" ng-submit="note.add()" novalidate>
 
-                    <input ng-model="note.content" type="text" name="note" required>
-
-                    <select ng-model="note.tag" name="tag" required>
-                <option>info</option>
-                <option>rush</option>
-                <option>know</option>
-                </select>
-                    <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
-
-                </form>
-
-            </div>
+            <form class="noteform" name="notesform" ng-show="showlist" ng-submit="notesform.$valid && note.add()" novalidate>
+                <div class="single-input">
+                    <input class="pull-left" ng-model="note.content" type="text" name="note" placeholder="Note content" required>
+                </div>
+                <div class="single-input single-select">
+                    <select class="pull-left" ng-model="note.tag" name="tag" required>
+                        <option disabled ng-selected="true">Tag</option>
+                        <option>Info</option>
+                        <option>Rush</option>
+                        <option>Know</option>
+                    </select>
+                </div>
+                <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
+            </form>
         </header>
         <table class="table">
             <tbody>

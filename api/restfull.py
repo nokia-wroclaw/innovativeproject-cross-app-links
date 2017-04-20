@@ -1,6 +1,6 @@
 from api import app
 from api.database import db
-from api.models import User, Group, App, Log
+from api.models import User, Group, App, Log, Note
 from flask_restless import APIManager, ProcessingException
 from flask_login import current_user, login_fresh
 from flask import session
@@ -49,3 +49,5 @@ preprocessors=dict(GET_SINGLE=[get_app_visible], GET_MANY=[get_app_visible]), re
 # /api/log , /api/log/<int>
 manager.create_api(Log, exclude_columns=['author.password_hash'], methods=['GET', 'POST'], preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]), results_per_page=0)
 
+# /api/note , /api/note/<int>
+manager.create_api(Note, exclude_columns=['owner.password_hash'], methods=['GET', 'POST', 'DELETE'], preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]), results_per_page=0)

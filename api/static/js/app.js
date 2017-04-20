@@ -57,13 +57,20 @@
                     $scope.logs = response['objects'];
                 });
             },
+            notes: function () {
+                restful.get('Note').then(function (response) {
+                    $scope.notes = response['objects'];
+                });
+            },
             all: function () {
                 this.me();
                 this.apps();
                 this.users();
                 this.groups();
                 this.logs();
+                this.notes();
             }
+
         };
         update.all();
 
@@ -214,6 +221,30 @@
             },
             status: false
         };
+
+        $scope.note = {
+
+            content: '',
+            tag: '',
+
+            add: function () {
+                var post_note = {
+                    content: this.content,
+                    tag: this.tag,
+                    owner_id: $scope.current_user.id,
+                    date: 'CURRENT_TIMESTAMP'
+                }
+                restful.post('Note', post_note).then(function (response) {
+                    update.notes();
+                });
+                this.clear();
+            },
+            clear: function () {
+                this.content = '';
+                this.tag = '';
+            }
+        };
+
         $scope.orderArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         /*
         If you use some variables in a couple places you probably 

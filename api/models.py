@@ -106,6 +106,7 @@ class Log(db.Model):
 #To create
 
 class  Note(db.Model):
+    
     __tablename__ = 'Note'
     
     id = db.Column(db.Integer, primary_key=True)

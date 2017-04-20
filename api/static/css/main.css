@@ -417,11 +417,11 @@ body {
       font-weight: 700;
       text-transform: uppercase;
       padding: 5px; }
-      .box.box-table .tag.important {
+      .box.box-table .tag.rush {
         background: red; }
-      .box.box-table .tag.done {
+      .box.box-table .tag.know {
         background: green; }
-      .box.box-table .tag.regular {
+      .box.box-table .tag.info {
         background: blue; }
   .box.color-box {
     color: #fff;
@@ -585,8 +585,8 @@ body {
 
 .single-input {
   width: 340px; }
-  .single-input input[type=text] {
-    float: right;
+  .single-input input[type=text],
+  .single-input select {
     box-sizing: border-box;
     padding: 10px 0px;
     border: 0;
@@ -594,12 +594,16 @@ body {
     border-bottom: 2px solid #e3e3e3;
     margin-bottom: 20px;
     transition: 0.3s ease; }
-    .single-input input[type=text]:focus {
+    .single-input input[type=text]:focus,
+    .single-input select:focus {
       padding-top: 15px;
       padding-bottom: 5px;
       outline: none;
       border-color: #2ea4d2;
       transition: 0.3s ease; }
+  .single-input select {
+    margin-top: 1px;
+    padding: 10px; }
 
 .row .row-buried {
   padding: 0; }

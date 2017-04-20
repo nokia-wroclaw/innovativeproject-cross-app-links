@@ -1,0 +1,36 @@
+.note-header {
+    position: relative;
+}
+
+.noteform {
+    margin-top: 20px;
+    padding: 0;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1220;
+}
+
+.noteform>button {
+    width: 15%;
+}
+
+.noteform .single-input {
+    padding-right: 10px;
+    width: 85%;
+}
+
+.noteform .single-input input {
+    width: 70%;
+    float: left;
+}
+
+.noteform .single-input select {
+    width: 30%;
+    float: left;
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+
+}

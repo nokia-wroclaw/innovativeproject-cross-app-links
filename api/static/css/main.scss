@@ -497,13 +497,13 @@ body {
             font-weight: 700;
             text-transform: uppercase;
             padding: 5px;
-            &.important {
+            &.rush {
                 background: red;
             }
-            &.done {
+            &.know {
                 background: green;
             }
-            &.regular {
+            &.info {
                 background: blue;
             }
         }

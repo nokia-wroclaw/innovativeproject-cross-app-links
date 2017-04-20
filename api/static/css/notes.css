@@ -11,22 +11,26 @@
     z-index: 1220;
 }
 
+.noteform>button {
+    width: 15%;
+}
+
 .noteform .single-input {
-    width: 70%;
+    padding-right: 10px;
+    width: 85%;
 }
 
 .noteform .single-input input {
-    width: 50%:
+    width: 70%;
+    float: left;
+}
+
+.noteform .single-input select {
+    width: 30%;
+    float: left;
+    text-transform: uppercase;
+    font-weight: 800;
 }
 
 
-}
-.noteform .single-select {
-    width: auto;
-}
-.box.no-overflow>header {
-    overflow: none;
-}
-.box.no-overflow {
-    overflow: none;
 }

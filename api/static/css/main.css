@@ -417,11 +417,11 @@ body {
       font-weight: 700;
       text-transform: uppercase;
       padding: 5px; }
-      .box.box-table .tag.important {
+      .box.box-table .tag.rush {
         background: red; }
-      .box.box-table .tag.done {
+      .box.box-table .tag.know {
         background: green; }
-      .box.box-table .tag.regular {
+      .box.box-table .tag.info {
         background: blue; }
   .box.color-box {
     color: #fff;

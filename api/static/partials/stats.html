@@ -17,32 +17,33 @@
             </canvas>
         </div>
         <div class="box box-table">
-            <header>
+            <header class="note-header">
                 <h3 class="blue">Notes</h3>
-                <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
+                <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal" ng-click="showlist = !showlist"></span>
+                </div>
+                <form class="noteform" name="notesform" ng-show="showlist" ng-submit="notesform.$valid && note.add()" novalidate>
+                    <div class="single-input pull-left">
+                        <input class="pull-left" ng-model="note.content" type="text" name="note" placeholder="Note content" required>
+                        <select class="pull-left" ng-model="note.tag" name="tag" required>
+                            <option>info</option>
+                            <option>rush</option>
+                            <option>know</option>
+                        </select>
+                    </div>
+                    <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
+                </form>
             </header>
             <table class="table">
                 <tbody>
-                    <tr>
-                        <td>Remember to clean dishes!!</td>
+                    <tr ng-repeat="note in notes | orderBy: id: true| limitTo: 3">
+                        <td>{{note.content}}</td>
                         <td>
-                            <div class="tag important">Rush</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Please don't remove my friends!</td>
-                        <td>
-                            <div class="tag regular">Info</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>I really need to buy a cake</td>
-                        <td>
-                            <div class="tag done">KNOW</div>
+                            <div class="tag {{note.tag}}">{{note.tag}}</div>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
     <div class="col-lg-8">

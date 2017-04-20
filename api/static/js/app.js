@@ -237,6 +237,11 @@
                 restful.post('Note', post_note).then(function (response) {
                     update.notes();
                 });
+                this.clear();
+            },
+            clear: function () {
+                this.content = '';
+                this.tag = '';
             }
         };
 
@@ -265,11 +270,11 @@
             resl: document.body.innerWidth,
             onchange: function () {
 
-            }
-            //1200
-            //768
-            //480
-            //320
+                }
+                //1200
+                //768
+                //480
+                //320
         };
 
         /*Stats chart settings and data*/

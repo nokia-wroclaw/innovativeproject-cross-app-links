@@ -25,8 +25,8 @@
         /*Filter apps by params in a route*/
         $scope.filterParams = {
             manage: function () {
-                if ($routeParams.linkID)
-                    return parseInt($routeParams.linkID);
+                if ($routeParams.siteID)
+                    return parseInt($routeParams.siteID);
                 else return '';
             }
         };

@@ -287,6 +287,9 @@ body {
         color: #3fce91;
         margin-right: 20px; }
 
+.user-profile-stat .site-stat {
+  padding-top: 30px; }
+
 /*BOX STYLESHEET*/
 .box {
   padding: 20px;

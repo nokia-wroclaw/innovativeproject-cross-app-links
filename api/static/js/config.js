@@ -9,7 +9,7 @@
                 templateUrl: 'static/partials/stats.html'
             }).when('/action-log', {
                 templateUrl: 'static/partials/action-log.html'
-            }).when('/links/:linkID', {
+            }).when('/links/:siteID', {
                 templateUrl: 'static/partials/links.html'
             }).when('/links', {
                 templateUrl: 'static/partials/links.html'
@@ -25,7 +25,7 @@
                 templateUrl: 'static/partials/settings.html'
             }).when('/ver', {
                 templateUrl: 'static/partials/ver.html'
-            }).when('/profile/:userID', {
+            }).when('/profile/:siteID', {
                 templateUrl: 'static/partials/profile.html'
             }).otherwise({
                 controller: function () {

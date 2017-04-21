@@ -70,7 +70,7 @@ def send_email_reset(email):
     send_email(subject,
         'cross-apps@yandex.com',
         email,
-        render_template("email_reset_template.html",
+        render_template("email_template.html",
             user=username,
             sender="system",
             url=url,

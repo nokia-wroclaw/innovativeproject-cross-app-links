@@ -52,9 +52,7 @@ body {
     box-sizing: border-box;
     transition: all 0.3s ease;
     z-index: 1001;
-    background: #fff;
-    overflow-x: hidden;
-    overflow-y: auto;
+    background-color: #23262a;
 }
 
 
@@ -75,9 +73,10 @@ body {
 
 .component-ul {
     font-family: 'Lato', sans-serif;
-    background-color: #23262a;
+    overflow-x: hidden;
+    overflow-y: auto;
     width: 100%;
-    min-height: 100%;
+    height: auto;
     box-sizing: border-box;
     float: left;
     padding: 5px;

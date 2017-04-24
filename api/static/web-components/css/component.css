@@ -86,7 +86,7 @@ body {
 .component-ul li {
     display: inline-block;
     float: left;
-    width: 33, 333333333%;
+    width: 50%;
     padding: 5px;
     box-sizing: border-box;
     position: relative;

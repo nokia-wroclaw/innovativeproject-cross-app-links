@@ -48,8 +48,12 @@
         <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
         <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
         <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>
+        <label class="input-description">Set as a beta link</label>
+        <input type="checkbox" ng-model="newlink.beta">
+        <label class="input-description">Set as a maintenance</label>
+        <input type="checkbox" ng-model="newlink.maintenance">
         <label class="input-description">Choose order</label>
-        <select ng-model="newlink.order_id" ng-options="i as i for i in orderArray" required>
+        <select class="pulled" ng-model="newlink.order_id" ng-options="i as i for i in orderArray" required>
         </select>
         <input class="button pure input-file-choose pull-left" type="file" nv-file-select="" uploader="newlink.uploader" requried>
         <button type="submit" class='button green single-icon pull-right'><span class="glyphicon glyphicon-ok"></span></button>

@@ -517,6 +517,7 @@ body {
       box-sizing: border-box;
       padding: 10px 0px;
       border: 0;
+      outline: none;
       background: transparent;
       border-bottom: 2px solid #e2f7ee;
       margin-bottom: 20px;
@@ -551,6 +552,13 @@ body {
         /* Firefox 19+ */
         font-weight: 400;
         color: #999; }
+    .box.box-form select.pulled {
+      float: right; }
+    .box.box-form input[type=checkbox] {
+      clear: right;
+      margin-top: 5px;
+      margin-left: 20px;
+      float: right; }
     .box.box-form input[type=file] {
       clear: left; }
     .box.box-form textarea {
@@ -562,7 +570,8 @@ body {
       font-size: 18px;
       font-weight: 400;
       color: #c0c0c0;
-      margin-top: 7px; }
+      margin-top: 7px;
+      clear: left; }
     .box.box-form select {
       opacity: 0.6;
       min-width: 100px;

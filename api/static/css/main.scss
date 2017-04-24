@@ -343,7 +343,6 @@ body {
 .user-profile-stat {
     .site-stat {
         padding-top: 30px;
-       
     }
 }
 
@@ -634,6 +633,7 @@ body {
             box-sizing: border-box;
             padding: 10px 0px;
             border: 0;
+            outline: none;
             background: transparent;
             border-bottom: 2px solid lighten(#3fce91, 40%);
             margin-bottom: 20px;
@@ -664,6 +664,15 @@ body {
                 color: #999;
             }
         }
+        select.pulled {
+            float: right;
+        }
+        input[type=checkbox] {
+            clear: right;
+            margin-top: 5px;
+            margin-left: 20px;
+            float: right;
+        }
         input[type=file] {
             clear: left;
         }
@@ -678,6 +687,7 @@ body {
             font-weight: 400;
             color: #c0c0c0;
             margin-top: 7px;
+            clear: left;
         }
         select {
             opacity: 0.6;

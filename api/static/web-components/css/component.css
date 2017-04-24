@@ -125,12 +125,11 @@ body {
 .component-ul li a .text {
     width: 100%;
     float: left;
-    margin: inherit;
     position: absolute;
-    bottom: 10px;
-    left: 10px;
-    font-size: 13px;
-    font-weight: 300;
+    bottom: 5px;
+    left: 5px;
+    font-size: 12px;
+    font-weight: 400;
     opacity: 1;
 }
 

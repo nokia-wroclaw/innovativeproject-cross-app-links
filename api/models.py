@@ -15,6 +15,8 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'))
     date = db.Column(db.TIMESTAMP)
+    avatar_url = db.Column(db.String) #modelstochange - add
+    been_active = db.Column(db.String) #modelstochange - add
     
     applications = db.relationship('App', backref='creator', lazy='dynamic')
     logs = db.relationship('Log', backref='author', lazy='dynamic')
@@ -51,6 +53,7 @@ class Group(db.Model):
     app_drop = db.Column(db.Boolean)
     user_add = db.Column(db.Boolean)
     user_drop = db.Column(db.Boolean)
+    
     users = db.relationship('User', backref='group', lazy='dynamic')
         
     def __init__(self, name, app_add, app_edit, app_drop, user_add, user_drop):
@@ -74,9 +77,12 @@ class App(db.Model):
     img_link = db.Column(db.String(50))
     order_id = db.Column(db.Integer)
     status = db.Column(db.Boolean)
-    click_num = db.Column(db.Integer)
+    #click_num = db.Column(db.Integer) #modelstochange - delete
     beta = db.Column(db.Boolean)
     date = db.Column(db.TIMESTAMP)
+    landing_clicks = db.Column(db.Integer) #modelstochange - add
+    component_clicks = db.Column(db.Integer) #modelstochange - add
+    
 
 
     def __init__(self, name, link, desc, creator_id, img_link, date):
@@ -94,7 +100,7 @@ class Log(db.Model):
     
     id = db.Column(db.Integer,primary_key=True)
     data_time = db.Column(db.TIMESTAMP)
-    content = db.Column(db.String(60),unique=True)
+    content = db.Column(db.String(60)) #modelstochange - change
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, content, data_time, author_id):
@@ -103,11 +109,9 @@ class Log(db.Model):
         self.data_time = data_time
         self.author_id = author_id
         
-#To create
-
 class  Note(db.Model):
-    
-    __tablename__ = 'Note'
+     
+    __tablename__ = 'note' #modelstochange - change
     
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
@@ -123,8 +127,8 @@ class  Note(db.Model):
         
 #db.create_all()
 
-class Invites(db.Model):
-    __tablename__ = 'Invites'
+class Invite(db.Model):
+    __tablename__ = 'invite' #modelstochange - change
     
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(25), unique=True)
@@ -143,7 +147,7 @@ class Invites(db.Model):
 
 
 class Reset(db.Model):
-    __tablename__ = 'Reset'
+    __tablename__ = 'reset' #modelstochange - change
     
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(25), unique=True)
@@ -155,15 +159,16 @@ class Reset(db.Model):
         self.token = str(uuid.uuid4())
 
 
+#modelstochange - delete
 
-class Stats(db.Model):
-    __tablename__ = 'Stats'
+"""""""""
+class Stat(db.Model):
+    __tablename__ = 'stats'
 
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.TIMESTAMP)
     users = db.Column(db.Integer)
     apps = db.Column(db.Integer)
-    clicks = db.Column(db.Integer)
 
 
     def __init__(self, timestamp,users,apps,clicks):
@@ -172,5 +177,15 @@ class Stats(db.Model):
         self.users = users
         self.apps = apps
         self.clicks = clicks
+"""""""""   
 
-
+#modelstochange - add
+    
+class Component(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    domain = db.Column(db.String(160), unique=True)
+    
+    def __init__(self, domain):
+        self.domain = domain
+    
+    

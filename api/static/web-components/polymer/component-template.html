@@ -33,6 +33,7 @@
 
 
     </script>
+    <iron-ajax id="ComponentRequest" url="../api/component" method="POST" content-type="application/json" handle-as="json" on-response="_handleComponentRequestResponse" on-error="_handleComponentRequestError"></iron-ajax>
     </template>
 
     <script>
@@ -43,7 +44,20 @@
 
             },
             ready: function() {
-
+                this._componentRequest();
+            },
+            _componentRequest: function() {
+                this.$.ComponentRequest.body = {
+                    "domain": window.location.href,
+                    "online": "CURRENT_TIMESTAMP"
+                };
+                this.$.ComponentRequest.generateRequest();
+            },
+            _handleComponentRequestResponse: function(response) {
+                console.log(response.data);
+            },
+            _handleComponentRequestResponse: function(error) {
+                console.log(error.data);
             },
             _getColor: function(e) {
                 var colorThief = new ColorThief();

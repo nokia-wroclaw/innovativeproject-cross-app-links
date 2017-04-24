@@ -229,7 +229,8 @@ def checkpass():
     Password authentication. Used for changing password. It checks if entered password is correct with password in database
     """
     data = request.get_json()
-    if sha256_crypt.verify(data.pass, current_user.password_hash):
+    dataobj = jsonify(data)
+    if sha256_crypt.verify(data['pass'], current_user.password_hash):
         return str(True)
     else:
         return str(False)

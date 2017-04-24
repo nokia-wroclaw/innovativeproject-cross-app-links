@@ -223,6 +223,10 @@
         };
 
         $scope.user_inf = {
+            manageFill(username, email) {
+                this.username = username;
+                this.email = email;
+            },
             update: function () {
                 var username = this.username;
                 var email = this.email;
@@ -232,7 +236,7 @@
                     pass: this.current_pass
                 }).then(function (response) {
                     console.log(response);
-                    if (response = 'True') {
+                    if (response == 'True') {
                         var user_info = {
                             username: username,
                             email: email,

@@ -552,13 +552,13 @@ body {
         /* Firefox 19+ */
         font-weight: 400;
         color: #999; }
-    .box.box-form select.pulled {
-      float: right; }
     .box.box-form input[type=checkbox] {
       clear: right;
       margin-top: 5px;
       margin-left: 20px;
-      float: right; }
+      float: right;
+      width: 18px;
+      height: 18px; }
     .box.box-form input[type=file] {
       clear: left; }
     .box.box-form textarea {
@@ -577,7 +577,7 @@ body {
       min-width: 100px;
       width: auto;
       padding: 7px;
-      clear: right; }
+      float: right; }
       .box.box-form select option {
         border: 0; }
         .box.box-form select option:hover {

@@ -664,14 +664,13 @@ body {
                 color: #999;
             }
         }
-        select.pulled {
-            float: right;
-        }
         input[type=checkbox] {
             clear: right;
             margin-top: 5px;
             margin-left: 20px;
             float: right;
+            width: 18px;
+            height: 18px;
         }
         input[type=file] {
             clear: left;
@@ -694,7 +693,7 @@ body {
             min-width: 100px;
             width: auto;
             padding: 7px;
-            clear: right;
+            float: right;
             option {
                 border: 0;
                 &:hover {

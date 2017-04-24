@@ -25,6 +25,8 @@
                 templateUrl: 'static/partials/settings.html'
             }).when('/ver', {
                 templateUrl: 'static/partials/ver.html'
+            }).when('/usercp', {
+                templateUrl: 'static/partials/usercp.html'
             }).when('/profile/:siteID', {
                 templateUrl: 'static/partials/profile.html'
             }).otherwise({

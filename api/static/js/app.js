@@ -222,6 +222,30 @@
             status: false
         };
 
+        $scope.user_inf = {
+            update: function () {
+                var username = this.username;
+                var email = this.email;
+                var password = this.password;
+
+                restful.post('auth/checkpass', {
+                    pass: this.current_pass
+                }).then(function (response) {
+                    console.log(response);
+                    if (response = 'True') {
+                        var user_info = {
+                            username: username,
+                            email: email,
+                        }
+                        restful.update('user', $scope.current_user.id, user_info).then(function (response) {
+                            update.me();
+                        });
+                    }
+                });
+
+            }
+        };
+
         $scope.note = {
 
             content: '',
@@ -270,11 +294,11 @@
             resl: document.body.innerWidth,
             onchange: function () {
 
-                }
-                //1200
-                //768
-                //480
-                //320
+            }
+            //1200
+            //768
+            //480
+            //320
         };
 
         /*Stats chart settings and data*/

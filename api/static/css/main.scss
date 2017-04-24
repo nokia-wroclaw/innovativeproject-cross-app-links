@@ -343,7 +343,6 @@ body {
 .user-profile-stat {
     .site-stat {
         padding-top: 30px;
-       
     }
 }
 
@@ -627,8 +626,10 @@ body {
         float: left;
         margin: 0;
         input[type=text],
+        input[type=password],
         textarea,
-        select {
+        select,
+        label {
             float: left;
             width: 100%;
             box-sizing: border-box;
@@ -663,6 +664,14 @@ body {
                 font-weight: 400;
                 color: #999;
             }
+        }
+        label {
+            font-size: 13px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            border: 0;
+            margin-bottom: 0;
+            font-weight: 800;
         }
         input[type=file] {
             clear: left;

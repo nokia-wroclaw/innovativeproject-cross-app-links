@@ -107,7 +107,8 @@ index_content_list = [
     'add-user',
     'settings',
     'ver',
-    'profile'
+    'profile',
+    'usercp'
 ]
 
 #Login manager
@@ -221,7 +222,20 @@ def setnewpassword():
         return redirect('/')
     else:
         return make_response(open('api/templates/create-password.html').read())
+#Password verify
+@app.route('/api/auth/checkpass', methods=['POST'])
+def checkpass():
+    """
+    Password authentication. Used for changing password. It checks if entered password is correct with password in database
+    """
+    data = request.get_json()
+    if sha256_crypt.verify(data.pass, current_user.password_hash):
+        return str(True)
+    else:
+        return str(False)
+    
 
+    
 # Delete user
 @app.route('/api/auth/remove', methods=['POST'])
 @login_required

@@ -510,8 +510,10 @@ body {
     float: left;
     margin: 0; }
     .box.box-form input[type=text],
+    .box.box-form input[type=password],
     .box.box-form textarea,
-    .box.box-form select {
+    .box.box-form select,
+    .box.box-form label {
       float: left;
       width: 100%;
       box-sizing: border-box;
@@ -524,33 +526,50 @@ body {
       font-weight: 600;
       font-size: 18px; }
       .box.box-form input[type=text].input-file-choose,
+      .box.box-form input[type=password].input-file-choose,
       .box.box-form textarea.input-file-choose,
-      .box.box-form select.input-file-choose {
+      .box.box-form select.input-file-choose,
+      .box.box-form label.input-file-choose {
         opacity: 0.8; }
         .box.box-form input[type=text].input-file-choose:hover,
+        .box.box-form input[type=password].input-file-choose:hover,
         .box.box-form textarea.input-file-choose:hover,
-        .box.box-form select.input-file-choose:hover {
+        .box.box-form select.input-file-choose:hover,
+        .box.box-form label.input-file-choose:hover {
           opacity: 0.8; }
       .box.box-form input[type=text]:focus,
+      .box.box-form input[type=password]:focus,
       .box.box-form textarea:focus,
-      .box.box-form select:focus {
+      .box.box-form select:focus,
+      .box.box-form label:focus {
         padding-top: 13px;
         padding-bottom: 7px;
         outline: none;
         border-color: #3fce91;
         transition: 0.3s ease; }
       .box.box-form input[type=text]::-webkit-input-placeholder,
+      .box.box-form input[type=password]::-webkit-input-placeholder,
       .box.box-form textarea::-webkit-input-placeholder,
-      .box.box-form select::-webkit-input-placeholder {
+      .box.box-form select::-webkit-input-placeholder,
+      .box.box-form label::-webkit-input-placeholder {
         /* Chrome/Opera/Safari */
         font-weight: 400;
         color: #999; }
       .box.box-form input[type=text]::-moz-placeholder,
+      .box.box-form input[type=password]::-moz-placeholder,
       .box.box-form textarea::-moz-placeholder,
-      .box.box-form select::-moz-placeholder {
+      .box.box-form select::-moz-placeholder,
+      .box.box-form label::-moz-placeholder {
         /* Firefox 19+ */
         font-weight: 400;
         color: #999; }
+    .box.box-form label {
+      font-size: 13px;
+      text-transform: uppercase;
+      opacity: 0.5;
+      border: 0;
+      margin-bottom: 0;
+      font-weight: 800; }
     .box.box-form input[type=file] {
       clear: left; }
     .box.box-form textarea {

@@ -42,7 +42,7 @@ def send_email_register(sender,recip):
     send_email(subject,
         'cross-apps@yandex.com',
         recip,
-        render_template("email_reset_template.html",
+        render_template("email_template.html",
             user=username,
             sender=admin,
             url=url,

@@ -18,6 +18,9 @@ body {
   background: #f0f0f0;
   background-attachment: fixed; }
 
+.clear {
+  clear: both; }
+
 .container-fluid {
   padding: 0;
   margin: 0;
@@ -332,7 +335,20 @@ body {
         color: #ccc;
         cursor: pointer; }
   .box.link-box {
-    float: left; }
+    float: left;
+    position: relative; }
+    .box.link-box .beta-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #3fce91;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 4px;
+      box-sizing: border-box;
+      float: right;
+      font-size: 11px;
+      color: #fff; }
     .box.link-box .main-link-info {
       float: left; }
       .box.link-box .main-link-info img {
@@ -553,14 +569,13 @@ body {
         font-weight: 400;
         color: #999; }
     .box.box-form input[type=checkbox] {
-      clear: right;
-      margin-top: 5px;
-      margin-left: 20px;
       float: right;
-      width: 18px;
-      height: 18px; }
+      transform: scale(1.2);
+      position: relative;
+      top: 3px; }
     .box.box-form input[type=file] {
-      clear: left; }
+      clear: right;
+      float: left; }
     .box.box-form textarea {
       height: 180px;
       resize: none; }
@@ -572,11 +587,15 @@ body {
       color: #c0c0c0;
       margin-top: 7px;
       clear: left; }
+    .box.box-form button {
+      float: right;
+      clear: right; }
     .box.box-form select {
       opacity: 0.6;
-      min-width: 100px;
+      min-width: 40px;
       width: auto;
       padding: 7px;
+      display: inline-block;
       float: right; }
       .box.box-form select option {
         border: 0; }

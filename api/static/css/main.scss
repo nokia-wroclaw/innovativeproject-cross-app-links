@@ -21,6 +21,10 @@ body {
     background-attachment: fixed;
 }
 
+.clear {
+    clear: both;
+}
+
 .container-fluid {
     padding: 0;
     margin: 0;
@@ -398,6 +402,20 @@ body {
     }
     &.link-box {
         float: left;
+        position: relative;
+        .beta-icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #3fce91;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 4px;
+            box-sizing: border-box;
+            float: right;
+            font-size: 11px;
+            color: #fff;
+        }
         .main-link-info {
             float: left;
             img {
@@ -665,15 +683,14 @@ body {
             }
         }
         input[type=checkbox] {
-            clear: right;
-            margin-top: 5px;
-            margin-left: 20px;
             float: right;
-            width: 18px;
-            height: 18px;
+            transform: scale(1.2);
+            position: relative;
+            top: 3px;
         }
         input[type=file] {
-            clear: left;
+            clear: right;
+            float: left;
         }
         textarea {
             height: 180px;
@@ -688,11 +705,16 @@ body {
             margin-top: 7px;
             clear: left;
         }
+        button {
+            float: right;
+            clear: right;
+        }
         select {
             opacity: 0.6;
-            min-width: 100px;
+            min-width: 40px;
             width: auto;
             padding: 7px;
+            display: inline-block;
             float: right;
             option {
                 border: 0;

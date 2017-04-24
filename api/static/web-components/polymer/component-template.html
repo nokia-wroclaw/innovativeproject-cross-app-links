@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="../static/bower_components/lato-font/css/lato-font.css">
         <link rel="stylesheet" href="../static/web-components/css/component.css">
-
+        <iron-ajax id="ComponentRequest" url="../api/component" method="POST" content-type="application/json" handle-as="json" on-response="_handleComponentRequestResponse"on-error="_handleComponentRequestError"></iron-ajax>
         <iron-ajax auto url="../api/v2/app" handle-as="json" last-response="{{response}}"></iron-ajax>
         <nav class="main-nav">
             <aside class="component-navbar c-hidden" id="web-component-navbar">
@@ -22,20 +22,13 @@
                                     <span class="text">{{item.name }}</span>
                                 </a>
                             </li>
-                        </template>
+                         </template>
     </ul>
     </section>
     </aside>
     </nav>
-
     <script src="../static/web-components/js/component.js"></script>
-    <script>
-
-
-    </script>
-    <iron-ajax id="ComponentRequest" url="../api/component" method="POST" content-type="application/json" handle-as="json" on-response="_handleComponentRequestResponse" on-error="_handleComponentRequestError"></iron-ajax>
     </template>
-
     <script>
         Polymer({
             is: "web-component",
@@ -48,8 +41,7 @@
             },
             _componentRequest: function() {
                 this.$.ComponentRequest.body = {
-                    "domain": window.location.href,
-                    "online": "CURRENT_TIMESTAMP"
+                    "domain": window.location.href
                 };
                 this.$.ComponentRequest.generateRequest();
             },

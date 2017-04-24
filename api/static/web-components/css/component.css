@@ -103,7 +103,8 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-decoration: none;
     color: #222;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 300;
     box-sizing: border-box;
     text-align: left;
     clear: both;
@@ -116,9 +117,9 @@ body {
 }
 
 .component-ul li a img {
-    height: 70px;
+    height: 45px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 30px;
     display: block;
     z-index: 105;
 }

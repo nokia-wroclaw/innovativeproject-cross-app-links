@@ -27,7 +27,7 @@ def commituser(token,userpassword):
         if not User.query.filter_by(email = useremail).first():
             return "Error while creating user."
     else:
-        return "Error invite not found."
+        return "Error. Invite not found."
 
 
 def commitinvite(email,maker,group):
@@ -90,6 +90,9 @@ def removereset(email):
     sadman = Reset.query.filter_by(email = email).first()
     db.session.delete(sadman)
     db.session.commit()
+
+def infomessage(type, message, path):
+    return render_template("message_template.html", type=type, message=message, path=path)
 
 #-----------
 #STATIC VAL
@@ -235,7 +238,6 @@ def remove():
     if Invites.query.filter_by(email=request.form['email']).first():
         removeinvite(request.form['email'])
     return redirect('/add-user')
-
 
 #Default templates for Flask route
 

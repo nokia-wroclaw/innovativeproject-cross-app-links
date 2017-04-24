@@ -2,6 +2,7 @@
 
 body {
     background: #f0f0f0;
+    font-family: 'Lato', sans-Serif;
 }
 
 .main-nav {
@@ -51,8 +52,9 @@ body {
     box-sizing: border-box;
     transition: all 0.3s ease;
     z-index: 1001;
-    background: #fff;
-    overflow: hidden;
+    background-color: #23262a;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 
@@ -73,20 +75,19 @@ body {
 
 .component-ul {
     font-family: 'Lato', sans-serif;
-    background-color: #23262a;
     width: 100%;
-    min-height: 100%;
+    height: auto;
     box-sizing: border-box;
     float: left;
-    padding: 5px;
+    padding: 2px;
     display: inline-block;
 }
 
 .component-ul li {
     display: inline-block;
     float: left;
-    width: 50%;
-    padding: 5px;
+    width: 33.333333333333333%;
+    padding: 2px;
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
@@ -97,12 +98,11 @@ body {
     float: left;
     padding: 10px;
     width: 100%;
-    height: 150px;
+    height: 108px;
     background-color: #eee;
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-decoration: none;
     color: #222;
-    font-weight: 600;
     box-sizing: border-box;
     text-align: left;
     clear: both;
@@ -115,9 +115,9 @@ body {
 }
 
 .component-ul li a img {
-    height: 70px;
+    height: 45px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 15px;
     display: block;
     z-index: 105;
 }
@@ -125,13 +125,12 @@ body {
 .component-ul li a .text {
     width: 100%;
     float: left;
-    margin: inherit;
     position: absolute;
-    bottom: 10px;
-    left: 10px;
-    font-weight: 800;
-    letter-spacing: 1.1px;
-    opacity: 0.8;
+    bottom: 2px;
+    left: 5px;
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 1;
 }
 
 .component-ul li .option-icon {
@@ -141,7 +140,7 @@ body {
     padding: 5px 5px 1px 5px;
     background: rgba(0, 0, 0, 0.1);
     color: #666;
-    font-size: 14px;
+    font-size: 11px;
     z-index: 99999;
 }
 

@@ -175,10 +175,13 @@ def register():
     If false, we call function that creates invite entry and sends email.
     """
     if not User.query.filter_by(email=request.form['email']).first():
-        commitinvite(request.form['email'],current_user,request.form['group'])
-        return redirect('/add-user')
+        if current_user.group_id == 1:
+            commitinvite(request.form['email'],current_user,request.form['group'])
+            return redirect('/add-user')
+        else:
+            return render_template("message_template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
     else:
-        return str(False)
+        return render_template("message_template.html", type="Warning!", message="User exists or invitation send already.", path="/add-user")
 
 
 # Confirm account
@@ -233,11 +236,15 @@ def remove():
     If user entry exists, removes it from the database.
     If invite entry exists, removes it from the database.
     """
-    if User.query.filter_by(email=request.form['email']).first():
-        removeuser(request.form['email'], current_user)
-    if Invites.query.filter_by(email=request.form['email']).first():
-        removeinvite(request.form['email'])
-    return redirect('/add-user')
+    if current_user.group_id == 1:
+        if User.query.filter_by(email=request.form['email']).first():
+            removeuser(request.form['email'], current_user)
+        if Invites.query.filter_by(email=request.form['email']).first():
+            removeinvite(request.form['email'])
+        return redirect('/add-user')
+    else:
+        return render_template("message_template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
+
 
 #Default templates for Flask route
 

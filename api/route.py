@@ -91,9 +91,6 @@ def removereset(email):
     db.session.delete(sadman)
     db.session.commit()
 
-def infomessage(type, message, path):
-    return render_template("message_template.html", type=type, message=message, path=path)
-
 #-----------
 #STATIC VAL
 #-----------

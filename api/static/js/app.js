@@ -1,6 +1,31 @@
 (function () {
     var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives', 'chart.js', 'angularFileUpload']);
-    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', 'FileUploader', function ($scope, restful, $location, $routeParams, $interval, FileUploader) {
+    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', 'FileUploader', '$http', function ($scope, restful, $location, $routeParams, $interval, FileUploader, $http) {
+
+        /*Append loading page druing data fetching*/
+
+        var loadingPage = {
+            ready: function () {
+                document.body.querySelector('.loading .text').innerHTML = 'Fetching data...';
+                $interval(function () {
+                    if ($http.pendingRequests < 1) {
+                        document.body.querySelector('.loading').remove();
+                        document.body.style.overflow = 'auto';
+                    }
+                }, 1000);
+            }
+        };
+        /*Hide it when content is loaded*/
+        $scope.$on('$viewContentLoaded', function () {
+            loadingPage.ready();
+        });
+
+
+        /*Change route to dashboard*/
+        $scope.redirectToDash = function () {
+            $location.path('/dashboard');
+        }
+
         /*Limits for lists*/
         $scope.limit = {
             users: 5,
@@ -109,12 +134,15 @@
             desc: '',
             img_link: '',
             order_id: '',
-            manageFill: function (name, link, desc, img_link, order_id) {
+            beta: null,
+            manageFill: function (name, link, desc, img_link, order_id, beta) {
                 this.name = name;
                 this.address = link;
                 this.desc = desc;
                 this.img_link = img_link;
                 this.order_id = order_id;
+                this.beta = beta;
+
             },
             add: function () {
                 var img_link = $scope.clockDate.date();
@@ -157,7 +185,8 @@
                     link: this.address,
                     desc: this.desc,
                     img_link: img_link,
-                    order_id: this.order_id
+                    order_id: this.order_id,
+                    beta: this.beta,
                 }
                 restful.update('app', app_id, post_object).then(function (response) {
                     var log_object = {
@@ -255,6 +284,7 @@
             $scope.newlink.clear();
             $scope.newlink.status = false;
             $scope.searchBy = '';
+
         });
 
         /*Popup model functions*/
@@ -270,11 +300,11 @@
             resl: document.body.innerWidth,
             onchange: function () {
 
-                }
-                //1200
-                //768
-                //480
-                //320
+            }
+            //1200
+            //768
+            //480
+            //320
         };
 
         /*Stats chart settings and data*/

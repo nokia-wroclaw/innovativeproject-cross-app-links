@@ -34,7 +34,7 @@
             <img src="../static/img/app-img/{{app.img_link}}.png">
             <h3 class="main-link-heading">{{app.name}}</h3>
         </div>
-        <a class="settings-icon" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
+        <a ng-show="current_user.group.app_edit" class="settings-icon" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
     </div>
 
     <div class="box box-table">

@@ -16,7 +16,60 @@ body {
   margin: 0;
   font-family: "Lato", sans-serif;
   background: #f0f0f0;
-  background-attachment: fixed; }
+  background-attachment: fixed;
+  overflow: hidden; }
+
+@keyframes spinner {
+  from {
+    transform: rotateZ(0);
+    border-width: 7px;
+    opacity: 0.1;
+    border-radius: 7px; }
+  to {
+    transform: rotateZ(360deg);
+    border-width: 1px;
+    opacity: 1;
+    border-color: #f55753;
+    border-radius: 100%; } }
+.loading {
+  position: fixed;
+  width: 100% !important;
+  height: 100% !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: #34313d;
+  z-index: 9999999999999999999999;
+  text-align: center; }
+  .loading .loading-icon {
+    display: block;
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    top: 45%;
+    position: relative;
+    background: transparent;
+    box-sizing: border-box;
+    border: 6px solid white;
+    border-radius: 7px;
+    animation: spinner infinite 0.7s linear;
+    transition: 0.4s ease; }
+  .loading .text {
+    display: block;
+    margin: 0 auto;
+    width: 180px;
+    height: 50px;
+    top: 49%;
+    position: relative;
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase; }
+
+.clear {
+  clear: both; }
 
 .container-fluid {
   padding: 0;
@@ -332,7 +385,21 @@ body {
         color: #ccc;
         cursor: pointer; }
   .box.link-box {
-    float: left; }
+    float: left;
+    position: relative; }
+    .box.link-box .beta-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #F4B759;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 4px;
+      box-sizing: border-box;
+      float: right;
+      font-weight: 600;
+      font-size: 11px;
+      color: #fff; }
     .box.link-box .main-link-info {
       float: left; }
       .box.link-box .main-link-info img {
@@ -517,6 +584,7 @@ body {
       box-sizing: border-box;
       padding: 10px 0px;
       border: 0;
+      outline: none;
       background: transparent;
       border-bottom: 2px solid #e2f7ee;
       margin-bottom: 20px;
@@ -551,8 +619,14 @@ body {
         /* Firefox 19+ */
         font-weight: 400;
         color: #999; }
+    .box.box-form input[type=checkbox] {
+      float: right;
+      transform: scale(1.2);
+      position: relative;
+      top: 3px; }
     .box.box-form input[type=file] {
-      clear: left; }
+      clear: right;
+      float: left; }
     .box.box-form textarea {
       height: 180px;
       resize: none; }
@@ -562,13 +636,18 @@ body {
       font-size: 18px;
       font-weight: 400;
       color: #c0c0c0;
-      margin-top: 7px; }
+      margin-top: 7px;
+      clear: left; }
+    .box.box-form button {
+      float: right;
+      clear: right; }
     .box.box-form select {
       opacity: 0.6;
-      min-width: 100px;
+      min-width: 40px;
       width: auto;
       padding: 7px;
-      clear: right; }
+      display: inline-block;
+      float: right; }
       .box.box-form select option {
         border: 0; }
         .box.box-form select option:hover {

@@ -130,6 +130,11 @@ def before_request():
 #ROUTING
 #-----------
 
+@app.route('/addme')
+def addme():
+    return str(current_user.group.app_add)
+
+
 #Auth route
 
 @app.route('/api/auth', methods=['POST'])

@@ -123,6 +123,19 @@ def load_user(user_id):
 
 # put @login_required to deny access for unknown visitors
 
+@app.route('/database')
+def database():
+    db.create_all()
+    group1 = Group('Administrator', True, True, True, True, True, True)
+    group2 = Group('Application manager', True, True, True, True, False, False)
+    group3 = Group('User', True, False, True, True, False, False)
+    admin = User('admin@example.com', sha256_crypt.encrypt('admin123'), 1, '04/26/2017')
+    db.session.add(group1)
+    db.session.add(group2)
+    db.session.add(group3)
+    db.session.add(admin)
+    db.session.commit()
+
 @app.before_request
 def before_request():
     g.user = None
@@ -134,7 +147,6 @@ def before_request():
 #-----------
 
 #Auth route
-
 @app.route('/api/auth', methods=['POST'])
 def auth():
     """

@@ -15,20 +15,22 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'))
     date = db.Column(db.TIMESTAMP)
-    avatar_url = db.Column(db.String) #modelstochange - add
-    been_active = db.Column(db.String) #modelstochange - add
+    avatar_url = db.Column(db.String)
+    been_active = db.Column(db.String)
     
     applications = db.relationship('App', backref='creator', lazy='dynamic')
     logs = db.relationship('Log', backref='author', lazy='dynamic')
     notes = db.relationship('Note', backref='owner', lazy='dynamic')
     
-    def __init__(self, email, password_hash,group):
+    def __init__(self, email, password_hash, group_id, been_active):
         
         self.email = email
         self.password_hash = password_hash
         self.group_id = group
         self.username = email.split('@')[0]
-#        self.date = date
+        self.date = "CURRENT_TIMESTAMP"
+        self.avatar_url = "default_avatar"
+        self.been_active = been_active
         
     def is_authenticated():
         return True
@@ -49,18 +51,21 @@ class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), unique=True)
     app_add = db.Column(db.Boolean)
-    app_edit = db.Column(db.Boolean)
-    app_drop = db.Column(db.Boolean)
+    app_edit_all = db.Column(db.Boolean) 
+    app_edit_my = db.Column(db.Boolean)
+    app_drop = db.Column(db.Boolean)    
     user_add = db.Column(db.Boolean)
     user_drop = db.Column(db.Boolean)
     
+    
     users = db.relationship('User', backref='group', lazy='dynamic')
         
-    def __init__(self, name, app_add, app_edit, app_drop, user_add, user_drop):
+    def __init__(self, name, app_add, app_edit_all, app_edit_my, app_drop, user_add, user_drop):
         
         self.name = name
         self.app_add = app_add
-        self.app_edit = app_edit
+        self.app_edit_all= app_edit_all
+        self.app_edit_my= app_edit_my
         self.app_drop = app_drop
         self.user_add = user_add
         self.user_drop = user_drop
@@ -77,11 +82,11 @@ class App(db.Model):
     img_link = db.Column(db.String(50))
     order_id = db.Column(db.Integer)
     status = db.Column(db.Boolean)
-    #click_num = db.Column(db.Integer) #modelstochange - delete
     beta = db.Column(db.Boolean)
+    maintenance = db.Column(db.Boolean)
     date = db.Column(db.TIMESTAMP)
-    landing_clicks = db.Column(db.Integer) #modelstochange - add
-    component_clicks = db.Column(db.Integer) #modelstochange - add
+    landing_clicks = db.Column(db.Integer) 
+    component_clicks = db.Column(db.Integer)
     
 
 
@@ -94,6 +99,9 @@ class App(db.Model):
         self.date = date
         self.status = True
         self.beta = False
+        self.maintenance = False
+        self.landing_clicks = 0
+        self.component_clicks = 0
             
             
 class Log(db.Model):
@@ -111,24 +119,20 @@ class Log(db.Model):
         
 class  Note(db.Model):
      
-    __tablename__ = 'note' #modelstochange - change
-    
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
     tag = db.Column(db.String(20))
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     date = db.Column(db.TIMESTAMP)
 
-    def __init__(self,content,tag,owner_id,date):
+    def __init__(self, content, tag, owner_id, date):
         self.content = content
         self.tag = tag
         self.owner_id = owner_id
         self.date = date
         
-#db.create_all()
 
 class Invite(db.Model):
-    __tablename__ = 'invite' #modelstochange - change
     
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(25), unique=True)
@@ -143,11 +147,10 @@ class Invite(db.Model):
         self.maker = maker
         self.group = group
         self.token = str(uuid.uuid4())
-#        self.date = date
+        self.date = "CURRENT_TIMESTAMP"
 
 
 class Reset(db.Model):
-    __tablename__ = 'reset' #modelstochange - change
     
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(25), unique=True)
@@ -159,27 +162,6 @@ class Reset(db.Model):
         self.token = str(uuid.uuid4())
 
 
-#modelstochange - delete
-
-"""""""""
-class Stat(db.Model):
-    __tablename__ = 'stats'
-
-    id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.TIMESTAMP)
-    users = db.Column(db.Integer)
-    apps = db.Column(db.Integer)
-
-
-    def __init__(self, timestamp,users,apps,clicks):
-
-        self.timestamp = timestamp
-        self.users = users
-        self.apps = apps
-        self.clicks = clicks
-"""""""""   
-
-#modelstochange - add
     
 class Component(db.Model):
     id = db.Column(db.Integer, primary_key=True)

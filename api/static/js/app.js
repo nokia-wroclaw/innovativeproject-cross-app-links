@@ -114,12 +114,15 @@
             desc: '',
             img_link: '',
             order_id: '',
-            manageFill: function (name, link, desc, img_link, order_id) {
+            beta: null,
+            manageFill: function (name, link, desc, img_link, order_id, beta) {
                 this.name = name;
                 this.address = link;
                 this.desc = desc;
                 this.img_link = img_link;
                 this.order_id = order_id;
+                this.beta = beta;
+
             },
             add: function () {
                 var img_link = $scope.clockDate.date();
@@ -162,7 +165,8 @@
                     link: this.address,
                     desc: this.desc,
                     img_link: img_link,
-                    order_id: this.order_id
+                    order_id: this.order_id,
+                    beta: this.beta,
                 }
                 restful.update('app', app_id, post_object).then(function (response) {
                     var log_object = {

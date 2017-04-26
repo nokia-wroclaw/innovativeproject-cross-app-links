@@ -21,6 +21,10 @@ body {
     background-attachment: fixed;
 }
 
+.clear {
+    clear: both;
+}
+
 .container-fluid {
     padding: 0;
     margin: 0;
@@ -343,7 +347,6 @@ body {
 .user-profile-stat {
     .site-stat {
         padding-top: 30px;
-       
     }
 }
 
@@ -399,6 +402,21 @@ body {
     }
     &.link-box {
         float: left;
+        position: relative;
+        .beta-icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #F4B759;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 4px;
+            box-sizing: border-box;
+            float: right;
+            font-weight: 600;
+            font-size: 11px;
+            color: #fff;
+        }
         .main-link-info {
             float: left;
             img {
@@ -634,6 +652,7 @@ body {
             box-sizing: border-box;
             padding: 10px 0px;
             border: 0;
+            outline: none;
             background: transparent;
             border-bottom: 2px solid lighten(#3fce91, 40%);
             margin-bottom: 20px;
@@ -664,8 +683,15 @@ body {
                 color: #999;
             }
         }
+        input[type=checkbox] {
+            float: right;
+            transform: scale(1.2);
+            position: relative;
+            top: 3px;
+        }
         input[type=file] {
-            clear: left;
+            clear: right;
+            float: left;
         }
         textarea {
             height: 180px;
@@ -678,13 +704,19 @@ body {
             font-weight: 400;
             color: #c0c0c0;
             margin-top: 7px;
+            clear: left;
+        }
+        button {
+            float: right;
+            clear: right;
         }
         select {
             opacity: 0.6;
-            min-width: 100px;
+            min-width: 40px;
             width: auto;
             padding: 7px;
-            clear: right;
+            display: inline-block;
+            float: right;
             option {
                 border: 0;
                 &:hover {

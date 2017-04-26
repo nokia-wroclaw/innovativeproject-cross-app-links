@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<div ng-if="filterParams.manage()>0 && current_user.app_edit" class="popup" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
+<div ng-if="current_user.group.app_edit && filterParams.manage()>0" class="popup" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
     <div class="no-box-el error-form-box" ng-show="form.$submitted">
         <span class='pull-left text-left error' ng-show="form.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
 

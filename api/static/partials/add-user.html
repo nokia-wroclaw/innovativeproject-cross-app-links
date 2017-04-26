@@ -1,6 +1,6 @@
-<if ng-if="!current_user.user_add" ng-init="redirectToDash()">
+<if ng-if="!current_user.group.user_add" ng-init="redirectToDash()">
 </if>
-<if ng-if="current_user.user_add">
+<if ng-if="current_user.group.user_add">
     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
         <div class="login-container">
             <div class="box box-form">

@@ -1,6 +1,11 @@
 (function () {
     var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives', 'chart.js', 'angularFileUpload']);
     app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', 'FileUploader', function ($scope, restful, $location, $routeParams, $interval, FileUploader) {
+
+        $scope.redirectToDash = function () {
+            $location.path('/dashboard');
+        }
+
         /*Limits for lists*/
         $scope.limit = {
             users: 5,
@@ -255,6 +260,7 @@
             $scope.newlink.clear();
             $scope.newlink.status = false;
             $scope.searchBy = '';
+
         });
 
         /*Popup model functions*/
@@ -270,11 +276,11 @@
             resl: document.body.innerWidth,
             onchange: function () {
 
-                }
-                //1200
-                //768
-                //480
-                //320
+            }
+            //1200
+            //768
+            //480
+            //320
         };
 
         /*Stats chart settings and data*/

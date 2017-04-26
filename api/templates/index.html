@@ -64,7 +64,7 @@
                             <li>
                                 <a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span><span class="hidden-md">Dashboard</span></a>
                             </li>
-                            <li>
+                            <li ng-show="current_user.group_id ==1">
                                 <a href="stats"><span class="glyphicon glyphicon glyphicon-stats"></span><span class="hidden-md">Statistics</span></a>
                             </li>
                             <li>
@@ -76,7 +76,7 @@
                             <li>
                                 <a href="links"><span class="glyphicon glyphicon-link"></span><span class="hidden-md">My links</span></a>
                             </li>
-                            <li class="hidden-md">
+                            <li ng-show="current_user.group.app_add">
                                 <a href="add-link"><span class="glyphicon glyphicon-plus"></span><span class="hidden-md">Add link</span></a>
                             </li>
                         </ul>
@@ -88,7 +88,7 @@
                             <li>
                                 <a href="groups"><span class="glyphicon glyphicon-tags"></span><span class="hidden-md">Groups</span></a>
                             </li>
-                            <li class="hidden-md">
+                            <li ng-show="current_user.group.user_add || current_user.group.user_drop">
                                 <a href="add-user"><span class="glyphicon glyphicon-plus"></span><span class="hidden-md">Add user</span></a>
                             </li>
 
@@ -96,10 +96,7 @@
                         <ul>
                             <h4 class="label hidden-md">Other</h4>
                             <li>
-                                <a href="settings"><span class="glyphicon glyphicon-cog"></span><span class="hidden-md">Settings</span></a>
-                            </li>
-                            <li>
-                                <a href="ver"><span class="glyphicon glyphicon-info-sign"></span><span class="hidden-md">Version</span></a>
+                                <a href="ver"><span class="glyphicon glyphicon-info-sign"></span><span class="hidden-md">About</span></a>
                             </li>
                         </ul>
                     </div>

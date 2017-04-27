@@ -101,7 +101,7 @@
 
         $scope.newlink = {
             uploader: new FileUploader({
-                url: 'api/upload',
+                url: 'api/upload/img',
                 formData: []
             }),
             name: '',
@@ -223,11 +223,26 @@
         };
 
         $scope.user_inf = {
+            uploader: new FileUploader({
+                url: 'api/upload/avatar',
+                formData: []
+            }),
             manageFill(username, email) {
                 this.username = username;
                 this.email = email;
             },
-            update: function () {
+            img_update: function () {
+                this.uploader.onBeforeUploadItem = function (item) {
+                    item.formData.push({
+                        filename: $scope.current_user.id
+                    });
+                }
+                this.uploader.uploadAll();
+                this.uploader.clearQueue();
+            },
+            user_update: function () {
+                this.uploader.uploadAll();
+                this.uploader.clearQueue();
                 var username = this.username;
                 var email = this.email;
                 var password = this.password;

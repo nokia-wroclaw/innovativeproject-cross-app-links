@@ -7,17 +7,9 @@ from api.database import db
 from api.functions import Mailing
 from flask_cors import CORS, cross_origin 
 
-
-#-----------
-#FUNCTIONS
-#-----------
-
 #-----------
 #STATIC VAL
 #-----------
-
-# Provide methods
-# mailing = Mailing
 
 #Registered list of available templates
 index_content_list = [

@@ -48,7 +48,7 @@
                     <button on-tap="_orderRequestSend" class="button-simple">Confirm</button>
                     <template id="elements" is="dom-repeat" items="{{response.objects}}">
                         <li class="order-li noselect" id="{{item.id}}">
-                            <div class="option-icon">
+                            <div class="option-icon" on-tap="_pinAppTrigger" id="{{item.id}}">
                                 <span class="glyphicon glyphicon-pushpin"></span>
                             </div>
                             <span class="order-li-name">{{item.name}}</span>
@@ -80,6 +80,15 @@
                 this._componentRequest();
                 this._loadSortable();
             },
+            _pinArray: [],
+            _pinAppTrigger: function(e){
+                var foundAt = this._pinArray.indexOf(e.target.parentElement.id);
+                if(foundAt === -1)
+                    this._pinArray.push(e.target.parentElement.id);
+                else
+                    this._pinArray = this._pinArray.slice(0, foundAt);
+                console.log(this._pinArray.toString());
+            },
             _orderString: '',
             _loadSortable: function() {
                 var el = this.$$('#sortable_ul');
@@ -105,7 +114,7 @@
             _handleComponentRequestResponse: function(response) {
                 console.log(response.data);
             },
-            _handleComponentRequestResponse: function(error) {
+            _handleComponentRequestError: function(error) {
                 console.log(error.data);
             },
             _tokenRequestSend: function(e) {

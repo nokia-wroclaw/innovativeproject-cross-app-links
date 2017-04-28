@@ -170,4 +170,4 @@ class Component(db.Model):
     def __init__(self, domain):
         self.domain = domain
     
-    
+    db.create_all()

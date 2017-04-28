@@ -122,7 +122,6 @@ def load_user(user_id):
 
 @app.route('/database')
 def database():
-    db.create_all()
     group1 = Group('Administrator', True, True, True, True, True, True)
     group2 = Group('Application manager', True, True, True, True, False, False)
     group3 = Group('User', True, False, True, True, False, False)

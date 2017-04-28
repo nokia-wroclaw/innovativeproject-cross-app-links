@@ -26,9 +26,9 @@
     </form>
 </div>
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
-    <form class="box box-form" name="avatar" ng-submit="user_inf.img_update()" novalidate>
+    <form class="box box-form" name="avatar" ng-submit="avatar.$valid && user_inf.img_update()" novalidate>
         <img src="../static/img/avatars/{{current_user.id}}.png">
-        <input class="button pure input-file-choose pull-left" type="file" nv-file-select uploader="user_inf.uploader" requried>
+        <input class="button pure input-file-choose pull-left" type="file" nv-file-select uploader="user_inf.uploader" required>
         <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
     </form>
 </div>

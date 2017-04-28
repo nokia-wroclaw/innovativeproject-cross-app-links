@@ -232,8 +232,11 @@
                 this.email = email;
             },
             img_update: function () {
-                this.uploader.uploadAll();
-                this.uploader.clearQueue();
+                if (this.uploader.queue.length > 0) {
+                    this.uploader.uploadAll();
+                    this.uploader.clearQueue();
+                    window.location.reload();
+                }
             },
             user_update: function () {
                 var username = this.username;

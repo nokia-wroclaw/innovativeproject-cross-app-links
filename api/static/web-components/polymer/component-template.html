@@ -1,6 +1,7 @@
 <link rel="import" href="../static/bower_components/polymer/polymer.html">
 <link rel="import" href="../static/bower_components/iron-ajax/iron-ajax.html">
 <script src="../static/bower_components/color-thief/dist/color-thief.min.js"></script>
+<script src="../static/bower_components/Sortable/Sortable.js"></script>
 
 <dom-module id="web-component" id='component'>
     <template>
@@ -9,35 +10,91 @@
         <link rel="stylesheet" href="../static/web-components/css/component.css">
         <iron-ajax id="ComponentRequest" url="../api/component" method="POST" content-type="application/json" handle-as="json" on-response="_handleComponentRequestResponse"on-error="_handleComponentRequestError"></iron-ajax>
         <iron-ajax auto url="../api/v2/app" handle-as="json" last-response="{{response}}"></iron-ajax>
+        
+        
+        
+        
+        
         <nav class="main-nav">
-            <aside class="component-navbar c-hidden" id="web-component-navbar">
-                <button class="burger-icon"><span class="glyphicon glyphicon-th"></span> </button>
-                <section class="component-overflow c-hidden">
-                    <ul class="component-ul">
-                        <template id="elements" is="dom-repeat" items="{{response.objects}}">
-                            <li>
-                                <div class="option-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
-                                <a target="_blank" href="{{item.link }}">
-                                    <img src="../static/img/app-img/{{item.img_link}}.png" on-load='_getColor' />
-                                    <span class="text">{{item.name }}</span>
-                                </a>
-                            </li>
-                         </template>
-    </ul>
+           
+        <aside class="component-navbar c-hidden" id="web-component-navbar">
+            <button class="burger-icon"><span class="glyphicon glyphicon-th"></span> </button>
+            <section class="component-overflow c-hidden">
+                
+                <ul class="component-ul">
+                    <div class="user-label">
+                        <div class="user-label-list" id="user-label-list">
+                            <div class="confirm-token hidden">
+                                <input id="tokenValue" type="text" placeholder="Your token" name="token" on-keydown="_tokenRequestSend">
+                                <a class="action-button" href="@"><span class="glyphicon glyphicon-question-sign"></span></a>
+                            </div>
+                            <div class="confirmed-user">
+                                <div class="confirmed-user-email">bakowroc@gmail.com</div>
+                                <button class="action-button button"><span class="glyphicon glyphicon-cog"></span></button>
+                        </div>
+                        </div>
+                    </div>
+                    <template id="elements" is="dom-repeat" items="{{response.objects}}" >
+                        <li class="hidden">  
+                            <a target="_blank" href="{{item.link }}">
+                                <img src="../static/img/app-img/{{item.img_link}}.png" on-load='_getColor' />
+                                <span class="text">{{item.name }}</span>
+                            </a>
+                        </li>
+                    </template>
+                </ul>
+                
+                <ul class="component-ul" id="sortable_ul">
+                    <button on-tap="_orderRequestSend" class="button-simple">Confirm</button>
+                    <template id="elements" is="dom-repeat" items="{{response.objects}}">
+                        <li class="order-li noselect" id="{{item.id}}">
+                            <div class="option-icon">
+                                <span class="glyphicon glyphicon-pushpin"></span>
+                            </div>
+                            <span class="order-li-name">{{item.name}}</span>
+                            <div class="drag-icon"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+                        </li>
+                    </template>
+                </ul>
+
+
+
     </section>
     </aside>
     </nav>
+
+
+
+
+
     <script src="../static/web-components/js/component.js"></script>
     </template>
     <script>
         Polymer({
             is: "web-component",
-            behavior: ['ColorThief'],
+            behavior: ['ColorThief', ' Sortable'],
             properties: {
 
             },
             ready: function() {
                 this._componentRequest();
+                this._loadSortable();
+            },
+            _orderString: '',
+            _loadSortable: function() {
+                var el = this.$$('#sortable_ul');
+                var polymer = this;
+                var sortable = Sortable.create(el, {
+                        handle: '.glyphicon-menu-hamburger',
+                        animation: 150,
+                        dataIdAttr: 'id',
+                        onEnd: function( /**Event*/ evt) {
+                            evt.item.id
+                            evt.newIndex
+                            polymer._orderString = sortable.toArray().toString();
+                        }
+                    }  
+                );
             },
             _componentRequest: function() {
                 this.$.ComponentRequest.body = {
@@ -50,6 +107,17 @@
             },
             _handleComponentRequestResponse: function(error) {
                 console.log(error.data);
+            },
+            _tokenRequestSend: function(e) {
+                if (e.keyCode === 13) {
+                    console.log('Sent')
+                }
+            },
+            _orderRequestSend: function() {
+                if(this._orderString == '')
+                    console.log('Cannot be null you idiot!')
+                else
+                    console.log(this._orderString);
             },
             _getColor: function(e) {
                 var colorThief = new ColorThief();

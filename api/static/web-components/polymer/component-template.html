@@ -20,22 +20,25 @@
         <aside class="component-navbar c-hidden" id="web-component-navbar">
             <button class="burger-icon"><span class="glyphicon glyphicon-th"></span> </button>
             <section class="component-overflow c-hidden">
-                
-                <ul class="component-ul">
-                    <div class="user-label">
+                <div class="user-label">
                         <div class="user-label-list" id="user-label-list">
-                            <div class="confirm-token hidden">
-                                <input id="tokenValue" type="text" placeholder="Your token" name="token" on-keydown="_tokenRequestSend">
-                                <a class="action-button" href="@"><span class="glyphicon glyphicon-question-sign"></span></a>
-                            </div>
-                            <div class="confirmed-user">
-                                <div class="confirmed-user-email">bakowroc@gmail.com</div>
-                                <button class="action-button button"><span class="glyphicon glyphicon-cog"></span></button>
-                        </div>
+                            <template is="dom-if" if="{{_checkAccess}}">
+                                <div class="confirm-token">
+                                    <input id="tokenValue" type="text" placeholder="Your token" name="token" on-keydown="_tokenRequestSend">
+                                    <a class="action-button" href="@"><span class="glyphicon glyphicon-question-sign"></span></a>
+                                </div>
+                            </template>
+                            <template is="dom-if" if="{{_checkAccess}}">
+                                <div class="confirmed-user">                               
+                                    <div class="confirmed-user-email">bakowroc@gmail.com</div>
+                                    <span class="action-button" on-tap="_switchView"><span class="glyphicon glyphicon-cog"></span></span>
+                                </div>
+                            </template>
                         </div>
                     </div>
+                <ul class="component-ul" id="items_ul">
                     <template id="elements" is="dom-repeat" items="{{response.objects}}" >
-                        <li class="hidden">  
+                        <li>  
                             <a target="_blank" href="{{item.link }}">
                                 <img src="../static/img/app-img/{{item.img_link}}.png" on-load='_getColor' />
                                 <span class="text">{{item.name }}</span>
@@ -43,10 +46,9 @@
                         </li>
                     </template>
                 </ul>
-                
-                <ul class="component-ul" id="sortable_ul">
-                    <button on-tap="_orderRequestSend" class="button-simple">Confirm</button>
-                    <template id="elements" is="dom-repeat" items="{{response.objects}}">
+                <ul class="component-ul hidden" id="sortable_ul" >
+                    <button on-tap="_changesRequestSend" class="button-simple">Confirm changes</button>
+                    <template id="orders" is="dom-repeat" items="{{response.objects}}">
                         <li class="order-li noselect" id="{{item.id}}">
                             <div class="option-icon" on-tap="_pinAppTrigger" id="{{item.id}}">
                                 <span class="glyphicon glyphicon-pushpin"></span>
@@ -72,13 +74,30 @@
     <script>
         Polymer({
             is: "web-component",
-            behavior: ['ColorThief', ' Sortable'],
+            behavior: ['ColorThief', 'Sortable'],
             properties: {
-
             },
             ready: function() {
-                this._componentRequest();
+                //Change for API request
+                localStorage.setItem('databasePersonalToken', 'leksykonpwr');
+                localStorage.setItem('email', 'bakowroc@gmail.com'); 
+                this._getValuesRequest();
+                //this._componentRequest();
                 this._loadSortable();
+            },
+            _getValuesRequest: function(){
+                if(this._cachedToken){
+                    console.log('You are authorized');
+                    this._retriveArray();
+                }else 
+                    console.log('You are using component as an Anonymous');  
+            },
+            _cachedToken: localStorage.getItem('cachedToken') || null,
+            _checkAccess: true,
+            _retriveArray: function(){
+                //Change for API request
+                this._pinArray = localStorage.getItem('pinString').split(',') || [];
+                this._orderArray = localStorage.getItem('orderString').split(',') || [];
             },
             _pinArray: [],
             _pinAppTrigger: function(e){
@@ -86,10 +105,9 @@
                 if(foundAt === -1)
                     this._pinArray.push(e.target.parentElement.id);
                 else
-                    this._pinArray = this._pinArray.slice(0, foundAt);
-                console.log(this._pinArray.toString());
+                    this._pinArray[foundAt] = 'e';
             },
-            _orderString: '',
+            _orderArray: [],
             _loadSortable: function() {
                 var el = this.$$('#sortable_ul');
                 var polymer = this;
@@ -97,10 +115,8 @@
                         handle: '.glyphicon-menu-hamburger',
                         animation: 150,
                         dataIdAttr: 'id',
-                        onEnd: function( /**Event*/ evt) {
-                            evt.item.id
-                            evt.newIndex
-                            polymer._orderString = sortable.toArray().toString();
+                        onEnd: function(evt) {
+                            polymer._orderArray = sortable.toArray();
                         }
                     }  
                 );
@@ -119,14 +135,44 @@
             },
             _tokenRequestSend: function(e) {
                 if (e.keyCode === 13) {
-                    console.log('Sent')
+                    //Change for API request
+                    var dbToken = localStorage.getItem('databasePersonalToken');
+                    if(e.target.value == dbToken){
+                        localStorage.cachedToken = e.target.value;
+                        location.reload();
+                    }
+                    else alert('Wrong token!!!');
                 }
             },
-            _orderRequestSend: function() {
-                if(this._orderString == '')
-                    console.log('Cannot be null you idiot!')
-                else
-                    console.log(this._orderString);
+            _changesRequestSend: function() {
+                if(this._orderArray.length == 0)
+                    console.log('You didnt change the order!')
+                else{
+                    var orderString = this._orderArray.toString();
+                    //Change for API request
+                    localStorage.orderString = orderString;
+                    console.log('Order:' + orderString);
+                }
+                if(this._pinArray.length == 0)
+                    console.log('You didnt pinned the app!')
+                else{
+                    var pinString = this._pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
+                    //Change for API request
+                    localStorage.pinString = pinString;
+                    console.log('Pinned: ' + pinString);
+                }
+            },
+            _switchView: function(){
+                var sortable = this.$$('#sortable_ul');
+                var items = this.$$('#items_ul');
+
+                if (sortable.className.indexOf("hidden") === -1) {
+                    sortable.className +=' hidden';
+                    items.className = items.className.replace(/hidden/g, '');
+                } else {
+                    items.className +=' hidden';
+                    sortable.className = items.className.replace(/hidden/g, '');
+                }
             },
             _getColor: function(e) {
                 var colorThief = new ColorThief();

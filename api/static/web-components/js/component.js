@@ -3,7 +3,6 @@
         element: document.querySelectorAll('#web-component-navbar')[0],
         button: document.querySelectorAll('#web-component-navbar .burger-icon')[0],
         overflow: document.querySelectorAll('#web-component-navbar .component-overflow')[0],
-        iframe: document.querySelectorAll('#web-component-navbar iframe')[0],
         use: function () {
             var component = this.element;
             var componentOverflow = this.overflow;
@@ -19,7 +18,6 @@
         start: function () {
             var button = this.button;
             var component = this.element;
-            var iframe = this.iframe;
             var componentOverflow = this.overflow;
 
             //Element which contains web-component

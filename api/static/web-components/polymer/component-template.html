@@ -22,13 +22,13 @@
             <section class="component-overflow c-hidden">
                 <div class="user-label">
                         <div class="user-label-list" id="user-label-list">
-                            <template is="dom-if" if="{{_checkAccess}}">
+                            <template is="dom-if" if="{{!_checkAccess()}}">
                                 <div class="confirm-token">
                                     <input id="tokenValue" type="text" placeholder="Your token" name="token" on-keydown="_tokenRequestSend">
                                     <a class="action-button" href="@"><span class="glyphicon glyphicon-question-sign"></span></a>
                                 </div>
                             </template>
-                            <template is="dom-if" if="{{_checkAccess}}">
+                            <template is="dom-if" if="{{_checkAccess()}}">
                                 <div class="confirmed-user">                               
                                     <div class="confirmed-user-email">bakowroc@gmail.com</div>
                                     <span class="action-button" on-tap="_switchView"><span class="glyphicon glyphicon-cog"></span></span>
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 <ul class="component-ul" id="items_ul">
-                    <template id="elements" is="dom-repeat" items="{{response.objects}}" >
+                    <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_appendFields" sort="_selfSort">
                         <li>  
                             <a target="_blank" href="{{item.link }}">
                                 <img src="../static/img/app-img/{{item.img_link}}.png" on-load='_getColor' />
@@ -48,7 +48,7 @@
                 </ul>
                 <ul class="component-ul hidden" id="sortable_ul" >
                     <button on-tap="_changesRequestSend" class="button-simple">Confirm changes</button>
-                    <template id="orders" is="dom-repeat" items="{{response.objects}}">
+                    <template id="orders" is="dom-repeat" items="{{response.objects}}" sort="_selfSort">
                         <li class="order-li noselect" id="{{item.id}}">
                             <div class="option-icon" on-tap="_pinAppTrigger" id="{{item.id}}">
                                 <span class="glyphicon glyphicon-pushpin"></span>
@@ -84,16 +84,20 @@
                 this._getValuesRequest();
                 //this._componentRequest();
                 this._loadSortable();
+                this._retriveArray();
             },
             _getValuesRequest: function(){
                 if(this._cachedToken){
                     console.log('You are authorized');
-                    this._retriveArray();
                 }else 
-                    console.log('You are using component as an Anonymous');  
+                    console.log('You are using component as an Anonymous');
             },
             _cachedToken: localStorage.getItem('cachedToken') || null,
-            _checkAccess: true,
+            _checkAccess: function(){
+                if(localStorage.getItem('cachedToken'))
+                    return true;
+                return false
+            },
             _retriveArray: function(){
                 //Change for API request
                 this._pinArray = localStorage.getItem('pinString').split(',') || [];
@@ -121,6 +125,20 @@
                     }  
                 );
             },
+            _appendFields: function(item){
+                var selfOrder = this._orderArray.indexOf(item.id.toString());
+                item.selfOrder= selfOrder;
+                var pin = this._pinArray.indexOf(item.id.toString());
+                if(pin !== -1)
+                    item.pin = true;
+                else 
+                    item.pin = false;
+                
+                return !item.pin ? item : false;
+            },
+            _selfSort: function(a,b){
+                return a.selfOrder < b.selfOrder ? -1 : 1;
+            },
             _componentRequest: function() {
                 this.$.ComponentRequest.body = {
                     "domain": window.location.href
@@ -145,22 +163,27 @@
                 }
             },
             _changesRequestSend: function() {
-                if(this._orderArray.length == 0)
-                    console.log('You didnt change the order!')
+                if(this._orderArray.length == 0){
+                    console.log('You didnt change the order!');
+                    return;
+                }
                 else{
                     var orderString = this._orderArray.toString();
                     //Change for API request
                     localStorage.orderString = orderString;
                     console.log('Order:' + orderString);
                 }
-                if(this._pinArray.length == 0)
+                if(this._pinArray.length == 0){
                     console.log('You didnt pinned the app!')
+                    return;
+                }   
                 else{
                     var pinString = this._pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
                     //Change for API request
                     localStorage.pinString = pinString;
                     console.log('Pinned: ' + pinString);
                 }
+                location.reload();
             },
             _switchView: function(){
                 var sortable = this.$$('#sortable_ul');
@@ -171,7 +194,7 @@
                     items.className = items.className.replace(/hidden/g, '');
                 } else {
                     items.className +=' hidden';
-                    sortable.className = items.className.replace(/hidden/g, '');
+                    sortable.className = sortable.className.replace(/hidden/g, '');
                 }
             },
             _getColor: function(e) {

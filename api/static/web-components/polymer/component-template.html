@@ -33,12 +33,17 @@
                             <template is="dom-if" if="{{!_checkAccess()}}">
                                 <div class="confirm-token">
                                     <input id="tokenValue" type="text" placeholder="Your token" name="token" on-keydown="_tokenRequestSend">
-                                    <a class="action-button" href="@"><span class="glyphicon glyphicon-question-sign"></span></a>
+                                    <a class="action-button" href="/get-component-token"><span class="glyphicon glyphicon-question-sign"></span></a>
                                 </div>
                             </template>
                             <template is="dom-if" if="{{_checkAccess()}}">
                                 <div class="confirmed-user">                               
-                                    <div class="confirmed-user-email"><span class="glyphicon glyphicon-link" on-tap="_signMeOut"></span> bakowroc@gmail.com</div>
+                                    <div class="confirmed-user-email">
+                                        <div class=" signMeOut">
+                                            <span class="glyphicon glyphicon-log-out" on-tap="_signMeOut"></span> 
+                                        </div>
+                                        bakowroc@gmail.com
+                                    </div>
                                     <span class="action-button" on-tap="_switchView"><span class="glyphicon glyphicon-cog"></span></span>
                                 </div>
                             </template>
@@ -59,7 +64,7 @@
                     <template id="orders" is="dom-repeat" items="{{response.objects}}" sort="_selfSort">
                         <li class="order-li noselect" id="{{item.id}}">
                             <div class="option-icon" on-tap="_pinAppTrigger" id="{{item.id}}">
-                                <span class$="{{_setAsPinned(item.pin)}}" on-tap="_setToChange"></span>
+                                <span class$="{{_setAsPinned(item.pin)}}" ></span>
                             </div>
                             <span class="order-li-name">{{item.name}}</span>
                             <div class="drag-icon"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
@@ -90,12 +95,13 @@
                 localStorage.setItem('databasePersonalToken', 'leksykonpwr');
                 localStorage.setItem('email', 'bakowroc@gmail.com'); 
                 this._getValuesRequest();
+                this._retriveArray();
                 //this._componentRequest();
             },
             _cachedToken: localStorage.getItem('cachedToken'),
             _getValuesRequest: function(){ 
                 if(this._cachedToken!=null){
-                    this._retriveArray();
+                    
                     this._loadSortable();
                     console.log('You are authorized');
                 }else 
@@ -116,6 +122,9 @@
             },
             _pinArray: [],
             _pinAppTrigger: function(e){
+                if(e.target.className.indexOf('beChanged') === -1)
+                    e.target.className+=' beChanged';
+                else e.target.className = e.target.className.replace(/beChanged/g,'');
                 var foundAt = this._pinArray.indexOf(e.target.parentElement.id);
                 if(foundAt === -1)
                     this._pinArray.push(e.target.parentElement.id);
@@ -226,11 +235,6 @@
                     return 'glyphicon glyphicon-pushpin pinned';
                 else
                     return 'glyphicon glyphicon-pushpin';
-            },
-            _setToChange: function(e){
-                if(e.target.className.indexOf('beChanged') === -1)
-                    e.target.className+=' beChanged';
-                else e.target.className = e.target.className.replace(/beChanged/g,'')
             },
             _getColor: function(e) {
                 var colorThief = new ColorThief();

@@ -162,9 +162,22 @@ body {
     font-size: 16px;
     text-align: left;
     padding: 20px;
+    padding-right: 0;
     padding-bottom: 0;
 }
 
+.component-overflow>.user-label>.user-label-list>.confirmed-user>.confirmed-user-email>.signMeOut{
+    float: left;
+    padding: 1px 5px 5px 5px;
+    opacity: 0.2;
+    margin-right: 5px;
+    text-align: center;
+    cursor: pointer;
+   
+}
+.component-overflow>.user-label>.user-label-list>.confirmed-user>.confirmed-user-email>.signMeOut:hover{
+    opacity: 0.9;
+}
 
 .component-ul {
     font-family: 'Lato', sans-serif;
@@ -243,7 +256,7 @@ body {
     padding: 10px;
     width: 100%;
     height: 108px;
-    background-color: #eee;
+    background-color: #D45A5A;
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-decoration: none;
     color: #222;

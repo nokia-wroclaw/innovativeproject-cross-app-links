@@ -44,7 +44,7 @@ def get_app_visible(search_params=None, **kw):
     if 'filters' not in search_params:
         search_params['filters'] = []
     search_params['filters'].append(filt)
-        
+    
 manager = APIManager(app,  
                      flask_sqlalchemy_db=db, 
                      preprocessors=dict(POST=[auth_func], 

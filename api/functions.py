@@ -1,6 +1,6 @@
 from api import app
 from flask import Flask, session, g
-from api.models import User, Group, App, Log, Invites, Reset
+from api.models import User, Group, App, Log, Invite, Reset
 from api.database import db
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from api.mail import send_email, send_email_register, send_email_reset
@@ -10,10 +10,10 @@ from passlib.hash import sha256_crypt
 class Mailing():
 	def commituser(self,token,userpassword):
 	    """
-	    Creates user with given password. Email and group are taken from Invites table.
+	    Creates user with given password. Email and group are taken from Invite table.
 	    Removes invite entry.
 	    """
-	    new = Invites.query.filter_by(token = token).first()
+	    new = Invite.query.filter_by(token = token).first()
 	    if new:
 	        useremail = new.email
 	        group = new.group
@@ -31,7 +31,7 @@ class Mailing():
 		Creates invite entry with given email, group and id of user who send invite
 		(maker is user object).
 		"""
-		new = Invites(email,maker.id,group)
+		new = Invite(email,maker.id,group)
 		db.session.add(new)
 		db.session.commit()
 		receiver = [email]
@@ -73,7 +73,7 @@ class Mailing():
 		"""
 		Removes invite entry.
 		"""
-		sadman = Invites.query.filter_by(email = email).first()
+		sadman = Invite.query.filter_by(email = email).first()
 		db.session.delete(sadman)
 		db.session.commit()
 

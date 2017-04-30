@@ -23,7 +23,9 @@ index_content_list = [
     'add-user',
     'settings',
     'ver',
-    'profile'
+    'profile',
+    'components'
+    
 ]
 
 #Login manager

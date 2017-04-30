@@ -7,29 +7,26 @@
     <div class="box box-table">
         <table class="table ">
             <header>
-                <h3 class="orange">Action log</h3>
+                <h3 class="green">Components in use</h3>
                 <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
             </header>
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Date</th>
-                    <th>Author</th>
-                    <th>Content</th>
+                    <th>Domain</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat='log in logs | orderBy: id : true | limitTo : limit.log' ng-show='logs.length'>
-                    <td>{{log.id}}</td>
-                    <td>{{log.date | date: 'short' }}</td>
-                    <td>{{log.author.username}}</td>
-                    <td>{{log.content}}</td>
+                <tr ng-repeat='component in components | orderBy: id : true | limitTo : limit.components' ng-show='components.length'>
+                    <td>{{component.id}}</td>
+                    <td><a href="{{component.domain}}">{{component.domain}}</a></td>
+                   
                 </tr>
             </tbody>
         </table>
-        <span class='warning-text' ng-hide='logs.length'>There is no activity yet</span>
+        <span class='warning-text' ng-hide='components.length'>There is no activity yet</span>
         <div class="full-width-button-area">
-            <a href="#" class="button orange pull-right" ng-click="limit.log=limit.log+2"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+            <a href="#" class="button green pull-right" ng-click="limit.components=limit.components+2"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
         </div>
     </div>
 </div>

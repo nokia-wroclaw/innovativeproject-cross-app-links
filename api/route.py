@@ -2,7 +2,7 @@ from flask import Flask, make_response, jsonify, render_template, redirect, sess
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from passlib.hash import sha256_crypt
 from api import app
-from api.models import User, Group, App, Log, Invites, Reset
+from api.models import User, Group, App, Log, Invite, Reset
 from api.database import db
 from api.functions import Mailing
 from flask_cors import CORS, cross_origin 
@@ -33,21 +33,17 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
 # put @login_required to deny access for unknown visitors
+
 
 @app.route('/database')
 def database():
-    db.create_all()
     group1 = Group('Administrator', True, True, True, True, True, True)
     group2 = Group('Application manager', True, True, True, True, False, False)
     group3 = Group('User', True, False, True, True, False, False)
-    admin = User('admin@example.com', sha256_crypt.encrypt('admin123'), 1, '04/26/2017')
-    db.session.add(group1)
-    db.session.add(group2)
-    db.session.add(group3)
-    db.session.add(admin)
-    db.session.commit()
+    admin = User('admin@example.com', sha256_crypt.encrypt('admin123'), 22, '04/26/2017')
+    app = App('Skype', 'http://skype.com', 'Skype is awesome tool', 1, '12121312222')
+    #db.session.commit()
 
 @app.before_request
 def before_request():
@@ -94,7 +90,7 @@ def logout():
 
 @app.route('/api/auth/register', methods=['POST'])
 @login_required
-def register():
+def register(): 
     """
     Checks if given email is already in use. 
     If false, we call function that creates invite entry and sends email.
@@ -165,7 +161,7 @@ def remove():
     if current_user.group_id == 1:
         if User.query.filter_by(email=request.form['email']).first():
             Mailing().removeuser(request.form['email'], current_user)
-        if Invites.query.filter_by(email=request.form['email']).first():
+        if Invite.query.filter_by(email=request.form['email']).first():
             Mailing().removeinvite(request.form['email'])
         return redirect('/add-user')
     else:
@@ -215,4 +211,3 @@ def component_test(component_type):
     elif component_type=='polymer':
         return make_response(open('api/static/web-components/polymer/polymer-index.html').read())
     return None
-

@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from api import app
-from api.models import User, Invites, Reset
+from api.models import User, Invite, Reset
 from flask_mail import Mail
 from flask_mail import Message
 
@@ -32,7 +32,7 @@ def send_email_register(sender,recip):
     email = recip[0]
     username = email.split('@')[0]
     admin = sender.split('@')[0]
-    new = Invites.query.filter_by(email = email).first()
+    new = Invite.query.filter_by(email = email).first()
     url = 'https://cross-app-links.herokuapp.com/api/auth/setpassword?token=' + str(new.token)
     subject = "Cross-apps registration"
     headerText = "You've received an invitation!"

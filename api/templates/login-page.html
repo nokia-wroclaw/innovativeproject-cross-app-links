@@ -17,7 +17,13 @@
 
 </head>
 
-<body ng-controller="loginCtrl" ng-cloak>
+<body ng-controller="loginCtrl">
+    <div class="loading">
+        <span class="loading-icon"></span>
+        <span class="text">
+            Loading content...
+        </span>
+    </div>
     <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 row pull-left row welcome-container">
         <nav class="main-landing-menu pull-right text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <ul>
@@ -51,8 +57,7 @@
                     <span class="input-icon"><span class="glyphicon glyphicon-lock"></span></span>
                 </div>
                 <input type="submit" name="submit" value="Sign in">
-                <span class="form-link forgotten-pass"><a href="/api/auth/resetpassword"">Forgot your password?</a></span>
-                <span class="form-link new-account"><a href="/register">I'd like to register a new account</a></span>
+                <span class="form-link forgotten-pass"><a href="/api/auth/resetpassword">Forgot your password?</a></span>
             </form>
             <span class="loadingForm" ng-show="loginFormLoading"></span>
         </div>

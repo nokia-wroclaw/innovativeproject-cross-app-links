@@ -10,11 +10,11 @@ flask_uuid.init_app(app)
 class User(UserMixin, db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.TIMESTAMP)
     email = db.Column(db.String(25), unique=True)
     username = db.Column(db.String(30), unique=True)
     password_hash = db.Column(db.String(128))
-    group_id = db.Column(db.Integer, db.ForeignKey('group.id'))
-    date = db.Column(db.TIMESTAMP)
+    group_id = db.Column(db.Integer, db.ForeignKey('group.id')) 
     avatar_url = db.Column(db.String)
     been_active = db.Column(db.String)
     
@@ -56,8 +56,7 @@ class Group(db.Model):
     app_drop = db.Column(db.Boolean)    
     user_add = db.Column(db.Boolean)
     user_drop = db.Column(db.Boolean)
-    
-    
+       
     users = db.relationship('User', backref='group', lazy='dynamic')
         
     def __init__(self, name, app_add, app_edit_all, app_edit_my, app_drop, user_add, user_drop):
@@ -75,6 +74,7 @@ class Group(db.Model):
 class App(db.Model):
     
     id=db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.TIMESTAMP)
     name = db.Column(db.String(30), unique=True)
     link = db.Column(db.String(50), unique=True)
     desc = db.Column(db.String(50))
@@ -83,63 +83,64 @@ class App(db.Model):
     order_id = db.Column(db.Integer)
     status = db.Column(db.Boolean)
     beta = db.Column(db.Boolean)
-    maintenance = db.Column(db.Boolean)
-    date = db.Column(db.TIMESTAMP)
+    maintenance = db.Column(db.Boolean)  
     landing_clicks = db.Column(db.Integer) 
     component_clicks = db.Column(db.Integer)
     
 
 
-    def __init__(self, name, link, desc, creator_id, img_link, date):
+    def __init__(self, name, link, desc, creator_id, img_link):
         self.name = name
         self.link = link
         self.desc = desc
         self.creator_id = creator_id
         self.img_link = img_link
-        self.date = date
         self.status = True
         self.beta = False
         self.maintenance = False
         self.landing_clicks = 0
         self.component_clicks = 0
+        self.date = 'CURRENT_TIMESTAMP'
             
             
 class Log(db.Model):
     
     id = db.Column(db.Integer,primary_key=True)
-    data_time = db.Column(db.TIMESTAMP)
+    date = db.Column(db.TIMESTAMP)
     content = db.Column(db.String(60)) #modelstochange - change
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, content, data_time, author_id):
+    def __init__(self, content, author_id):
         
         self.content = content
-        self.data_time = data_time
+        self.date = date
         self.author_id = author_id
+        self.date = 'CURRENT_TIMESTAMP'
         
 class  Note(db.Model):
      
     id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.TIMESTAMP)
     content = db.Column(db.Text)
     tag = db.Column(db.String(20))
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    date = db.Column(db.TIMESTAMP)
 
-    def __init__(self, content, tag, owner_id, date):
+    def __init__(self, content, tag, owner_id):
         self.content = content
         self.tag = tag
         self.owner_id = owner_id
-        self.date = date
+        self.date = 'CURRENT_TIMESTAMP'
         
 
 class Invite(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.TIMESTAMP)
     email = db.Column(db.String(25), unique=True)
     token = db.Column(db.String(50), unique=True)
     maker = db.Column(db.Integer)
     group = db.Column(db.Integer)
-    date = db.Column(db.TIMESTAMP)
+   
     
     def __init__(self, email, maker,group):
         
@@ -161,13 +162,26 @@ class Reset(db.Model):
         self.email = email
         self.token = str(uuid.uuid4())
 
-
-    
+        
 class Component(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     domain = db.Column(db.String(160), unique=True)
     
     def __init__(self, domain):
         self.domain = domain
+ 
+class ComponentUser(db.Model):
     
-    db.create_all()
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.TIMESTAMP)
+    email = db.Column(db.String)
+    token = db.Column(db.String)
+    order_string = db.Column(db.String)
+    pin_string = db.Column(db.String)
+    
+    def __init__(self, email):
+        self.email = email
+        self.token = str(uuid.uuid4())
+        self.order_string = ''
+        self.pin_string = ''
+        self.date = 'CURRENT_TIMESTAMP'

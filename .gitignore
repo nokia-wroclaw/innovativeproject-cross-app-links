@@ -9,6 +9,7 @@ api/database.pyc
 api/route.pyc
 api/upload.pyc
 api/mail.pyc
+api/functions.pyc
 run.pyc
 alembic.ini
 api/__init__.pyc

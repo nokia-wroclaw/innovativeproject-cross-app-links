@@ -4,92 +4,8 @@ from passlib.hash import sha256_crypt
 from api import app
 from api.models import User, Group, App, Log, Invites, Reset
 from api.database import db
-from api.mail import send_email, send_email_register, send_email_reset
+from api.functions import Mailing
 from flask_cors import CORS, cross_origin 
-
-
-#-----------
-#FUNCTIONS
-#-----------
-def commituser(token,userpassword):
-    """
-    Creates user with given password. Email and group are taken from Invites table.
-    Removes invite entry.
-    """
-    new = Invites.query.filter_by(token = token).first()
-    if new:
-        useremail = new.email
-        group = new.group
-        new = User(useremail,sha256_crypt.encrypt(userpassword),group)
-        db.session.add(new)
-        db.session.commit()
-        removeinvite(useremail)
-        if not User.query.filter_by(email = useremail).first():
-            return "Error while creating user."
-    else:
-        return "Error. Invite not found."
-
-
-def commitinvite(email,maker,group):
-    """
-    Creates invite entry with given email, group and id of user who send invite
-    (maker is user object).
-    """
-    new = Invites(email,maker.id,group)
-    db.session.add(new)
-    db.session.commit()
-    receiver = [email]
-    send_email_register(maker.email,receiver)
-
-
-def askforreset(email):
-    """
-    Creates reset entry and sends email with password reset link.
-    """
-    new = Reset(email)
-    db.session.add(new)
-    db.session.commit()
-    receiver = [email]
-    send_email_reset(receiver)
-
-def updatepassword(token,userpassword):
-    """
-    Retrieves user email from reset entry and set new passowrd for the user
-    """
-    new = Reset.query.filter_by(token = token).first()
-    useremail = new.email
-    user = User.query.filter_by(email=useremail).first()
-    user.password_hash = sha256_crypt.encrypt(userpassword)
-    db.session.commit()
-    removereset(useremail)
-
-
-def removeuser(email, current):
-    """
-    Removes user from database. If user removes himself, session is terminated.
-    """
-    sadman = User.query.filter_by(email = email).first()
-    if current.email == email:
-        logout_user()
-        session.pop('user', None)
-    db.session.delete(sadman)
-    db.session.commit()
-
-def removeinvite(email):
-    """
-    Removes invite entry.
-    """
-    sadman = Invites.query.filter_by(email = email).first()
-    db.session.delete(sadman)
-    db.session.commit()
-
-def removereset(email):
-    """
-    Removes reset entry.
-    """
-    sadman = Reset.query.filter_by(email = email).first()
-    db.session.delete(sadman)
-    db.session.commit()
 
 #-----------
 #STATIC VAL
@@ -142,11 +58,6 @@ def before_request():
 #ROUTING
 #-----------
 
-@app.route('/addme')
-def addme():
-    return str(current_user.group.app_add)
-
-
 #Auth route
 @app.route('/api/auth', methods=['POST'])
 def auth():
@@ -189,7 +100,7 @@ def register():
     """
     if not User.query.filter_by(email=request.form['email']).first():
         if current_user.group_id == 1:
-            commitinvite(request.form['email'],current_user,request.form['group'])
+            Mailing().commitinvite(request.form['email'],current_user,request.form['group'])
             return redirect('/add-user')
         else:
             return render_template("message_template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
@@ -207,7 +118,7 @@ def setpassword():
     if request.method == 'POST':
         temp = request.args.get('token')
         givenpassword = request.form['password']
-        commituser(temp,givenpassword)
+        Mailing().commituser(temp,givenpassword)
         return redirect('/')
     else:
         return make_response(open('api/templates/create-user.html').read())
@@ -220,7 +131,7 @@ def resetpassword():
     """
     if request.method == 'POST':
         givenemail = request.form['email']
-        askforreset(givenemail)
+        Mailing().askforreset(givenemail)
         return redirect('/')
     else:
         return make_response(open('api/templates/reset-password.html').read())
@@ -236,7 +147,7 @@ def setnewpassword():
     if request.method == 'POST':
         temp = request.args.get('token')
         givenpassword = request.form['password']
-        updatepassword(temp,givenpassword)
+        Mailing().updatepassword(temp,givenpassword)
         return redirect('/')
     else:
         return make_response(open('api/templates/create-password.html').read())
@@ -248,12 +159,13 @@ def remove():
     """
     If user entry exists, removes it from the database.
     If invite entry exists, removes it from the database.
+                removeinvite(request.form['email'])
     """
     if current_user.group_id == 1:
         if User.query.filter_by(email=request.form['email']).first():
-            removeuser(request.form['email'], current_user)
+            Mailing().removeuser(request.form['email'], current_user)
         if Invites.query.filter_by(email=request.form['email']).first():
-            removeinvite(request.form['email'])
+            Mailing().removeinvite(request.form['email'])
         return redirect('/add-user')
     else:
         return render_template("message_template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")

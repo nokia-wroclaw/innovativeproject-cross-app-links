@@ -5,33 +5,27 @@
             properties: {
             },
             ready: function() {
-                //Change for API request
-                localStorage.setItem('databasePersonalToken', 'leksykonpwr');
-                localStorage.setItem('email', 'bakowroc@gmail.com'); 
+                this._componentRequest();
                 this._getValuesRequest();
-                this._retriveArray();
-                //this._componentRequest();
             },
-            _cachedToken: localStorage.getItem('cachedToken'),
+            _cachedToken: localStorage.getItem('cachedToken') || null,
             _getValuesRequest: function(){ 
                 if(this._cachedToken!=null){
-                    
-                    this._loadSortable();
-                    console.log('You are authorized');
-                }else 
-                    console.log('You are using component as an Anonymous');
+                    this.$.AuthRequest.body = {
+                        token:  this._cachedToken
+                    };
+                    this.$.AuthRequest.generateRequest();
+            }else 
+                console.log('Anonymous user')
             }, 
             _checkAccess: function(){
                 if(this._cachedToken!=null)
                     return true;
                 return false;
             },
-            _retriveArray: function(){
-                //Change for API request
-                if(localStorage.getItem('cachedToken')){
-                    this._pinArray = localStorage.getItem('pinString').split(',') || [];
-                    this._orderArray = localStorage.getItem('orderString').split(',') || [];
-                }
+            _retriveArray: function(pinString, orderString){
+                    this._pinArray = pinString.split(',') || [];
+                    this._orderArray = orderString.split(',') || [];
             },
             _pinArray: [],
             _pinAppTrigger: function(e){
@@ -88,48 +82,53 @@
                 else a.order_id < b.order_id ? -1 : 1;
             },
             _componentRequest: function() {
-                this.$.ComponentRequest.body = {
-                    "domain": window.location.href
-                };
-                this.$.ComponentRequest.generateRequest();
-            },
-            _handleComponentRequestResponse: function(response) {
-                console.log(response.data);
-            },
-            _handleComponentRequestError: function(error) {
-                console.log(error.data);
+                if(localStorage.getItem('secured')==null){
+                    this.$.ComponentRequest.body = {
+                        "domain": window.location.href
+                    };
+                    this.$.ComponentRequest.generateRequest();
+                    localStorage.setItem('secured', true);
+                }
             },
             _tokenRequestSend: function(e) {
                 if (e.keyCode === 13) {
-                    //Change for API request
-                    var dbToken = localStorage.getItem('databasePersonalToken');
-                    if(e.target.value == dbToken){
-                        localStorage.cachedToken = e.target.value;
-                        location.reload();
-                    }
-                    else alert('Wrong token!!!');
+                     this.$.AuthRequest.body = {
+                        token:  e.target.value
+                     };
+                    this.$.AuthRequest.generateRequest();
+                    location.reload();
                 }
             },
+            _handleAuthRequestResponse: function(response) {
+                var ComponentUser = response.detail.response;
+                if(ComponentUser!=null){
+                    localStorage.setItem('cachedToken', ComponentUser.token);
+                    localStorage.setItem('cachedEmail', ComponentUser.email);
+                    this._retriveArray(ComponentUser.pin_string, ComponentUser.order_string);
+                    this._loadSortable();
+                }else alert('Wrong token');
+            },
+            _handleAuthRequestError: function(error) {
+                console.log(error.detail);
+            },
             _changesRequestSend: function() {
-                if(this._orderArray.length == 0){
-                    console.log('You didnt change the order!');
+                var orderString = this._orderArray.toString();
+                var pinString = this._pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
+                this.$.ChangesRequest.body = {
+                    token: this._cachedToken,
+                    pin_string: pinString,
+                    order_string: orderString
                 }
-                else{
-                    var orderString = this._orderArray.toString();
-                    //Change for API request
-                    localStorage.orderString = orderString;
-                    console.log('Order:' + orderString);
-                }
-                if(this._pinArray.length == 0){
-                    console.log('You didnt pinned the app!')
-                }   
-                else{
-                    var pinString = this._pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
-                    //Change for API request
-                    localStorage.pinString = pinString;
-                    console.log('Pinned: ' + pinString);
-                }
-                location.reload();
+                this.$.ChangesRequest.generateRequest();
+            },
+            _handleChangesRequestResponse: function(response) {
+                var response = response.detail.response;
+                if(response!=null){
+                    location.reload();
+                }else console.log('Something went wrong');
+            },
+            _handleChangesRequestError: function(error) {
+                console.log(error.detail);
             },
             _switchView: function(){
                 var sortable = this.$$('#sortable_ul');
@@ -164,7 +163,8 @@
                 e.path[1].style.background = background;
             },
             _signMeOut: function(){
-                localStorage.removeItem('cachedToken')
+                localStorage.removeItem('cachedToken');
+                localStorage.removeItem('cachedEmail');
                 location.reload();
             }
         });

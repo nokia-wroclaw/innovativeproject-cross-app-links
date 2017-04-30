@@ -2,7 +2,7 @@ from flask import Flask, make_response, jsonify, render_template, redirect, sess
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from passlib.hash import sha256_crypt
 from api import app
-from api.models import User, Group, App, Log, Invite, Reset
+from api.models import User, Group, App, Log, Invite, Reset, Component, ComponentUser
 from api.database import db
 from api.functions import Mailing
 from flask_cors import CORS, cross_origin 
@@ -34,16 +34,6 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 # put @login_required to deny access for unknown visitors
-
-
-@app.route('/database')
-def database():
-    group1 = Group('Administrator', True, True, True, True, True, True)
-    group2 = Group('Application manager', True, True, True, True, False, False)
-    group3 = Group('User', True, False, True, True, False, False)
-    admin = User('admin@example.com', sha256_crypt.encrypt('admin123'), 22, '04/26/2017')
-    app = App('Skype', 'http://skype.com', 'Skype is awesome tool', 1, '12121312222')
-    #db.session.commit()
 
 @app.before_request
 def before_request():
@@ -169,7 +159,6 @@ def remove():
 
 
 #Default templates for Flask route
-
 @app.route('/')
 def index():
     return make_response(open('api/templates/login-page.html').read())
@@ -200,7 +189,7 @@ def component(component_type):
     elif component_type =='polymer':
         return make_response(open('api/static/web-components/polymer/component-template.html').read())
     
-    
+ 
 @app.route('/get-components/<component_type>')
 def component_test(component_type):
     """
@@ -211,3 +200,41 @@ def component_test(component_type):
     elif component_type=='polymer':
         return make_response(open('api/static/web-components/polymer/polymer-index.html').read())
     return None
+
+@app.route('/get-component-token')
+def get_component_token():
+    return make_response(open('api/templates/get-component-token.html').read())
+
+@app.route('/api/create-component-user', methods=['POST'])
+def create_component_user():
+    email = request.form['email']
+    user = ComponentUser(email);
+    db.session.add(user)
+    db.session.commit()
+    return 'Yeah, it has been created'
+    #Mailing is needed
+    
+@app.route('/api/component-user-data', methods=['POST'])
+def component_user_data():
+    data = request.get_json()
+    user = ComponentUser.query.filter_by(token=data['token']).first()
+    if user:
+        component_user_obj = {}
+        component_user_obj['email'] = user.email
+        component_user_obj['token'] = user.token
+        component_user_obj['pin_string'] = user.pin_string
+        component_user_obj['order_string'] = user.order_string
+        return jsonify(component_user_obj)
+    return str(False)    
+
+@app.route('/api/component-user-data-update', methods=['POST'])
+def component_user_data_update():
+    data = request.get_json()
+    user = ComponentUser.query.filter_by(token=data['token']).first()
+    if user:
+        user.pin_string = data['pin_string']
+        user.order_string = data['order_string']
+        db.session.add(user)
+        db.session.commit()
+        return jsonify(data['token'])
+    return str(False)  

@@ -47,8 +47,7 @@ def get_app_visible(search_params=None, **kw):
     
 manager = APIManager(app,  
                      flask_sqlalchemy_db=db, 
-                     preprocessors=dict(POST=[auth_func], 
-                                        DELETE_SINGLE=[auth_func], 
+                     preprocessors=dict(DELETE_SINGLE=[auth_func], 
                                         PUT_SINGLE=[auth_func]))
 
 # /api/user , /api/user/<int>
@@ -57,14 +56,15 @@ manager.create_api(User,
                    methods=['GET', 'POST', 'DELETE','PUT'], 
                    preprocessors=dict(GET_SINGLE=[auth_func], 
                                       GET_MANY=[auth_func],
-                                      POST=[is_auth_to_user_add], 
+                                      POST=[auth_func, is_auth_to_user_add], 
                                       DELETE_SINGLE=[is_auth_to_user_drop]), 
                    results_per_page=0)
 
 manager.create_api(User, 
                    url_prefix='/api/me',
                    methods=['GET', 'POST', 'PUT'], 
-                   preprocessors=dict(GET_SINGLE=[auth_func, get_logged_user], 
+                   preprocessors=dict(POST=[auth_func], 
+                                      GET_SINGLE=[auth_func, get_logged_user], 
                                       GET_MANY=[auth_func, get_logged_user]), 
                    results_per_page=0)
 
@@ -72,7 +72,8 @@ manager.create_api(User,
 manager.create_api(Group, 
                    exclude_columns=['users.password_hash', 'users.group_id'], 
                    methods=['GET', 'POST', 'DELETE','PUT'], 
-                   preprocessors=dict(GET_SINGLE=[auth_func], 
+                   preprocessors=dict(POST=[auth_func], 
+                                      GET_SINGLE=[auth_func], 
                                       GET_MANY=[auth_func]), 
                    results_per_page=0)
 
@@ -80,7 +81,8 @@ manager.create_api(Group,
 manager.create_api(App, 
                    exclude_columns=['creator.password_hash'], 
                    methods=['GET', 'POST', 'DELETE','PUT'], 
-                   preprocessors=dict(GET_SINGLE=[auth_func], 
+                   preprocessors=dict(POST=[auth_func], 
+                                      GET_SINGLE=[auth_func], 
                                       GET_MANY=[auth_func],
                                       PUT_SINGLE=[is_auth_to_app_edit], 
                                       DELETE_SINGLE=[is_auth_to_app_drop]),
@@ -91,7 +93,8 @@ manager.create_api(App,
                    include_columns=['id','name','link','desc', 'img_link', 'order_id'], 
                    url_prefix='/api/v2', 
                    methods=['GET'],
-                   preprocessors=dict(GET_SINGLE=[get_app_visible], 
+                   preprocessors=dict(POST=[auth_func], 
+                                      GET_SINGLE=[get_app_visible], 
                                       GET_MANY=[get_app_visible]), 
                    results_per_page=0)
 
@@ -99,7 +102,8 @@ manager.create_api(App,
 manager.create_api(Log, 
                    exclude_columns=['author.password_hash'], 
                    methods=['GET', 'POST'], 
-                   preprocessors=dict(GET_SINGLE=[auth_func], 
+                   preprocessors=dict(POST=[auth_func], 
+                                      GET_SINGLE=[auth_func], 
                                       GET_MANY=[auth_func]), 
                    results_per_page=0)
 
@@ -107,7 +111,8 @@ manager.create_api(Log,
 manager.create_api(Note, 
                    exclude_columns=['owner.password_hash'], 
                    methods=['GET', 'POST', 'DELETE'], 
-                   preprocessors=dict(GET_SINGLE=[auth_func], 
+                   preprocessors=dict(POST=[auth_func], 
+                                      GET_SINGLE=[auth_func], 
                                       GET_MANY=[auth_func]), 
                    results_per_page=0)
 

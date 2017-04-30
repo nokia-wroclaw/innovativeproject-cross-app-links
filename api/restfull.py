@@ -1,6 +1,6 @@
 from api import app
 from api.database import db
-from api.models import User, Group, App, Log, Note
+from api.models import User, Group, App, Log, Note, ComponentUser, Component
 from flask_restless import APIManager, ProcessingException
 from flask_login import current_user, login_fresh
 from flask import session
@@ -14,7 +14,7 @@ def auth_func(*args, **kw):
             raise ProcessingException(description='Not authenticated!', code=401)
 
 def is_auth_to_app_edit(*args, **kw):
-     if not current_user.group.app_edit:
+     if not current_user.group.app_edit_all:
         raise ProcessingException(description='Not authenticated!', code=401)
                         
 def is_auth_to_app_drop(*args, **kw):
@@ -107,6 +107,18 @@ manager.create_api(Log,
 manager.create_api(Note, 
                    exclude_columns=['owner.password_hash'], 
                    methods=['GET', 'POST', 'DELETE'], 
+                   preprocessors=dict(GET_SINGLE=[auth_func], 
+                                      GET_MANY=[auth_func]), 
+                   results_per_page=0)
+
+manager.create_api(ComponentUser, 
+                   methods=['GET'],
+                   preprocessors=dict(GET_SINGLE=[auth_func], 
+                                      GET_MANY=[auth_func]), 
+                   results_per_page=0)
+
+manager.create_api(Component, 
+                   methods=['GET', 'POST'],
                    preprocessors=dict(GET_SINGLE=[auth_func], 
                                       GET_MANY=[auth_func]), 
                    results_per_page=0)

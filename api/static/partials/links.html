@@ -21,15 +21,15 @@
         </div>
         <div class="bottom-nav">
             <a class="creator-link pull-left text-left" href="profile/{{app.creator.id}}">{{app.creator.username}}</a>
-            <a ng-show="current_user.group.app_edit" class="button small  margined pull-right" ng-class="app.status ? 'green' : 'pure'" href="#" ng-click="newlink.hide(app.id,app.status)">
+            <a ng-show="current_user.group.app_edit_all" class="button small  margined pull-right" ng-class="app.status ? 'green' : 'pure'" href="#" ng-click="newlink.hide(app.id,app.status)">
                 <span class="glyphicon" ng-class="app.status ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"></span></a>
-            <a ng-show="current_user.group.app_edit" class="button blue small  margined pull-right" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
+            <a ng-show="current_user.group.app_edit_all" class="button blue small  margined pull-right" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
             <a ng-show="current_user.group.app_drop" class="button red small pull-right" href="#" ng-click="newlink.delete(app.id)"><span class="glyphicon glyphicon-trash"></span></a>
         </div>
     </div>
 </div>
 
-<div ng-if="current_user.group.app_edit && filterParams.manage()>0" class="popup" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
+<div ng-if="current_user.group.app_edit_all && filterParams.manage()>0" class="popup" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
     <div class="no-box-el error-form-box" ng-show="form.$submitted">
         <span class='pull-left text-left error' ng-show="form.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
 

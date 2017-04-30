@@ -29,7 +29,7 @@ class User(UserMixin, db.Model):
         self.group_id = group_id
         self.username = email.split('@')[0]
         self.been_active = been_active
-        self.date = "now"
+        self.date = "now()"
         self.avatar_url = "default_avatar"
        
         
@@ -86,8 +86,6 @@ class App(db.Model):
     landing_clicks = db.Column(db.Integer) 
     component_clicks = db.Column(db.Integer)
     
-
-
     def __init__(self, name, link, desc, creator_id, img_link):
         self.name = name
         self.link = link
@@ -99,7 +97,7 @@ class App(db.Model):
         self.maintenance = False
         self.landing_clicks = 0
         self.component_clicks = 0
-        self.date = 'now'
+        self.date = "now()"
             
             
 class Log(db.Model):
@@ -128,7 +126,7 @@ class  Note(db.Model):
         self.content = content
         self.tag = tag
         self.owner_id = owner_id
-        self.date = 'now'
+        self.date = "now()"
         
 
 class Invite(db.Model):
@@ -147,7 +145,7 @@ class Invite(db.Model):
         self.maker = maker
         self.group = group
         self.token = str(uuid.uuid4())
-        self.date = "now"
+        self.date = "now()"
 
 
 class Reset(db.Model):
@@ -183,4 +181,4 @@ class ComponentUser(db.Model):
         self.token = str(uuid.uuid4())
         self.order_string = ''
         self.pin_string = ''
-        self.date = 'now'
+        self.date = "now()"

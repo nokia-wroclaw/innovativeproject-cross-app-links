@@ -343,6 +343,11 @@ body {
                         transition: all 0.3s linear;
                         opacity: 1;
                     }
+                    &.active-li{
+                        color: #fff;
+                        opacity: 1;
+                        background: #D45A5A;
+                    }
                 }
             }
         }

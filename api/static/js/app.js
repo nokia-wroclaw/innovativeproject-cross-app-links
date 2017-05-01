@@ -1,16 +1,16 @@
 (function () {
     var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives', 'chart.js', 'angularFileUpload']);
-    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$routeParams', '$interval', 'FileUploader', '$http', function ($scope, restful, $location, $routeParams, $interval, FileUploader, $http) {
+    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$route', '$routeParams', '$interval', 'FileUploader', '$http', function ($scope, restful, $route, $location, $routeParams, $interval, FileUploader, $http) {
 
         /*Append loading page druing data fetching*/
         var loadingPage = {
             ready: function () {
-                document.body.querySelector('.loading .text').innerHTML = 'Fetching data...';
+                document.body.querySelector('.loading .text').innerHTML = 'Fetching data...' || null;
                 var interval = $interval(function () {
                     if ($http.pendingRequests < 1) {
                         document.body.querySelector('.loading').remove();
                         document.body.style.overflow = 'auto';
-                        $interval.cancel(this);
+                        $interval.cancel(interval);
                     }
                 }, 1000);
             }
@@ -39,6 +39,14 @@
             status: true,
             hide: function () {
                 this.status = !this.status;
+            },
+            active: function(url){
+                var arr = angular.element('#navigation a').removeClass('active-li');
+                for(var i=0;i<arr.length;i++){    
+                    if(arr[i].href.indexOf(url) !== -1)
+                        var active = arr[i];
+                }
+                active.className +=' active-li';
             }
         };
 
@@ -118,7 +126,7 @@
         /*Refresh clock every 30s*/
         $interval(function () {
             $scope.clockDate.update()
-        }, 3000)
+        }, 30000)
 
         /*Applications methods*/
         $scope.newlink = {
@@ -265,10 +273,11 @@
         want to reset them when you leave a page. That's why you should put
         those variables/functions below.
         */
-        $scope.$on('$routeChangeStart', function () {
+        $scope.$on('$routeChangeStart', function (current, next) {
             $scope.newlink.clear();
             $scope.newlink.status = false;
             $scope.searchBy = '';
+            $scope.menu.active(next.originalPath);
 
         });
 

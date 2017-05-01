@@ -2,33 +2,34 @@
 
     var app = angular.module('config', []);
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+       var path = 'static/partials/';
         $routeProvider
             .when('/dashboard', {
-                templateUrl: 'static/partials/dashboard.html'
+                templateUrl:  path + 'dashboard.html'
             }).when('/stats', {
-                templateUrl: 'static/partials/stats.html'
+                templateUrl:  path + 'stats.html'
             }).when('/action-log', {
-                templateUrl: 'static/partials/action-log.html'
+                templateUrl:  path + 'action-log.html'
             }).when('/links/:siteID', {
-                templateUrl: 'static/partials/links.html'
+                templateUrl:  path + 'links.html'
             }).when('/links', {
-                templateUrl: 'static/partials/links.html'
+                templateUrl:  path + 'links.html'
             }).when('/add-link', {
-                templateUrl: 'static/partials/add-link.html'
+                templateUrl:  path + 'add-link.html'
             }).when('/users', {
-                templateUrl: 'static/partials/users.html'
+                templateUrl:  path + 'users.html'
             }).when('/groups', {
-                templateUrl: 'static/partials/groups.html'
+                templateUrl:  path + 'groups.html'
             }).when('/add-user', {
-                templateUrl: 'static/partials/add-user.html'
+                templateUrl:  path + 'add-user.html'
             }).when('/settings', {
-                templateUrl: 'static/partials/settings.html'
+                templateUrl:  path + 'settings.html'
             }).when('/ver', {
-                templateUrl: 'static/partials/ver.html'
+                templateUrl:  path + 'ver.html'
             }).when('/profile/:siteID', {
-                templateUrl: 'static/partials/profile.html'
+                templateUrl:  path + 'profile.html'
             }).when('/components', {
-                templateUrl: 'static/partials/components.html'
+                templateUrl:  path + 'components.html'
             }).otherwise({
                 controller: function () {
                     window.location.replace(window.location);

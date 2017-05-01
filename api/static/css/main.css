@@ -296,6 +296,10 @@ body {
             background: rgba(0, 0, 0, 0.1);
             transition: all 0.3s linear;
             opacity: 1; }
+          .main-navigation .main-navigation-overflow ul li a.active-li {
+            color: #fff;
+            opacity: 1;
+            background: #D45A5A; }
 
 .main-content {
   padding: 20px 10px;

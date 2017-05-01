@@ -41,7 +41,7 @@
                 <tbody>
                     <tr ng-repeat='log in user.logs| orderBy: id : true | limitTo : 5' ng-show='user.logs.length'>
                         <td>{{log.id}}</td>
-                        <td>{{log.data_time | date: 'short' }}</td>
+                        <td>{{log.date| date: 'short' }}</td>
                         <td>{{log.content}}</td>
                     </tr>
                 </tbody>

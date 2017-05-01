@@ -77,8 +77,13 @@
                 });
             },
             notes: function () {
-                restful.get('Note').then(function (response) {
+                restful.get('note').then(function (response) {
                     $scope.notes = response['objects'];
+                });
+            },
+            components: function () {
+                restful.get('component').then(function (response) {
+                    $scope.components = response['objects'];
                 });
             },
             all: function () {
@@ -88,6 +93,7 @@
                 this.groups();
                 this.logs();
                 this.notes();
+                this.components();
             }
         };
         update.all();
@@ -242,7 +248,7 @@
                     tag: this.tag,
                     owner_id: $scope.current_user.id,
                 }
-                restful.post('Note', post_note).then(function () {
+                restful.post('note', post_note).then(function () {
                     update.notes();
                 });
                 this.clear();

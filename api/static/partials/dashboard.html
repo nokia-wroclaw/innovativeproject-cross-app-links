@@ -22,7 +22,7 @@
     <div class="box color-box blue">
         <div class="site-stat">
             <span class="stat-desc">Components in use</span>
-            <span class="stat-number">17</span>
+            <span class="stat-number">{{components.length}}</span>
             <span class="stat-icon glyphicon glyphicon-tasks"></span>
         </div>
     </div>
@@ -89,7 +89,7 @@
             <tbody>
                 <tr ng-repeat='log in logs | orderBy: id : true | limitTo : 5' ng-show='logs.length'>
                     <td>{{log.id}}</td>
-                    <td>{{log.data_time | date: 'short' }}</td>
+                    <td>{{log.date | date: 'short' }}</td>
                     <td>{{log.author.username}}</td>
                     <td>{{log.content}}</td>
                 </tr>
@@ -103,7 +103,7 @@
     <div class="box box-table">
         <table class="table ">
             <header>
-                <h3 class="green">Who's online</h3>
+                <h3 class="green">Today's online</h3>
                 <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
             </header>
             <tbody>

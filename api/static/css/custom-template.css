@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato';
+  background: #34313d; }
+
+.container-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 10%;
+  background: #fefefe;
+  border-radius: 3px;
+  box-sizing: border-box;
+  width: 520px;
+  padding: 40px; }
+  .container-box h3 {
+    margin: 0;
+    float: left;
+    font-weight: 600;
+    font-size: 24px;
+    color: #333; }
+  .container-box ul {
+    margin: 0;
+    margin-bottom: 40px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    width: 100%;
+    font-weight: 400;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.7); }
+    .container-box ul p {
+      float: left;
+      width: 100%;
+      clear: both;
+      margin: 40px 0; }
+    .container-box ul li {
+      float: left;
+      display: block;
+      width: 100%;
+      margin-bottom: 5px; }
+      .container-box ul li .glyphicon {
+        color: #3fce91;
+        margin-right: 15px; }
+  .container-box form {
+    float: left;
+    width: 100%; }
+    .container-box form input[type=text] {
+      width: 100%;
+      border: 0;
+      outline: none;
+      border-bottom: 2px solid #eee;
+      padding: 10px 0;
+      background: none;
+      font-size: 24px;
+      color: #222; }
+      .container-box form input[type=text]:focus {
+        border-color: #3fce91; }
+  .container-box .button {
+    float: left;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    background: #ddd;
+    border-radius: 3px;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    box-sizing: border-box; }
+    .container-box .button.red {
+      background: #D45A5A; }
+
+/*# sourceMappingURL=custom-template.css.map */

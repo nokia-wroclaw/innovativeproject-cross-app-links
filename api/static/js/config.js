@@ -27,6 +27,8 @@
                 templateUrl: 'static/partials/ver.html'
             }).when('/profile/:siteID', {
                 templateUrl: 'static/partials/profile.html'
+            }).when('/components', {
+                templateUrl: 'static/partials/components.html'
             }).otherwise({
                 controller: function () {
                     window.location.replace(window.location);

@@ -8,30 +8,36 @@
         
         
         <iron-ajax id="ComponentRequest" 
-                   url="../api/component" 
-                   method="POST" content-type="application/json" 
-                   handle-as="json"></iron-ajax>
+                   
+                    url="../api/component" 
+                    method="POST" content-type="application/json" 
+                    handle-as="json"></iron-ajax>
         
-        <iron-ajax id="AuthRequest" 
-                   url="../api/component-user-data" 
-                   method="POST" 
-                   content-type="application/json" 
-                   handle-as="json" 
-                   on-response="_handleAuthRequestResponse"
-                   on-error="_handleAuthRequestError"></iron-ajax>
+        <iron-ajax id="AuthRequest"
+                    
+                    url="../api/component-user-data" 
+                    method="POST" 
+                    content-type="application/json" 
+                    handle-as="json" 
+                    on-response="_handleAuthRequestResponse"
+                    on-error="_handleAuthRequestError"></iron-ajax>
         
          <iron-ajax id="ChangesRequest" 
-                   url="../api/component-user-data-update" 
-                   method="POST" 
-                   content-type="application/json" 
-                   handle-as="json" 
-                   on-response="_handleChangesRequestResponse"
-                   on-error="_handleChangesRequestError"></iron-ajax>
+                    
+                    url="../api/component-user-data-update" 
+                    method="POST" 
+                    content-type="application/json" 
+                    handle-as="json" 
+                    on-response="_handleChangesRequestResponse"
+                    on-error="_handleChangesRequestError"></iron-ajax>
         
-        <iron-ajax auto 
-                   url="../api/v2/app" 
-                   handle-as="json" 
-                   last-response="{{response}}"></iron-ajax>
+        <iron-ajax id="GetDataResponse"
+                    
+                    method="GET"
+                    url="../api/v2/app" 
+                    handle-as="json" 
+                    on-response="_handleDataRequest"
+                    last-response="{{response}}"></iron-ajax>
         
 
         <nav class="main-nav">
@@ -39,20 +45,20 @@
                 <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_pinnedFilter">
                     <li>  
                         <a target="_blank" href="{{item.link}}">
-                            <img src="../static/img/app-img/{{item.img_link}}.png"/>
+                            <img src="{{_getProperPath(item.img_link)}}"/>
                         </a>
                     </li>
                 </template>
             </ul>  
             <aside class="component-navbar c-hidden" id="web-component-navbar">
-                <button class="burger-icon"><span class="glyphicon glyphicon-th"></span> </button>
+                <button class="burger-icon" on-tap="_showToggle"><span class="glyphicon glyphicon-th"></span> </button>
                 <section class="component-overflow c-hidden">
                     <div class="user-label">
                             <div class="user-label-list" id="user-label-list">
                                 <template is="dom-if" if="{{!_checkAccess()}}">
                                     <div class="confirm-token">
                                         <input id="tokenValue" type="text" placeholder="Your token" name="token" on-keydown="_tokenRequestSend">
-                                        <a class="action-button" href="/get-component-token">
+                                        <a class="action-button" href="../get-component-token">
                                             <span class="glyphicon glyphicon-question-sign"></span>
                                         </a>
                                     </div>
@@ -76,7 +82,7 @@
                         <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_appendFields" sort="_selfSort">
                             <li>  
                                 <a target="_blank" href="{{item.link }}">
-                                    <img src="../static/img/app-img/{{item.img_link}}.png" on-load='_getColor' />
+                                    <img src="{{_getProperPath(item.img_link)}}" on-load='_getColor' />
                                     <span class="text">{{item.name }}</span>
                                 </a>
                             </li>
@@ -97,9 +103,8 @@
                 </section>
             </aside>
         </nav>
-        <script src="../static/web-components/js/component.js"></script>
+        
     </template>
-    
     <script src="../static/bower_components/color-thief/dist/color-thief.min.js"></script>
     <script src="../static/bower_components/Sortable/Sortable.js"></script>
     <script src="../static/web-components/js/polymer-ui.js"></script>

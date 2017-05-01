@@ -7,6 +7,7 @@ from flask import session
 from flask_cors import CORS
 
 cors = CORS(app, resources={r"/api/v2/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/api/component": {"origins": "*"}})
 
 def auth_func(*args, **kw):
     if not login_fresh() and not current_user.is_authenticated:

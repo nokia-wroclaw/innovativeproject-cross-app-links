@@ -181,14 +181,17 @@ def main(content='dashboard', content_id=None):
 @cross_origin()
 def static_file(path):
     return send_from_directory('static/bower_components', path)
-        
+   
+@app.route('/static/web-components/<path:path>')
+@cross_origin()
+def static_file_web(path):
+    return send_from_directory('static/web-components', path)    
+    
 #Routes for components data
 @app.route('/component/<component_type>')
 @cross_origin()
 def component(component_type):
-    if component_type =='iframe':
-        return make_response(open('api/static/web-components/iframe/component-template.html').read())
-    elif component_type =='polymer':
+    if component_type =='polymer':
         return make_response(open('api/static/web-components/polymer/component-template.html').read())
     
  
@@ -217,6 +220,7 @@ def create_component_user():
     #Mailing is needed
     
 @app.route('/api/component-user-data', methods=['POST'])
+@cross_origin()
 def component_user_data():
     data = request.get_json()
     user = ComponentUser.query.filter_by(token=data['token']).first()
@@ -230,6 +234,7 @@ def component_user_data():
     return str(False)    
 
 @app.route('/api/component-user-data-update', methods=['POST'])
+@cross_origin()
 def component_user_data_update():
     data = request.get_json()
     user = ComponentUser.query.filter_by(token=data['token']).first()

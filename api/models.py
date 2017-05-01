@@ -112,7 +112,7 @@ class Log(db.Model):
         self.content = content
         self.date = date
         self.author_id = author_id
-        self.date = 'now'
+        self.date = "now()"
         
 class  Note(db.Model):
      

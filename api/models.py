@@ -110,7 +110,6 @@ class Log(db.Model):
     def __init__(self, content, author_id):
         
         self.content = content
-        self.date = date
         self.author_id = author_id
         self.date = "now()"
         

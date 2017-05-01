@@ -110,8 +110,8 @@
                 <tr ng-repeat='user in users | limitTo : 5' ng-show='users.length'>
                     <td>{{user.id}}</td>
                     <td>{{user.username}}</td>
-                    <td>87.128.21.11</td>
-                    <td>Since 3 minutes</td>
+                    <td>{{user.group.name}}</td>
+                    <td>{{user.been_active | date : 'HH:mm'}}</td>
                 </tr>
             </tbody>
             <span class='warning-text' ng-hide='users.length'>No active users since last check</span>

@@ -6,7 +6,8 @@ from api.models import User, Group, App, Log, Invite, Reset, Component, Componen
 from api.database import db
 from api.functions import Mailing
 from flask_cors import CORS, cross_origin 
-
+from datetime import datetime
+from time import time
 #-----------
 #STATIC VAL
 #-----------
@@ -61,8 +62,12 @@ def auth():
     if user:
         if sha256_crypt.verify(request.form['password'], user.password_hash):
             login_user(user)
+            user.been_active = str(time()).replace('.', '')[:-4]
+            db.session.add(user)
+            db.session.commit()
             session['user'] = user.username
             return redirect('/')
+       
         else:
             return make_response(open('api/templates/login-page.html').read())
     else:

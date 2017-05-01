@@ -1,6 +1,6 @@
 (function () {
     var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives', 'chart.js', 'angularFileUpload']);
-    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$route', '$routeParams', '$interval', 'FileUploader', '$http', function ($scope, restful, $route, $location, $routeParams, $interval, FileUploader, $http) {
+    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$route', '$routeParams', '$interval', 'FileUploader', '$http', function ($scope, restful, $location, $route, $routeParams, $interval, FileUploader, $http) {
 
         /*Append loading page druing data fetching*/
         var loadingPage = {
@@ -46,7 +46,7 @@
                     if(arr[i].href.indexOf(url) !== -1)
                         var active = arr[i];
                 }
-                active.className +=' active-li';
+                active.className+=' active-li';
             }
         };
 

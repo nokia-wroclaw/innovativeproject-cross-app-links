@@ -30,7 +30,8 @@
         $scope.limit = {
             users: 5,
             group: 3,
-            log: 5
+            log: 5,
+            components: 5
         };
 
         /*Menu elements*/
@@ -155,11 +156,9 @@
                     creator_id: $scope.current_user.id,
                     img_link: img_link,
                 }
-                console.log(post_object);
                 restful.post('app', post_object).then(function () {
                     update.apps();
                 });
-
                 this.clear();
                 this.status = true;
             },
@@ -188,9 +187,10 @@
                         content: 'A link #' + app_id + ' was updated',
                         author_id: $scope.current_user.id
                     }
-                    restful.post('log', log_object);
                     update.apps();
-                    update.logs();
+                    restful.post('log', log_object).then(function(){
+                        update.logs();
+                    });
                 });
                 this.clear();
                 this.status = true;
@@ -208,11 +208,11 @@
                             content: 'A link #' + app_id + ' was updated',
                             author_id: $scope.current_user.id
                         }
-                        restful.post('log', log_object);
                         update.apps();
-                        update.logs();
+                        restful.post('log', log_object).then(function(){
+                            update.logs();
+                        });
                     });
-
                 }
             },
 
@@ -224,11 +224,11 @@
                             content: 'A link #' + app_id + ' was removed',
                             author_id: $scope.current_user.id
                         }
-                        restful.post("log", log_object);
                         update.apps();
-                        update.logs();
+                        restful.post('log', log_object).then(function(){
+                            update.logs();
+                        });
                     });
-
                 }
             },
             clear: function () {

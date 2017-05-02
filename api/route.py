@@ -93,7 +93,7 @@ def register():
     If false, we call function that creates invite entry and sends email.
     """
     if not User.query.filter_by(email=request.form['email']).first():
-        if current_user.group_id == 1:
+        if current_user.group.user_add:
             Mailing().commitinvite(request.form['email'],current_user,request.form['group'])
             return redirect('/add-user')
         else:
@@ -155,7 +155,7 @@ def remove():
     If invite entry exists, removes it from the database.
                 removeinvite(request.form['email'])
     """
-    if current_user.group_id == 1:
+    if current_user.group.user_drop:
         if User.query.filter_by(email=request.form['email']).first():
             Mailing().removeuser(request.form['email'], current_user)
         if Invite.query.filter_by(email=request.form['email']).first():

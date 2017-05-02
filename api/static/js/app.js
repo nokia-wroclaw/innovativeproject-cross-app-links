@@ -200,10 +200,10 @@
                             filename: this.img_link
                         });
                     }
-                    this.uploader.uploadItem(0);
-                    this.uploader.clearQueue();
+                    this.uploader.uploadAll();
                     this.uploader.onSuccessItem = (item, response, status, headers) => {   
                         console.log('Uploader: Success callback');
+                        this.uploader.clearQueue();
                     }
                     this.uploader.onErrorItem = (item, response, status, headers)=> {
                         //Add information for img uplaod error in DOM (html)

@@ -661,10 +661,10 @@ body {
     .box.box-form .input-imglink {
       float: left;
       width: 100%;
-      text-align: center;
+      text-align: left;
       margin-bottom: 20px; }
       .box.box-form .input-imglink img {
-        width: 180px; }
+        width: 90px; }
   .box.box-list {
     background: 0;
     box-shadow: none; }

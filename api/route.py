@@ -192,6 +192,11 @@ def static_file(path):
 def static_file_web(path):
     return send_from_directory('static/web-components', path)    
     
+@app.route('/static/img/app-img/<path:path>')
+@cross_origin()
+def static_file_img(path):
+    return send_from_directory('/static/img/app-img', path)        
+    
 #Routes for components data
 @app.route('/component/<component_type>')
 @cross_origin()

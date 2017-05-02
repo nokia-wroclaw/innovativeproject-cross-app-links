@@ -1,9 +1,9 @@
 from api import app
 from flask import Flask, session, g
-from api.models import User, Group, App, Log, Invite, Reset
+from api.models import User, Group, App, Log, Invite, Reset, Component, ComponentUser
 from api.database import db
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
-from api.mail import send_email, send_email_register, send_email_reset
+from api.mail import send_email, send_email_register, send_email_reset, send_email_token
 from passlib.hash import sha256_crypt
 
 
@@ -46,6 +46,17 @@ class Mailing():
 	    db.session.commit()
 	    receiver = [email]
 	    send_email_reset(receiver)
+
+	def askfortoken(self,email):
+		"""
+		Creates ComponentUser entry and sends email with token.
+		"""
+		user = ComponentUser(email);
+		db.session.add(user)
+		db.session.commit()
+		receiver = [email]
+		send_email_token(receiver)
+
 
 	def updatepassword(self,token,userpassword):
 	    """

@@ -225,11 +225,9 @@ def get_component_token():
 @app.route('/api/create-component-user', methods=['POST'])
 def create_component_user():
     email = request.form['email']
-    user = ComponentUser(email);
-    db.session.add(user)
-    db.session.commit()
+    Mailing().askfortoken(email)
     return 'Yeah, it has been created'
-    #Mailing is needed
+
     
 @app.route('/api/component-user-data', methods=['POST'])
 @cross_origin()

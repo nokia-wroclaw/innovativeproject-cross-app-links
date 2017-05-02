@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from api import app
-from api.models import User, Invite, Reset
+from api.models import User, Invite, Reset, ComponentUser
 from flask_mail import Mail
 from flask_mail import Message
 
@@ -18,21 +18,21 @@ mail = Mail(app)
 
 def send_email(subject, sender, recipients, html_body):
     """
-    Sends email of given subject, sender, recipents (array) and html template.
+    Sends email of given subject, sender, recipients (array) and html template.
     """
     msg = Message(subject=subject, sender=sender, recipients=recipients)
     msg.html = html_body
     mail.send(msg)
 
 
-def send_email_register(sender,recip):
+def send_email_register(sender,email):
     """
     User invitation email.
     """
-    email = recip[0]
-    username = email.split('@')[0]
+    recipient = email[0]
+    username = recipient.split('@')[0]
     admin = sender.split('@')[0]
-    new = Invite.query.filter_by(email = email).first()
+    new = Invite.query.filter_by(email = recipient).first()
     url = 'https://cross-app-links.herokuapp.com/api/auth/setpassword?token=' + str(new.token)
     subject = "Cross-apps registration"
     headerText = "You've received an invitation!"
@@ -41,7 +41,7 @@ def send_email_register(sender,recip):
     userText = ""
     send_email(subject,
         'cross-apps@yandex.com',
-        recip,
+        email,
         render_template("email_template.html",
             user=username,
             sender=admin,
@@ -58,9 +58,9 @@ def send_email_reset(email):
     """
     User password reset email.
     """
-    recipent = email[0]
-    username = recipent.split('@')[0]
-    new = Reset.query.filter_by(email = recipent).first()
+    recipient = email[0]
+    username = recipient.split('@')[0]
+    new = Reset.query.filter_by(email = recipient).first()
     url = 'https://cross-app-links.herokuapp.com/api/auth/setnewpassword?token=' + str(new.token)
     subject = "Cross-apps password reset"
     headerText = "Looks like you want to reset your password!"
@@ -76,6 +76,34 @@ def send_email_reset(email):
             url=url,
             subject=subject,
             buttonText="RESET",
+            headerText=headerText,
+            freeText=freeText,
+            userTextBold=userTextBold,
+            userText=userText))
+
+
+def send_email_token(email):
+    """
+    Sending requested token.
+    """
+    recipient = email[0]
+    username = recipient.split('@')[0]
+    new = ComponentUser.query.filter_by(email = recipient).first()
+    url = 'https://cross-app-links.herokuapp.com'
+    subject = "Cross-apps token delivery!"
+    headerText = "You've received a Cross-apps token!"
+    freeText = ""
+    userTextBold = "Here is your unique token for Cross-app links. \n Token allows you to set your own view order \n and pin your favourite apps to the navbad."
+    userText = str(new.token)
+    send_email(subject,
+        'cross-apps@yandex.com',
+        email,
+        render_template("email_template.html",
+            user=username,
+            sender="system",
+            url=url,
+            subject=subject,
+            buttonText="Visit our website",
             headerText=headerText,
             freeText=freeText,
             userTextBold=userTextBold,

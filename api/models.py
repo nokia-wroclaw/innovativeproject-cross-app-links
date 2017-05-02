@@ -22,13 +22,12 @@ class User(UserMixin, db.Model):
     logs = db.relationship('Log', backref='author', lazy='dynamic')
     notes = db.relationship('Note', backref='owner', lazy='dynamic')
     
-    def __init__(self, email, password_hash, group_id, been_active):
+    def __init__(self, email, password_hash, group_id):
         
         self.email = email
         self.password_hash = password_hash
         self.group_id = group_id
         self.username = email.split('@')[0]
-        self.been_active = been_active
         self.date = "now()"
         self.avatar_url = "default_avatar"
        

@@ -17,7 +17,7 @@ class Mailing():
 	    if new:
 	        useremail = new.email
 	        group = new.group
-	        new = User(useremail,sha256_crypt.encrypt(userpassword),group, "now()")
+	        new = User(useremail,sha256_crypt.encrypt(userpassword),group)
 	        db.session.add(new)
 	        db.session.commit()
 	        self.removeinvite(useremail)

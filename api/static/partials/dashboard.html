@@ -31,7 +31,7 @@
 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pull-left">
     <div class="box link-box" ng-repeat='app in apps | orderBy : id : true | limitTo: 3'>
         <div class="main-link-info">
-            <img src="../static/img/app-img/{{app.img_link}}.png">
+            <img ng-src="../static/img/app-img/{{app.img_link}}.png">
             <h3 class="main-link-heading">{{app.name}}</h3>
         </div>
         <a ng-show="current_user.group.app_edit_all" class="settings-icon" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
@@ -74,7 +74,7 @@
         </div>
     </div>
     <div class="box image-box">
-        <img src="../static/img/dashboard/temp.jpg">
+        <img ng-src="../static/img/dashboard/temp.jpg">
     </div>
 
 </div>

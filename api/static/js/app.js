@@ -1,15 +1,15 @@
 (function () {
     var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives', 'chart.js', 'angularFileUpload']);
-    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$route', '$routeParams', '$interval', 'FileUploader', '$http', function ($scope, restful, $location, $route, $routeParams, $interval, FileUploader, $http) {
+    app.controller('mainCtrl', ['$scope', 'restful', '$location', '$route', '$routeParams', '$interval', 'FileUploader', '$http', '$document', function ($scope, restful, $location, $route, $routeParams, $interval, FileUploader, $http, $document) {
 
         /*Append loading page druing data fetching*/
         var loadingPage = {
             ready: function () {
-                document.body.querySelector('.loading .text').innerHTML = 'Fetching data...' || null;
+                angular.element('.loading .text').innerHTML = 'Fetching data...';
                 var interval = $interval(function () {
                     if ($http.pendingRequests < 1) {
-                        document.body.querySelector('.loading').remove();
-                        document.body.style.overflow = 'auto';
+                        angular.element('.loading').addClass('hidden');
+                        $document.find('body').css('overflow', 'auto');
                         $interval.cancel(interval);
                     }
                 }, 1000);
@@ -41,12 +41,14 @@
                 this.status = !this.status;
             },
             active: function(url){
-                var arr = angular.element('#navigation a').removeClass('active-li');
-                for(var i=0;i<arr.length;i++){    
-                    if(arr[i].href.indexOf(url) !== -1)
-                        var active = arr[i];
+                if (url.indexOf(':siteID')===-1){
+                    var arr = angular.element('#navigation a').removeClass('active-li');
+                    for(var i=0;i<arr.length;i++){    
+                        if(arr[i].href.indexOf(url) !== -1)
+                            var active = arr[i];
+                    }
+                    active.className+=' active-li';
                 }
-                active.className+=' active-li';
             }
         };
 
@@ -155,20 +157,36 @@
                         filename: img_link
                     });
                 }
-                this.uploader.uploadAll();
-                this.uploader.clearQueue();
-                var post_object = {
-                    name: this.name,
-                    link: this.address,
-                    desc: this.desc,
-                    creator_id: $scope.current_user.id,
-                    img_link: img_link,
-                }
-                restful.post('app', post_object).then(function () {
-                    update.apps();
-                });
-                this.clear();
-                this.status = true;
+                this.uploader.uploadItem(0); 
+                this.uploader.onSuccessItem = (item, response, status, headers)=> {
+                    var post_object = {
+                        name: this.name,
+                        link: this.address,
+                        desc: this.desc,
+                        creator_id: $scope.current_user.id,
+                        img_link: img_link,
+                    }
+                    restful.post('app', post_object).then(function () {
+                        update.apps();
+                    });
+                    this.clear();
+                    this.status = true;
+                    this.uploader.clearQueue();
+                };
+                 this.uploader.onErrorItem = function(item, response, status, headers) {
+                    console.log('Uplaoder: Error callback');
+                    console.log(item);
+                    console.log(response);
+                    console.log(headers);
+                };
+                
+                this.uploader.onCancelItem = function(item, response, status, headers) {
+                    console.log('Uploader: Cancel callback');
+                    console.log(item);
+                    console.log(response);
+                    console.log(headers);
+                };
+               
             },
             update: function (app_id) {
                 if (this.uploader.queue.length > 0) {
@@ -180,31 +198,46 @@
                         filename: img_link
                     });
                 }
-                this.uploader.uploadAll();
-                this.uploader.clearQueue();
-                var post_object = {
-                    name: this.name,
-                    link: this.address,
-                    desc: this.desc,
-                    img_link: img_link,
-                    order_id: this.order_id,
-                    beta: this.beta,
-                }
-                restful.update('app', app_id, post_object).then(function () {
-                    var log_object = {
-                        content: 'A link #' + app_id + ' was updated',
-                        author_id: $scope.current_user.id
+                this.uploader.uploadItem(0);
+                this.uploader.onSuccessItem = (item, response, status, headers)=> {
+                    var post_object = {
+                        name: this.name,
+                        link: this.address,
+                        desc: this.desc,
+                        img_link: img_link,
+                        order_id: this.order_id,
+                        beta: this.beta,
                     }
-                    update.apps();
-                    restful.post('log', log_object).then(function(){
-                        update.logs();
+                    restful.update('app', app_id, post_object).then(function () {
+                        var log_object = {
+                            content: 'A link #' + app_id + ' was updated',
+                            author_id: $scope.current_user.id
+                        }
+                        update.apps();
+                        restful.post('log', log_object).then(function(){
+                            update.logs();
+                        });
                     });
-                });
-                this.clear();
-                this.status = true;
-                $location.path('/links').replace();
+                    this.clear();
+                    this.status = true;
+                    this.uploader.clearQueue();
+                    $location.path('/links').replace();
+                };
+                this.uploader.onErrorItem = function(item, response, status, headers) {
+                    //Add information for img uplaod error in DOM (html)
+                    console.log('Uplaoder: Error callback');
+                    console.log(item);
+                    console.log(response);
+                    console.log(headers);
+                };
+                this.uploader.onCancelItem = function(item, response, status, headers) {
+                    //Add information for img uplaod error in DOM (html)
+                    console.log('Uploader: Cancel callback');
+                    console.log(item);
+                    console.log(response);
+                    console.log(headers);
+                };
             },
-
             hide: function (app_id, app_status) {
                 var confirmResult = confirm("Do you want to change visibility of this app?");
                 if (confirmResult) {

@@ -1,18 +1,20 @@
 (function () {
     var app = angular.module('mainApp', ['services']);
-    app.controller('loginCtrl', ['$scope', 'restful', '$http', '$interval', function ($scope, restful, $http, $interval) {
+    app.controller('loginCtrl', ['$scope', 'restful', '$http', '$interval', '$document', function ($scope, restful, $http, $interval, $document) {
 
         var loadingPage = {
             ready: function () {
-                document.body.querySelector('.loading .text').innerHTML = 'Fetching data...';
-                $interval(function () {
+                angular.element('.loading .text').innerHTML = 'Fetching data...';
+                var interval = $interval(function () {
                     if ($http.pendingRequests < 1) {
-                        document.body.querySelector('.loading').remove();
-                        document.body.style.overflow = 'auto';
+                        angular.element('.loading').addClass('hidden');
+                        $document.find('body').css('overflow', 'auto');
+                        $interval.cancel(interval);
                     }
                 }, 1000);
             }
         };
+
         /*Hide it when content is loaded*/
         angular.element(document).ready(function () {
             loadingPage.ready();

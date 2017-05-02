@@ -10,7 +10,7 @@
         <div class="main-link-info">
 
             <div class="beta-icon" ng-show="app.beta">Beta</div>
-            <img src="../static/img/app-img/{{app.img_link}}.png">
+            <img ng-src="../static/img/app-img/{{app.img_link}}.png">
             <h3 class="main-link-heading">{{app.name}}</h3>
         </div>
         <div class="main-link-href">
@@ -47,7 +47,7 @@
         </div>
     </div>
     <form ng-init="newlink.manageFill(app.name,app.link,app.desc, app.img_link, app.order_id, app.beta)" name='form' class="box box-form no-shadow" ng-submit="form.$valid && form.$dirty && newlink.update(app.id)" novalidate>
-        <div class="input-imglink"><img src="/static/img/app-img/{{newlink.img_link}}.png"></div>
+        <div class="input-imglink"><img ng-src="/static/img/app-img/{{newlink.img_link}}.png"></div>
         <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
         <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
         <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>

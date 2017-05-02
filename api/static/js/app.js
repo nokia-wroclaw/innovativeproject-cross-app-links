@@ -200,7 +200,7 @@
                             filename: this.img_link
                         });
                     }
-                    this.uploader.uploadAll();
+                    this.uploader.uploadItem(0);
                     this.uploader.clearQueue();
                     this.uploader.onSuccessItem = (item, response, status, headers) => {   
                         console.log('Uploader: Success callback');

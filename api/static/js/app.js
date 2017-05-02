@@ -134,7 +134,10 @@
         $scope.newlink = {
             uploader: new FileUploader({
                 url: 'api/upload',
-                formData: []
+                formData: [],
+                removeAfterUpload: true,
+                withCredentials: true,
+                queueLimit: 1
             }),
             name: '',
             address: '',
@@ -188,25 +191,33 @@
                 };
 
             },
-            update: function (app_id) {
-                var img_link = this.img_link;
+            update: function (app_id) {   
                 if (this.uploader.queue.length > 0) {
-                    img_link = this.img_link = $scope.clockDate.date();
-                    this.uploader.onBeforeUploadItem = function (item) {
+                    console.log(this.uploader.getReadyItems());
+                    console.log('Uplaoder started');
+                    console.log('Before: ' + this.img_link);
+                    console.log()
+                    this.img_link = new Date();
+                    this.img_link = this.img_link.getTime();
+                    this.uploader.onBeforeUploadItem = (item) =>{
                         item.formData.push({
-                            filename: img_link
+                            filename: this.img_link
                         });
                     }
-                    this.uploader.uploadItem(0);
+                    console.log('After: ' + this.img_link);
+                    this.uploader.uploadAll();
                     this.uploader.clearQueue();
-                    this.uploader.onErrorItem = function (item, response, status, headers) {
+                    this.uploader.onSuccessItem = (item, response, status, headers) => {   
+                        console.log('Uploader: Success callback');
+                    }
+                    this.uploader.onErrorItem = (item, response, status, headers)=> {
                         //Add information for img uplaod error in DOM (html)
                         console.log('Uplaoder: Error callback');
                         console.log(item);
                         console.log(response);
                         console.log(headers);
                     };
-                    this.uploader.onCancelItem = function (item, response, status, headers) {
+                    this.uploader.onCancelItem = (item, response, status, headers)=> {
                         //Add information for img uplaod error in DOM (html)
                         console.log('Uploader: Cancel callback');
                         console.log(item);
@@ -218,7 +229,7 @@
                     name: this.name,
                     link: this.address,
                     desc: this.desc,
-                    img_link: img_link,
+                    img_link: this.img_link,
                     order_id: this.order_id,
                     beta: this.beta,
                 }

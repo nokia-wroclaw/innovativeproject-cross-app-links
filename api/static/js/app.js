@@ -40,14 +40,14 @@
             hide: function () {
                 this.status = !this.status;
             },
-            active: function(url){
-                if (url.indexOf(':siteID')===-1){
+            active: function (url) {
+                if (url.indexOf(':siteID') === -1) {
                     var arr = angular.element('#navigation a').removeClass('active-li');
-                    for(var i=0;i<arr.length;i++){    
-                        if(arr[i].href.indexOf(url) !== -1)
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i].href.indexOf(url) !== -1)
                             var active = arr[i];
                     }
-                    active.className+=' active-li';
+                    active.className += ' active-li';
                 }
             }
         };
@@ -157,8 +157,8 @@
                         filename: img_link
                     });
                 }
-                this.uploader.uploadItem(0); 
-                this.uploader.onSuccessItem = (item, response, status, headers)=> {
+                this.uploader.uploadItem(0);
+                this.uploader.onSuccessItem = (item, response, status, headers) => {
                     var post_object = {
                         name: this.name,
                         link: this.address,
@@ -173,70 +173,69 @@
                     this.status = true;
                     this.uploader.clearQueue();
                 };
-                 this.uploader.onErrorItem = function(item, response, status, headers) {
+                this.uploader.onErrorItem = function (item, response, status, headers) {
                     console.log('Uplaoder: Error callback');
                     console.log(item);
                     console.log(response);
                     console.log(headers);
                 };
-                
-                this.uploader.onCancelItem = function(item, response, status, headers) {
+
+                this.uploader.onCancelItem = function (item, response, status, headers) {
                     console.log('Uploader: Cancel callback');
                     console.log(item);
                     console.log(response);
                     console.log(headers);
                 };
-               
+
             },
             update: function (app_id) {
-                if (this.uploader.queue.length > 0) {
-                    this.img_link = $scope.clockDate.date();
-                }
                 var img_link = this.img_link;
-                this.uploader.onBeforeUploadItem = function (item) {
-                    item.formData.push({
-                        filename: img_link
-                    });
-                }
-                this.uploader.uploadItem(0);
-                this.uploader.onSuccessItem = (item, response, status, headers)=> {
-                    var post_object = {
-                        name: this.name,
-                        link: this.address,
-                        desc: this.desc,
-                        img_link: img_link,
-                        order_id: this.order_id,
-                        beta: this.beta,
-                    }
-                    restful.update('app', app_id, post_object).then(function () {
-                        var log_object = {
-                            content: 'A link #' + app_id + ' was updated',
-                            author_id: $scope.current_user.id
-                        }
-                        update.apps();
-                        restful.post('log', log_object).then(function(){
-                            update.logs();
+                if (this.uploader.queue.length > 0) {
+                    img_link = this.img_link = $scope.clockDate.date();
+                    this.uploader.onBeforeUploadItem = function (item) {
+                        item.formData.push({
+                            filename: img_link
                         });
-                    });
-                    this.clear();
-                    this.status = true;
+                    }
+                    this.uploader.uploadItem(0);
                     this.uploader.clearQueue();
-                    $location.path('/links').replace();
-                };
-                this.uploader.onErrorItem = function(item, response, status, headers) {
-                    //Add information for img uplaod error in DOM (html)
-                    console.log('Uplaoder: Error callback');
-                    console.log(item);
-                    console.log(response);
-                    console.log(headers);
-                };
-                this.uploader.onCancelItem = function(item, response, status, headers) {
-                    //Add information for img uplaod error in DOM (html)
-                    console.log('Uploader: Cancel callback');
-                    console.log(item);
-                    console.log(response);
-                    console.log(headers);
-                };
+                    this.uploader.onErrorItem = function (item, response, status, headers) {
+                        //Add information for img uplaod error in DOM (html)
+                        console.log('Uplaoder: Error callback');
+                        console.log(item);
+                        console.log(response);
+                        console.log(headers);
+                    };
+                    this.uploader.onCancelItem = function (item, response, status, headers) {
+                        //Add information for img uplaod error in DOM (html)
+                        console.log('Uploader: Cancel callback');
+                        console.log(item);
+                        console.log(response);
+                        console.log(headers);
+                    };
+                }
+                var post_object = {
+                    name: this.name,
+                    link: this.address,
+                    desc: this.desc,
+                    img_link: img_link,
+                    order_id: this.order_id,
+                    beta: this.beta,
+                }
+                restful.update('app', app_id, post_object).then(function () {
+                    var log_object = {
+                        content: 'A link #' + app_id + ' was updated',
+                        author_id: $scope.current_user.id
+                    }
+                    update.apps();
+                    restful.post('log', log_object).then(function () {
+                        update.logs();
+                    });
+                });
+                this.clear();
+                this.status = true;
+
+                $location.path('/links').replace();
             },
             hide: function (app_id, app_status) {
                 var confirmResult = confirm("Do you want to change visibility of this app?");
@@ -250,7 +249,7 @@
                             author_id: $scope.current_user.id
                         }
                         update.apps();
-                        restful.post('log', log_object).then(function(){
+                        restful.post('log', log_object).then(function () {
                             update.logs();
                         });
                     });
@@ -266,7 +265,7 @@
                             author_id: $scope.current_user.id
                         }
                         update.apps();
-                        restful.post('log', log_object).then(function(){
+                        restful.post('log', log_object).then(function () {
                             update.logs();
                         });
                     });

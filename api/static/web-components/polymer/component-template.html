@@ -82,7 +82,7 @@
                         <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_appendFields" sort="_selfSort">
                             <li>  
                                 <a target="_blank" href="{{item.link }}">
-                                    <img src="{{_getProperPath(item.img_link)}}" on-load='_getColor' />
+                                    <img crossOrigin="Anonymous" src="{{_getProperPath(item.img_link)}}" on-load='_getColor' />
                                     <span class="text">{{item.name }}</span>
                                 </a>
                             </li>

@@ -1,4 +1,4 @@
-from flask import Flask, make_response, jsonify, render_template, redirect, session, request, g, send_from_directory
+from flask import Flask, make_response, jsonify, render_template, redirect, session, request, g, send_from_directory, send_file
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from passlib.hash import sha256_crypt
 from api import app
@@ -191,6 +191,13 @@ def static_file(path):
 @cross_origin()
 def static_file_web(path):
     return send_from_directory('static/web-components', path)    
+
+ 
+@app.route('/static/img/app-img/<path:path>')
+@cross_origin()
+def static_file_img(path):
+    return send_from_directory('static/img/app-img/',path)        
+
 
 #Routes for components data
 @app.route('/component/<component_type>')

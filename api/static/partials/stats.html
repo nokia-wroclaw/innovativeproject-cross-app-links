@@ -3,14 +3,13 @@
 <if ng-if="current_user.group.name =='Administrator'">
     <div class="row">
         <div class="col-lg-4">
-            <div class="box color-box green">
+            <div class="box color-box lightgreen">
                 <div class="site-stat">
-                    <span class="stat-desc">Registered users</span>
-                    <span class="stat-number">{{users.length}}</span>
-                    <span class="stat-icon glyphicon glyphicon-user"></span>
+                    <span class="stat-desc">Applications</span>
+                    <span class="stat-number">{{apps.length}}</span>
+                    <span class="stat-icon glyphicon glyphicon-link"></span>
                 </div>
             </div>
-
             <div class="box">
                 <header>
                     <h3 class="blue">Invitations</h3>
@@ -51,32 +50,32 @@
         </div>
         <div class="col-lg-8">
             <div class="box">
-                <canvas id="line" class="chart chart-line" chart-data="stats.users.data" chart-labels="stats.users.labels" chart-series="stats.users.series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
+                <canvas id="line" class="chart chart-line" chart-data="stats.apps.data" chart-labels="stats.apps.labels" chart-series="stats.apps.series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
             </canvas>
             </div>
             <div class="row">
                 <div class="col-lg-6 row-buried">
-                    <div class="box color-box lightgreen">
+                    <div class="box color-box green">
                         <div class="site-stat">
-                            <span class="stat-desc">Applications</span>
-                            <span class="stat-number">{{apps.length}}</span>
-                            <span class="stat-icon glyphicon glyphicon-link"></span>
+                            <span class="stat-desc">Registered users</span>
+                            <span class="stat-number">{{users.length}}</span>
+                            <span class="stat-icon glyphicon glyphicon-user"></span>
                         </div>
                     </div>
                     <div class="box">
-                        <canvas id="bar" class="chart chart-bar" chart-data="stats.apps.data" chart-labels="stats.apps.labels" chart-series="stats.apps.series"> </canvas>
+                        <canvas id="bar" class="chart chart-bar" chart-data="stats.users.data" chart-labels="stats.users.labels" chart-series="stats.users.series"> </canvas>
                     </div>
                 </div>
                 <div class="col-lg-6 row-buried">
-                    <div class="box color-box blue">
+                    <div class="box color-box orange">
                         <div class="site-stat">
-                            <span class="stat-desc">Components in use</span>
-                            <span class="stat-number">{{components.length}}</span>
-                            <span class="stat-icon glyphicon glyphicon-tasks"></span>
+                            <span class="stat-desc">Today's activity</span>
+                            <span class="stat-number">{{logs.todaysAct}}</span>
+                            <span class="stat-icon glyphicon glyphicon-eye-open"></span>
                         </div>
                     </div>
                     <div class="box">
-                        <canvas id="bar" class="chart chart-bar" chart-data="stats.components.data" chart-labels="stats.components.labels" chart-series="stats.components.series"> </canvas>
+                        <canvas id="bar" class="chart chart-bar" chart-data="stats.logs.data" chart-labels="stats.logs.labels" chart-series="stats.logs.series"> </canvas>
                     </div>
                 </div>
 

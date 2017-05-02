@@ -176,8 +176,10 @@
                     return 'glyphicon glyphicon-pushpin';
             },
             _getColor: function(e) {
+                var img = e.target;
+                img.crossOrigin = 'Anonymous';
                 var colorThief = new ColorThief();
-                var background = colorThief.getColor(e.target);
+                var background = colorThief.getColor(img);
                 var red = background[0] + 120;
                 var green = background[1] + 50;
                 var blue = background[2] + 90;

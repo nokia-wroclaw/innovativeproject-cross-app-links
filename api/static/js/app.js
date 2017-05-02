@@ -193,10 +193,6 @@
             },
             update: function (app_id) {   
                 if (this.uploader.queue.length > 0) {
-                    console.log(this.uploader.getReadyItems());
-                    console.log('Uplaoder started');
-                    console.log('Before: ' + this.img_link);
-                    console.log()
                     this.img_link = new Date();
                     this.img_link = this.img_link.getTime();
                     this.uploader.onBeforeUploadItem = (item) =>{
@@ -204,7 +200,6 @@
                             filename: this.img_link
                         });
                     }
-                    console.log('After: ' + this.img_link);
                     this.uploader.uploadAll();
                     this.uploader.clearQueue();
                     this.uploader.onSuccessItem = (item, response, status, headers) => {   
@@ -245,7 +240,6 @@
                 });
                 this.clear();
                 this.status = true;
-
                 $location.path('/links').replace();
             },
             hide: function (app_id, app_status) {
@@ -266,7 +260,6 @@
                     });
                 }
             },
-
             delete: function (app_id) {
                 var confirmResult = confirm("Do you want to remove this app?");
                 if (confirmResult) {
@@ -289,7 +282,6 @@
             },
             status: false
         };
-
         $scope.note = {
             content: '',
             tag: '',
@@ -309,7 +301,7 @@
                 this.tag = '';
             }
         };
-
+        
         $scope.orderArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         /*
         If you use some variables in a couple places you probably 

@@ -115,7 +115,7 @@ def setpassword():
         Mailing().commituser(temp,givenpassword)
         return redirect('/')
     else:
-        return make_response(open('api/templates/create-user.html').read())
+        return make_response(open('api/templates/create-user2.html').read())
 
 
 @app.route('/api/auth/resetpassword', methods=['GET','POST'])
@@ -144,7 +144,7 @@ def setnewpassword():
         Mailing().updatepassword(temp,givenpassword)
         return redirect('/')
     else:
-        return make_response(open('api/templates/create-password.html').read())
+        return make_response(open('api/templates/create-password2.html').read())
 
 # Delete user
 @app.route('/api/auth/remove', methods=['POST'])

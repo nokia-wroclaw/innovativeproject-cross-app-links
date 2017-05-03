@@ -97,9 +97,9 @@ def register():
             Mailing().commitinvite(request.form['email'],current_user,request.form['group'])
             return redirect('/add-user')
         else:
-            return render_template("message_template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
+            return render_template("message-template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
     else:
-        return render_template("message_template.html", type="Warning!", message="User exists or invitation send already.", path="/add-user")
+        return render_template("message-template.html", type="Warning!", message="User exists or invitation send already.", path="/add-user")
 
 
 # Confirm account
@@ -115,7 +115,7 @@ def setpassword():
         Mailing().commituser(temp,givenpassword)
         return redirect('/')
     else:
-        return make_response(open('api/templates/create-user2.html').read())
+        return make_response(open('api/templates/create-user.html').read())
 
 
 @app.route('/api/auth/resetpassword', methods=['GET','POST'])
@@ -144,7 +144,7 @@ def setnewpassword():
         Mailing().updatepassword(temp,givenpassword)
         return redirect('/')
     else:
-        return make_response(open('api/templates/create-password2.html').read())
+        return make_response(open('api/templates/create-password.html').read())
 
 # Delete user
 @app.route('/api/auth/remove', methods=['POST'])
@@ -162,7 +162,7 @@ def remove():
             Mailing().removeinvite(request.form['email'])
         return redirect('/add-user')
     else:
-        return render_template("message_template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
+        return render_template("message-template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
 
 
 #Default templates for Flask route

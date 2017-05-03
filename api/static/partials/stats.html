@@ -1,82 +1,85 @@
-<div class="row">
-    <div class="col-lg-4">
-        <div class="box color-box green">
-            <div class="site-stat">
-                <span class="stat-desc">Registered users</span>
-                <span class="stat-number">{{users.length}}</span>
-                <span class="stat-icon glyphicon glyphicon-user"></span>
-            </div>
-        </div>
-
-        <div class="box">
-            <header>
-                <h3 class="blue">Invitations</h3>
-                <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
-            </header>
-            <canvas id="doughnut" class="chart chart-doughnut" chart-data="stats.invitations.data" chart-labels="stats.invitations.labels">
-            </canvas>
-        </div>
-        <div class="box box-table">
-            <header class="note-header">
-                <h3 class="blue">Notes</h3>
-                <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal" ng-click="showlist = !showlist"></span>
+<if ng-if="current_user.group.name !='Administrator'" ng-init="redirectToDash()">
+</if>
+<if ng-if="current_user.group.name =='Administrator'">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="box color-box lightgreen">
+                <div class="site-stat">
+                    <span class="stat-desc">Applications</span>
+                    <span class="stat-number">{{apps.length}}</span>
+                    <span class="stat-icon glyphicon glyphicon-link"></span>
                 </div>
-                <form class="noteform" name="notesform" ng-show="showlist" ng-submit="notesform.$valid && note.add()" novalidate>
-                    <div class="single-input pull-left">
-                        <input class="pull-left" ng-model="note.content" type="text" name="note" placeholder="Note content" required>
-                        <select class="pull-left" ng-model="note.tag" name="tag" required>
+            </div>
+            <div class="box">
+                <header>
+                    <h3 class="blue">Invitations</h3>
+                    <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
+                </header>
+                <canvas id="doughnut" class="chart chart-doughnut" chart-data="stats.invitations.data" chart-labels="stats.invitations.labels">
+            </canvas>
+            </div>
+            <div class="box box-table">
+                <header class="note-header">
+                    <h3 class="blue">Notes</h3>
+                    <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal" ng-click="showlist = !showlist"></span>
+                    </div>
+                    <form class="noteform" name="notesform" ng-show="showlist" ng-submit="notesform.$valid && note.add()" novalidate>
+                        <div class="single-input pull-left">
+                            <input class="pull-left" ng-model="note.content" type="text" name="note" placeholder="Note content" required>
+                            <select class="pull-left" ng-model="note.tag" name="tag" required>
                             <option>info</option>
                             <option>rush</option>
                             <option>know</option>
                         </select>
-                    </div>
-                    <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
-                </form>
-            </header>
-            <table class="table">
-                <tbody>
-                    <tr ng-repeat="note in notes | orderBy: id: true| limitTo: 3">
-                        <td>{{note.content}}</td>
-                        <td>
-                            <div class="tag {{note.tag}}">{{note.tag}}</div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </div>
+                        <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
+                    </form>
+                </header>
+                <table class="table">
+                    <tbody>
+                        <tr ng-repeat="note in notes | orderBy: id: true| limitTo: 3">
+                            <td>{{note.content}}</td>
+                            <td>
+                                <div class="tag {{note.tag}}">{{note.tag}}</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
+            </div>
         </div>
-    </div>
-    <div class="col-lg-8">
-        <div class="box">
-            <canvas id="line" class="chart chart-line" chart-data="stats.users.data" chart-labels="stats.users.labels" chart-series="stats.users.series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
+        <div class="col-lg-8">
+            <div class="box">
+                <canvas id="line" class="chart chart-line" chart-data="stats.apps.data" chart-labels="stats.apps.labels" chart-series="stats.apps.series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
             </canvas>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 row-buried">
-                <div class="box color-box lightgreen">
-                    <div class="site-stat">
-                        <span class="stat-desc">Applications</span>
-                        <span class="stat-number">{{apps.length}}</span>
-                        <span class="stat-icon glyphicon glyphicon-link"></span>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 row-buried">
+                    <div class="box color-box green">
+                        <div class="site-stat">
+                            <span class="stat-desc">Registered users</span>
+                            <span class="stat-number">{{users.length}}</span>
+                            <span class="stat-icon glyphicon glyphicon-user"></span>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <canvas id="bar" class="chart chart-bar" chart-data="stats.users.data" chart-labels="stats.users.labels" chart-series="stats.users.series"> </canvas>
                     </div>
                 </div>
-                <div class="box">
-                    <canvas id="bar" class="chart chart-bar" chart-data="stats.apps.data" chart-labels="stats.apps.labels" chart-series="stats.apps.series"> </canvas>
-                </div>
-            </div>
-            <div class="col-lg-6 row-buried">
-                <div class="box color-box blue">
-                    <div class="site-stat">
-                        <span class="stat-desc">Components in use</span>
-                        <span class="stat-number">17</span>
-                        <span class="stat-icon glyphicon glyphicon-tasks"></span>
+                <div class="col-lg-6 row-buried">
+                    <div class="box color-box orange">
+                        <div class="site-stat">
+                            <span class="stat-desc">Today's activity</span>
+                            <span class="stat-number">{{logs.todaysAct}}</span>
+                            <span class="stat-icon glyphicon glyphicon-eye-open"></span>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <canvas id="bar" class="chart chart-bar" chart-data="stats.logs.data" chart-labels="stats.logs.labels" chart-series="stats.logs.series"> </canvas>
                     </div>
                 </div>
-                <div class="box">
-                    <canvas id="bar" class="chart chart-bar" chart-data="stats.components.data" chart-labels="stats.components.labels" chart-series="stats.components.series"> </canvas>
-                </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
+</if>

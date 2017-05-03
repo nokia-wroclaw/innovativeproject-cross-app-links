@@ -20,6 +20,13 @@
         margin: 0; } }
 /* Medium Devices, Desktops */
 @media only screen and (max-width: 992px) {
+  .row .row-buried {
+    padding: 0; }
+    .row .row-buried:nth-child(odd) {
+      padding-right: 0x; }
+    .row .row-buried:nth-child(even) {
+      padding-left: 0px; }
+
   .container {
     width: 100%; }
 

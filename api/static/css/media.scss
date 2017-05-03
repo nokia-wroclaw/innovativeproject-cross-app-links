@@ -42,6 +42,17 @@
     /* Medium Devices, Desktops */
     
     @media only screen and (max-width: 992px) {
+        .row {
+            .row-buried {
+                padding: 0;
+                &:nth-child(odd) {
+                    padding-right: 0x;
+                }
+                &:nth-child(even) {
+                    padding-left: 0px;
+                }
+            }
+        }
         .container {
             width: 100%;
         }

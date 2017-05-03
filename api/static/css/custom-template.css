@@ -1,0 +1,209 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato';
+  background: #34313d; }
+
+.container-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 10%;
+  background: #fefefe;
+  border-radius: 3px;
+  box-sizing: border-box;
+  width: 520px;
+  padding: 40px; }
+  .container-box h3 {
+    margin: 0;
+    float: left;
+    font-weight: 600;
+    font-size: 24px;
+    color: #333; }
+  .container-box ul {
+    margin: 0;
+    margin-bottom: 40px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    width: 100%;
+    font-weight: 400;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.7); }
+    .container-box ul p {
+      float: left;
+      width: 100%;
+      clear: both;
+      margin: 40px 0; }
+    .container-box ul li {
+      float: left;
+      display: block;
+      width: 100%;
+      margin-bottom: 5px; }
+      .container-box ul li .glyphicon {
+        color: #3fce91;
+        margin-right: 15px; }
+  .container-box form {
+    float: left;
+    width: 100%; }
+    .container-box form input[type=text] {
+      width: 100%;
+      border: 0;
+      outline: none;
+      border-bottom: 2px solid #eee;
+      padding: 10px 0;
+      background: none;
+      font-size: 24px;
+      color: #222; }
+      .container-box form input[type=text]:focus {
+        border-color: #3fce91; }
+  .container-box .button {
+    float: left;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    background: #ddd;
+    border-radius: 3px;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    box-sizing: border-box; }
+    .container-box .button.red {
+      background: #D45A5A; }
+
+
+
+.login-form {
+    background: none;
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+    padding: 0;
+    border-radius: 3px;
+}
+
+.login-form>.input-socket {
+    width: 100%;
+    box-sizing: border-box;
+    float: left;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 2px;
+    overflow: hidden;
+    height: 60px;
+    position: relative;
+}
+
+.login-form>.input-socket>input[type="text"],
+.login-form>.input-socket>input[type="password"],
+.login-form>.input-socket>.input-icon,
+.login-form>input[type="submit"] {
+    float: right;
+    width: 85%;
+    padding: 20px;
+    padding-left: 10px;
+    padding-top: 22px;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 2px;
+    color: #b6b0c8;
+    height: 60px;
+    background: white;
+    display: inline;
+    transition: 0.3s ease all;
+}
+
+.login-form>.input-socket>input[type="text"],
+.login-form>.input-socket>input[type="password"] {
+    border: 1px solid #ccc;
+}
+
+.login-form>.input-socket>.input-icon,
+.login-form>input[type="submit"] {
+    border: none;
+}
+
+.login-form>.input-socket>input[type="text"]:focus,
+.login-form>.input-socket>input[type="password"]:focus {
+    width: 100%;
+    border: 0;
+    outline: none;
+    padding-left: 20px;
+    transition: 0.3s ease all;
+}
+
+.login-form>.input-socket>input[type="text"]:focus + .input-icon,
+.login-form>.input-socket>input[type="password"]:focus + .input-icon {
+    transform: translateX(-100%);
+    transition: 0.4s ease all;
+}
+
+.login-form>.input-socket>.input-icon {
+    position: absolute;
+    text-align: center;
+    width: 15%;
+    float: left;
+    display: inline;
+    padding-left: 20px;
+    padding-top: 20px;
+    transition: 0.4s ease all;
+}
+
+.login-form>.input-socket>input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #b6b0c8;
+}
+
+.login-form>.input-socket>input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #b6b0c8;
+}
+
+.login-form>.input-socket>input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #b6b0c8;
+}
+
+.login-form>.input-socket>input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #b6b0c8;
+}
+
+.login-form>input[type="submit"] {
+    padding: 8px 0;
+    float: right;
+    background: #2ea4d2;
+    color: white;
+    width: 100px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.login-form>input[type="submit"]:hover {
+    cursor: poiner;
+}
+
+.login-form>.form-link {
+    font-size: 14px;
+    font-weight: 400;
+    float: left;
+}
+
+.login-form>.form-link.forgotten-pass {
+    margin: 8px 0;
+}
+
+.login-form>.form-link.new-account {
+    text-align: center;
+    width: 100%;
+}
+
+.login-form>.form-link>a:link,
+.login-form>.form-link>a:visited,
+.login-form>.form-link>a:active {
+    color: #b6b0c8;
+    display: block;
+}
+/*# sourceMappingURL=custom-template.css.map */

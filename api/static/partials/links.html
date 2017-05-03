@@ -6,8 +6,11 @@
 </div>
 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" ng-repeat='app in apps | orderBy : id : true | filter: {name: searchBy}'>
     <div class="box link-box">
+
         <div class="main-link-info">
-            <img src="../static/img/app-img/{{app.img_link}}.png">
+
+            <div class="beta-icon" ng-show="app.beta">Beta</div>
+            <img ng-src="../static/img/app-img/{{app.img_link}}.png">
             <h3 class="main-link-heading">{{app.name}}</h3>
         </div>
         <div class="main-link-href">
@@ -18,15 +21,15 @@
         </div>
         <div class="bottom-nav">
             <a class="creator-link pull-left text-left" href="profile/{{app.creator.id}}">{{app.creator.username}}</a>
-            <a class="button small  margined pull-right" ng-class="app.status ? 'green' : 'pure'" href="#" ng-click="newlink.hide(app.id,app.status)">
+            <a ng-show="current_user.group.app_edit_all" class="button small  margined pull-right" ng-class="app.status ? 'green' : 'pure'" href="#" ng-click="newlink.hide(app.id,app.status)">
                 <span class="glyphicon" ng-class="app.status ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"></span></a>
-            <a class="button blue small  margined pull-right" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
-            <a class="button red small pull-right" href="#" ng-click="newlink.delete(app.id)"><span class="glyphicon glyphicon-trash"></span></a>
+            <a ng-show="current_user.group.app_edit_all" class="button blue small  margined pull-right" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
+            <a ng-show="current_user.group.app_drop" class="button red small pull-right" href="#" ng-click="newlink.delete(app.id)"><span class="glyphicon glyphicon-trash"></span></a>
         </div>
     </div>
 </div>
 
-<div ng-if="filterParams.manage()>0" class="popup" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
+<div ng-if="current_user.group.app_edit_all && filterParams.manage()>0" class="popup" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
     <div class="no-box-el error-form-box" ng-show="form.$submitted">
         <span class='pull-left text-left error' ng-show="form.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
 
@@ -43,11 +46,17 @@
 
         </div>
     </div>
-    <form ng-init="newlink.manageFill(app.name,app.link,app.desc, app.img_link, app.order_id)" name='form' class="box box-form no-shadow" ng-submit="form.$valid && form.$dirty && newlink.update(app.id)" novalidate>
-        <div class="input-imglink"><img src="/static/img/app-img/{{newlink.img_link}}.png"></div>
+    <form ng-init="newlink.manageFill(app.name,app.link,app.desc, app.img_link, app.order_id, app.beta)" name='form' class="box box-form no-shadow" ng-submit="form.$valid && form.$dirty && newlink.update(app.id)" novalidate>
+        <div class="input-imglink"><img ng-src="/static/img/app-img/{{newlink.img_link}}.png"></div>
         <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
         <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
         <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>
+        <label class="input-description">Set as a beta link</label>
+        <input type="checkbox" ng-model="newlink.beta">
+        <!--
+<label class="input-description">Set as a maintenance</label>
+<input type="checkbox" ng-model="newlink.maintenance">
+-->
         <label class="input-description">Choose order</label>
         <select ng-model="newlink.order_id" ng-options="i as i for i in orderArray" required>
         </select>
@@ -55,8 +64,4 @@
         <button type="submit" class='button green single-icon pull-right'><span class="glyphicon glyphicon-ok"></span></button>
     </form>
 </div>
-<div class="success-bar" ng-show="newlink.status">
-    Success! You've just added a link.
-</div>
-
 <div class="black-bg" ng-if="filterParams.manage()>0" ng-click="popup.edit.close()"></div>

@@ -22,7 +22,7 @@
     <div class="box color-box blue">
         <div class="site-stat">
             <span class="stat-desc">Components in use</span>
-            <span class="stat-number">17</span>
+            <span class="stat-number">{{components.length}}</span>
             <span class="stat-icon glyphicon glyphicon-tasks"></span>
         </div>
     </div>
@@ -31,10 +31,10 @@
 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pull-left">
     <div class="box link-box" ng-repeat='app in apps | orderBy : id : true | limitTo: 3'>
         <div class="main-link-info">
-            <img src="../static/img/app-img/{{app.img_link}}.png">
+            <img ng-src="../static/img/app-img/{{app.img_link}}.png">
             <h3 class="main-link-heading">{{app.name}}</h3>
         </div>
-        <a class="settings-icon" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
+        <a ng-show="current_user.group.app_edit_all" class="settings-icon" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
     </div>
 
     <div class="box box-table">
@@ -74,7 +74,7 @@
         </div>
     </div>
     <div class="box image-box">
-        <img src="../static/img/dashboard/temp.jpg">
+        <img ng-src="../static/img/dashboard/temp.jpg">
     </div>
 
 </div>
@@ -89,7 +89,7 @@
             <tbody>
                 <tr ng-repeat='log in logs | orderBy: id : true | limitTo : 5' ng-show='logs.length'>
                     <td>{{log.id}}</td>
-                    <td>{{log.data_time | date: 'short' }}</td>
+                    <td>{{log.date | date: 'short' }}</td>
                     <td>{{log.author.username}}</td>
                     <td>{{log.content}}</td>
                 </tr>
@@ -103,15 +103,15 @@
     <div class="box box-table">
         <table class="table ">
             <header>
-                <h3 class="green">Who's online</h3>
+                <h3 class="green">Today's online</h3>
                 <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
             </header>
             <tbody>
                 <tr ng-repeat='user in users | limitTo : 5' ng-show='users.length'>
                     <td>{{user.id}}</td>
                     <td>{{user.username}}</td>
-                    <td>87.128.21.11</td>
-                    <td>Since 3 minutes</td>
+                    <td>{{user.group.name}}</td>
+                    <td>{{user.been_active | date : 'HH:mm'}}</td>
                 </tr>
             </tbody>
             <span class='warning-text' ng-hide='users.length'>No active users since last check</span>

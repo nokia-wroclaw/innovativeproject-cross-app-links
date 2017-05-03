@@ -6,11 +6,12 @@
     <title>Cross-app-links</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="../static/bower_components/lato-font/css/lato-font.css">
     <!--        BOWER PCKG-->
     <link rel="stylesheet" href="../static/bower_components/dstyle_resetCSS/reset.min.css">
     <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" type="text/css" />
+    <link rel="stylesheet" href="../static/bower_components/lato-font/css/lato-font.css">
     <!--        BOWER PCKG:END-->
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/media.css">
@@ -21,6 +22,12 @@
 </head>
 
 <body ng-controller="mainCtrl">
+    <div class="loading">
+        <span class="loading-icon"></span>
+        <span class="text">
+            Loading content...
+        </span>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <header class="main-header col-sm-12 col-xs-12 pull-right row" ng-class="menu.status ? 'col-lg-10 col-md-11' : 'col-lg-12 col-md-12'">
@@ -56,19 +63,21 @@
         </div>
         <div class="container-fluid" ng-class="menu.status ? 'container-fluid' : 'container'">
             <div class="row">
-                <nav class="main-navigation col-lg-2 col-md-1 col-sm-12 col-xs-12 pull-left" ng-show="menu.status">
-
+                <nav id="navigation" class="main-navigation col-lg-2 col-md-1 col-sm-12 col-xs-12 pull-left" ng-show="menu.status">
                     <div class="main-navigation-overflow" ng-scrollbars ng-scrollbars-config="config">
                         <ul>
                             <h4 class="label hidden-md">Main</h4>
                             <li>
                                 <a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span><span class="hidden-md">Dashboard</span></a>
                             </li>
-                            <li>
+                            <li ng-show="current_user.group.name =='Administrator'">
                                 <a href="stats"><span class="glyphicon glyphicon glyphicon-stats"></span><span class="hidden-md">Statistics</span></a>
                             </li>
                             <li>
                                 <a href="action-log"><span class="glyphicon glyphicon-eye-open"></span><span class="hidden-md">Action log</span></a>
+                            </li>
+                            <li>
+                                <a href="components"><span class="glyphicon glyphicon-tasks"></span><span class="hidden-md">Components</span></a>
                             </li>
                         </ul>
                         <ul>
@@ -76,7 +85,7 @@
                             <li>
                                 <a href="links"><span class="glyphicon glyphicon-link"></span><span class="hidden-md">My links</span></a>
                             </li>
-                            <li class="hidden-md">
+                            <li ng-show="current_user.group.app_add">
                                 <a href="add-link"><span class="glyphicon glyphicon-plus"></span><span class="hidden-md">Add link</span></a>
                             </li>
                         </ul>
@@ -88,7 +97,7 @@
                             <li>
                                 <a href="groups"><span class="glyphicon glyphicon-tags"></span><span class="hidden-md">Groups</span></a>
                             </li>
-                            <li class="hidden-md">
+                            <li ng-show="current_user.group.user_add || current_user.group.user_drop">
                                 <a href="add-user"><span class="glyphicon glyphicon-plus"></span><span class="hidden-md">Add user</span></a>
                             </li>
 
@@ -96,10 +105,7 @@
                         <ul>
                             <h4 class="label hidden-md">Other</h4>
                             <li>
-                                <a href="settings"><span class="glyphicon glyphicon-cog"></span><span class="hidden-md">Settings</span></a>
-                            </li>
-                            <li>
-                                <a href="ver"><span class="glyphicon glyphicon-info-sign"></span><span class="hidden-md">Version</span></a>
+                                <a href="ver"><span class="glyphicon glyphicon-info-sign"></span><span class="hidden-md">About</span></a>
                             </li>
                         </ul>
                     </div>

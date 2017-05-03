@@ -12,6 +12,9 @@ body {
   float: left;
   width: 100%; }
 
+a.button {
+  text-decoration: none; }
+
 .button {
   float: left;
   width: auto;
@@ -30,15 +33,15 @@ body {
   .button.green {
     background: #3fce91; }
   .button.big {
-    padding: 20px 60px;
+    padding: 20px;
     font-size: 20px; }
   .button.bordered {
     border-bottom: 3px solid rgba(0, 0, 0, 0.1); }
 
 .project-container {
-  background: transparent;
+  background: #D45A5A;
   background-size: cover;
-  width: 70%;
+  width: 60%;
   height: 100%;
   float: right;
   position: relative; }
@@ -53,33 +56,33 @@ body {
       margin-bottom: 15px;
       margin-left: 15px;
       border-radius: 20px;
-      height: 18px;
+      height: 26px;
       background: black;
-      opacity: 0.1; }
+      opacity: 0.05; }
       .project-container .fractal-overflow .fractal.break {
         clear: both; }
       .project-container .fractal-overflow .fractal.blue {
-        background: blue; }
+        background: rgba(0, 0, 0, 0.9); }
       .project-container .fractal-overflow .fractal.red {
-        background: red; }
+        background: rgba(0, 0, 0, 0.8); }
       .project-container .fractal-overflow .fractal.orange {
-        background: orange; }
+        background: rgba(0, 0, 0, 0.7); }
       .project-container .fractal-overflow .fractal.green {
-        background: green; }
+        background: rgba(0, 0, 0, 0.6); }
       .project-container .fractal-overflow .fractal.lightgreen {
-        background: lightgreen; }
+        background: rgba(0, 0, 0, 0.5); }
       .project-container .fractal-overflow .fractal.transparent {
         background: transparent; }
       .project-container .fractal-overflow .fractal.long {
-        width: 12%; }
+        width: 15%; }
       .project-container .fractal-overflow .fractal.medium {
-        width: 9%; }
+        width: 12%; }
       .project-container .fractal-overflow .fractal.medium-short {
-        width: 7%; }
+        width: 10%; }
       .project-container .fractal-overflow .fractal.short {
-        width: 5%; }
+        width: 8%; }
       .project-container .fractal-overflow .fractal.micro {
-        width: 2%; }
+        width: 3%; }
   .project-container .main-project-section {
     width: 750px;
     margin: 0 auto;
@@ -87,50 +90,82 @@ body {
     position: absolute;
     left: 0;
     right: 0;
-    top: 25vh;
+    top: 15vh;
     text-align: center; }
-    .project-container .main-project-section .project-header .logo {
-      float: left;
-      width: 100%;
-      text-align: center;
-      margin-bottom: 40px; }
-    .project-container .main-project-section .project-header .site-name {
-      text-transform: uppercase;
-      font-weight: 800;
-      width: 100%;
-      float: left;
-      font-size: 72px; }
-    .project-container .main-project-section .the-component {
-      margin-top: 20px;
-      float: left;
-      width: 100%; }
-      .project-container .main-project-section .the-component h2 {
-        font-size: 16px;
-        font-weight: 400;
+    .project-container .main-project-section .tablet-preview {
+      width: 530px;
+      height: 650px;
+      box-sizing: border-box;
+      padding: 50px 25px;
+      border-radius: 20px;
+      background-color: #34313d;
+      box-shadow: 3px 7px 120px rgba(0, 0, 0, 0.5);
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      border-bottom: 5px solid #28262f; }
+      .project-container .main-project-section .tablet-preview .tablet-screen {
         float: left;
         width: 100%;
-        margin: 20px 0;
-        font-weight: 400;
-        color: #888;
-        padding: 0 100px; }
-      .project-container .main-project-section .the-component .download-button {
-        width: 100%;
-        text-align: center;
+        height: 100%;
+        box-sizing: border-box;
+        background: #f0f0f0;
+        position: relative; }
+        .project-container .main-project-section .tablet-preview .tablet-screen .project-header {
+          margin-top: 120px; }
+          .project-container .main-project-section .tablet-preview .tablet-screen .project-header .logo {
+            float: left;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 40px; }
+          .project-container .main-project-section .tablet-preview .tablet-screen .project-header .site-name {
+            text-transform: uppercase;
+            font-weight: 800;
+            width: 100%;
+            float: left;
+            font-size: 36px; }
+        .project-container .main-project-section .tablet-preview .tablet-screen .the-component {
+          float: left;
+          width: 100%;
+          padding: 40px; }
+          .project-container .main-project-section .tablet-preview .tablet-screen .the-component h2 {
+            font-size: 16px;
+            font-weight: 400;
+            float: left;
+            width: 100%;
+            margin-bottoM: 40px;
+            font-weight: 400;
+            color: #888; }
+          .project-container .main-project-section .tablet-preview .tablet-screen .the-component .download-button {
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 80px;
+            display: block;
+            float: left; }
+            .project-container .main-project-section .tablet-preview .tablet-screen .the-component .download-button .button {
+              padding-top: 24px;
+              float: none; }
+              .project-container .main-project-section .tablet-preview .tablet-screen .the-component .download-button .button .glyphicon {
+                margin-right: 20px;
+                margin-top: 5px; }
+      .project-container .main-project-section .tablet-preview .tablet-button {
+        position: absolute;
+        left: 0;
+        right: 0;
         margin: 0 auto;
-        margin-top: 40px;
-        display: block;
-        float: left; }
-        .project-container .main-project-section .the-component .download-button .button {
-          float: none; }
-          .project-container .main-project-section .the-component .download-button .button .glyphicon {
-            margin-right: 30px;
-            margin-top: 5px; }
+        bottom: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background: #403c4b; }
 
 .form-container {
-  width: 30%;
+  width: 40%;
   height: 100%;
   background: transparent;
-  position: relative; }
+  position: relative;
+  padding: 120px; }
   .form-container .main-header {
     width: 100%;
     clear: both;
@@ -163,7 +198,6 @@ body {
             color: #ccc;
             font-size: 16px;
             font-weight: 600;
-            text-transform: uppercase;
             width: 100%; }
   .form-container .form-overflow,
   .form-container .user-overflow {
@@ -179,7 +213,6 @@ body {
       float: left;
       width: 100%;
       box-sizing: border-box;
-      border-bottom: 2px solid #ddd;
       overflow: hidden;
       height: auto;
       margin-bottom: 40px; }
@@ -206,7 +239,15 @@ body {
         outline: none;
         font-size: 20px;
         float: right;
-        width: 100%; }
+        width: 100%;
+        border-bottom: 2px solid #ddd; }
+        .form-container .form-overflow .input-overflow input:focus,
+        .form-container .user-overflow .input-overflow input:focus {
+          border-color: #2ea4d2; }
+    .form-container .form-overflow .form-link,
+    .form-container .user-overflow .form-link {
+      padding-top: 13px;
+      font-size: 16px; }
   .form-container .user-overflow .user-avatar {
     float: left;
     text-align: center;
@@ -253,14 +294,15 @@ body {
 
 .app-container {
   padding: 120px;
-  background: transparent; }
+  background: #fafafa; }
   .app-container .app-overflow {
     text-align: center;
     float: left;
     box-sizing: border-box;
     padding: 20px;
     width: 25%;
-    vertical-align: top; }
+    vertical-align: top;
+    margin-bottom: 120px; }
     .app-container .app-overflow .app-img {
       width: 100%;
       float: left;

@@ -1,12 +1,15 @@
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
 
     <form ng-if="current_user.id > 0" class="box box-form" name="user" ng-submit="user.$valid && user_inf.user_update()" novalidate>
-        <div class="no-box-el error-form-box" ng-show="user.$submitted &&user.$invalid">
+        <div class="no-box-el error-form-box" ng-show="user.$submitted && user.$invalid">
             <span class='pull-left text-left error' ng-show="user.username.$error.required"><span class="glyphicon glyphicon-remove"></span>Required username!</span>
             <span class='pull-left text-left error' ng-show="user.email.$error.required"><span class="glyphicon glyphicon-remove"></span>Required email!</span>
             <span class='pull-left text-left error' ng-show="user.username.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short name!</span>
             <span class='pull-left text-left error' ng-show="user.username.$error.maxlength"><span class="glyphicon glyphicon-remove"></span>Too long name!</span>
             <span class='pull-left text-left error' ng-show="user.email.$error.email"><span class="glyphicon glyphicon-remove"></span>Wrong email!</span>
+            <span class='pull-left text-left error' ng-show="user.password.$error.required"><span class="glyphicon glyphicon-remove"></span>Confirm your changes!</span>
+            <span class='pull-left text-left error' ng-show="user.password.&dirty && !user_inf.user_update.restful.post('auth/checkpass', user.password)"><span class="glyphicon glyphicon-remove"></span>Wrong password!</span>
+            <span class='pull-left text-left error' ng-show="user.name.$pristine $$ user.email.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
         </div>
         <header ng-init="user_inf.manageFill(current_user.username, current_user.email)">
             <h3 class="blue">Account settings</h3>
@@ -28,10 +31,13 @@
         <input type="password" ng-model="user_inf.pass_verify" placeholder="Confirm new password">
 
         <label>Confirm changes: </label>
-        <input type="password" ng-model="user_inf.current_pass" placeholder="Enter current password" required>
+        <input type="password" name="password" ng-model="user_inf.current_pass" placeholder="Enter current password" required>
 
         <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
     </form>
+    <div class="success-bar" ng-show="user.$valid">
+        Success! You're changes has been submitted.
+    </div>
 </div>
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
     <form class="box box-form" name="avatar" ng-submit="user_inf.img_update()" novalidate>

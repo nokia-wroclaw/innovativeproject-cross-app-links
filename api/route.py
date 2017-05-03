@@ -62,7 +62,7 @@ def auth():
     if user:
         if sha256_crypt.verify(request.form['password'], user.password_hash):
             login_user(user)
-            user.been_active = str(time()).replace('.', '')[:-3]
+            user.been_active = str(datetime.now().isoformat() )
             db.session.add(user)
             db.session.commit()
             session['user'] = user.username

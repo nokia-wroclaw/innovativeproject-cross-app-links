@@ -1,368 +1,321 @@
-html,
 body {
-    height: 100%;
-}
+  height: 100%;
+  font-family: 'Lato';
+  background: #fff;
+  background-size: cover; }
 
-body {
-    font-family: 'Lato';
-    background: #fff;
-}
+.project-container,
+.form-container,
+.app-container {
+  box-sizing: border-box;
+  padding: 40px;
+  float: left;
+  width: 100%; }
 
-.welcome-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    height: 100%;
-    background: #34313d;
-    background-size: cover;
-    background-attachment: fixed;
-}
+a.button {
+  text-decoration: none; }
 
-.welcome-container>.main-landing-menu {
-    margin-top: 40px;
-}
+.button {
+  float: left;
+  width: auto;
+  border-radius: 3px;
+  padding: 10px 20px;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: #fff;
+  box-sizing: border-box;
+  text-decoration: none; }
+  .button.blue {
+    background: #2ea4d2; }
+  .button.orange {
+    background: #F4B759; }
+  .button.green {
+    background: #3fce91; }
+  .button.big {
+    padding: 20px;
+    font-size: 20px; }
+  .button.bordered {
+    border-bottom: 3px solid rgba(0, 0, 0, 0.1); }
 
-.welcome-container>.main-landing-menu>ul>li>a {
-    display: block;
-    color: #f0f0f0;
-    box-sizing: border-box;
-    padding-top: 15px;
-}
-
-.welcome-container>.main-landing-menu>ul>li>a.logo {
-    padding: 0;
-    text-align: center;
-}
-
-.welcome-container>header {
-    margin-top: 10vh;
-    float: left;
+.project-container {
+  background: #D45A5A;
+  background-size: cover;
+  width: 60%;
+  height: 100%;
+  float: right;
+  position: relative; }
+  .project-container .fractal-overflow {
+    float: right;
     width: 100%;
-    box-sizing: border-box;
-    display: block;
-    text-align: center;
-    position: relative;
-    margin-bottom: 15vh;
-}
-
-.welcome-container>header>h1,
-.welcome.container>header>h2 {
-    color: #f0f0f0;
-    width: 100%;
-    text-align: center;
-    display: block;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-.welcome-container>header>h1 {
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 3.5vw;
-}
-
-.welcome-container>header>h2 {
-    font-weight: 300;
-    color: #ccc;
-    font-size: 2vw;
-}
-
-.welcome-container>header>.button {
+    position: absolute;
+    top: 40px;
+    right: 40px; }
+    .project-container .fractal-overflow .fractal {
+      float: right;
+      margin-bottom: 15px;
+      margin-left: 15px;
+      border-radius: 20px;
+      height: 26px;
+      background: black;
+      opacity: 0.05; }
+      .project-container .fractal-overflow .fractal.break {
+        clear: both; }
+      .project-container .fractal-overflow .fractal.blue {
+        background: rgba(0, 0, 0, 0.9); }
+      .project-container .fractal-overflow .fractal.red {
+        background: rgba(0, 0, 0, 0.8); }
+      .project-container .fractal-overflow .fractal.orange {
+        background: rgba(0, 0, 0, 0.7); }
+      .project-container .fractal-overflow .fractal.green {
+        background: rgba(0, 0, 0, 0.6); }
+      .project-container .fractal-overflow .fractal.lightgreen {
+        background: rgba(0, 0, 0, 0.5); }
+      .project-container .fractal-overflow .fractal.transparent {
+        background: transparent; }
+      .project-container .fractal-overflow .fractal.long {
+        width: 15%; }
+      .project-container .fractal-overflow .fractal.medium {
+        width: 12%; }
+      .project-container .fractal-overflow .fractal.medium-short {
+        width: 10%; }
+      .project-container .fractal-overflow .fractal.short {
+        width: 8%; }
+      .project-container .fractal-overflow .fractal.micro {
+        width: 3%; }
+  .project-container .main-project-section {
+    width: 750px;
     margin: 0 auto;
-    margin-top: 90px;
-    width: 35%;
-    min-width: 300px;
-    max-width: 500px;
-    font-size: 26px;
-    font-weight: 500;
+    display: block;
     position: absolute;
     left: 0;
     right: 0;
-    padding: 25px 15px;
-    border-bottom: 3px solid #32a474;
-}
-
-.welcome-container>.login-overflow {
-    margin: 0 auto;
-    width: 40%;
-    min-width: 300px;
-    position: relative;
-}
-
-.welcome-container>.login-overflow>.user-section {
-    width: 100%;
-    float: left;
-}
-
-.welcome-container>.login-overflow>.user-section>.logged-as {
-    width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0 15px;
-    margin-bottom: 30px;
-    text-align: center;
-    float: left;
-    color: #fff;
-}
-
-.welcome-container>.login-overflow>.user-section>.logged-as>span {
-    color: #b6b0c8;
-    font-weight: 800;
-}
-
-.welcome-container>.login-overflow>.user-section>a.button {
-    width: 100%;
-    float: left;
-    opacity: 1;
-    text-decoration: none;
-    margin-bottom: 20px;
-}
-
-.welcome-container>.login-overflow>.user-section>a.button:hover {
-    opacity: 0.8;
-}
-
-.welcome-container>.login-overflow>header>h1 {
-    margin: 0;
-    margin-bottom: 20px;
-    color: white;
-    font-weight: 500;
-    font-size: 24px;
-}
-
-.welcome-container>.login-overflow>header>h1>span {
-    float: right;
-    font-size: 12px;
-    font-weight: 400;
-    color: #f55753;
-    position: relative;
-    top: 8px;
-}
-
-.welcome-container>.login-overflow>.login-form {
-    background: none;
-    width: 100%;
-    float: left;
-    box-sizing: border-box;
-    padding: 0;
-    border-radius: 3px;
-}
-
-.welcome-container>.login-overflow>.login-form>.input-socket {
-    width: 100%;
-    box-sizing: border-box;
-    float: left;
-    margin-bottom: 20px;
-    background: white;
-    border-radius: 2px;
-    overflow: hidden;
-    height: 60px;
-    position: relative;
-}
-
-.welcome-container>.login-overflow>.login-form>.input-socket>input[type="text"],
-.welcome-container>.login-overflow>.login-form>.input-socket>input[type="password"],
-.welcome-container>.login-overflow>.login-form>.input-socket>.input-icon,
-.welcome-container>.login-overflow>.login-form>input[type="submit"] {
-    float: right;
-    width: 85%;
-    padding: 20px;
-    padding-left: 10px;
-    padding-top: 22px;
-    box-sizing: border-box;
-    border: none;
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: 2px;
-    color: #b6b0c8;
-    height: 60px;
-    background: white;
-    display: inline;
-    transition: 0.3s ease all;
-}
-
-.welcome-container>.login-overflow>.login-form>.input-socket>input[type="text"]:focus,
-.welcome-container>.login-overflow>.login-form>.input-socket>input[type="password"]:focus {
-    width: 100%;
-    border: 0;
-    outline: none;
-    padding-left: 20px;
-    transition: 0.3s ease all;
-}
-
-.welcome-container>.login-overflow>.login-form>.input-socket>input[type="text"]:focus + .input-icon,
-.welcome-container>.login-overflow>.login-form>.input-socket>input[type="password"]:focus + .input-icon {
-    transform: translateX(-100%);
-    transition: 0.4s ease all;
-}
-
-.welcome-container>.login-overflow>.login-form>.input-socket>.input-icon {
-    position: absolute;
-    text-align: center;
-    width: 15%;
-    float: left;
-    display: inline;
-    padding-left: 20px;
-    padding-top: 20px;
-    transition: 0.4s ease all;
-}
-
-.welcome-container>.login-overflow>.login-form>.input-socket>input::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
-    color: #b6b0c8;
-}
-
-.welcome-container>.login-overflow>.login-form>.input-socket>input::-moz-placeholder {
-    /* Firefox 19+ */
-    color: #b6b0c8;
-}
-
-.welcome-container>.login-overflow>.login-form>.input-socket>input:-ms-input-placeholder {
-    /* IE 10+ */
-    color: #b6b0c8;
-}
-
-.welcome-container>.login-overflow>.login-form>.input-socket>input:-moz-placeholder {
-    /* Firefox 18- */
-    color: #b6b0c8;
-}
-
-.welcome-container>.login-overflow>.login-form>input[type="submit"] {
-    padding: 8px 0;
-    float: right;
-    background: #2ea4d2;
-    color: white;
-    width: 100px;
-    height: 40px;
-    margin-bottom: 20px;
-}
-
-.welcome-container>.login-overflow>.login-form>input[type="submit"]:hover {
-    cursor: poiner;
-}
-
-.welcome-container>.login-overflow>.login-form>.form-link {
-    font-size: 14px;
-    font-weight: 400;
-    float: left;
-}
-
-.welcome-container>.login-overflow>.login-form>.form-link.forgotten-pass {
-    margin: 8px 0;
-}
-
-.welcome-container>.login-overflow>.login-form>.form-link.new-account {
-    text-align: center;
-    width: 100%;
-}
-
-.welcome-container>.login-overflow>.login-form>.form-link>a:link,
-.welcome-container>.login-overflow>.login-form>.form-link>a:visited,
-.welcome-container>.login-overflow>.login-form>.form-link>a:active {
-    color: #b6b0c8;
-    display: block;
-}
-
-.main-application-container {
-    background: #fff;
-    padding: 35px;
-}
-
-.main-application-container .main-app-link {
-    padding: 0 position: relative;
-    height: 250px;
-    margin-bottom: 50px;
-}
-
-.main-application-container .main-app-link>header>.link-img {
-    margin: 0 auto;
-    text-align: center;
-    height: 60px;
-    overflow: hidden;
-    float: left;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.main-application-container .main-app-link>header>.link-name {
-    font-size: 1.2vw;
-    font-weight: 300;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-    margin-top: 20px;
-    float: left;
-}
-
-.main-application-container .main-app-link>header>.link-img>img {
-    height: 100%;
-}
-
-.main-application-container .main-app-link>.link-desc {
-    width: 100%;
-    float: left;
-    font-weight: 300;
-    color: #999;
-    box-sizing: border-box;
-    text-align: center;
-    font-size: 1vw;
-}
-
-.main-application-container .main-app-link>.manage-area {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    float: left;
-    width: 100%;
-}
-
-.main-application-container .main-app-link>.manage-area>a {
-    text-transform: uppercase;
-    display: block;
-    width: 100%;
-    color: #32a474;
-    font-weight: 600;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-.main-application-container .main-app-link>.manage-area>a>.glyphicon {
-    margin-right: 20px;
-}
-
-
-/*Loading*/
-
-.loadingForm {
-    display: block;
-    margin: 0 auto;
-    width: 50px;
-    height: 50px;
-    position: relative;
-    top: 300px;
-    background: transparent;
-    box-sizing: border-box;
-    border: 6px solid white;
-    border-radius: 7px;
-    animation: spinner infinite 0.7s linear;
-    transition: 0.4s ease;
-}
-
-@keyframes spinner {
-    from {
-        transform: rotateZ(0);
-        border-width: 7px;
-        opacity: 0.1;
-        border-radius: 7px;
-    }
-    to {
-        transform: rotateZ(360deg);
-        border-width: 1px;
-        opacity: 0.05;
+    top: 15vh;
+    text-align: center; }
+    .project-container .main-project-section .tablet-preview {
+      width: 530px;
+      height: 650px;
+      box-sizing: border-box;
+      padding: 50px 25px;
+      border-radius: 20px;
+      background-color: #34313d;
+      box-shadow: 3px 7px 120px rgba(0, 0, 0, 0.5);
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      border-bottom: 5px solid #28262f; }
+      .project-container .main-project-section .tablet-preview .tablet-screen {
+        float: left;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        background: #f0f0f0;
+        position: relative; }
+        .project-container .main-project-section .tablet-preview .tablet-screen .project-header {
+          margin-top: 120px; }
+          .project-container .main-project-section .tablet-preview .tablet-screen .project-header .logo {
+            float: left;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 40px; }
+          .project-container .main-project-section .tablet-preview .tablet-screen .project-header .site-name {
+            text-transform: uppercase;
+            font-weight: 800;
+            width: 100%;
+            float: left;
+            font-size: 36px; }
+        .project-container .main-project-section .tablet-preview .tablet-screen .the-component {
+          float: left;
+          width: 100%;
+          padding: 40px; }
+          .project-container .main-project-section .tablet-preview .tablet-screen .the-component h2 {
+            font-size: 16px;
+            font-weight: 400;
+            float: left;
+            width: 100%;
+            margin-bottoM: 40px;
+            font-weight: 400;
+            color: #888; }
+          .project-container .main-project-section .tablet-preview .tablet-screen .the-component .download-button {
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 80px;
+            display: block;
+            float: left; }
+            .project-container .main-project-section .tablet-preview .tablet-screen .the-component .download-button .button {
+              padding-top: 24px;
+              float: none; }
+              .project-container .main-project-section .tablet-preview .tablet-screen .the-component .download-button .button .glyphicon {
+                margin-right: 20px;
+                margin-top: 5px; }
+      .project-container .main-project-section .tablet-preview .tablet-button {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: 10px;
+        width: 30px;
+        height: 30px;
         border-radius: 100%;
-    }
-}
+        background: #403c4b; }
+
+.form-container {
+  width: 40%;
+  height: 100%;
+  background: transparent;
+  position: relative;
+  padding: 120px; }
+  .form-container .main-header {
+    width: 100%;
+    clear: both;
+    float: left;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    box-shadow: none; }
+    .form-container .main-header .project-navigation {
+      width: 100%;
+      float: left;
+      margin-top: 10px; }
+      .form-container .main-header .project-navigation ul {
+        float: left;
+        width: 100%;
+        margin: 0;
+        padding: 0; }
+        .form-container .main-header .project-navigation ul li {
+          display: inline-block;
+          width: 33.333333%;
+          box-sizing: border-box;
+          padding: 20px;
+          float: left;
+          text-align: center; }
+          .form-container .main-header .project-navigation ul li a {
+            display: block;
+            color: #ccc;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%; }
+  .form-container .form-overflow,
+  .form-container .user-overflow {
+    margin-top: 18vh;
+    width: 100%;
+    float: left; }
+    .form-container .form-overflow header h1,
+    .form-container .user-overflow header h1 {
+      margin-bottom: 80px;
+      font-size: 36px; }
+    .form-container .form-overflow .input-overflow,
+    .form-container .user-overflow .input-overflow {
+      float: left;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      height: auto;
+      margin-bottom: 40px; }
+      .form-container .form-overflow .input-overflow .label,
+      .form-container .user-overflow .input-overflow .label {
+        clear: both;
+        width: 100%;
+        float: left;
+        text-align: left;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 14px;
+        color: #ccc;
+        margin: 0;
+        padding: 0; }
+      .form-container .form-overflow .input-overflow input,
+      .form-container .user-overflow .input-overflow input {
+        box-sizing: border-box;
+        padding: 10px 0;
+        border: 0;
+        background: none;
+        margin: 0;
+        height: 48px;
+        outline: none;
+        font-size: 20px;
+        float: right;
+        width: 100%;
+        border-bottom: 2px solid #ddd; }
+        .form-container .form-overflow .input-overflow input:focus,
+        .form-container .user-overflow .input-overflow input:focus {
+          border-color: #2ea4d2; }
+    .form-container .form-overflow .form-link,
+    .form-container .user-overflow .form-link {
+      padding-top: 13px;
+      font-size: 16px; }
+  .form-container .user-overflow .user-avatar {
+    float: left;
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100px; }
+    .form-container .user-overflow .user-avatar img {
+      border-radius: 100%;
+      width: 100px; }
+  .form-container .user-overflow .user-info {
+    width: 100%;
+    float: left;
+    text-align: center; }
+    .form-container .user-overflow .user-info .username,
+    .form-container .user-overflow .user-info .info-row {
+      clear: both;
+      float: left;
+      width: 100%;
+      text-align: center;
+      font-size: 16px; }
+    .form-container .user-overflow .user-info .username {
+      font-size: 20px;
+      font-weight: 600;
+      color: #77a5e3;
+      margin-top: 20px;
+      margin-bottom: 40px; }
+    .form-container .user-overflow .user-info .info-row {
+      color: #ccc;
+      width: 50%;
+      margin: 0 auto;
+      display: block;
+      float: none;
+      margin-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(221, 221, 221, 0.3); }
+    .form-container .user-overflow .user-info .buttons {
+      width: 50%;
+      text-align: center;
+      display: block;
+      margin: 0 auto; }
+      .form-container .user-overflow .user-info .buttons .button {
+        margin-top: 30px;
+        width: 100%; }
+
+.app-container {
+  padding: 120px;
+  background: #fafafa; }
+  .app-container .app-overflow {
+    text-align: center;
+    float: left;
+    box-sizing: border-box;
+    padding: 20px;
+    width: 25%;
+    vertical-align: top;
+    margin-bottom: 120px; }
+    .app-container .app-overflow .app-img {
+      width: 100%;
+      float: left;
+      margin-bottom: 30px;
+      text-align: center; }
+      .app-container .app-overflow .app-img img {
+        width: 70px; }
+    .app-container .app-overflow .app-name {
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 15px; }
+    .app-container .app-overflow .app-desc {
+      font-size: 18px;
+      font-weight: 300; }
+
+/*# sourceMappingURL=loginpage.css.map */

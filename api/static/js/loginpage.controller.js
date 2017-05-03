@@ -18,7 +18,6 @@
         /*Hide it when content is loaded*/
         angular.element(document).ready(function () {
             loadingPage.ready();
-
         });
 
         restful.get('me/user').then(function (response) {
@@ -29,25 +28,5 @@
         });
 
 
-        $scope.login = function (email, password) {
-            $scope.loginFormLoading = true;
-            var data = {
-                email: email,
-                password: password
-            };
-            restful.login(data).then(function (response) {
-                if (response == 'True')
-                    restful.get('me/user').then(function (response) {
-                        $scope.current_user = response['objects'][0];
-                        $scope.loginFormLoading = false;
-                    });
-                else {
-                    $scope.loginFormError = true;
-                    $scope.loginFormLoading = false;
-                }
-            }).catch(function (response) {
-                console.log(response);
-            });
-        }
 }]);
 }());

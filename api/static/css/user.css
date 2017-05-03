@@ -22,3 +22,9 @@
     font-weight: 600;
     font-size: 18px;
 }
+
+.box.box-table .table tbody tr td img {
+    width: 30px;
+    border-radius: 100%;
+    margin-right: 15px;
+}

@@ -1,0 +1,129 @@
+@media only screen and (max-width: 1660px) {
+    .form-container {
+        .user-overflow {
+            .user-info {
+                .info-row,
+                .buttons {
+                    width: 80%;
+                }
+            }
+        }
+    }
+    .app-container {
+        padding: 40px;
+    }
+}
+
+@media only screen and (max-width: 1266px) {
+    .form-container {
+        padding: 40px;
+        .user-overflow {
+            .user-info {
+                .info-row,
+                .buttons {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .project-container {
+        .main-project-section {
+            width: 100%;
+            top: 10vh;
+            .tablet-preview {
+                width: 400px;
+                height: 520px;
+                .tablet-screen {
+                    .project-header {
+                        margin-top: 60px;
+                        .site-name {
+                            font-size: 24px;
+                        }
+                    }
+                    .the-component {}
+                }
+            }
+        }
+    }
+    .app-container {
+        .app-overflow {
+            width: 33.3333333%;
+        }
+    }
+}
+
+@media only screen and (max-width: 920px) {
+    .form-container {
+        width: 100%;
+        height: auto;
+        .user-overflow {
+            .user-info {
+                .info-row,
+                .buttons {
+                    width: 50%;
+                }
+            }
+        }
+    }
+    .project-container {
+        width: 100%;
+        height: auto;
+        float: left;
+        .main-project-section {
+            position: static;
+            float: left;
+        }
+    }
+    .app-container {
+        .app-overflow {
+            width: 50%;
+        }
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .form-container {
+        .user-overflow {
+            .user-info {
+                .info-row,
+                .buttons {
+                    width: 80%;
+                }
+            }
+        }
+    }
+    .app-container {
+        .app-overflow {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .mobile-phone-v {
+        visibility: visible;
+        position: static;
+    }
+    .mobile-phone-h {
+        visibility: hidden;
+        position: fixed;
+    }
+    .project-container {
+        height: 90px;
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .form-container {
+        padding: 20px;
+        .user-overflow {
+            .user-info {
+                .info-row,
+                .buttons {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

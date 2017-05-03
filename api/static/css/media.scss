@@ -4,18 +4,6 @@
         .container {
             width: 90%;
         }
-        .main-application-container {
-            .main-app-link {
-                header {
-                    .link-name {
-                        font-size: 17px;
-                    }
-                }
-                .link-desc {
-                    font-size: 15px;
-                }
-            }
-        }
     }
     
     @media only screen and (max-width: 1200px) {
@@ -83,20 +71,6 @@
                             }
                         }
                     }
-                }
-            }
-        }
-        .welcome-container {
-            position: static;
-            padding-bottom: 60px;
-            height: auto;
-            header {
-                margin-bottom: 5vh;
-                h1 {
-                    font-size: 36px;
-                }
-                h2 {
-                    font-size: 20px;
                 }
             }
         }

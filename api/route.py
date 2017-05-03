@@ -257,9 +257,3 @@ def component_user_data_update():
         db.session.commit()
         return jsonify(data['token'])
     return str(False)  
-
-#Download component
-
-@app.route('/download-component/<ver>')
-def dwonload_component(ver):
-    return send_from_directory('static/download/', 'cross-app-links-component'+ver)

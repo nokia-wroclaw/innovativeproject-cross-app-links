@@ -107,7 +107,7 @@
                 <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
             </header>
             <tbody>
-                <tr ng-repeat='user in users | limitTo : 5' ng-show='users.length'>
+                <tr ng-repeat='user in users | limitTo : 5' ng-show='users.length' ng-if="(user.been_active | date : 'shortDate') == (todayDateTime | date : 'shortDate')">
                     <td>{{user.id}}</td>
                     <td>{{user.username}}</td>
                     <td>{{user.group.name}}</td>

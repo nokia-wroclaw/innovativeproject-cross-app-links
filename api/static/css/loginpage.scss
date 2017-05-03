@@ -14,6 +14,15 @@ body {
     width: 100%;
 }
 
+.mobile-phone-v {
+    visibility: hidden;
+    position: fixed;
+}
+
+.mobile-phone-h {
+    visibility: visible;
+}
+
 a.button {
     text-decoration: none;
 }
@@ -41,6 +50,13 @@ a.button {
     &.big {
         padding: 20px;
         font-size: 20px;
+    }
+    &.transparent {
+        background: none;
+    }
+    &.block {
+        width: 100%;
+        float: left;
     }
     &.bordered {
         border-bottom: 3px solid rgba(black, 0.1);
@@ -191,6 +207,15 @@ a.button {
                 height: 30px;
                 border-radius: 100%;
                 background: lighten(#34313d, 5%);
+            }
+        }
+        .download {
+            float: left;
+            width: 100%;
+            padding-top: 15px;
+            .button {
+                margin: 0;
+                position: static;
             }
         }
     }

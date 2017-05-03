@@ -51,8 +51,10 @@
                 </template>
             </ul>  
             <aside class="component-navbar c-hidden" id="web-component-navbar">
+               
                 <button class="burger-icon" on-tap="_showToggle"><span class="glyphicon glyphicon-th"></span> </button>
                 <section class="component-overflow c-hidden">
+                    <div id="loading-box" class="loading-box"><span class="spinner"></span></div>
                     <div class="user-label">
                             <div class="user-label-list" id="user-label-list">
                                 <template is="dom-if" if="{{!_checkAccess()}}">
@@ -64,12 +66,12 @@
                                     </div>
                                 </template>
                                 <template is="dom-if" if="{{_checkAccess()}}">
-                                    <div class="confirmed-user">                               
+                                    <div class="confirmed-user">   
+                                        <div class=" signMeOut">
+                                            <span class="glyphicon glyphicon-log-out" on-tap="_signMeOut"></span> 
+                                        </div>
                                         <div class="confirmed-user-email">
-                                            <div class=" signMeOut">
-                                                <span class="glyphicon glyphicon-log-out" on-tap="_signMeOut"></span> 
-                                            </div>
-                                            bakowroc@gmail.com
+                                           {{email}}
                                         </div>
                                         <span class="action-button" on-tap="_switchView">
                                             <span class="glyphicon glyphicon-cog"></span>

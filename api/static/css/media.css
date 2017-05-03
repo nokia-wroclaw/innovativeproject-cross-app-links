@@ -1,12 +1,7 @@
 /*For almost medium*/
 @media only screen and (max-width: 1440px) {
   .container {
-    width: 90%; }
-
-  .main-application-container .main-app-link header .link-name {
-    font-size: 17px; }
-  .main-application-container .main-app-link .link-desc {
-    font-size: 15px; } }
+    width: 90%; } }
 @media only screen and (max-width: 1200px) {
   .container {
     width: 100%;
@@ -45,18 +40,7 @@
     .main-navigation .main-navigation-overflow ul li a {
       text-align: left; }
       .main-navigation .main-navigation-overflow ul li a .glyphicon {
-        margin-right: 20px; }
-
-  .welcome-container {
-    position: static;
-    padding-bottom: 60px;
-    height: auto; }
-    .welcome-container header {
-      margin-bottom: 5vh; }
-      .welcome-container header h1 {
-        font-size: 36px; }
-      .welcome-container header h2 {
-        font-size: 20px; } }
+        margin-right: 20px; } }
 /* Small Devices, Tablets */
 /* Extra Small Devices, Phones */
 /* Custom, iPhone Retina */

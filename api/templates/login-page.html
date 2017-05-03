@@ -13,7 +13,7 @@
     <!--        BOWER PCKG:END-->
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/loginpage.css">
-    <link rel="stylesheet" href="../static/css/media.css">
+    <link rel="stylesheet" href="../static/css/loginpage-media.css">
 
 </head>
 
@@ -44,11 +44,11 @@
             <form action="/api/auth" method="POST">
                 <div class="input-overflow">
                     <span class="label">Email address</span>
-                    <input type="text" name="email" placeholder="Type here">
+                    <input type="text" name="email" placeholder="Type here" required>
                 </div>
                 <div class="input-overflow">
                     <span class="label">Password</span>
-                    <input type="password" name="password" placeholder="And here">
+                    <input type="password" name="password" placeholder="And here" required>
                 </div>
                 <div class="form-link pull-left"><a href="/api/auth/resetpassword">Forgot your password?</a></div>
                 <button type="submit" class="button blue auto pull-right">Sign in</button>
@@ -67,7 +67,7 @@
         </div>
     </div>
     <div class="project-container">
-        <div class="fractal-overflow">
+        <div class="fractal-overflow mobile-phone-h">
             <span class="fractal blue long"></span>
             <span class="fractal orange short"></span>
             <span class="fractal red medium"></span>
@@ -87,7 +87,12 @@
             <span class="fractal red medium break"></span>
         </div>
         <div class="main-project-section">
-            <div class="tablet-preview">
+            <div class="download mobile-phone-v">
+                <a href="/static/download/cross-app-links-componentv1_0_0.zip" class="button transaprent big block">
+                    <span class="glyphicon glyphicon-save"></span>Download component
+                </a>
+            </div>
+            <div class="tablet-preview mobile-phone-h">
                 <div class="tablet-screen">
                     <header class="project-header">
                         <div class="logo"><img ng-src="../static/img/logo.png"></div>

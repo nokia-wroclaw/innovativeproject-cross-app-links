@@ -2,7 +2,12 @@
     Polymer({
         is: "web-component",
         behavior: ['ColorThief', 'Sortable'],
-        properties: {},
+        properties: {
+            email: {
+                type: String,
+                value: localStorage.getItem('cachedEmail')
+            }
+        },
         ready: function () {
             this._componentRequest();
 
@@ -11,6 +16,10 @@
 
             this._getValuesRequest();
 
+        },
+        _loading: function(){
+            var loading = this.$$('#loading-box');
+            loading.style.visibility = 'visible';
         },
         _getProperPath: function (path) {
             return this.resolveUrl('../static/img/app-img/' + path + '.png');
@@ -36,9 +45,9 @@
         },
         _pinArray: [],
         _pinAppTrigger: function (e) {
-            if (e.target.className.indexOf('beChanged') === -1)
-                e.target.className += ' beChanged';
-            else e.target.className = e.target.className.replace(/beChanged/g, '');
+            if (e.target.parentElement.className.indexOf('beChanged') === -1)
+                e.target.parentElement.className += ' beChanged';
+            else e.target.parentElement.className = e.target.parentElement.className.replace(/beChanged/g, '');
             var foundAt = this._pinArray.indexOf(e.target.parentElement.id);
             if (foundAt === -1)
                 this._pinArray.push(e.target.parentElement.id);
@@ -98,6 +107,7 @@
         },
         _tokenRequestSend: function (e) {
             if (e.keyCode === 13) {
+                this._loading();
                 this.$.AuthRequest.body = {
                     token: e.target.value
                 };
@@ -125,6 +135,7 @@
             console.log(response.detail.response);
         },
         _changesRequestSend: function () {
+            this._loading();
             var orderString = this._orderArray.toString();
             var pinString = this._pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
             this.$.ChangesRequest.body = {
@@ -190,6 +201,7 @@
 
         },
         _signMeOut: function () {
+            this._loading();
             localStorage.removeItem('cachedToken');
             localStorage.removeItem('cachedEmail');
             location.reload();

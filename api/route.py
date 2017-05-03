@@ -115,7 +115,7 @@ def setpassword():
         Mailing().commituser(temp,givenpassword)
         return redirect('/')
     else:
-        return make_response(open('api/templates/create-user.html').read())
+        return make_response(open('api/templates/create-user2.html').read())
 
 
 @app.route('/api/auth/resetpassword', methods=['GET','POST'])
@@ -144,7 +144,7 @@ def setnewpassword():
         Mailing().updatepassword(temp,givenpassword)
         return redirect('/')
     else:
-        return make_response(open('api/templates/create-password.html').read())
+        return make_response(open('api/templates/create-password2.html').read())
 
 # Delete user
 @app.route('/api/auth/remove', methods=['POST'])
@@ -225,11 +225,9 @@ def get_component_token():
 @app.route('/api/create-component-user', methods=['POST'])
 def create_component_user():
     email = request.form['email']
-    user = ComponentUser(email);
-    db.session.add(user)
-    db.session.commit()
+    Mailing().askfortoken(email)
     return 'Yeah, it has been created'
-    #Mailing is needed
+
     
 @app.route('/api/component-user-data', methods=['POST'])
 @cross_origin()

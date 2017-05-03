@@ -7,3 +7,18 @@
     width: 180px;
     border-radius: 100%
 }
+
+.box.box-form input[type=email] {
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0px;
+    border: 0;
+    outline: none;
+    background: transparent;
+    border-bottom: 2px solid #e2f7ee;
+    margin-bottom: 20px;
+    transition: 0.3s ease;
+    font-weight: 600;
+    font-size: 18px;
+}

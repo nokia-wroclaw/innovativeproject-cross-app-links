@@ -219,7 +219,7 @@
         $scope.newlink = {
             uploader: new FileUploader({
                 url: 'api/upload/img',
-                formData: []
+                formData: [],
                 removeAfterUpload: true,
                 withCredentials: true,
                 queueLimit: 1
@@ -366,7 +366,7 @@
                 this.desc = '';
             },
             status: false
-        }; <<
+        };
 
         $scope.user_inf = {
             uploader: new FileUploader({

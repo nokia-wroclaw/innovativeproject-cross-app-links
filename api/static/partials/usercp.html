@@ -1,5 +1,13 @@
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
+
     <form ng-if="current_user.id > 0" class="box box-form" name="user" ng-submit="user.$valid && user_inf.user_update()" novalidate>
+        <div class="no-box-el error-form-box" ng-show="user.$submitted &&user.$invalid">
+            <span class='pull-left text-left error' ng-show="user.username.$error.required"><span class="glyphicon glyphicon-remove"></span>Required username!</span>
+            <span class='pull-left text-left error' ng-show="user.email.$error.required"><span class="glyphicon glyphicon-remove"></span>Required email!</span>
+            <span class='pull-left text-left error' ng-show="user.username.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short name!</span>
+            <span class='pull-left text-left error' ng-show="user.username.$error.maxlength"><span class="glyphicon glyphicon-remove"></span>Too long name!</span>
+            <span class='pull-left text-left error' ng-show="user.email.$error.email"><span class="glyphicon glyphicon-remove"></span>Wrong email!</span>
+        </div>
         <header ng-init="user_inf.manageFill(current_user.username, current_user.email)">
             <h3 class="blue">Account settings</h3>
         </header>
@@ -7,10 +15,10 @@
         <input type="text" disabled="disabled" value="{{current_user.id}}" required>
 
         <label>Username: </label>
-        <input type="text" name="username" ng-model="user_inf.username" required>
+        <input type="text" name="username" ng-model="user_inf.username" minlength="3" maxlength="30" required>
 
         <label>Email Address: </label>
-        <input type="text" ng-model="user_inf.email" required>
+        <input type="email" name="email" ng-model="user_inf.email" required>
 
         <label>Group: </label>
         <input type="text" disabled="disabled" value="{{current_user.group.name}}" required>
@@ -26,7 +34,7 @@
     </form>
 </div>
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
-    <form class="box box-form" name="avatar" ng-submit="avatar.$valid && user_inf.img_update()" novalidate>
+    <form class="box box-form" name="avatar" ng-submit="user_inf.img_update()" novalidate>
         <img src="../static/img/avatars/{{current_user.id}}.png">
         <input class="button pure input-file-choose pull-left" type="file" nv-file-select uploader="user_inf.uploader" required>
         <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>

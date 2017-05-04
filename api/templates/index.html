@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-lg-8 col-md-9 col-sm-10 col-xs-10 pull-right text-right">
                         <div class="user-section" ng-mouseover="navigation.usernav=true" ng-mouseleave="navigation.usernav=false">
-                            <div class="user-avatar"><span class="glyphicon glyphicon-menu-hamburger"></span><img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png"></div>
+                            <div class="user-avatar"><span class="glyphicon glyphicon-menu-hamburger"></span><img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}"></div>
                             <span class="user-name">{{current_user.username}}</span>
 
                             <nav class="user-menu" ng-show="navigation.usernav">

@@ -44,7 +44,7 @@
 </div>
 <div ng-if="current_user.id > 0" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
     <form class="box box-form" name="avatar" ng-submit="user_inf.img_update()" novalidate>
-        <img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png">
+        <img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}">
         <input class="button pure input-file-choose pull-left" type="file" nv-file-select uploader="user_inf.uploader" required>
         <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
     </form>

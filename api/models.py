@@ -135,6 +135,7 @@ class Invite(db.Model):
     token = db.Column(db.String(50), unique=True)
     maker = db.Column(db.Integer)
     group = db.Column(db.Integer)
+    active = db.Column(db.Boolean)
    
     
     def __init__(self, email, maker,group):
@@ -144,6 +145,7 @@ class Invite(db.Model):
         self.group = group
         self.token = str(uuid.uuid4())
         self.date = "now()"
+        self.active = True
 
 
 class Reset(db.Model):

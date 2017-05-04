@@ -14,7 +14,7 @@ class Mailing():
 	    Removes invite entry.
 	    """
 	    new = Invite.query.filter_by(token = token).first()
-	    if new:
+	    if new.active:
 	        useremail = new.email
 	        group = new.group
 	        new = User(useremail,sha256_crypt.encrypt(userpassword),group)
@@ -82,16 +82,17 @@ class Mailing():
 
 	def removeinvite(self,email):
 		"""
-		Removes invite entry.
+		Deactivates invite entry.
 		"""
-		sadman = Invite.query.filter_by(email = email).first()
-		db.session.delete(sadman)
+		invite = Invite.query.filter_by(email = email).first()
+		invite.active = False
+		db.session.add(invite)
 		db.session.commit()
 
 	def removereset(self,email):
 		"""
 		Removes reset entry.
 		"""
-		sadman = Reset.query.filter_by(email = email).first()
-		db.session.delete(sadman)
+		reset = Reset.query.filter_by(email = email).first()
+		db.session.delete(reset)
 		db.session.commit()

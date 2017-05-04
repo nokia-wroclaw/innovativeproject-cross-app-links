@@ -1,7 +1,8 @@
 (function () {
     var app = angular.module('mainApp', ['services']);
     app.controller('loginCtrl', ['$scope', 'restful', '$http', '$interval', '$document', function ($scope, restful, $http, $interval, $document) {
-
+        $scope.todayDateTime = new Date;
+        
         var loadingPage = {
             ready: function () {
                 angular.element('.loading .text').innerHTML = 'Fetching data...';

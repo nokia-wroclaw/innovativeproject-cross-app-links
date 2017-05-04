@@ -31,7 +31,7 @@
 
 <div ng-if="current_user.group.app_edit_all && filterParams.manage()>0" class="popup" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
     <div class="no-box-el error-form-box" ng-show="form.$submitted">
-        <span class='pull-left text-left error' ng-show="form.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
+        <span class='pull-left text-left error' ng-show="user_inf.uplaoder.queue <1 || form.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
 
         <div class="form.$invalid">
             <span class='pull-left text-left error' ng-show="form.name.$error.required"><span class="glyphicon glyphicon-remove"></span>Required link name!</span>
@@ -46,17 +46,13 @@
 
         </div>
     </div>
-    <form ng-init="newlink.manageFill(app.name,app.link,app.desc, app.img_link, app.order_id, app.beta)" name='form' class="box box-form no-shadow" ng-submit="form.$valid && form.$dirty && newlink.update(app.id)" novalidate>
+    <form ng-init="newlink.manageFill(app.name,app.link,app.desc, app.img_link, app.order_id, app.beta)" name='form' class="box box-form no-shadow" ng-submit="form.$valid && (form.$dirty || user_inf.uploader.queue >0) && newlink.update(app.id)" novalidate>
         <div class="input-imglink"><img ng-src="/static/img/app-img/{{newlink.img_link}}.png"></div>
         <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
         <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
         <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>
         <label class="input-description">Set as a beta link</label>
         <input type="checkbox" ng-model="newlink.beta">
-        <!--
-<label class="input-description">Set as a maintenance</label>
-<input type="checkbox" ng-model="newlink.maintenance">
--->
         <label class="input-description">Choose order</label>
         <select ng-model="newlink.order_id" ng-options="i as i for i in orderArray" required>
         </select>

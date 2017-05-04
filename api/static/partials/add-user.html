@@ -46,7 +46,7 @@
 </if>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="search-by single-input pull-right">
-        <input class="pull-right" type='text' ng-model='searchBy' placeholder='Search by user'>
+        <input class="pull-right" type='text' ng-model='searchBy' placeholder='Search by email'>
     </div>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -65,7 +65,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="invite in invites | limitTo : limit.invites| filter : {email : searchBy}" ng-show="invites.length">
+                <tr ng-repeat="invite in invites | limitTo : limit.invites| filter : {email : searchBy, active:true}" ng-show="invites.length">
                     <td>{{invite.id}}</td>
                     <td>{{invite.email}}</td>
                     <td>{{invite.group}}</td>

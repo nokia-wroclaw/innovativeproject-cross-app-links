@@ -715,7 +715,7 @@
             input[type=email],
             textarea,
             select,
-            label {
+            label.user {
                 float: left;
                 width: 100%;
                 box-sizing: border-box;
@@ -752,7 +752,7 @@
                     color: #999;
                 }
             }
-            label {
+            label.user {
                 font-size: 13px;
                 text-transform: uppercase;
                 opacity: 0.5;

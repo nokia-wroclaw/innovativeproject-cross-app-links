@@ -8,6 +8,7 @@ from api.functions import Mailing
 from flask_cors import CORS, cross_origin 
 from datetime import datetime
 from time import time
+import os
 #-----------
 #STATIC VAL
 #-----------
@@ -166,9 +167,9 @@ def remove():
 
 @app.route('/api/auth/removeinvite', methods=['POST'])
 @login_required
-def removeinvite():
+def removeinvites():
     if request.method == 'POST':
-        Mailing().removeinvite(request.form['email'])
+        Mailing().removeinvite(request.form['id'])
     return redirect('/add-user')
 
 

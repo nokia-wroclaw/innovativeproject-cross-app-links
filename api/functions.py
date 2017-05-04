@@ -80,11 +80,11 @@ class Mailing():
 		db.session.delete(sadman)
 		db.session.commit()
 
-	def removeinvite(self,email):
+	def removeinvite(self,id):
 		"""
 		Deactivates invite entry.
 		"""
-		invite = Invite.query.filter_by(email = email).order_by('-id').first()
+		invite = Invite.query.filter_by(id = id).order_by('-id').first()
 		invite.active = False
 		db.session.add(invite)
 		db.session.commit()

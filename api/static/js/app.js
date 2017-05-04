@@ -389,12 +389,11 @@
             img_update: function () {
                 if (this.uploader.queue.length > 0) {
                     this.uploader.uploadAll();
-                    this.uploader.clearQueue();
-                    window.location.reload();
                     restful.update('user', $scope.current_user.id, {
                         avatar_url: 'avatar_' + $scope.current_user.id
-                    }).then(function (response) {
-                        update.me();
+                    }).then((response)=> {
+                        this.uploader.clearQueue();
+                        window.location.reload();
                     });
                 }
             },

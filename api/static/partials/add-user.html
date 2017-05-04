@@ -68,7 +68,7 @@
                 <tr ng-repeat="invite in invites | limitTo : limit.invites| filter : {email : searchBy, active:true}" ng-show="invites.length">
                     <td>{{invite.id}}</td>
                     <td>{{invite.email}}</td>
-                    <td>{{invite.group}}</td>
+                    <td>{{invite.groups.name}}</td>
                     <td>{{invite.inviter.username}}</td>
                 </tr>
             </tbody>

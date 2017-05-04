@@ -7,11 +7,11 @@ from flask_mail import Message
 
 
 app.config.update(
-    MAIL_SERVER = 'smtp.yandex.com',
-    MAIL_PORT = 465,
-    MAIL_USE_SSL = True ,   
-    MAIL_USERNAME = 'cross-apps@yandex.com',
-    MAIL_PASSWORD = 'innovativeproject',
+    MAIL_SERVER = os.environ['MAIL_SERVER'],
+    MAIL_PORT = os.environ['MAIL_PORT'],
+    MAIL_USE_SSL = os.environ['MAIL_USE_SSL'] ,   
+    MAIL_USERNAME = os.environ['MAIL_USERNAME'],
+    MAIL_PASSWORD = os.environ['MAIL_PASSWORD'],
 )
 
 mail = Mail(app)

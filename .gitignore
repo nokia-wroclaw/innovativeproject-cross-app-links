@@ -16,3 +16,4 @@ api/__init__.pyc
 alembic/
 scripts/*
 node_modules/*
+.env

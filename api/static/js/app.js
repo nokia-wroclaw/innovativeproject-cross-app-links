@@ -384,9 +384,9 @@
                     this.uploader.uploadAll();
                     restful.update('user', $scope.current_user.id, {
                         avatar_url: 'avatar_' + $scope.current_user.id
-                    }).then(function (response) {
+                    }).then((response)=> {
                         this.uploader.clearQueue();
-                        //window.location.reload();
+                        window.location.reload();
                     });
                 }
             },

@@ -401,19 +401,25 @@
                                 username: this.username,
                                 email: this.email,
                             }
-                            restful.update('user', $scope.current_user.id, user_info).then(function (response) {
+                            restful.update('user', $scope.current_user.id, user_info).then((response) => {
                                 update.me();
                                 $scope.userFormSucces = true;
+                                this.clear();
                             });
                             if (this.pass_verify != null && this.password != null && this.password == this.pass_verify)
                                 restful.post('auth/changepass', {
                                     newpass: this.password
-                                }).then(function () {
-                                    $scope.userFormSucces = true;
+                                }).then(() => {
+                                    window.location.reload();
                                 })
                         } else
                             $scope.userFormWrongPass = true;
                     });
+            },
+            clear: function () {
+                this.password = '';
+                this.current_pass = '';
+                this.pass_verify = '';
             }
 
         };

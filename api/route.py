@@ -184,6 +184,9 @@ def changepass():
     user = User.query.filter_by(id = current_user.get_id()).first()
     user.password_hash = sha256_crypt.encrypt(data['newpass'])
     db.session.commit()
+    logout_user()
+    session.pop('user', None)
+    return str(True)
     
 #Default templates for Flask route
 @app.route('/')

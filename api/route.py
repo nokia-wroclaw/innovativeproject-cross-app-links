@@ -25,8 +25,8 @@ index_content_list = [
     'settings',
     'ver',
     'profile',
+    'usercp',
     'components'
-    
 ]
 
 #Login manager
@@ -164,7 +164,30 @@ def remove():
     else:
         return render_template("message-template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
 
-
+#Password verify
+@app.route('/api/auth/checkpass', methods=['POST'])
+def checkpass():
+    """
+    Password authentication. It checks if entered password is correct with password in database
+    """
+    data = request.get_json()
+    dataobj = jsonify(data)
+    if sha256_crypt.verify(data['pass'], current_user.password_hash):
+        return str(True)
+    else:
+        return str(False)
+    
+#Change password
+@app.route('/api/auth/changepass', methods=['POST'])
+def changepass():
+    data = request.get_json()
+    user = User.query.filter_by(id = current_user.get_id()).first()
+    user.password_hash = sha256_crypt.encrypt(data['newpass'])
+    db.session.commit()
+    logout_user()
+    session.pop('user', None)
+    return str(True)
+    
 #Default templates for Flask route
 @app.route('/')
 def index():

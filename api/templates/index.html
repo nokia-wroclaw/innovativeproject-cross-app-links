@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../static/css/forms.css">
     <link rel="stylesheet" href="../static/css/popup.css">
     <link rel="stylesheet" href="../static/css/notes.css">
+    <link rel="stylesheet" href="../static/css/user.css">
 </head>
 
 <body ng-controller="mainCtrl">
@@ -41,7 +42,7 @@
                     </div>
                     <div class="col-lg-8 col-md-9 col-sm-10 col-xs-10 pull-right text-right">
                         <div class="user-section" ng-mouseover="navigation.usernav=true" ng-mouseleave="navigation.usernav=false">
-                            <div class="user-avatar"><span class="glyphicon glyphicon-menu-hamburger"></span><img src="../static/img/default_avatar.jpg"></div>
+                            <div class="user-avatar"><span class="glyphicon glyphicon-menu-hamburger"></span><img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png"></div>
                             <span class="user-name">{{current_user.username}}</span>
 
                             <nav class="user-menu" ng-show="navigation.usernav">

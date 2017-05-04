@@ -73,7 +73,7 @@
                     <td>{{invite.inviter.username}}</td>
                     <td>
                         <form action="/api/auth/removeinvite" name="disable_invite" method="POST">
-                            <button type="submit" name="email" value="{{invite.email}}">Remove</button>
+                            <button class="button orange" type="submit" name="email" value="{{invite.email}}">Cancel invite</button>
                         </form>
                     </td>
                 </tr>

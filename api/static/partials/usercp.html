@@ -17,23 +17,23 @@
         <header ng-init="user_inf.manageFill(current_user.username, current_user.email)">
             <h3 class="blue">Account settings</h3>
         </header>
-        <label>Id: </label>
+        <label class="user">Id: </label>
         <input type="text" disabled="disabled" value="{{current_user.id}}" required>
 
-        <label>Username: </label>
+        <label class="user">Username: </label>
         <input type="text" name="username" ng-model="user_inf.username" minlength="3" maxlength="30" required>
 
-        <label>Email Address: </label>
+        <label class="user">Email Address: </label>
         <input type="email" name="email" ng-model="user_inf.email" required>
 
-        <label>Group: </label>
+        <label class="user">Group: </label>
         <input type="text" disabled="disabled" value="{{current_user.group.name}}" required>
 
-        <label>Change password: </label>
+        <label class="user">Change password: </label>
         <input type="password" ng-model="user_inf.password" placeholder="Set new password">
         <input type="password" ng-model="user_inf.pass_verify" placeholder="Confirm new password">
 
-        <label>Confirm changes: </label>
+        <label class="user">Confirm changes: </label>
         <input type="password" name="password" ng-model="user_inf.current_pass" placeholder="Enter current password" required>
 
         <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
@@ -41,7 +41,7 @@
 </div>
 <div ng-if="current_user.id > 0" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
     <form class="box box-form" name="avatar" ng-submit="user_inf.img_update()" novalidate>
-        <img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}">
+        <img class="avatar" ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}">
         <input class="button pure input-file-choose pull-left" type="file" nv-file-select uploader="user_inf.uploader" required>
         <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
     </form>

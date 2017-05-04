@@ -1,4 +1,4 @@
-.box.box-form img {
+.box.box-form img.avatar {
     padding: 20px;
     display: block;
     margin-left: auto;
@@ -8,7 +8,7 @@
     border-radius: 100%
 }
 
-.box.box-table .table tbody tr td img {
+.box.box-table .table tbody tr td img.user {
     width: 30px;
     border-radius: 100%;
     margin-right: 15px;

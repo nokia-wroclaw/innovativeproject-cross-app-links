@@ -177,6 +177,14 @@ def checkpass():
     else:
         return str(False)
     
+#Change password
+@app.route('/api/auth/changepass', methods=['POST'])
+def changepass():
+    data = request.get_json()
+    user = User.query.filter_by(id = current_user.get_id()).first()
+    user.password_hash = sha256_crypt.encrypt(data['newpass'])
+    db.session.commit()
+    
 #Default templates for Flask route
 @app.route('/')
 def index():

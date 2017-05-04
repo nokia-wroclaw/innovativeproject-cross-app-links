@@ -23,8 +23,8 @@ def upload():
 @app.route('/api/upload/avatar', endpoint='upload2', methods=['GET','POST'])
 def upload2():
     if request.method == 'POST' and 'file' in request.files:
-        if os.path.exists('api/static/img/avatars/' + current_user.get_id() + '.png'):
-            os.remove('api/static/img/avatars/' + current_user.get_id() + '.png')
-        filename = user_avatars.save(request.files['file'], folder='avatars', name =( current_user.get_id() + '.png'))
+        if os.path.exists('api/static/img/avatars/avatar_' + current_user.get_id() + '.png'):
+            os.remove('api/static/img/avatars/avatar_' + current_user.get_id() + '.png')
+        filename = user_avatars.save(request.files['file'], folder='avatars', name =('avatar_' + current_user.get_id() + '.png'))
         return str(True)
     return str(False)

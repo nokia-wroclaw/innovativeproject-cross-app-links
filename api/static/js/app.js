@@ -3,7 +3,7 @@
     app.controller('mainCtrl', ['$scope', 'restful', '$location', '$route', '$routeParams', '$interval', 'FileUploader', '$http', '$document', '$filter', function ($scope, restful, $location, $route, $routeParams, $interval, FileUploader, $http, $document, $filter) {
 
         $scope.todayDateTime = new Date;
-        
+
         /*Append loading page druing data fetching*/
         var loadingPage = {
             ready: function () {
@@ -384,28 +384,38 @@
                     this.uploader.uploadAll();
                     this.uploader.clearQueue();
                     window.location.reload();
+                    restful.update('user', $scope.current_user.id, {
+                        avatar_url: 'avatar_' + $scope.current_user.id
+                    }).then(function (response) {
+                        update.me();
+                    });
                 }
             },
             user_update: function () {
-                var username = this.username;
-                var email = this.email;
-                var password = this.password;
-
-                restful.post('auth/checkpass', {
-                    pass: this.current_pass
-                }).then(function (response) {
-                    console.log(response);
-                    if (response == 'True') {
-                        var user_info = {
-                            username: username,
-                            email: email,
-                        }
-                        restful.update('user', $scope.current_user.id, user_info).then(function (response) {
-                            update.me();
-                        });
-                    }
-                });
+                if (this.password == null || this.password == this.pass_verify)
+                    restful.post('auth/checkpass', {
+                        pass: this.current_pass
+                    }).then((response) => {
+                        if (response == 'True') {
+                            var user_info = {
+                                username: this.username,
+                                email: this.email,
+                            }
+                            restful.update('user', $scope.current_user.id, user_info).then(function (response) {
+                                update.me();
+                                $scope.userFormSucces = true;
+                            });
+                            if (this.pass_verify != null && this.password != null && this.password == this.pass_verify)
+                                restful.post('auth/changepass', {
+                                    newpass: this.password
+                                }).then(function () {
+                                    $scope.userFormSucces = true;
+                                })
+                        } else
+                            $scope.userFormWrongPass = true;
+                    });
             }
+
         };
 
         $scope.note = {

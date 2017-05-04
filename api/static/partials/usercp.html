@@ -1,16 +1,19 @@
-<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
-
-    <form ng-if="current_user.id > 0" class="box box-form" name="user" ng-submit="user.$valid && user_inf.user_update()" novalidate>
-        <div class="no-box-el error-form-box" ng-show="user.$submitted && user.$invalid">
+<div ng-if="current_user.id > 0" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
+    <div class="no-box-el error-form-box" ng-show="user.$submitted">
+        <div ng-show="user.$submitted && user.$invalid">
             <span class='pull-left text-left error' ng-show="user.username.$error.required"><span class="glyphicon glyphicon-remove"></span>Required username!</span>
             <span class='pull-left text-left error' ng-show="user.email.$error.required"><span class="glyphicon glyphicon-remove"></span>Required email!</span>
             <span class='pull-left text-left error' ng-show="user.username.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short name!</span>
             <span class='pull-left text-left error' ng-show="user.username.$error.maxlength"><span class="glyphicon glyphicon-remove"></span>Too long name!</span>
             <span class='pull-left text-left error' ng-show="user.email.$error.email"><span class="glyphicon glyphicon-remove"></span>Wrong email!</span>
-            <span class='pull-left text-left error' ng-show="user.password.$error.required"><span class="glyphicon glyphicon-remove"></span>Confirm your changes!</span>
-            <span class='pull-left text-left error' ng-show="user.password.&dirty && !user_inf.user_update.restful.post('auth/checkpass', user.password)"><span class="glyphicon glyphicon-remove"></span>Wrong password!</span>
-            <span class='pull-left text-left error' ng-show="user.name.$pristine $$ user.email.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
+            <span class='pull-left text-left error' ng-show="user.password.$error.required && user.password.$untouched"><span class="glyphicon glyphicon-remove"></span>Confirm your changes!</span>
         </div>
+        <div ng-show="user.$submitted">
+            <span class='pull-left text-left error' ng-show="userFormWrongPass"><span class="glyphicon glyphicon-remove"></span>Wrong password!</span>
+            <span class='pull-left text-left error' ng-show="user_inf.password != user_inf.pass_verify"><span class="glyphicon glyphicon-remove"></span>Passwords don't match!</span>
+        </div>
+    </div>
+    <form class="box box-form" name="user" ng-submit="user.$valid && user_inf.user_update()" novalidate>
         <header ng-init="user_inf.manageFill(current_user.username, current_user.email)">
             <h3 class="blue">Account settings</h3>
         </header>
@@ -35,13 +38,13 @@
 
         <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
     </form>
-    <div class="success-bar" ng-show="user.$valid">
-        Success! You're changes has been submitted.
+    <div class="success-bar" ng-show="userFormSucces">
+        Success! Your changes has been submitted.
     </div>
 </div>
-<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
+<div ng-if="current_user.id > 0" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
     <form class="box box-form" name="avatar" ng-submit="user_inf.img_update()" novalidate>
-        <img src="../static/img/avatars/{{current_user.id}}.png">
+        <img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png">
         <input class="button pure input-file-choose pull-left" type="file" nv-file-select uploader="user_inf.uploader" required>
         <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
     </form>

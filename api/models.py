@@ -21,6 +21,7 @@ class User(UserMixin, db.Model):
     applications = db.relationship('App', backref='creator', lazy='dynamic')
     logs = db.relationship('Log', backref='author', lazy='dynamic')
     notes = db.relationship('Note', backref='owner', lazy='dynamic')
+    invites = db.relationship('Invite', backref='inviter', lazy='dynamic')
     
     def __init__(self, email, password_hash, group_id):
         
@@ -133,7 +134,7 @@ class Invite(db.Model):
     date = db.Column(db.TIMESTAMP)
     email = db.Column(db.String(25), unique=True)
     token = db.Column(db.String(50), unique=True)
-    maker = db.Column(db.Integer)
+    maker = db.Column(db.Integer, db.ForeignKey('user.id'))
     group = db.Column(db.Integer)
     active = db.Column(db.Boolean)
    

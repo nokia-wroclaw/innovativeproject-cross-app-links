@@ -21,7 +21,7 @@
             <tbody>
                 <tr ng-repeat="user in users | limitTo : limit.users| filter : {username : searchBy}" ng-show="users.length">
                     <td>{{user.id}}</td>
-                    <td><img ng-src="../static/img/avatars/{{user.avatar_url}}.png?{{todayDateTime.getTime()}}"><a href="/profile/{{user.id}}">{{user.username}}</a></td>
+                    <td><img class="user" ng-src="../static/img/avatars/{{user.avatar_url}}.png?{{todayDateTime.getTime()}}"><a href="/profile/{{user.id}}">{{user.username}}</a></td>
                     <td>{{user.group.name}}</td>
                     <td>{{user.email}}</td>
                 </tr>

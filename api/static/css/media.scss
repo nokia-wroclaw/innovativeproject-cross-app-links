@@ -9,6 +9,10 @@
         .container {
             width: 90%;
         }
+        .popup {
+            width: 70%;
+            max-width: none;
+        }
        
     }
     
@@ -31,6 +35,10 @@
                     }
                 }
             }
+        }
+        .popup {
+            width: 70%;
+            max-width: none;
         }
     }
     /* Medium Devices, Desktops */
@@ -80,6 +88,10 @@
                 }
             }
         }
+        .popup {
+            width: 85%;
+            max-width: none;
+        }
     }
     /* Small Devices, Tablets */
     
@@ -89,4 +101,9 @@
     @media only screen and (max-width: 480px) {}
     /* Custom, iPhone Retina */
     
-    @media only screen and (max-width: 320px) {}
+    @media only screen and (max-width: 320px) {
+        .popup {
+            width: 100%;
+            max-width: none;
+        }
+}

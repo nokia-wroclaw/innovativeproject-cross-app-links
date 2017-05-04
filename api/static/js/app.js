@@ -58,7 +58,7 @@
         $scope.stats = {
             apps: {},
             users: {},
-            components: {},
+            invitations: {},
             logs: {}
         }
 
@@ -182,12 +182,24 @@
             },
             invites: function () {
                 restful.get('invite').then(function (response) {
-                    $scope.invites = response['objects'];
+                    var invites = $scope.invites = response['objects'];
+                    $scope.stats.invitations = {
+                        labels: ["Accepted", "Pending"],
+                        data: [
+                           $filter('filter')(invites, {
+                                active: true
+                            }).length,
+                            $filter('filter')(invites, {
+                                active: false
+                            }).length
+                        ]
+                    }
                 });
             },
             components: function () {
                 restful.get('component').then(function (response) {
                     $scope.components = response['objects'];
+
                 });
             },
             all: function () {
@@ -391,7 +403,7 @@
                     this.uploader.uploadAll();
                     restful.update('user', $scope.current_user.id, {
                         avatar_url: 'avatar_' + $scope.current_user.id
-                    }).then((response)=> {
+                    }).then((response) => {
                         this.uploader.clearQueue();
                         window.location.reload();
                     });

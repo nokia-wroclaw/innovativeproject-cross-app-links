@@ -13,7 +13,7 @@ class Mailing():
 	    Creates user with given password. Email and group are taken from Invite table.
 	    Removes invite entry.
 	    """
-	    new = Invite.query.filter_by(token = token).last()
+	    new = Invite.query.filter_by(token = token).order_by('-id').first()
 	    if new.active:
 	        useremail = new.email
 	        group = new.group
@@ -62,7 +62,7 @@ class Mailing():
 	    """
 	    Retrieves user email from reset entry and set new passowrd for the user
 	    """
-	    new = Reset.query.filter_by(token = token).last()
+	    new = Reset.query.filter_by(token = token).order_by('-id').first()
 	    useremail = new.email
 	    user = User.query.filter_by(email=useremail).first()
 	    user.password_hash = sha256_crypt.encrypt(userpassword)
@@ -84,7 +84,7 @@ class Mailing():
 		"""
 		Deactivates invite entry.
 		"""
-		invite = Invite.query.filter_by(email = email).last()
+		invite = Invite.query.filter_by(email = email).order_by('-id').first()
 		invite.active = False
 		db.session.add(invite)
 		db.session.commit()
@@ -93,6 +93,6 @@ class Mailing():
 		"""
 		Removes reset entry.
 		"""
-		reset = Reset.query.filter_by(email = email).last()
+		reset = Reset.query.filter_by(email = email).order_by('-id').first()
 		db.session.delete(reset)
 		db.session.commit()

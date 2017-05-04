@@ -33,7 +33,8 @@
             users: 5,
             group: 3,
             log: 5,
-            components: 5
+            components: 5,
+            invites: 5
         };
 
         /*Menu elements*/
@@ -179,6 +180,11 @@
                     $scope.notes = response['objects'];
                 });
             },
+            invites: function () {
+                restful.get('invite').then(function (response) {
+                    $scope.invites = response['objects'];
+                });
+            },
             components: function () {
                 restful.get('component').then(function (response) {
                     $scope.components = response['objects'];
@@ -191,6 +197,7 @@
                 this.groups();
                 this.logs();
                 this.notes();
+                this.invites();
                 this.components();
             }
         };

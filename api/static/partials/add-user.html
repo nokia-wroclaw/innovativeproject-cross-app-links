@@ -44,3 +44,45 @@
         </div>
     </div>
 </if>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="search-by single-input pull-right">
+        <input class="pull-right" type='text' ng-model='searchBy' placeholder='Search by email'>
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="box box-table">
+        <table class="table ">
+            <header>
+                <h3 class="green">Pending invites ({{(invites|filter: {active:true}).length}})</h3>
+                <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
+            </header>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Group</th>
+                    <th>Sender</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="invite in invites | limitTo : limit.invites| filter : {email : searchBy, active:true}" ng-show="invites.length">
+                    <td>{{invite.id}}</td>
+                    <td>{{invite.email}}</td>
+                    <td>{{invite.groups.name}}</td>
+                    <td>{{invite.inviter.username}}</td>
+                    <td>
+                        <form action="/api/auth/removeinvite" name="disable_invite" method="POST">
+                            <button class="button orange" type="submit" name="email" value="{{invite.email}}">Cancel invite</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <span class="warning-text" ng-hide="invites.length">No invites yet.</span>
+        <div class="full-width-button-area">
+            <a href="#" class="button green pull-right" ng-click="limit.invites=limit.invites+2"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+        </div>
+    </div>
+</div>
+

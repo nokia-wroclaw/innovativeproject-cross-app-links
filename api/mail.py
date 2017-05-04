@@ -7,14 +7,15 @@ import os
 
 
 app.config.update(
-    MAIL_SERVER = os.environ['MAIL_SERVER'],
-    MAIL_PORT = os.environ['MAIL_PORT'],
-    MAIL_USE_SSL = os.environ['MAIL_USE_SSL'] ,   
-    MAIL_USERNAME = os.environ['MAIL_USERNAME'],
-    MAIL_PASSWORD = os.environ['MAIL_PASSWORD'],
+    MAIL_SERVER = str(os.environ['MAIL_SERVER']),
+    MAIL_PORT = str(os.environ['MAIL_PORT']),
+    MAIL_USE_SSL = str(os.environ['MAIL_USE_SSL']),   
+    MAIL_USERNAME = str(os.environ['MAIL_USERNAME']),
+    MAIL_PASSWORD = str(os.environ['MAIL_PASSWORD']),
 )
 
 mail = Mail(app)
+
 
 def send_email(subject, sender, recipients, html_body):
     """
@@ -33,7 +34,7 @@ def send_email_register(sender,email):
     username = recipient.split('@')[0]
     admin = sender.split('@')[0]
     new = Invite.query.filter_by(email = recipient).order_by('-id').first()
-    url = 'https://cross-app-links.herokuapp.com/api/auth/setpassword?token=' + str(new.token)
+    url = str(os.environ['SERVER_ADDRESS']) + '/api/auth/setpassword?token=' + str(new.token)
     subject = "Cross-apps registration"
     headerText = "You've received an invitation!"
     freeText = "Administrator has invited you to join Cross-apps shortcuts!"
@@ -61,7 +62,7 @@ def send_email_reset(email):
     recipient = email[0]
     username = recipient.split('@')[0]
     new = Reset.query.filter_by(email = recipient).order_by('-id').first()
-    url = 'https://cross-app-links.herokuapp.com/api/auth/setnewpassword?token=' + str(new.token)
+    url = str(os.environ['SERVER_ADDRESS']) + '/api/auth/setnewpassword?token=' + str(new.token)
     subject = "Cross-apps password reset"
     headerText = "Looks like you want to reset your password!"
     freeText = "Here we send you instructions to set up a new password for your account!"
@@ -89,7 +90,6 @@ def send_email_token(email):
     recipient = email[0]
     username = recipient.split('@')[0]
     new = ComponentUser.query.filter_by(email = recipient).order_by('-id').first()
-    url = 'https://cross-app-links.herokuapp.com'
     subject = "Cross-apps token delivery!"
     headerText = "You've received a Cross-apps token!"
     freeText = ""
@@ -101,7 +101,7 @@ def send_email_token(email):
         render_template("email-template.html",
             user=username,
             sender="system",
-            url=url,
+            url=str(os.environ['SERVER_ADDRESS']),
             subject=subject,
             buttonText="Visit our website",
             headerText=headerText,

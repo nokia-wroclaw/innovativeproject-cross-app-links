@@ -54,9 +54,10 @@ a.button {
   background: #D45A5A;
   background-size: cover;
   width: 60%;
-  height: 100%;
+  min-height: 100%;
   float: right;
-  position: relative; }
+  position: relative;
+  padding-bottom: 120px; }
   .project-container .fractal-overflow {
     float: right;
     width: 100%;
@@ -99,10 +100,7 @@ a.button {
     width: 750px;
     margin: 0 auto;
     display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 15vh;
+    margin-top: 13vh;
     text-align: center; }
     .project-container .main-project-section .tablet-preview {
       width: 530px;
@@ -221,7 +219,7 @@ a.button {
   .form-container .form-overflow,
   .form-container .user-overflow {
     margin-top: 18vh;
-    width: 100%;
+    min-width: 100%;
     float: left; }
     .form-container .form-overflow header h1,
     .form-container .user-overflow header h1 {

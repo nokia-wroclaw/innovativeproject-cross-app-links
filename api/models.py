@@ -133,7 +133,7 @@ class Invite(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.TIMESTAMP)
-    email = db.Column(db.String(25), unique=True)
+    email = db.Column(db.String(25), unique=False)
     token = db.Column(db.String(50), unique=True)
     maker = db.Column(db.Integer, db.ForeignKey('user.id'))
     group = db.Column(db.Integer, db.ForeignKey('group.id'))

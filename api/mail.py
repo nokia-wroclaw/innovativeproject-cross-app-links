@@ -32,7 +32,7 @@ def send_email_register(sender,email):
     recipient = email[0]
     username = recipient.split('@')[0]
     admin = sender.split('@')[0]
-    new = Invite.query.filter_by(email = recipient).last()
+    new = Invite.query.filter_by(email = recipient).order_by('-id').first()
     url = 'https://cross-app-links.herokuapp.com/api/auth/setpassword?token=' + str(new.token)
     subject = "Cross-apps registration"
     headerText = "You've received an invitation!"
@@ -60,7 +60,7 @@ def send_email_reset(email):
     """
     recipient = email[0]
     username = recipient.split('@')[0]
-    new = Reset.query.filter_by(email = recipient).last()
+    new = Reset.query.filter_by(email = recipient).order_by('-id').first()
     url = 'https://cross-app-links.herokuapp.com/api/auth/setnewpassword?token=' + str(new.token)
     subject = "Cross-apps password reset"
     headerText = "Looks like you want to reset your password!"
@@ -88,7 +88,7 @@ def send_email_token(email):
     """
     recipient = email[0]
     username = recipient.split('@')[0]
-    new = ComponentUser.query.filter_by(email = recipient).last()
+    new = ComponentUser.query.filter_by(email = recipient).order_by('-id').first()
     url = 'https://cross-app-links.herokuapp.com'
     subject = "Cross-apps token delivery!"
     headerText = "You've received a Cross-apps token!"

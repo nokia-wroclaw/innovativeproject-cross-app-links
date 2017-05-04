@@ -62,6 +62,7 @@
                     <th>Email</th>
                     <th>Group</th>
                     <th>Sender</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,6 +71,11 @@
                     <td>{{invite.email}}</td>
                     <td>{{invite.groups.name}}</td>
                     <td>{{invite.inviter.username}}</td>
+                    <td>
+                        <form action="/api/auth/removeinvite" name="disable_invite" method="POST">
+                            <button type="submit" name="email" value="{{invite.email}}">Remove</button>
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>

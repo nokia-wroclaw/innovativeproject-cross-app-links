@@ -3,7 +3,7 @@ from api import app
 from api.models import User, Invite, Reset, ComponentUser
 from flask_mail import Mail
 from flask_mail import Message
-
+import os
 
 
 app.config.update(

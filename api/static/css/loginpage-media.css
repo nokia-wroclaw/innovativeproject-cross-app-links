@@ -61,7 +61,15 @@
 
   .project-container {
     height: 90px;
-    padding: 0; } }
+    min-height: 90px;
+    padding: 0;
+    box-sizing: border-box; }
+    .project-container .main-project-section {
+      float: left;
+      box-sizing: border-box;
+      height: 90px;
+      margin: 0;
+      padding: 0; } }
 @media only screen and (max-width: 320px) {
   .form-container {
     padding: 20px; }

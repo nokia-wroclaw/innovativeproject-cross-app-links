@@ -109,8 +109,20 @@
         position: fixed;
     }
     .project-container {
+        
         height: 90px;
+        min-height: 90px;
         padding: 0;
+        box-sizing: border-box;
+        
+        .main-project-section {
+            float: left;
+            box-sizing: border-box;
+            height: 90px;
+            margin: 0;
+            padding: 0;
+        }
+        
     }
 }
 

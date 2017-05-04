@@ -54,7 +54,7 @@
         <label class="input-description">Set as a beta link</label>
         <input type="checkbox" ng-model="newlink.beta">
         <label class="input-description">Choose order</label>
-        <select ng-model="newlink.order_id" ng-options="i as i for i in orderArray" required>
+        <select ng-model="newlink.order_id" ng-options="i as i for i in orderArray(apps.length)" required>
         </select>
         <input class="button pure input-file-choose pull-left" type="file" nv-file-select="" uploader="newlink.uploader" requried>
         <button type="submit" class='button green single-icon pull-right'><span class="glyphicon glyphicon-ok"></span></button>

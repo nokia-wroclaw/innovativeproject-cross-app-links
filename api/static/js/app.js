@@ -462,7 +462,13 @@
             }
         };
 
-        $scope.orderArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        $scope.orderArray = function (app_length) {
+            var app_count = new Array();
+            for (i = 1; i < app_length + 1; i++) {
+                app_count.push(i)
+            }
+            return app_count
+        };
         /*
         If you use some variables in a couple places you probably 
         want to reset them when you leave a page. That's why you should put

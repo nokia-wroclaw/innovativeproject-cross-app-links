@@ -187,10 +187,10 @@
                         labels: ["Accepted", "Pending"],
                         data: [
                            $filter('filter')(invites, {
-                                active: true
+                                active: false
                             }).length,
                             $filter('filter')(invites, {
-                                active: false
+                                active: true
                             }).length
                         ]
                     }

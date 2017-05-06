@@ -103,6 +103,13 @@ def register():
         return render_template("message-template.html", type="Warning!", message="User exists or invitation send already.", path="/add-user")
 
 
+@app.route('/api/sendinvite'), methods=['POST'])
+@login_required
+def sendinvite():
+    data = request.get_json()
+    email = data['email']
+    #Get token from invite by email (it's already in DB) and send a link to email
+    
 # Confirm account
 @app.route('/api/auth/setpassword', methods=['GET','POST'])
 def setpassword():

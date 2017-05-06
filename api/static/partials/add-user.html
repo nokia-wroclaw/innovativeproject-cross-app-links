@@ -1,3 +1,4 @@
+<if ng-if="current_user.id > 0">
 <if ng-if="!current_user.group.user_add" ng-init="redirectToDash()">
 </if>
 <if ng-if="current_user.group.user_add">
@@ -7,14 +8,14 @@
                 <header>
                     <h3 class="orange">Invite new user!</h3>
                 </header>
-                <form class="login-form" method="POST" name="login_form" action="/api/auth/register">
+                <form name="add_user_form" ng-submit="add_user_form.$valid && invite.add()" novalidate>
                     <div class="input-socket">
-                        <input type="text" name="email" placeholder="User e-mail" required>
+                        <input type="email" name="email" ng-model="invite.email" placeholder="User e-mail" required>
                     </div>
                     <p>Select user permission group:</p>
-                    <select name="group">
-                    <option ng-repeat="group in groups | orderBy:'-id'" value={{group.id}}>{{group.name}}</option>
-                </select>
+                    <select class="pull-left" name="group" ng-model="invite.group" required>
+                        <option ng-repeat="group in groups | orderBy:'-id'" value={{group.id}}>{{group.name}}</option>
+                    </select>
                     <button type="submit" class='button blue pull-right'>Confirm</button>
                 </form>
             </div>
@@ -26,10 +27,9 @@
                 <header>
                     <h3 class="orange">Remove user from application.</h3>
                 </header>
-                <form class="login-form " method="POST" name="remove_form" novalidate ng-submit="remove_form.$valid && removeUser(removeEmail)" action="/api/auth/remove">
+                <form name="remove_form" ng-submit="remove_form.$valid && invite.deleteUser(current_user.email, users, removeEmail)" novalidate>
                     <div class="input-socket">
-                        <input type="text" name="email" ng-model="removeEmail" placeholder="User e-mail" required>
-
+                        <input type="email" name="email" ng-model="removeEmail" placeholder="User e-mail" required>
                     </div>
                     <button type="submit" class='button orange pull-right'>Confirm</button>
                 </form>
@@ -59,15 +59,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="invite in invites | filter : {active:true}" ng-show="invites.length">
-                    <td>{{invite.id}}</td>
-                    <td>{{invite.email}}</td>
-                    <td>{{invite.groups.name}}</td>
-                    <td>{{invite.inviter.username}}</td>
+                <tr ng-repeat="s_invite in invites | filter : {active:true}" ng-show="invites.length">
+                    <td>{{s_invite.id}}</td>
+                    <td>{{s_invite.email}}</td>
+                    <td>{{s_invite.groups.name}}</td>
+                    <td>{{s_invite.inviter.username}}</td>
                     <td>
-                        <form action="/api/auth/removeinvite" name="disable_invite" method="POST">
-                            <button class="button orange" type="submit" name="id" value="{{invite.id}}">Cancel invite</button>
-                        </form>
+                        <span class="button orange" ng-click="invite.delete(s_invite.id)">Cancel invite</span>
                     </td>
                 </tr>
             </tbody>
@@ -78,4 +76,5 @@
         </div> -->
     </div>
 </div>
+</if>
 

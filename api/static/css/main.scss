@@ -481,6 +481,7 @@
                     float: left;
                     display: inline-block;
                     width: 45px;
+                    height: 45px;
                 }
                 .main-link-heading {
                     text-transform: uppercase;
@@ -709,7 +710,6 @@
         }
         &.box-form {
             float: left;
-            margin: 0;
             input[type=text],
             input[type=password],
             input[type=email],

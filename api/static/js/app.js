@@ -132,12 +132,12 @@
         /*Get data model*/
         var update = {
             me: function () {
-                restful.get('me/user').then(function (response) {
+                restful.get('me/user').then((response)=> {
                     $scope.current_user = response['objects'][0];
                 });
             },
             apps: function () {
-                restful.get('app').then(function (response) {
+                restful.get('app').then((response)=> {
                     var apps = $scope.apps = response['objects'];
                     $scope.stats.apps = {
                         labels: generateWeekStats(apps).week,
@@ -147,7 +147,7 @@
                 });
             },
             users: function () {
-                restful.get('user').then(function (response) {
+                restful.get('user').then((response)=> {
                     var users = $scope.users = response['objects'];
                     $scope.stats.users = {
                         labels: ['Yesterday', 'Today'],
@@ -157,12 +157,12 @@
                 });
             },
             groups: function () {
-                restful.get('group').then(function (response) {
+                restful.get('group').then((response)=> {
                     $scope.groups = response['objects'];
                 });
             },
             logs: function () {
-                restful.get('log').then(function (response) {
+                restful.get('log').then((response)=> {
                     var logs = $scope.logs = response['objects'];
                     $scope.logs.todaysAct = generateTripleDataStats(logs).edit + generateTripleDataStats(logs).drop;
                     $scope.stats.logs = {
@@ -176,12 +176,12 @@
                 });
             },
             notes: function () {
-                restful.get('note').then(function (response) {
+                restful.get('note').then((response)=> {
                     $scope.notes = response['objects'];
                 });
             },
             invites: function () {
-                restful.get('invite').then(function (response) {
+                restful.get('invite').then((response)=> {
                     var invites = $scope.invites = response['objects'];
                     $scope.stats.invitations = {
                         labels: ["Accepted", "Pending"],
@@ -197,7 +197,7 @@
                 });
             },
             components: function () {
-                restful.get('component').then(function (response) {
+                restful.get('component').then((response) =>{
                     $scope.components = response['objects'];
 
                 });
@@ -236,7 +236,8 @@
             $scope.clockDate.update()
         }, 30000)
 
-        /*Applications methods*/
+        /*Managing of webpage datas*/
+        
         $scope.newlink = {
             uploader: new FileUploader({
                 url: 'api/upload/img',
@@ -275,7 +276,8 @@
                         creator_id: $scope.current_user.id,
                         img_link: img_link,
                     }
-                    restful.post('app', post_object).then(function () {
+                    restful.post('app', post_object).then(()=> {
+                        /*Loading finish here*/
                         update.apps();
                     });
                     this.clear();
@@ -299,17 +301,20 @@
             },
             update: function (app_id) {
                 if (this.uploader.queue.length > 0) {
+                    var old_img_link = this.img_link;
                     this.img_link = new Date();
                     this.img_link = this.img_link.getTime();
                     this.uploader.onBeforeUploadItem = (item) => {
                         item.formData.push({
                             filename: this.img_link
                         });
+                        item.formData.push({
+                            deleteFile: old_img_link
+                        });
                     }
                     this.uploader.uploadAll();
                     this.uploader.onSuccessItem = (item, response, status, headers) => {
                         console.log('Uploader: Success callback');
-                        this.uploader.clearQueue();
                     }
                     this.uploader.onErrorItem = (item, response, status, headers) => {
                         //Add information for img uplaod error in DOM (html)
@@ -341,6 +346,7 @@
                     }
                     update.apps();
                     restful.post('log', log_object).then(function () {
+                        /*Loading finish here*/
                         update.logs();
                     });
                 });
@@ -388,7 +394,6 @@
             },
             status: false
         };
-
         $scope.user_inf = {
             uploader: new FileUploader({
                 url: 'api/upload/avatar',
@@ -421,8 +426,8 @@
                             }
                             restful.update('user', $scope.current_user.id, user_info).then((response) => {
                                 update.me();
-                                $scope.userFormSucces = true;
                                 this.clear();
+                                /*Loading finish here*/
                             });
                             if (this.pass_verify != null && this.password != null && this.password == this.pass_verify)
                                 restful.post('auth/changepass', {
@@ -441,7 +446,6 @@
             }
 
         };
-
         $scope.note = {
             content: '',
             tag: '',
@@ -451,7 +455,8 @@
                     tag: this.tag,
                     owner_id: $scope.current_user.id,
                 }
-                restful.post('note', post_note).then(function () {
+                restful.post('note', post_note).then(()=>{
+                    /*Loading finish here*/
                     update.notes();
                 });
                 this.clear();
@@ -461,7 +466,69 @@
                 this.tag = '';
             }
         };
-
+        $scope.invite = {
+            email: '',
+            group: '',
+            add: function(){
+                var post_object = {
+                    email: this.email,
+                    maker: $scope.current_user.id,
+                    group: this.group 
+                };
+                restful.post('invite', post_object).then(()=>{
+                    update.invites();
+                    restful.post('sendinvite', {email: this.email}).then(()=>{
+                        /*Loading finish here*/
+                    }); 
+                });
+                this.clear();
+                this.status = true;
+            },
+            delete: function(invite_id){
+               var confirmResult = confirm("Do you want to remove this ivnitation?");
+                if (confirmResult) {
+                    restful.delete("invite", invite_id).then(() =>{
+                        var log_object = {
+                            content: 'An invitation #' + invite_id + ' was sent',
+                            author_id: $scope.current_user.id
+                        }
+                        update.invites();
+                        restful.post('log', log_object).then(()=>{
+                            update.logs();
+                            /*Loading finish here*/
+                        });
+                    });
+                }  
+            },
+            deleteUser: function(me, users, removeEmail){
+                var user = $filter('filter')(users, {email: removeEmail})[0];
+                if(user)
+                    restful.delete('user', user.id).then(()=>{
+                         var log_object = {
+                            content: 'An user #' + user.id + ' was removed',
+                            author_id: $scope.current_user.id
+                        }
+                        restful.post('log', log_object).then(()=>{
+                            if(me == removeEmail){
+                                restful.logout().then(()=>{
+                                    window.location.reload();
+                                }); 
+                            }
+                            else {
+                                update.users();
+                                update.logs(); 
+                                /*Loading finish here*/
+                            }
+                        });
+                    });
+            },
+            clear: function(){
+                this.email = ''
+                this.group = ''
+            },
+            status: false
+        };
+            
         $scope.orderArray = function (app_length) {
             var app_count = new Array();
             for (i = 1; i < app_length + 1; i++) {

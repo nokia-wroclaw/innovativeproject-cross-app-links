@@ -409,7 +409,8 @@ body {
       .box.link-box .main-link-info img {
         float: left;
         display: inline-block;
-        width: 45px; }
+        width: 45px;
+        height: 45px; }
       .box.link-box .main-link-info .main-link-heading {
         text-transform: uppercase;
         font-weight: 800;
@@ -585,8 +586,7 @@ body {
       float: left;
       color: #34313d; }
   .box.box-form {
-    float: left;
-    margin: 0; }
+    float: left; }
     .box.box-form input[type=text],
     .box.box-form input[type=password],
     .box.box-form input[type=email],

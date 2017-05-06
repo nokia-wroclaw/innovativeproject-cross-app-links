@@ -17,3 +17,4 @@ alembic/
 scripts/*
 node_modules/*
 .env
+run

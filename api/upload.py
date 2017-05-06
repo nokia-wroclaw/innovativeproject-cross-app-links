@@ -16,8 +16,9 @@ configure_uploads(app, user_avatars)
 @app.route('/api/upload/img', endpoint='upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST' and 'file' in request.files:
-        if os.path.exists('api/static/img/app-img/'+ request.form['deleteFile'] + '.png'):
-            os.remove('api/static/img/app-img/'+ request.form['deleteFile'] + '.png')
+        if 'deleteFile' in request.form:
+            if os.path.exists('api/static/img/app-img/'+ request.form['deleteFile'] + '.png'):
+                os.remove('api/static/img/app-img/'+ request.form['deleteFile'] + '.png')
         filename = link_images.save(request.files['file'], folder='app-img', name=request.form['filename'] + '.png')
         return str(True)
     return str(False)

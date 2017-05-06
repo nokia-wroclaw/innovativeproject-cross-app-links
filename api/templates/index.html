@@ -22,10 +22,16 @@
 </head>
 
 <body ng-controller="mainCtrl">
-    <div class="loading">
+    <div id="loading" class="loading">
         <span class="loading-icon"></span>
         <span class="text">
             Loading content...
+        </span>
+    </div>
+    <div class="loading view-loader" ng-show="actionDataInProgress">
+        <span class="loading-icon"></span>
+        <span class="text">
+            Sending request...
         </span>
     </div>
     <div class="container-fluid">
@@ -113,7 +119,9 @@
                 </nav>
                 <!--    STATIC:END : NG-->
                 <div class="col-sm-12 col-xs-12 pull-right row" ng-class="menu.status ? 'col-lg-10 col-md-11' : 'col-lg-12 col-md-12'">
+                    
                     <div class="main-content " ng-view autoscroll="true" ng-class="menu.status ? 'col-lg-10' : 'col-lg-12'">
+                       
                         <!--    INCLUDE : NG-->
 
                         <!--    INCLUDE:END : NG-->

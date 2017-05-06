@@ -3,14 +3,14 @@
     app.controller('mainCtrl', ['$scope', 'restful', '$location', '$route', '$routeParams', '$interval', 'FileUploader', '$http', '$document', '$filter', function ($scope, restful, $location, $route, $routeParams, $interval, FileUploader, $http, $document, $filter) {
 
         $scope.todayDateTime = new Date;
-
+        $scope.actionDataInProgress = false;
         /*Append loading page druing data fetching*/
         var loadingPage = {
             ready: function () {
-                angular.element('.loading .text').innerHTML = 'Fetching data...';
+                angular.element('#loading .text').innerHTML = 'Fetching data...';
                 var interval = $interval(function () {
                     if ($http.pendingRequests < 1) {
-                        angular.element('.loading').addClass('hidden');
+                        angular.element('#loading').addClass('hidden');
                         $document.find('body').css('overflow', 'auto');
                         $interval.cancel(interval);
                     }
@@ -261,6 +261,7 @@
                 this.beta = beta;
             },
             add: function () {
+                $scope.actionDataInProgress = true;
                 var img_link = $scope.clockDate.date();
                 this.uploader.onBeforeUploadItem = function (item) {
                     item.formData.push({
@@ -277,8 +278,8 @@
                         img_link: img_link,
                     }
                     restful.post('app', post_object).then(()=> {
-                        /*Loading finish here*/
                         update.apps();
+                        $scope.actionDataInProgress = false;
                     });
                     this.clear();
                     this.status = true;
@@ -289,6 +290,7 @@
                     console.log(item);
                     console.log(response);
                     console.log(headers);
+                    $scope.actionDataInProgress = false;
                 };
 
                 this.uploader.onCancelItem = function (item, response, status, headers) {
@@ -296,10 +298,12 @@
                     console.log(item);
                     console.log(response);
                     console.log(headers);
+                    $scope.actionDataInProgress = false;
                 };
 
             },
             update: function (app_id) {
+                $scope.actionDataInProgress = true;
                 if (this.uploader.queue.length > 0) {
                     var old_img_link = this.img_link;
                     this.img_link = new Date();
@@ -346,8 +350,8 @@
                     }
                     update.apps();
                     restful.post('log', log_object).then(function () {
-                        /*Loading finish here*/
                         update.logs();
+                        $scope.actionDataInProgress = false;
                     });
                 });
                 this.clear();
@@ -357,6 +361,7 @@
             hide: function (app_id, app_status) {
                 var confirmResult = confirm("Do you want to change visibility of this app?");
                 if (confirmResult) {
+                    $scope.actionDataInProgress = true;
                     var hide = {
                         status: !app_status
                     }
@@ -368,6 +373,7 @@
                         update.apps();
                         restful.post('log', log_object).then(function () {
                             update.logs();
+                            $scope.actionDataInProgress = false;
                         });
                     });
                 }
@@ -375,6 +381,7 @@
             delete: function (app_id) {
                 var confirmResult = confirm("Do you want to remove this app?");
                 if (confirmResult) {
+                    $scope.actionDataInProgress = true;
                     restful.delete("app", app_id).then(function () {
                         var log_object = {
                             content: 'A link #' + app_id + ' was removed',
@@ -383,6 +390,7 @@
                         update.apps();
                         restful.post('log', log_object).then(function () {
                             update.logs();
+                            $scope.actionDataInProgress = false;
                         });
                     });
                 }
@@ -405,6 +413,7 @@
             },
             img_update: function () {
                 if (this.uploader.queue.length > 0) {
+                    $scope.actionDataInProgress = true;
                     this.uploader.uploadAll();
                     restful.update('user', $scope.current_user.id, {
                         avatar_url: 'avatar_' + $scope.current_user.id
@@ -416,6 +425,7 @@
             },
             user_update: function () {
                 if (this.password == null || this.password == this.pass_verify)
+                    $scope.actionDataInProgress = true;
                     restful.post('auth/checkpass', {
                         pass: this.current_pass
                     }).then((response) => {
@@ -427,7 +437,7 @@
                             restful.update('user', $scope.current_user.id, user_info).then((response) => {
                                 update.me();
                                 this.clear();
-                                /*Loading finish here*/
+                                $scope.actionDataInProgress = false;
                             });
                             if (this.pass_verify != null && this.password != null && this.password == this.pass_verify)
                                 restful.post('auth/changepass', {
@@ -450,13 +460,14 @@
             content: '',
             tag: '',
             add: function () {
+                $scope.actionDataInProgress = true;
                 var post_note = {
                     content: this.content,
                     tag: this.tag,
                     owner_id: $scope.current_user.id,
                 }
                 restful.post('note', post_note).then(()=>{
-                    /*Loading finish here*/
+                    $scope.actionDataInProgress = false;
                     update.notes();
                 });
                 this.clear();
@@ -473,6 +484,7 @@
                 var invite = $filter('filter')(invites, {email: this.email})[0];
                 var user = $filter('filter')(users, {email: this.email})[0];
                 if(!user && !invite){
+                    $scope.actionDataInProgress = true;
                     var post_object = {
                         email: this.email,
                         maker: $scope.current_user.id,
@@ -481,7 +493,7 @@
                     restful.post('invite', post_object).then(()=>{
                         update.invites();
                         restful.post('sendinvite', {email: this.email}).then(()=>{
-                            /*Loading finish here*/
+                            $scope.actionDataInProgress = false;
                         }); 
                     });
                     this.clear();
@@ -491,6 +503,7 @@
             delete: function(invite_id){
                var confirmResult = confirm("Do you want to remove this ivnitation?");
                 if (confirmResult) {
+                    $scope.actionDataInProgress = true;
                     restful.delete("invite", invite_id).then(() =>{
                         var log_object = {
                             content: 'An invitation #' + invite_id + ' was sent',
@@ -499,7 +512,7 @@
                         update.invites();
                         restful.post('log', log_object).then(()=>{
                             update.logs();
-                            /*Loading finish here*/
+                            $scope.actionDataInProgress = false;
                         });
                     });
                 }  
@@ -507,6 +520,7 @@
             deleteUser: function(me, users, removeEmail){
                 var user = $filter('filter')(users, {email: removeEmail})[0];
                 if(user)
+                    $scope.actionDataInProgress = true;
                     restful.delete('user', user.id).then(()=>{
                          var log_object = {
                             content: 'An user #' + user.id + ' was removed',
@@ -521,7 +535,7 @@
                             else {
                                 update.users();
                                 update.logs(); 
-                                /*Loading finish here*/
+                                $scope.actionDataInProgress = false;
                             }
                         });
                     });

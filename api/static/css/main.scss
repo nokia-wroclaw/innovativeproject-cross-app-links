@@ -77,6 +77,10 @@
             text-transform: uppercase;
         }
     }
+
+.view-loader{
+    opacity: 0.9;
+}
     
     .clear {
         clear: both;
@@ -929,6 +933,15 @@
         box-shadow: none;
     }
     
+@keyframes hideOnTime {
+    from{
+        transform: translateZ(0);
+    }
+    to{
+        transform: translateZ(-100%);
+    }
+}
+
     .success-bar {
         background: #3fce91;
         position: fixed;
@@ -944,4 +957,8 @@
         padding: 20px;
         box-sizing: border-box;
         z-index: 105;
+        transition: 0.3s ease all;
+        animation: hideOnTime 0.5s linear;
+        animation-delay: 3s;
+        animation-iteration-count: 1;
     }

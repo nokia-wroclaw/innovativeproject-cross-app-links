@@ -38,3 +38,13 @@
 <blockquote>export FLASK_DEBUG=true</blockquote>
 <blockquote>flask run</blockquote>
 
+
+<h3>Environment variables required:</h3>
+<blockquote>DATABASE_URL - database url</blockquote>
+<blockquote>MAIL_PASSWORD - password for email</blockquote>
+<blockquote>MAIL_PORT - email port</blockquote>
+<blockquote>MAIL_SERVER- email server address</blockquote>
+<blockquote>MAIL_USERNAME - email username</blockquote>
+<blockquote>MAIL_USE_SSL - are we using ssl or not?</blockquote>
+<blockquote>SERVER_ADDRESS - host address (example https://cross-app-links.herokuapp.com)</blockquote>
+

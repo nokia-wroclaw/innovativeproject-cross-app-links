@@ -17,10 +17,11 @@ class Mailing():
 	    if new.active:
 	        useremail = new.email
 	        group = new.group
+	        inviteID = new.id
 	        new = User(useremail,sha256_crypt.encrypt(userpassword),group)
 	        db.session.add(new)
 	        db.session.commit()
-	        self.removeinvite(useremail)
+	        self.removeinvite(inviteID)
 	        if not User.query.filter_by(email = useremail).first():
 	            return "Error while creating user."
 	    else:
@@ -87,6 +88,14 @@ class Mailing():
 		invite = Invite.query.filter_by(id = id).order_by('-id').first()
 		invite.active = False
 		db.session.add(invite)
+		db.session.commit()
+
+	def cancelinvite(self,id):
+		"""
+		Deletes invite entry.
+		"""
+		invite = Invite.query.filter_by(id = id).order_by('-id').first()
+		db.session.delete(invite)
 		db.session.commit()
 
 	def removereset(self,email):

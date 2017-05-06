@@ -172,11 +172,11 @@ def remove():
     else:
         return render_template("message-template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
 
-@app.route('/api/auth/removeinvite', methods=['POST'])
+@app.route('/api/auth/cancelinvite', methods=['POST'])
 @login_required
-def removeinvites():
+def cancelinvite():
     if request.method == 'POST':
-        Mailing().removeinvite(request.form['id'])
+        Mailing().cancelinvite(request.form['id'])
     return redirect('/add-user')
 
 

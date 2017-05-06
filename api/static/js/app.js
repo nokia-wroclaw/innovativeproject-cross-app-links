@@ -469,20 +469,24 @@
         $scope.invite = {
             email: '',
             group: '',
-            add: function(){
-                var post_object = {
-                    email: this.email,
-                    maker: $scope.current_user.id,
-                    group: this.group 
-                };
-                restful.post('invite', post_object).then(()=>{
-                    update.invites();
-                    restful.post('sendinvite', {email: this.email}).then(()=>{
-                        /*Loading finish here*/
-                    }); 
-                });
-                this.clear();
-                this.status = true;
+            add: function(users, invites){
+                var invite = $filter('filter')(invites, {email: this.email})[0];
+                var user = $filter('filter')(users, {email: this.email})[0];
+                if(!user && !invite){
+                    var post_object = {
+                        email: this.email,
+                        maker: $scope.current_user.id,
+                        group: this.group 
+                    };
+                    restful.post('invite', post_object).then(()=>{
+                        update.invites();
+                        restful.post('sendinvite', {email: this.email}).then(()=>{
+                            /*Loading finish here*/
+                        }); 
+                    });
+                    this.clear();
+                    this.status = true;
+                }
             },
             delete: function(invite_id){
                var confirmResult = confirm("Do you want to remove this ivnitation?");

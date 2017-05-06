@@ -8,7 +8,7 @@
                 <header>
                     <h3 class="orange">Invite new user!</h3>
                 </header>
-                <form name="add_user_form" ng-submit="add_user_form.$valid && invite.add()" novalidate>
+                <form name="add_user_form" ng-submit="add_user_form.$valid && invite.add(users, invites)" novalidate>
                     <div class="input-socket">
                         <input type="email" name="email" ng-model="invite.email" placeholder="User e-mail" required>
                     </div>

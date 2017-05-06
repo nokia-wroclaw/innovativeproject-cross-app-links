@@ -11,8 +11,8 @@ class User(UserMixin, db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.TIMESTAMP)
-    email = db.Column(db.String(25), unique=True)
-    username = db.Column(db.String(30), unique=True)
+    email = db.Column(db.String(50), unique=True)
+    username = db.Column(db.String(40), unique=True)
     password_hash = db.Column(db.String(128))
     group_id = db.Column(db.Integer, db.ForeignKey('group.id')) 
     avatar_url = db.Column(db.String)
@@ -75,9 +75,9 @@ class App(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.TIMESTAMP)
-    name = db.Column(db.String(30), unique=True)
-    link = db.Column(db.String(50), unique=True)
-    desc = db.Column(db.String(50))
+    name = db.Column(db.String(50), unique=True)
+    link = db.Column(db.String(100), unique=True)
+    desc = db.Column(db.String(100))
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     img_link = db.Column(db.String(50))
     order_id = db.Column(db.Integer)
@@ -105,7 +105,7 @@ class Log(db.Model):
     
     id = db.Column(db.Integer,primary_key=True)
     date = db.Column(db.TIMESTAMP)
-    content = db.Column(db.String(60)) #modelstochange - change
+    content = db.Column(db.String(100))
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, content, author_id):
@@ -133,7 +133,7 @@ class Invite(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.TIMESTAMP)
-    email = db.Column(db.String(25), unique=False)
+    email = db.Column(db.String(50), unique=False)
     token = db.Column(db.String(50), unique=True)
     maker = db.Column(db.Integer, db.ForeignKey('user.id'))
     group = db.Column(db.Integer, db.ForeignKey('group.id'))
@@ -153,7 +153,7 @@ class Invite(db.Model):
 class Reset(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(25), unique=True)
+    email = db.Column(db.String(50), unique=True)
     token = db.Column(db.String(50), unique=True)
     
     def __init__(self, email):

@@ -108,6 +108,9 @@ def register():
 def sendinvite():
     data = request.get_json()
     email = data['email']
+    maker = data['sender']
+    receiver = [email]
+    send_email_register(maker,receiver)
     #Get token from invite by email (it's already in DB) and send a link to email
     
 # Confirm account

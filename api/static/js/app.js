@@ -299,7 +299,8 @@
                     console.log(response);
                     console.log(headers);
                     $scope.actionDataInProgress = false;
-                };
+                };                    
+
 
             },
             update: function (app_id) {
@@ -480,7 +481,7 @@
         $scope.invite = {
             email: '',
             group: '',
-            add: function(users, invites){
+            add: function(users, invites, senderemail){
                 var invite = $filter('filter')(invites, {email: this.email})[0];
                 var user = $filter('filter')(users, {email: this.email})[0];
                 if(!user && !invite.active){
@@ -492,7 +493,7 @@
                     };
                     restful.post('invite', post_object).then(()=>{
                         update.invites();
-                        restful.post('sendinvite', {email: this.email,sender: $scope.current_user.email}).then(()=>{
+                        restful.post('sendinvite', {email: this.email,sender: senderemail}).then(()=>{
                             $scope.actionDataInProgress = false;
                         }); 
                     });

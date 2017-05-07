@@ -484,6 +484,7 @@
             add: function(users, invites, senderemail){
                 var invite = $filter('filter')(invites, {email: this.email})[0];
                 var user = $filter('filter')(users, {email: this.email})[0];
+                var inviteEmail = this.email;
                 if(!user && (!invite || !invite.active)){
                     $scope.actionDataInProgress = true;
                     var post_object = {
@@ -493,7 +494,7 @@
                     };
                     restful.post('invite', post_object).then(()=>{
                         update.invites();
-                        restful.post('sendinvite', {email: this.email,sender: senderemail}).then(()=>{
+                        restful.post('sendinvite', {email: inviteEmail,sender: senderemail}).then(()=>{
                             $scope.actionDataInProgress = false;
                         }); 
                     });

@@ -7,6 +7,7 @@ from api.database import db
 from api.functions import Mailing
 from flask_cors import CORS, cross_origin 
 from datetime import datetime
+from api.mail import send_email_register
 from time import time
 import os
 #-----------

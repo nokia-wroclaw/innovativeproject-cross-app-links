@@ -484,7 +484,7 @@
             add: function(users, invites, senderemail){
                 var invite = $filter('filter')(invites, {email: this.email})[0];
                 var user = $filter('filter')(users, {email: this.email})[0];
-                if(!user && !invite.active){
+                if(!user && (!invite || !invite.active)){
                     $scope.actionDataInProgress = true;
                     var post_object = {
                         email: this.email,

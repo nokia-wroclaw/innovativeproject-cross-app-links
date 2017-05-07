@@ -564,6 +564,7 @@
             $scope.newlink.status = false;
             $scope.searchBy = '';
             $scope.menu.active(next.originalPath);
+            $scope.invite.status = false;
 
         });
 

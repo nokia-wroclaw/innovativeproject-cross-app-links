@@ -7,13 +7,13 @@
             </header>
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th class="hidden-xs">Id</th>
                     <th>Domain</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat='component in components | orderBy: id : true | limitTo : limit.components' ng-show='components.length'>
-                    <td>{{component.id}}</td>
+                    <td class="hidden-xs">{{component.id}}</td>
                     <td><a href="{{component.domain}}">{{component.domain}}</a></td>
                    
                 </tr>

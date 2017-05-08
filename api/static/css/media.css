@@ -29,7 +29,7 @@
   .row .row-buried {
     padding: 0; }
     .row .row-buried:nth-child(odd) {
-      padding-right: 0x; }
+      padding-right: 0px; }
     .row .row-buried:nth-child(even) {
       padding-left: 0px; }
 
@@ -57,8 +57,36 @@
     width: 85%;
     max-width: none; } }
 /* Small Devices, Tablets */
-/* Extra Small Devices, Phones */
-/* Custom, iPhone Retina */
+@media only screen and (max-width: 768px) {
+  .xs-button-fix .glyphicon {
+    margin-right: 3px;
+    margin-left: 3px; }
+
+  .main-content {
+    padding: 10px 0; }
+
+  .box {
+    margin-bottom: 10px; }
+
+  .user-profile-main {
+    padding: 0; }
+    .user-profile-main .user-profile-avatar {
+      width: 40px;
+      height: 40px; }
+      .user-profile-main .user-profile-avatar img {
+        width: 100%; }
+    .user-profile-main .user-profile-info {
+      padding: 0; } }
+@media only screen and (max-width: 480px) {
+  .single-icon {
+    clear: both;
+    float: left !important; }
+
+  .xs-input-fix {
+    position: static !important;
+    margin: 0;
+    margin-top: 10px;
+    width: 100% !important; } }
 @media only screen and (max-width: 320px) {
   .popup {
     width: 100%;

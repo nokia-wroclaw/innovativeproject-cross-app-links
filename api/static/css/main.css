@@ -230,16 +230,15 @@ body {
                 font-size: 11px;
                 margin-right: 15px; }
     .main-header .header-cell .header-nav-icon {
-      margin-right: 60px;
-      float: right; }
+      margin-right: 0; }
       .main-header .header-cell .header-nav-icon a {
-        margin-left: 20px;
         float: left;
         color: #e3e3e3;
         font-size: 24px;
         box-sizing: border-box;
         height: 100%;
-        padding: 30px 20px; }
+        padding: 32px 0;
+        margin-left: 20px; }
         .main-header .header-cell .header-nav-icon a:hover {
           color: #ddd;
           cursor: pointer; }
@@ -323,7 +322,9 @@ body {
     float: left;
     display: inline-block;
     color: #34313d;
-    margin-left: 40px; }
+    padding-left: 40px;
+    box-sizing: border-box;
+    width: 100%; }
     .user-profile-main .user-profile-info .user-profile-username {
       margin-bottom: 10px;
       font-size: 24px;
@@ -608,19 +609,19 @@ body {
       transition: 0.3s ease;
       font-weight: 600;
       font-size: 18px; }
-      .box.box-form input[type=text].input-file-choose,
-      .box.box-form input[type=password].input-file-choose,
-      .box.box-form input[type=email].input-file-choose,
-      .box.box-form textarea.input-file-choose,
-      .box.box-form select.input-file-choose,
-      .box.box-form label.user.input-file-choose {
+      .box.box-form input[type=text] .input-file-choose,
+      .box.box-form input[type=password] .input-file-choose,
+      .box.box-form input[type=email] .input-file-choose,
+      .box.box-form textarea .input-file-choose,
+      .box.box-form select .input-file-choose,
+      .box.box-form label.user .input-file-choose {
         opacity: 0.8; }
-        .box.box-form input[type=text].input-file-choose:hover,
-        .box.box-form input[type=password].input-file-choose:hover,
-        .box.box-form input[type=email].input-file-choose:hover,
-        .box.box-form textarea.input-file-choose:hover,
-        .box.box-form select.input-file-choose:hover,
-        .box.box-form label.user.input-file-choose:hover {
+        .box.box-form input[type=text] .input-file-choose:hover,
+        .box.box-form input[type=password] .input-file-choose:hover,
+        .box.box-form input[type=email] .input-file-choose:hover,
+        .box.box-form textarea .input-file-choose:hover,
+        .box.box-form select .input-file-choose:hover,
+        .box.box-form label.user .input-file-choose:hover {
           opacity: 0.8; }
       .box.box-form input[type=text]:focus,
       .box.box-form input[type=password]:focus,
@@ -664,8 +665,9 @@ body {
       position: relative;
       top: 3px; }
     .box.box-form input[type=file] {
-      clear: right;
       float: left; }
+      .box.box-form input[type=file].edited {
+        clear: right; }
     .box.box-form textarea {
       height: 180px;
       resize: none; }
@@ -705,7 +707,7 @@ body {
     box-shadow: none; }
 
 .single-input {
-  width: 340px; }
+  width: auto; }
   .single-input input[type=text],
   .single-input select {
     box-sizing: border-box;

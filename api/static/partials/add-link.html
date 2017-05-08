@@ -20,8 +20,8 @@
         <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
         <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
         <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>
-        <button type="submit" class='button green pull-right single-icon' ng-click="newlink.error.clear()"><span class="glyphicon glyphicon-ok"></span></button>
-        <input class="button pure input-file-choose" type="file" nv-file-select="" uploader="newlink.uploader" ng-click="newlink.uploader.clearQueue()" accept="image/*" requried>
+        <input class="button pure input-file-choose xs-input-fix" type="file" nv-file-select="" uploader="newlink.uploader" ng-click="newlink.uploader.clearQueue()" accept="image/*" requried>
+        <button type="submit" class='button green pull-right single-icon xs-input-fix' ng-click="newlink.error.clear()"><span class="glyphicon glyphicon-ok"></span></button>
     </form>
 </div>
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">

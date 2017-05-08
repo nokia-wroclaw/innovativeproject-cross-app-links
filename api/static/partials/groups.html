@@ -12,14 +12,14 @@
             </header>
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th class="hidden-xs">Id</th>
                     <th>Group Name</th>
                     <th>Permissions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="group in groups | limitTo : limit.group | filter : {name : searchBy}" ng-show="groups.length">
-                    <td>{{group.id}}</td>
+                    <td class="hidden-xs">{{group.id}}</td>
                     <td><a href="/groups/{{group.id}}">{{group.name}}</a></td>
                     <td>
                         <p ng-show="group.app_add">Adding applications</p>

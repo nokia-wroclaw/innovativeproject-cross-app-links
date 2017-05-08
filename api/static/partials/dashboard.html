@@ -43,15 +43,15 @@
             <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal" ng-click="showlist = !showlist"></span>
             </div>
             <form class="noteform" name="notesform" ng-show="showlist" ng-submit="notesform.$valid && note.add()" novalidate>
-                <div class="single-input pull-left">
-                    <input class="note" ng-model="note.content" type="text" name="note" placeholder="Note content" required>
-                    <select class="note" ng-model="note.tag" name="tag" required>
+                <div class="single-input pull-left xs-input-fix">
+                    <input class="note xs-input-fix" ng-model="note.content" type="text" name="note" placeholder="Note content" required>
+                    <select class="note xs-input-fix" ng-model="note.tag" name="tag" required>
                         <option>info</option>
                         <option>rush</option>
                         <option>know</option>
                     </select>
                 </div>
-                <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
+                <button type="submit" class='button green pull-right single-icon xs-input-fix'><span class="glyphicon glyphicon-ok"></span></button>
             </form>
         </header>
         <table class="table">
@@ -73,7 +73,7 @@
             <span class="time-zone">{{clockDate.date() | date: 'EEEE'}}</span>
         </div>
     </div>
-    <div class="box image-box">
+    <div class="box image-box hidden-md hidden-sm hidden-xs">
         <img ng-src="../static/img/dashboard/temp.jpg">
     </div>
 
@@ -88,7 +88,7 @@
             </header>
             <tbody>
                 <tr ng-repeat='log in logs | orderBy: id : true | limitTo : 5' ng-show='logs.length'>
-                    <td>{{log.date | date: 'short' }}</td>
+                    <td class="hidden-xs">{{log.date | date: 'short' }}</td>
                     <td>{{log.author.username}}</td>
                     <td>{{log.content}}</td>
                 </tr>
@@ -96,7 +96,7 @@
             <span class='warning-text' ng-hide='logs.length'>There is no activity yet</span>
         </table>
         <div href="action-log" class="full-width-button-area">
-            <a href="action-log" class="button orange pull-right"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+            <a href="action-log" class="button orange pull-right xs-input-fix"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
         </div>
     </div>
     <div class="box box-table">
@@ -107,16 +107,16 @@
             </header>
             <tbody>
                 <tr ng-repeat='user in users | limitTo : 5' ng-show='users.length' ng-if="(user.been_active | date : 'shortDate') == (todayDateTime | date : 'shortDate')">
-                    <td>{{user.id}}</td>
+                    <td class="hidden-xs">{{user.id}}</td>
                     <td>{{user.username}}</td>
-                    <td>{{user.group.name}}</td>
+                    <td class="hidden-xs">{{user.group.name}}</td>
                     <td>{{user.been_active | date : 'HH:mm'}}</td>
                 </tr>
             </tbody>
             <span class='warning-text' ng-hide='users.length'>No active users since last check</span>
         </table>
         <div href="action-log" class="full-width-button-area">
-            <a href="users" class="button green pull-right"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+            <a href="users" class="button green pull-right xs-input-fix"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
         </div>
     </div>
 

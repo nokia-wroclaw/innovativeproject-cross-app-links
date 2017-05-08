@@ -12,7 +12,7 @@
             </header>
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th class="hidden-xs">Id</th>
                     <th>User</th>
                     <th>Group</th>
                     <th>E-mail</th>
@@ -20,8 +20,8 @@
             </thead>
             <tbody>
                 <tr ng-repeat="user in users | limitTo : limit.users| filter : {username : searchBy}" ng-show="users.length">
-                    <td>{{user.id}}</td>
-                    <td><img class="user" ng-src="../static/img/avatars/{{user.avatar_url}}.png?{{todayDateTime.getTime()}}"><a href="/profile/{{user.id}}">{{user.username}}</a></td>
+                    <td class="hidden-xs">{{user.id}}</td>
+                    <td><img class="user hidden-xs" ng-src="../static/img/avatars/{{user.avatar_url}}.png?{{todayDateTime.getTime()}}"><a href="/profile/{{user.id}}">{{user.username}}</a></td>
                     <td>{{user.group.name}}</td>
                     <td>{{user.email}}</td>
                 </tr>

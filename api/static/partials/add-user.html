@@ -10,13 +10,13 @@
                 </header>
                 <form name="add_user_form" ng-submit="add_user_form.$valid && invite.add(users, invites, current_user.email)" novalidate>
                     <div class="input-socket">
-                        <input type="email" name="email" ng-model="invite.email" placeholder="User e-mail" required>
+                        <input type="email" class="xs-input-fix" name="email" ng-model="invite.email" placeholder="User e-mail" required>
                     </div>
                     <p>Select user permission group:</p>
-                    <select class="pull-left" name="group" ng-model="invite.group" required>
+                    <select class="pull-left xs-input-fix" name="group" ng-model="invite.group" required>
                         <option ng-repeat="group in groups | orderBy:'-id'" value={{group.id}}>{{group.name}}</option>
                     </select>
-                    <button type="submit" class='button blue pull-right'>Confirm</button>
+                    <button type="submit" class='button blue pull-right xs-input-fix'>Confirm</button>
                 </form>
             </div>
         </div>
@@ -29,9 +29,9 @@
                 </header>
                 <form name="remove_form" ng-submit="remove_form.$valid && invite.deleteUser(current_user.email, users, removeEmail)" novalidate>
                     <div class="input-socket">
-                        <input type="email" name="email" ng-model="removeEmail" placeholder="User e-mail" required>
+                        <input type="email" class="xs-input-fix" name="email" ng-model="removeEmail" placeholder="User e-mail" required>
                     </div>
-                    <button type="submit" class='button orange pull-right'>Confirm</button>
+                    <button type="submit" class='button orange pull-right xs-input-fix'>Confirm</button>
                 </form>
 
 
@@ -51,21 +51,21 @@
             </header>
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th class="hidden-xs">Id</th>
                     <th>Email</th>
-                    <th>Group</th>
+                    <th class="hidden-xs">Group</th>
                     <th>Sender</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="s_invite in invites | filter : {active:true}" ng-show="invites.length">
-                    <td>{{s_invite.id}}</td>
+                    <td class="hidden-xs">{{s_invite.id}}</td>
                     <td>{{s_invite.email}}</td>
-                    <td>{{s_invite.groups.name}}</td>
+                    <td class="hidden-xs">{{s_invite.groups.name}}</td>
                     <td>{{s_invite.inviter.username}}</td>
                     <td>
-                        <span class="button orange" ng-click="invite.delete(s_invite.id)">Cancel invite</span>
+                        <span class="button orange pull-left xs-button-fix" ng-click="invite.delete(s_invite.id)"><span class="hidden-xs">Cancel invite</span><span class="visible-xs"><span class="glyphicon glyphicon-remove"></span></span></span>
                     </td>
                 </tr>
             </tbody>

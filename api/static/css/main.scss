@@ -268,16 +268,15 @@
                 }
             }
             .header-nav-icon {
-                margin-right: 60px;
-                float: right;
+                margin-right: 0;
                 a {
-                    margin-left: 20px;
                     float: left;
                     color: lighten(#ccc, 9%);
                     font-size: 24px;
                     box-sizing: border-box;
                     height: 100%;
-                    padding: 30px 20px;
+                    padding: 32px 0;
+                    margin-left: 20px;
                     &:hover {
                         color: #ddd;
                         cursor: pointer;
@@ -378,7 +377,9 @@
             float: left;
             display: inline-block;
             color: #34313d;
-            margin-left: 40px;
+            padding-left: 40px;
+            box-sizing: border-box;
+            width: 100%;
             .user-profile-username {
                 margin-bottom: 10px;
                 font-size: 24px;
@@ -732,8 +733,9 @@
                 transition: 0.3s ease;
                 font-weight: 600;
                 font-size: 18px;
-                &.input-file-choose {
+                .input-file-choose {
                     opacity: 0.8;
+                    
                     &:hover {
                         opacity: 0.8;
                     }
@@ -771,8 +773,10 @@
                 top: 3px;
             }
             input[type=file] {
-                clear: right;
                 float: left;
+                &.edited{
+                    clear: right;
+                }
             }
             textarea {
                 height: 180px;
@@ -825,7 +829,7 @@
     }
     
     .single-input {
-        width: 340px;
+        width: auto;
         input[type=text],
         select {
             box-sizing: border-box;

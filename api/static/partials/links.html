@@ -24,29 +24,35 @@
             <a ng-show="current_user.group.app_edit_all" class="button small  margined pull-right" ng-class="app.status ? 'green' : 'pure'" href="#" ng-click="newlink.hide(app.id,app.status)">
                 <span class="glyphicon" ng-class="app.status ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"></span></a>
             <a ng-show="current_user.group.app_edit_all" class="button blue small  margined pull-right" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
-            <a ng-show="current_user.group.app_drop" class="button red small pull-right" href="#" ng-click="newlink.delete(app.id)"><span class="glyphicon glyphicon-trash"></span></a>
+            <a ng-show="current_user.group.app_drop" class="button red small pull-right" href="#" ng-click="newlink.delete(app.id, app.img_link)"><span class="glyphicon glyphicon-trash"></span></a>
         </div>
     </div>
 </div>
 
 <div ng-if="current_user.group.app_edit_all && filterParams.manage()>0" class="popup" ng-repeat="app in apps | filter : {id: filterParams.manage()}:true">
     <div class="no-box-el error-form-box" ng-show="form.$submitted">
-        <span class='pull-left text-left error' ng-show="user_inf.uplaoder.queue <1 || form.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
-
+        <span class='pull-left text-left error' ng-show="newlink.uploader.queue.length <1 || form.$pristine"><span class="glyphicon glyphicon-remove"></span>You have to edit something!</span>
         <div class="form.$invalid">
-            <span class='pull-left text-left error' ng-show="form.name.$error.required"><span class="glyphicon glyphicon-remove"></span>Required link name!</span>
+            <span class='pull-left text-left error' ng-show="form.name.$error.required"><span class="glyphicon glyphicon-remove"></span>Choose an order</span>
+            <span class='pull-left text-left error' ng-show="form.order.$error.required"><span class="glyphicon glyphicon-remove"></span>Required link name!</span>
             <span class='pull-left text-left error' ng-show="form.name.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short link name!</span>
-
             <span class='pull-left text-left error' ng-show="form.address.$error.required"><span class="glyphicon glyphicon-remove"></span>Required url!</span>
             <span class='pull-left text-left error' ng-show="form.address.$error.linkformat"><span class="glyphicon glyphicon-remove"></span>Wrong url!</span>
-
             <span class='pull-left text-left error' ng-show="form.desc.$error.required"><span class="glyphicon glyphicon-remove"></span>Required description!</span>
             <span class='pull-left text-left error' ng-show="form.desc.$error.maxlength"><span class="glyphicon glyphicon-remove"></span>Too long description!</span>
             <span class='pull-left text-left error' ng-show="form.desc.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short description!</span>
-
+        </div>
+        <div ng-show="newlink.error.noUnique">
+            <span class='pull-left text-left error'><span class="glyphicon glyphicon-remove"></span>Link taken!</span>
         </div>
     </div>
-    <form ng-init="newlink.manageFill(app.name,app.link,app.desc, app.img_link, app.order_id, app.beta)" name='form' class="box box-form no-shadow" ng-submit="form.$valid && (form.$dirty || user_inf.uploader.queue >0) && newlink.update(app.id)" novalidate>
+    
+    <form ng-init="newlink.manageFill(app.name,app.link,app.desc, app.img_link, app.order_id, app.beta)" 
+          name='form' 
+          class="box box-form no-shadow" 
+          ng-submit="form.$valid && (form.$dirty || newlink.uploader.queue.length > 0) && newlink.update(app.id, apps)" 
+          novalidate>
+        
         <div class="input-imglink"><img ng-src="/static/img/app-img/{{newlink.img_link}}.png"></div>
         <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
         <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
@@ -54,10 +60,10 @@
         <label class="input-description">Set as a beta link</label>
         <input type="checkbox" ng-model="newlink.beta">
         <label class="input-description">Choose order</label>
-        <select ng-model="newlink.order_id" ng-options="i as i for i in orderArray(apps.length)" required>
+        <select name="order" ng-model="newlink.order_id" ng-options="i as i for i in orderArray(apps.length)" required>
         </select>
-        <input class="button pure input-file-choose pull-left" type="file" nv-file-select="" uploader="newlink.uploader" requried>
-        <button type="submit" class='button green single-icon pull-right'><span class="glyphicon glyphicon-ok"></span></button>
+        <input class="button pure input-file-choose pull-left" type="file" nv-file-select uploader="newlink.uploader" ng-click="newlink.uploader.clearQueue()" accept="image/*" requried/>
+        <button type="submit" class='button green single-icon pull-right' ng-click="newlink.error.clear()"><span class="glyphicon glyphicon-ok"></span></button>
     </form>
 </div>
 <div class="black-bg" ng-if="filterParams.manage()>0" ng-click="popup.edit.close()"></div>

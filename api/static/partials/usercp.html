@@ -1,5 +1,5 @@
 <div ng-if="current_user.id > 0" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
-    <div class="no-box-el error-form-box" ng-show="user.$submitted">
+    <div class="no-box-el error-form-box" ng-show="user.$submitted && statusBarBoolean==false">
         <div ng-show="user.$submitted && user.$invalid">
             <span class='pull-left text-left error' ng-show="user.username.$error.required"><span class="glyphicon glyphicon-remove"></span>Required username!</span>
             <span class='pull-left text-left error' ng-show="user.email.$error.required"><span class="glyphicon glyphicon-remove"></span>Required email!</span>
@@ -42,10 +42,10 @@
 <div ng-if="current_user.id > 0" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
     <form class="box box-form" name="avatar" ng-submit="user_inf.img_update()" novalidate>
         <img class="avatar" ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}">
-        <input class="button pure input-file-choose pull-left" type="file" nv-file-select uploader="user_inf.uploader" required>
+        <input class="button pure input-file-choose pull-left" type="file" nv-file-select uploader="user_inf.uploader" ng-click="user_inf.uploader.clearQueue()" required>
         <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
     </form>
 </div>
-<div class="success-bar" ng-if="user_inf.status">
+<div class="success-bar" ng-class="{'hideOnTime': statusBarBoolean}" ng-if="statusBarBoolean && !actionDataInProgress">
     Success! You've just edited your profile!
 </div>

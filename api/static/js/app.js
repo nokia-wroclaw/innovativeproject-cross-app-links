@@ -1,9 +1,15 @@
 (function () {
     var app = angular.module('mainApp', ['ngRoute', 'config', 'ngScrollbars', 'services', 'directives', 'chart.js', 'angularFileUpload']);
     app.controller('mainCtrl', ['$scope', 'restful', '$location', '$route', '$routeParams', '$interval', 'FileUploader', '$http', '$document', '$filter', function ($scope, restful, $location, $route, $routeParams, $interval, FileUploader, $http, $document, $filter) {
-
+        /*Some globals*/
         $scope.todayDateTime = new Date;
         $scope.actionDataInProgress = false;
+        $scope.statusBarBoolean = false;
+        $scope.statusRequestTrue = function () {
+            $scope.actionDataInProgress = false;
+            $scope.statusBarBoolean = true;
+        }
+
         /*Append loading page druing data fetching*/
         var loadingPage = {
             ready: function () {
@@ -132,12 +138,12 @@
         /*Get data model*/
         var update = {
             me: function () {
-                restful.get('me/user').then((response)=> {
+                restful.get('me/user').then((response) => {
                     $scope.current_user = response['objects'][0];
                 });
             },
             apps: function () {
-                restful.get('app').then((response)=> {
+                restful.get('app').then((response) => {
                     var apps = $scope.apps = response['objects'];
                     $scope.stats.apps = {
                         labels: generateWeekStats(apps).week,
@@ -147,7 +153,7 @@
                 });
             },
             users: function () {
-                restful.get('user').then((response)=> {
+                restful.get('user').then((response) => {
                     var users = $scope.users = response['objects'];
                     $scope.stats.users = {
                         labels: ['Yesterday', 'Today'],
@@ -157,12 +163,12 @@
                 });
             },
             groups: function () {
-                restful.get('group').then((response)=> {
+                restful.get('group').then((response) => {
                     $scope.groups = response['objects'];
                 });
             },
             logs: function () {
-                restful.get('log').then((response)=> {
+                restful.get('log').then((response) => {
                     var logs = $scope.logs = response['objects'];
                     $scope.logs.todaysAct = generateTripleDataStats(logs).edit + generateTripleDataStats(logs).drop;
                     $scope.stats.logs = {
@@ -176,12 +182,12 @@
                 });
             },
             notes: function () {
-                restful.get('note').then((response)=> {
+                restful.get('note').then((response) => {
                     $scope.notes = response['objects'];
                 });
             },
             invites: function () {
-                restful.get('invite').then((response)=> {
+                restful.get('invite').then((response) => {
                     var invites = $scope.invites = response['objects'];
                     $scope.stats.invitations = {
                         labels: ["Accepted", "Pending"],
@@ -197,7 +203,7 @@
                 });
             },
             components: function () {
-                restful.get('component').then((response) =>{
+                restful.get('component').then((response) => {
                     $scope.components = response['objects'];
 
                 });
@@ -237,11 +243,12 @@
         }, 30000)
 
         /*Managing of webpage datas*/
-        
+
         $scope.newlink = {
             uploader: new FileUploader({
                 url: 'api/upload/img',
                 formData: [],
+                filters: [],
                 removeAfterUpload: true,
                 withCredentials: true,
                 queueLimit: 1
@@ -260,104 +267,92 @@
                 this.order_id = order_id;
                 this.beta = beta;
             },
-            add: function () {
-                $scope.actionDataInProgress = true;
-                var img_link = $scope.clockDate.date();
-                this.uploader.onBeforeUploadItem = function (item) {
-                    item.formData.push({
-                        filename: img_link
-                    });
-                }
-                this.uploader.uploadItem(0);
-                this.uploader.onSuccessItem = (item, response, status, headers) => {
+            add: function (apps) {
+                var app = $filter('filter')(apps, {
+                    link: this.address
+                });
+                if (app.length == 0) {
+                    if (this.uploader.queue.length > 0) {
+                        $scope.actionDataInProgress = true;
+                        var img_link = $scope.clockDate.date();
+                        this.uploader.onBeforeUploadItem = function (item) {
+                            item.formData.push({
+                                filename: img_link
+                            });
+                        }
+                        this.uploader.uploadItem(0);
+                        this.uploader.onSuccessItem = (item, response, status, headers) => {
+                            var post_object = {
+                                name: this.name,
+                                link: this.address,
+                                desc: this.desc,
+                                creator_id: $scope.current_user.id,
+                                img_link: img_link,
+                            }
+                            restful.post('app', post_object).then(() => {
+                                update.apps();
+                                this.clear();
+                                this.uploader.clearQueue();
+                                $scope.statusRequestTrue();
+                            });
+                        };
+                        this.uploader.onErrorItem = function (item, response, status, headers) {
+                            $scope.actionDataInProgress = false;
+                        };
+
+                        this.uploader.onCancelItem = function (item, response, status, headers) {
+                            $scope.actionDataInProgress = false;
+                        };
+                    } else this.error.noUpload = true;
+                } else this.error.noUnique = true
+            },
+            update: function (app_id, apps) {
+                var app = $filter('filter')(apps, {
+                    link: this.address
+                });
+                if (!app.length || app[0].id == app_id) {
+                    $scope.actionDataInProgress = true;
+                    if (this.uploader.queue.length > 0) {
+                        var old_img_link = this.img_link;
+                        this.img_link = new Date();
+                        this.img_link = this.img_link.getTime();
+                        this.uploader.onBeforeUploadItem = (item) => {
+                            item.formData.push({
+                                filename: this.img_link
+                            });
+                            item.formData.push({
+                                deleteFile: old_img_link
+                            });
+                        }
+                        this.uploader.uploadAll();
+                        this.uploader.onSuccessItem = (item, response, status, headers) => {};
+                        this.uploader.onErrorItem = (item, response, status, headers) => {
+                            $scope.actionDataInProgress = false;
+                        };
+                        this.uploader.onCancelItem = (item, response, status, headers) => {};
+                    }
                     var post_object = {
                         name: this.name,
                         link: this.address,
                         desc: this.desc,
-                        creator_id: $scope.current_user.id,
-                        img_link: img_link,
+                        img_link: this.img_link,
+                        order_id: this.order_id,
+                        beta: this.beta,
                     }
-                    restful.post('app', post_object).then(()=> {
+                    restful.update('app', app_id, post_object).then(() => {
+                        var log_object = {
+                            content: 'A link #' + app_id + ' was updated',
+                            author_id: $scope.current_user.id
+                        }
                         update.apps();
-                        $scope.actionDataInProgress = false;
+                        restful.post('log', log_object).then(() => {
+                            update.logs();
+                            $scope.actionDataInProgress = false;
+                        });
                     });
                     this.clear();
-                    this.status = true;
-                    this.uploader.clearQueue();
-                };
-                this.uploader.onErrorItem = function (item, response, status, headers) {
-                    console.log('Uplaoder: Error callback');
-                    console.log(item);
-                    console.log(response);
-                    console.log(headers);
-                    $scope.actionDataInProgress = false;
-                };
-
-                this.uploader.onCancelItem = function (item, response, status, headers) {
-                    console.log('Uploader: Cancel callback');
-                    console.log(item);
-                    console.log(response);
-                    console.log(headers);
-                    $scope.actionDataInProgress = false;
-                };                    
-
-
-            },
-            update: function (app_id) {
-                $scope.actionDataInProgress = true;
-                if (this.uploader.queue.length > 0) {
-                    var old_img_link = this.img_link;
-                    this.img_link = new Date();
-                    this.img_link = this.img_link.getTime();
-                    this.uploader.onBeforeUploadItem = (item) => {
-                        item.formData.push({
-                            filename: this.img_link
-                        });
-                        item.formData.push({
-                            deleteFile: old_img_link
-                        });
-                    }
-                    this.uploader.uploadAll();
-                    this.uploader.onSuccessItem = (item, response, status, headers) => {
-                        console.log('Uploader: Success callback');
-                    }
-                    this.uploader.onErrorItem = (item, response, status, headers) => {
-                        //Add information for img uplaod error in DOM (html)
-                        console.log('Uplaoder: Error callback');
-                        console.log(item);
-                        console.log(response);
-                        console.log(headers);
-                    };
-                    this.uploader.onCancelItem = (item, response, status, headers) => {
-                        //Add information for img uplaod error in DOM (html)
-                        console.log('Uploader: Cancel callback');
-                        console.log(item);
-                        console.log(response);
-                        console.log(headers);
-                    };
-                }
-                var post_object = {
-                    name: this.name,
-                    link: this.address,
-                    desc: this.desc,
-                    img_link: this.img_link,
-                    order_id: this.order_id,
-                    beta: this.beta,
-                }
-                restful.update('app', app_id, post_object).then(function () {
-                    var log_object = {
-                        content: 'A link #' + app_id + ' was updated',
-                        author_id: $scope.current_user.id
-                    }
-                    update.apps();
-                    restful.post('log', log_object).then(function () {
-                        update.logs();
-                        $scope.actionDataInProgress = false;
-                    });
-                });
-                this.clear();
-                this.status = true;
-                $location.path('/links').replace();
+                    $location.path('/links').replace();
+                } this.error.noUnique = true;
             },
             hide: function (app_id, app_status) {
                 var confirmResult = confirm("Do you want to change visibility of this app?");
@@ -366,30 +361,33 @@
                     var hide = {
                         status: !app_status
                     }
-                    restful.update('app', app_id, hide).then(function () {
+                    restful.update('app', app_id, hide).then(() => {
                         var log_object = {
                             content: 'A link #' + app_id + ' was updated',
                             author_id: $scope.current_user.id
                         }
                         update.apps();
-                        restful.post('log', log_object).then(function () {
+                        restful.post('log', log_object).then(() => {
                             update.logs();
                             $scope.actionDataInProgress = false;
                         });
                     });
                 }
             },
-            delete: function (app_id) {
+            delete: function (app_id, app_img) {
                 var confirmResult = confirm("Do you want to remove this app?");
                 if (confirmResult) {
                     $scope.actionDataInProgress = true;
-                    restful.delete("app", app_id).then(function () {
+                    restful.delete('app', app_id).then(() => {
+                        restful.post('remove-file-on-drop', {
+                            filename: app_img
+                        }).then((response) => {});
                         var log_object = {
                             content: 'A link #' + app_id + ' was removed',
                             author_id: $scope.current_user.id
                         }
                         update.apps();
-                        restful.post('log', log_object).then(function () {
+                        restful.post('log', log_object).then(() => {
                             update.logs();
                             $scope.actionDataInProgress = false;
                         });
@@ -401,7 +399,16 @@
                 this.address = '';
                 this.desc = '';
             },
-            status: false
+            error: {
+                noUpload: false,
+                noImgFile: false,
+                noUnique: false,
+                clear: function () {
+                    this.noUpload = false;
+                    this.noImgFile = false;
+                    this.noUnique = false;
+                }
+            }
         };
         $scope.user_inf = {
             uploader: new FileUploader({
@@ -427,28 +434,28 @@
             user_update: function () {
                 if (this.password == null || this.password == this.pass_verify)
                     $scope.actionDataInProgress = true;
-                    restful.post('auth/checkpass', {
-                        pass: this.current_pass
-                    }).then((response) => {
-                        if (response == 'True') {
-                            var user_info = {
-                                username: this.username,
-                                email: this.email,
-                            }
-                            restful.update('user', $scope.current_user.id, user_info).then((response) => {
-                                update.me();
-                                this.clear();
-                                $scope.actionDataInProgress = false;
-                            });
-                            if (this.pass_verify != null && this.password != null && this.password == this.pass_verify)
-                                restful.post('auth/changepass', {
-                                    newpass: this.password
-                                }).then(() => {
-                                    window.location.reload();
-                                })
-                        } else
-                            $scope.userFormWrongPass = true;
-                    });
+                restful.post('auth/checkpass', {
+                    pass: this.current_pass
+                }).then((response) => {
+                    if (response == 'True') {
+                        var user_info = {
+                            username: this.username,
+                            email: this.email,
+                        }
+                        restful.update('user', $scope.current_user.id, user_info).then((response) => {
+                            update.me();
+                            this.clear();
+                            $scope.statusRequestTrue();
+                        });
+                        if (this.pass_verify != null && this.password != null && this.password == this.pass_verify)
+                            restful.post('auth/changepass', {
+                                newpass: this.password
+                            }).then(() => {
+                                window.location.reload();
+                            })
+                    } else
+                        $scope.userFormWrongPass = true;
+                });
             },
             clear: function () {
                 this.password = '';
@@ -467,7 +474,7 @@
                     tag: this.tag,
                     owner_id: $scope.current_user.id,
                 }
-                restful.post('note', post_note).then(()=>{
+                restful.post('note', post_note).then(() => {
                     $scope.actionDataInProgress = false;
                     update.notes();
                 });
@@ -481,74 +488,81 @@
         $scope.invite = {
             email: '',
             group: '',
-            add: function(users, invites, senderemail){
-                var invite = $filter('filter')(invites, {email: this.email})[0];
-                var user = $filter('filter')(users, {email: this.email})[0];
+            add: function (users, invites, senderemail) {
+                var invite = $filter('filter')(invites, {
+                    email: this.email
+                })[0];
+                var user = $filter('filter')(users, {
+                    email: this.email
+                })[0];
                 var inviteEmail = this.email;
-                if(!user && (!invite || !invite.active)){
+                if (!user && (!invite || !invite.active)) {
                     $scope.actionDataInProgress = true;
                     var post_object = {
                         email: this.email,
                         maker: $scope.current_user.id,
-                        group: this.group 
+                        group: this.group
                     };
-                    restful.post('invite', post_object).then(()=>{
+                    restful.post('invite', post_object).then(() => {
                         update.invites();
-                        restful.post('sendinvite', {email: inviteEmail,sender: senderemail}).then(()=>{
-                            $scope.actionDataInProgress = false;
-                        }); 
+                        restful.post('sendinvite', {
+                            email: inviteEmail,
+                            sender: senderemail
+                        }).then(() => {
+                            $scope.statusRequestTrue();
+                        });
                     });
                     this.clear();
                     this.status = true;
                 }
             },
-            delete: function(invite_id){
-               var confirmResult = confirm("Do you want to remove this ivnitation?");
+            delete: function (invite_id) {
+                var confirmResult = confirm("Do you want to remove this ivnitation?");
                 if (confirmResult) {
                     $scope.actionDataInProgress = true;
-                    restful.delete("invite", invite_id).then(() =>{
+                    restful.delete("invite", invite_id).then(() => {
                         var log_object = {
                             content: 'An invitation #' + invite_id + ' was sent',
                             author_id: $scope.current_user.id
                         }
                         update.invites();
-                        restful.post('log', log_object).then(()=>{
+                        restful.post('log', log_object).then(() => {
                             update.logs();
                             $scope.actionDataInProgress = false;
                         });
                     });
-                }  
+                }
             },
-            deleteUser: function(me, users, removeEmail){
-                var user = $filter('filter')(users, {email: removeEmail})[0];
-                if(user)
+            deleteUser: function (me, users, removeEmail) {
+                var user = $filter('filter')(users, {
+                    email: removeEmail
+                })[0];
+                if (user)
                     $scope.actionDataInProgress = true;
-                    restful.delete('user', user.id).then(()=>{
-                         var log_object = {
-                            content: 'An user #' + user.id + ' was removed',
-                            author_id: $scope.current_user.id
+                restful.delete('user', user.id).then(() => {
+                    var log_object = {
+                        content: 'An user #' + user.id + ' was removed',
+                        author_id: $scope.current_user.id
+                    }
+                    restful.post('log', log_object).then(() => {
+                        if (me == removeEmail) {
+                            restful.logout().then(() => {
+                                window.location.reload();
+                            });
+                        } else {
+                            update.users();
+                            update.logs();
+                            $scope.actionDataInProgress = false;
                         }
-                        restful.post('log', log_object).then(()=>{
-                            if(me == removeEmail){
-                                restful.logout().then(()=>{
-                                    window.location.reload();
-                                }); 
-                            }
-                            else {
-                                update.users();
-                                update.logs(); 
-                                $scope.actionDataInProgress = false;
-                            }
-                        });
                     });
+                });
             },
-            clear: function(){
+            clear: function () {
                 this.email = ''
                 this.group = ''
-            },
-            status: false
+            }
         };
-            
+
         $scope.orderArray = function (app_length) {
             var app_count = new Array();
             for (i = 1; i < app_length + 1; i++) {
@@ -563,10 +577,11 @@
         */
         $scope.$on('$routeChangeStart', function (current, next) {
             $scope.newlink.clear();
-            $scope.newlink.status = false;
+            $scope.invite.clear();
+            $scope.user_inf.clear();
+            $scope.statusBarBoolean = false;
             $scope.searchBy = '';
             $scope.menu.active(next.originalPath);
-            $scope.invite.status = false;
 
         });
 

@@ -73,7 +73,7 @@
         <span class="warning-text" ng-hide="invites.length">No invites yet.</span>
     </div>
 </div>
-    <div class="success-bar" ng-if="invite.status">
+    <div class="success-bar" ng-class="{'hideOnTime': statusBarBoolean}" ng-if="statusBarBoolean && !actionDataInProgress">
     Success! You've just sent an invitation!
 </div>
 </if>

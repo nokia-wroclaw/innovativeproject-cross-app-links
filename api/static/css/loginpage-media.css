@@ -24,6 +24,7 @@
           font-size: 24px; }
 
   .app-container .app-overflow {
+    margin-bottom: 80px;
     width: 33.3333333%; } }
 @media only screen and (max-width: 920px) {
   .form-container {
@@ -42,7 +43,8 @@
       float: left; }
 
   .app-container .app-overflow {
-    width: 50%; } }
+    width: 50%;
+    margin-bottom: 40px; } }
 @media only screen and (max-width: 640px) {
   .form-container .user-overflow .user-info .info-row,
   .form-container .user-overflow .user-info .buttons {

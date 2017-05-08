@@ -1,30 +1,34 @@
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-    <div class="no-box-el error-form-box" ng-show="form.$submitted && form.$invalid && newlink.status==false">
-        <span class='pull-left text-left error' ng-show="form.name.$error.required"><span class="glyphicon glyphicon-remove"></span>Required link name!</span>
-        <span class='pull-left text-left error' ng-show="form.name.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short link name!</span>
-
-        <span class='pull-left text-left error' ng-show="form.address.$error.required"><span class="glyphicon glyphicon-remove"></span>Required url!</span>
-        <span class='pull-left text-left error' ng-show="form.address.$error.linkformat"><span class="glyphicon glyphicon-remove"></span>Wrong url!</span>
-
-        <span class='pull-left text-left error' ng-show="form.desc.$error.required"><span class="glyphicon glyphicon-remove"></span>Required description!</span>
-        <span class='pull-left text-left error' ng-show="form.desc.$error.maxlength"><span class="glyphicon glyphicon-remove"></span>Too long description!</span>
-        <span class='pull-left text-left error' ng-show="form.desc.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short description!</span>
+    <div class="no-box-el error-form-box" ng-show="form.$submitted && statusBarBoolean==false">
+        <div ng-show="form.$invalid">
+            <span class='pull-left text-left error' ng-show="form.name.$error.required"><span class="glyphicon glyphicon-remove"></span>Required link name!</span>
+            <span class='pull-left text-left error' ng-show="form.name.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short link name!</span>
+            <span class='pull-left text-left error' ng-show="form.address.$error.required"><span class="glyphicon glyphicon-remove"></span>Required url!</span>
+            <span class='pull-left text-left error' ng-show="form.address.$error.linkformat"><span class="glyphicon glyphicon-remove"></span>Wrong url!</span>
+            <span class='pull-left text-left error' ng-show="form.desc.$error.required"><span class="glyphicon glyphicon-remove"></span>Required description!</span>
+            <span class='pull-left text-left error' ng-show="form.desc.$error.maxlength"><span class="glyphicon glyphicon-remove"></span>Too long description!</span>
+            <span class='pull-left text-left error' ng-show="form.desc.$error.minlength"><span class="glyphicon glyphicon-remove"></span>Too short description!</span>
+        </div>
+        <div ng-show="newlink.error.noUnique">
+             <span class='pull-left text-left error'><span class="glyphicon glyphicon-remove"></span>Link taken!</span>
+        </div>
+        <div ng-show="newlink.error.noUpload">
+            <span class='pull-left text-left error'><span class="glyphicon glyphicon-remove"></span>You have to select an image!</span>
+        </div>
     </div>
-    <form name='form' class="box box-form" ng-submit="form.$valid && newlink.add()" novalidate>
+    <form name='form' class="box box-form" ng-submit="form.$valid && newlink.add(apps)" novalidate>
         <input type='text' name='name' ng-model='newlink.name' minlength="3" maxlength="30" placeholder='Set a name for your link' required>
         <input type='text' name='address' ng-model='newlink.address' placeholder='Paste the address' required link-required>
         <textarea name='desc' ng-model='newlink.desc' minlength="12" maxlength="50" placeholder="Write a little bit about it" required></textarea>
-
-        <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
-        <input class="button pure input-file-choose" type="file" nv-file-select="" uploader="newlink.uploader" requried>
+        <button type="submit" class='button green pull-right single-icon' ng-click="newlink.error.clear()"><span class="glyphicon glyphicon-ok"></span></button>
+        <input class="button pure input-file-choose" type="file" nv-file-select="" uploader="newlink.uploader" ng-click="newlink.uploader.clearQueue()" accept="image/*" requried>
     </form>
-
 </div>
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
     <div class="no-box-el">
         <header></header>
     </div>
 </div>
-<div class="success-bar" ng-if="newlink.status">
+<div class="success-bar" ng-class="{'hideOnTime': statusBarBoolean}" ng-if="statusBarBoolean && !actionDataInProgress">
     Success! You've just added a link.
 </div>

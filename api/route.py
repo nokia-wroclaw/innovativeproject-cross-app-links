@@ -1,15 +1,16 @@
-from flask import Flask, make_response, jsonify, render_template, redirect, session, request, g, send_from_directory, send_file
-from flask_login import LoginManager, login_user, login_required, logout_user, current_user
-from passlib.hash import sha256_crypt
 from api import app
 from api.models import User, Group, App, Log, Invite, Reset, Component, ComponentUser
 from api.database import db
 from api.functions import Mailing
+from api.mail import send_email_register
+from flask import Flask, make_response, jsonify, render_template, redirect, session, request, g, send_from_directory, send_file
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_cors import CORS, cross_origin 
 from datetime import datetime
-from api.mail import send_email_register
 from time import time
+from passlib.hash import sha256_crypt
 import os
+
 #-----------
 #STATIC VAL
 #-----------
@@ -50,15 +51,17 @@ def before_request():
 #ROUTING
 #-----------
 
-#Auth route
-@app.route('/api/auth', methods=['POST'])
-def auth():
-    """
+"""
+
     User authentication. Checks if user exists (by given email).
     If it does, password hashes are compared.
     Session is opened when both credentials are correct.
     If password or email is incorrect user is redirected to the same page.
-    """
+    
+"""
+
+@app.route('/api/auth', methods=['POST'])
+def auth():
     session.pop('user', None)
     user = User.query.filter_by(email=request.form['email']).first()
     if user:
@@ -71,39 +74,31 @@ def auth():
             return redirect('/')
        
         else:
-            return make_response(open('api/templates/login-page.html').read())
+            return redirect('/#login-failure')
     else:
-        return make_response(open('api/templates/login-page.html').read())
+        return redirect('/#login-failure')
 
+    
+"""
+
+    Logs out user and removes him from the session.
+    
+"""
 
 @app.route('/api/auth/logout')
 @login_required
 def logout():
-    """
-    Logs out user and removes him from the session.
-    """
     logout_user()
     session.pop('user', None)
     return redirect('/')
 
 
-@app.route('/api/auth/register', methods=['POST'])
-@login_required
-def register(): 
-    """
-    Checks if given email is already in use. 
-    If false, we call function that creates invite entry and sends email.
-    """
-    if not User.query.filter_by(email=request.form['email']).first():
-        if current_user.group.user_add:
-            Mailing().commitinvite(request.form['email'],current_user,request.form['group'])
-            return redirect('/add-user')
-        else:
-            return render_template("message-template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
-    else:
-        return render_template("message-template.html", type="Warning!", message="User exists or invitation send already.", path="/add-user")
+"""
 
-
+    Send an invitation to posted email with token
+    
+"""
+    
 @app.route('/api/sendinvite', methods=['POST'])
 @login_required
 def sendinvite():
@@ -112,15 +107,17 @@ def sendinvite():
     maker = data['sender']
     receiver = [email]
     send_email_register(maker,receiver)
-    #Get token from invite by email (it's already in DB) and send a link to email
     
-# Confirm account
-@app.route('/api/auth/setpassword', methods=['GET','POST'])
-def setpassword():
-    """
+    
+"""
+ 
     Finish user registration process. Displays page which allows to set user password.
     If given, token and user password is forwarded to the function that creates user entry.
-    """
+    
+"""
+    
+@app.route('/api/auth/setpassword', methods=['GET','POST'])
+def setpassword():
     if request.method == 'POST':
         temp = request.args.get('token')
         givenpassword = request.form['password']
@@ -129,12 +126,16 @@ def setpassword():
     else:
         return make_response(open('api/templates/create-user.html').read())
 
+    
+"""
+ 
+    Displays page that allows user to send email with link to set his new password.
+    
+"""
 
 @app.route('/api/auth/resetpassword', methods=['GET','POST'])
 def resetpassword():
-    """
-    Displays page that allows user to send email with link to set his new password.
-    """
+   
     if request.method == 'POST':
         givenemail = request.form['email']
         Mailing().askforreset(givenemail)
@@ -143,13 +144,16 @@ def resetpassword():
         return make_response(open('api/templates/reset-password.html').read())
 
 
-@app.route('/api/auth/setnewpassword', methods=['GET','POST'])
-def setnewpassword():
-    """
+"""
+
     Displays page which asks for new user password.
     If given, function is called.
     New password is set and user is redirected to the root page.
-    """
+    
+"""
+
+@app.route('/api/auth/setnewpassword', methods=['GET','POST'])
+def setnewpassword():
     if request.method == 'POST':
         temp = request.args.get('token')
         givenpassword = request.form['password']
@@ -158,47 +162,32 @@ def setnewpassword():
     else:
         return make_response(open('api/templates/create-password.html').read())
 
-# Delete user
-@app.route('/api/auth/remove', methods=['POST'])
-@login_required
-def remove():
-    """
-    If user entry exists, removes it from the database.
-    If invite entry exists, removes it from the database.
-                removeinvite(request.form['email'])
-    """
-    if current_user.group.user_drop:
-        if User.query.filter_by(email=request.form['email']).first():
-            Mailing().removeuser(request.form['email'], current_user)
-        if Invite.query.filter_by(email=request.form['email']).first():
-            Mailing().removeinvite(request.form['email'])
-        return redirect('/add-user')
-    else:
-        return render_template("message-template.html", type="Warning!", message="You don't have permission to perform this action.", path="/add-user")
 
-@app.route('/api/auth/cancelinvite', methods=['POST'])
-@login_required
-def cancelinvite():
-    if request.method == 'POST':
-        Mailing().cancelinvite(request.form['id'])
-    return redirect('/add-user')
+"""
 
-
-#Password verify
+    Password authentication. It checks if entered password is correct with password in database
+    
+"""
+    
 @app.route('/api/auth/checkpass', methods=['POST'])
 def checkpass():
-    """
-    Password authentication. It checks if entered password is correct with password in database
-    """
+    
     data = request.get_json()
     dataobj = jsonify(data)
     if sha256_crypt.verify(data['pass'], current_user.password_hash):
         return str(True)
     else:
         return str(False)
+
     
-#Change password
+"""
+
+    Encrypt posted password and change it inside database.
+    
+"""
+
 @app.route('/api/auth/changepass', methods=['POST'])
+@login_required
 def changepass():
     data = request.get_json()
     user = User.query.filter_by(id = current_user.get_id()).first()
@@ -208,10 +197,23 @@ def changepass():
     session.pop('user', None)
     return str(True)
     
-#Default templates for Flask route
+
+"""
+
+    Main page route
+    
+"""
+
 @app.route('/')
 def index():
     return make_response(open('api/templates/login-page.html').read())
+
+
+"""
+
+    Routes for registered content given in index_content_list []
+    
+"""
 
 @app.route('/<content>')
 @app.route('/<content>/<content_id>')
@@ -223,7 +225,31 @@ def main(content='dashboard', content_id=None):
                 return make_response(open('api/templates/index.html').read())
         else:    
             return make_response(open('api/templates/404.html').read())
+
         
+"""
+    
+    Delete an icon of removed link
+    
+"""
+
+@app.route('/api/remove-file-on-drop', methods=['POST'])
+@login_required
+def remove_file_on_drop():
+    data = request.get_json()
+    if current_user.group.app_drop:
+        if os.path.exists('api/static/img/app-img/' + data['filename'] + '.png'):
+            os.remove('api/static/img/app-img/' + data['filename'] + '.png')
+            return 'Image was removed successfully'
+        return 'Image not exists'
+    return 'Not authenticated 401'
+
+
+"""
+    
+    Registering a CORS header authentication for component's resources
+    
+"""        
 
 @app.route('/static/bower_components/<path:path>')
 @cross_origin()
@@ -235,32 +261,24 @@ def static_file(path):
 def static_file_web(path):
     return send_from_directory('static/web-components', path)    
 
- 
 @app.route('/static/img/app-img/<path:path>')
 @cross_origin()
 def static_file_img(path):
     return send_from_directory('static/img/app-img/',path)        
 
-
-#Routes for components data
 @app.route('/component/<component_type>')
 @cross_origin()
 def component(component_type):
     if component_type =='polymer':
         return make_response(open('api/static/web-components/polymer/component-template.html').read())
     
- 
-@app.route('/get-components/<component_type>')
-def component_test(component_type):
-    """
-    Routes for components test.
-    """
-    if component_type=='iframe':
-        return make_response(open('api/static/web-components/iframe/iframe-index.html').read())
-    elif component_type=='polymer':
-        return make_response(open('api/static/web-components/polymer/polymer-index.html').read())
-    return None
+    
+"""
 
+    Creating a web-component token for additional access
+    
+"""
+    
 @app.route('/get-component-token')
 def get_component_token():
     return make_response(open('api/templates/get-component-token.html').read())
@@ -269,9 +287,16 @@ def get_component_token():
 def create_component_user():
     email = request.form['email']
     Mailing().askfortoken(email)
-    return 'Yeah, it has been created'
+    return redirect('/get-component-token#success')
 
+
+"""
+
+    Get your personal data (for component) based on posted token.
+    If token is correct return data.
     
+"""
+
 @app.route('/api/component-user-data', methods=['POST'])
 @cross_origin()
 def component_user_data():
@@ -286,6 +311,13 @@ def component_user_data():
         return jsonify(component_user_obj)
     return str(False)    
 
+
+"""
+
+    Update your component data based on posted token.
+    
+"""
+
 @app.route('/api/component-user-data-update', methods=['POST'])
 @cross_origin()
 def component_user_data_update():
@@ -296,5 +328,5 @@ def component_user_data_update():
         user.order_string = data['order_string']
         db.session.add(user)
         db.session.commit()
-        return jsonify(data['token'])
+        return str(True)
     return str(False)  

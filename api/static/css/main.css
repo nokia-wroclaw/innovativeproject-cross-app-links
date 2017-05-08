@@ -417,7 +417,7 @@ body {
       .box.link-box .main-link-info .main-link-heading {
         text-transform: uppercase;
         font-weight: 800;
-        font-size: 0.8vw;
+        font-size: 15px;
         float: left;
         display: inline-block;
         padding: 15px 20px;
@@ -787,11 +787,10 @@ body {
   background: none;
   box-shadow: none; }
 
-@keyframes hideOnTime {
-  from {
-    transform: translateZ(0); }
+@keyframes hideOnTimeAnimation {
   to {
-    transform: translateZ(-100%); } }
+    transform: translateY(100%);
+    visibility: hidden; } }
 .success-bar {
   background: #3fce91;
   position: fixed;
@@ -808,8 +807,13 @@ body {
   box-sizing: border-box;
   z-index: 105;
   transition: 0.3s ease all;
-  animation: hideOnTime 0.5s linear;
-  animation-delay: 3s;
-  animation-iteration-count: 1; }
+  visibility: visible; }
+  .success-bar.hideOnTime {
+    animation-name: hideOnTimeAnimation;
+    animation-delay: 2s;
+    animation-duration: 0.25s;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards; }
 
 /*# sourceMappingURL=main.css.map */

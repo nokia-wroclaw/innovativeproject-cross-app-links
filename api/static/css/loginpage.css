@@ -335,4 +335,21 @@ a.button {
       font-size: 18px;
       font-weight: 300; }
 
+footer.main-footer {
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px;
+  background: #34313d; }
+  footer.main-footer .copyright {
+    float: left;
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 8px;
+    padding: 0;
+    width: 100%;
+    text-align: center; }
+
 /*# sourceMappingURL=loginpage.css.map */

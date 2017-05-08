@@ -78,6 +78,10 @@
     .user-profile-main .user-profile-info {
       padding: 0; } }
 @media only screen and (max-width: 480px) {
+  .main-header .header-cell .user-section {
+    padding: 20px 10px;
+    padding-left: 0; }
+
   .single-icon {
     clear: both;
     float: left !important; }

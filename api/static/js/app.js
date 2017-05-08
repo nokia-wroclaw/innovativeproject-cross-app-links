@@ -46,10 +46,15 @@
         /*Menu elements*/
         $scope.menu = {
             status: true,
+            rspl: function(){
+                if(window.innerWidth <= 768)
+                   this.status = false;
+            },
             hide: function () {
                 this.status = !this.status;
             },
             active: function (url) {
+                this.rspl();
                 if (url.indexOf(':siteID') === -1) {
                     var arr = angular.element('#navigation a').removeClass('active-li');
                     for (var i = 0; i < arr.length; i++) {
@@ -593,16 +598,7 @@
                 }
             }
         };
-        /*Some elements should change with resolution so it's nice to include them*/
-        var bootstrap_resolution = {
-            resl: document.body.innerWidth,
-            onchange: function () {}
-            //1200
-            //768
-            //480
-            //320
-        };
-
+ 
         /*Stats chart settings*/
 
         $scope.datasetOverride = [{

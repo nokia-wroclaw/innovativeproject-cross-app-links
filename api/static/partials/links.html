@@ -62,8 +62,8 @@
         <label class="input-description">Choose order</label>
         <select name="order" ng-model="newlink.order_id" ng-options="i as i for i in orderArray(apps.length)" required>
         </select>
-        <input class="button pure edited input-file-choose pull-left" type="file" nv-file-select uploader="newlink.uploader" ng-click="newlink.uploader.clearQueue()" accept="image/*" requried/>
-        <button type="submit" class='button green single-icon pull-right' ng-click="newlink.error.clear()"><span class="glyphicon glyphicon-ok"></span></button>
+        <input class="button pure edited input-file-choose pull-left xs-input-fix'" type="file" nv-file-select uploader="newlink.uploader" ng-click="newlink.uploader.clearQueue()" accept="image/*" requried/>
+        <button type="submit" class='button green single-icon pull-right xs-input-fix' ng-click="newlink.error.clear()"><span class="glyphicon glyphicon-ok"></span></button>
     </form>
 </div>
 <div class="black-bg" ng-if="filterParams.manage()>0" ng-click="popup.edit.close()"></div>

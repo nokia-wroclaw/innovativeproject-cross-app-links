@@ -39,11 +39,12 @@
         <div class="form-overflow" ng-if="!current_user.id">
             <header>
                 <h1>Sign in</h1>
+                <span class="login-failure" ng-show="isFailure()">Incorrect email or/and password!</span>
             </header>
             <form action="/api/auth" method="POST">
                 <div class="input-overflow">
                     <span class="label">Email address</span>
-                    <input type="text" name="email" placeholder="Type here" required>
+                    <input type="email" name="email" placeholder="Type here" required>
                 </div>
                 <div class="input-overflow">
                     <span class="label">Password</span>

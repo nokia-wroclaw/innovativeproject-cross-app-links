@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: 'Lato';
-    background: #34313d;
+    background: lighten(#ddd, 7%);
 }
 
 .container-box{
@@ -54,6 +54,8 @@ body{
     form{
         float: left;
         width: 100%;
+        input[type=password],
+        input[type=email],
         input[type=text]{
             width: 100%;
             border: 0;

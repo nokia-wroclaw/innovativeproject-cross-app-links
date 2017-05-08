@@ -107,8 +107,9 @@ def sendinvite():
     maker = data['sender']
     receiver = [email]
     send_email_register(maker,receiver)
-    
-    
+    return str(True)
+
+
 """
  
     Finish user registration process. Displays page which allows to set user password.

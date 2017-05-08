@@ -223,8 +223,16 @@ a.button {
     float: left; }
     .form-container .form-overflow header h1,
     .form-container .user-overflow header h1 {
-      margin-bottom: 80px;
-      font-size: 36px; }
+      margin-bottom: 35px;
+      font-size: 35px; }
+    .form-container .form-overflow header .login-failure,
+    .form-container .user-overflow header .login-failure {
+      opacity: 0.7;
+      color: red;
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 35px;
+      float: left; }
     .form-container .form-overflow .input-overflow,
     .form-container .user-overflow .input-overflow {
       float: left;
@@ -326,7 +334,8 @@ a.button {
       margin-bottom: 30px;
       text-align: center; }
       .app-container .app-overflow .app-img img {
-        width: 70px; }
+        width: 70px;
+        height: 70px; }
     .app-container .app-overflow .app-name {
       font-size: 24px;
       font-weight: 400;

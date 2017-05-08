@@ -270,8 +270,16 @@ a.button {
         float: left;
         header {
             h1 {
-                margin-bottom: 80px;
-                font-size: 36px;
+                margin-bottom: 35px;
+                font-size: 35px;
+            }
+            .login-failure{
+                opacity: 0.7;
+                color: red;
+                font-weight: 800;
+                font-size: 18px;
+                margin-bottom: 35px;
+                float: left;
             }
         }
         .input-overflow {
@@ -388,6 +396,7 @@ a.button {
             text-align: center;
             img {
                 width: 70px;
+                height: 70px;
             }
         }
         .app-name {

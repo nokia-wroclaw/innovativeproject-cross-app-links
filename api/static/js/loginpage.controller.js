@@ -1,7 +1,13 @@
 (function () {
     var app = angular.module('mainApp', ['services']);
-    app.controller('loginCtrl', ['$scope', 'restful', '$http', '$interval', '$document', function ($scope, restful, $http, $interval, $document) {
+    app.controller('loginCtrl', ['$scope', 'restful', '$http', '$interval', '$document','$location', function ($scope, restful, $http, $interval, $document, $location) {
         $scope.todayDateTime = new Date;
+        $scope.isFailure = function(){
+            if($location.hash() =='login-failure'){
+                return true;
+            }
+                
+        }
         
         var loadingPage = {
             ready: function () {

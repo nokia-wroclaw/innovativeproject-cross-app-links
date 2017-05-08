@@ -6,11 +6,13 @@ body {
 
 .project-container,
 .form-container,
-.app-container {
+.app-container,
+.main-footer {
   box-sizing: border-box;
   padding: 40px;
   float: left;
-  width: 100%; }
+  width: 100%;
+  overflow-x: hidden; }
 
 .mobile-phone-v {
   visibility: hidden;
@@ -345,10 +347,6 @@ a.button {
       font-weight: 300; }
 
 footer.main-footer {
-  float: left;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 40px;
   background: #34313d; }
   footer.main-footer .copyright {
     float: left;
@@ -359,6 +357,7 @@ footer.main-footer {
     margin-top: 8px;
     padding: 0;
     width: 100%;
-    text-align: center; }
+    text-align: center;
+    box-sizing: border-box; }
 
 /*# sourceMappingURL=loginpage.css.map */

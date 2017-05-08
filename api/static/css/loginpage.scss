@@ -3,15 +3,19 @@ body {
     font-family: 'Lato';
     background: #fff; //url('/static/img/loginpage/2144.jpg');
     background-size: cover;
+    
 }
+
 
 .project-container,
 .form-container,
-.app-container {
+.app-container,
+.main-footer{
     box-sizing: border-box;
     padding: 40px;
     float: left;
     width: 100%;
+    overflow-x: hidden;
 }
 
 .mobile-phone-v {
@@ -412,10 +416,6 @@ a.button {
 }
 
 footer.main-footer{
-    float: left;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 40px;
     background: #34313d;
     .copyright{
         float: left;
@@ -427,5 +427,6 @@ footer.main-footer{
         padding: 0;
         width: 100%;
         text-align: center;
+        box-sizing: border-box;
     }
 }

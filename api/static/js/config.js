@@ -27,7 +27,9 @@
             }).when('/ver', {
                 templateUrl: path + 'ver.html'
             }).when('/usercp', {
-                templateUrl: 'static/partials/usercp.html'
+                templateUrl: path + 'usercp.html'
+            }).when('/usercp/permissions', {
+                templateUrl: path + 'my_permissions.html'
             }).when('/profile/:siteID', {
                 templateUrl: path + 'profile.html'
             }).when('/components', {

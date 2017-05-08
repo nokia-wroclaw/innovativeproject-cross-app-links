@@ -36,14 +36,14 @@
         <label class="user">Confirm changes: </label>
         <input type="password" name="password" ng-model="user_inf.current_pass" placeholder="Enter current password" required>
 
-        <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
+        <button type="submit" class='button green pull-right single-icon xs-input-fix'><span class="glyphicon glyphicon-ok"></span></button>
     </form>
 </div>
 <div ng-if="current_user.id > 0" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-left">
     <form class="box box-form" name="avatar" ng-submit="user_inf.img_update()" novalidate>
         <img class="avatar" ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}">
-        <input class="button pure input-file-choose pull-left" type="file" nv-file-select uploader="user_inf.uploader" ng-click="user_inf.uploader.clearQueue()" required>
-        <button type="submit" class='button green pull-right single-icon'><span class="glyphicon glyphicon-ok"></span></button>
+        <input class="button pure input-file-choose pull-left xs-input-fix" type="file" nv-file-select uploader="user_inf.uploader" ng-click="user_inf.uploader.clearQueue()" required>
+        <button type="submit" class='button green pull-right single-icon xs-input-fix'><span class="glyphicon glyphicon-ok"></span></button>
     </form>
 </div>
 <div class="success-bar" ng-class="{'hideOnTime': statusBarBoolean}" ng-if="statusBarBoolean && !actionDataInProgress">

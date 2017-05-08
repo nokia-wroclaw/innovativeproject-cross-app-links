@@ -4,13 +4,6 @@
     <if ng-if="current_user.group.name =='Administrator'">
         <div class="row">
             <div class="col-lg-4">
-                <div class="box color-box lightgreen">
-                    <div class="site-stat">
-                        <span class="stat-desc">Applications</span>
-                        <span class="stat-number">{{apps.length}}</span>
-                        <span class="stat-icon glyphicon glyphicon-link"></span>
-                    </div>
-                </div>
 
                 <div class="box">
                     <header>
@@ -50,6 +43,13 @@
                 </div>
             </div>
             <div class="col-lg-8">
+                <div class="box color-box lightgreen">
+                    <div class="site-stat">
+                        <span class="stat-desc">Applications</span>
+                        <span class="stat-number">{{apps.length}}</span>
+                        <span class="stat-icon glyphicon glyphicon-link"></span>
+                    </div>
+                </div>
                 <div class="box">
                     <canvas id="line" class="chart chart-line" chart-data="stats.apps.data" chart-labels="stats.apps.labels" chart-series="stats.apps.series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
             </canvas>

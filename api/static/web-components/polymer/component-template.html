@@ -46,7 +46,7 @@
                 <section class="component-overflow c-hidden">
                     <div id="loading-box" class="loading-box"><span class="spinner"></span></div>
                      <ul class="pinned">
-                        <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_pinnedFilter">
+                        <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_pinnedFilter" sort="_selfSort">
                             <li>  
                                 <a target="_blank" href="{{item.link}}">
                                     <img src="{{_getProperPath(item.img_link)}}"/>

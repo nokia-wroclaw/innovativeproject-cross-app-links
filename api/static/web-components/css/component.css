@@ -84,6 +84,7 @@ body {
     float: right;
     list-style: none;
     height: auto;
+    max-height: 60px;
     overflow: hidden;
     width: 100%;
     text-align: center;

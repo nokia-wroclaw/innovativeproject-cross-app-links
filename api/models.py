@@ -179,10 +179,12 @@ class ComponentUser(db.Model):
     token = db.Column(db.String)
     order_string = db.Column(db.String)
     pin_string = db.Column(db.String)
+    hidden_string = db.Column(db.String)
     
     def __init__(self, email):
         self.email = email
         self.token = str(uuid.uuid4())
         self.order_string = ''
         self.pin_string = ''
+        self.hidden_string = self.pin_string
         self.date = "now()"

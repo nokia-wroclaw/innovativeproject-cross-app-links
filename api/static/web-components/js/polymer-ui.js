@@ -45,9 +45,9 @@
         },
         _pinArray: [],
         _pinAppTrigger: function (e) {
-            if (e.target.parentElement.className.indexOf('beChanged') === -1)
-                e.target.parentElement.className += ' beChanged';
-            else e.target.parentElement.className = e.target.parentElement.className.replace(/beChanged/g, '');
+            if (e.target.className.indexOf('beChanged') === -1)
+                e.target.className += ' beChanged';
+            else e.target.className = e.target.className.replace(/beChanged/g, '');
             var foundAt = this._pinArray.indexOf(e.target.parentElement.id);
             if (foundAt === -1)
                 this._pinArray.push(e.target.parentElement.id);

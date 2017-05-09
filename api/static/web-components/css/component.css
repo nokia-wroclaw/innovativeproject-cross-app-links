@@ -305,7 +305,10 @@ body {
 }
 
 .component-ul li.order-li .beChanged{
-    background: rgba(255,255,255,0.2);
+    color: green;
+}
+.component-ul li.order-li .glyphicon.beChanged{
+    color: green;
 }
 
 

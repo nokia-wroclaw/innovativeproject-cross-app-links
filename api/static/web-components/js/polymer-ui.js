@@ -10,10 +10,8 @@
         },
         ready: function () {
             this._componentRequest();
-
             if (this._cachedToken == null)
                 this.$.GetDataResponse.generateRequest();
-
             this._getValuesRequest();
 
         },
@@ -99,6 +97,8 @@
         },
         _pinnedFilter: function (item) {
             if (this._cachedToken && this._pinArray.length > 0) {
+                var selfOrder = this._orderArray.indexOf(item.id.toString());
+                item.selfOrder = selfOrder;
                 var pin = this._pinArray.indexOf(item.id.toString());
                 if (pin !== -1)
                     item.pin = true;
@@ -111,7 +111,7 @@
         _selfSort: function (a, b) {
             if (this._cachedToken && this._orderArray.length > 0)
                 return a.selfOrder < b.selfOrder ? -1 : 1;
-            else a.order_id < b.order_id ? -1 : 1;
+            else return a.order_id < b.order_id ? -1 : 1;
         },
         _componentRequest: function () {
             if (localStorage.getItem('secured') == null) {

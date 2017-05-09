@@ -304,11 +304,10 @@ body {
     opacity: 1;
 }
 
-.component-ul li.order-li .beChanged>.glyphicon {
-    color: #D45A5A;
-    ;
-    opacity: 1;
+.component-ul li.order-li .beChanged{
+    background: rgb(255,255,255,0.2);
 }
+
 
 .component-ul li.order-li:active {
     background: rgba(255, 255, 255, 0.02);

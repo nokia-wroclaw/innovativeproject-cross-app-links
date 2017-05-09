@@ -11,6 +11,9 @@
     }
     .app-container {
         padding: 40px;
+        .app-overflow{
+            margin-bottom: 60px;
+        }
     }
 }
 
@@ -47,7 +50,6 @@
     }
     .app-container {
         .app-overflow {
-            margin-bottom: 80px;
             width: 33.3333333%;
         }
     }
@@ -107,14 +109,14 @@
         position: static;
     }
     .mobile-phone-h {
-        visibility: hidden;
-        position: fixed;
+        display: none!important;
     }
     .project-container {
         height: 90px;
         min-height: 90px;
         padding: 0;
         box-sizing: border-box;
+        overflow: hidden;
         .main-project-section {
             float: left;
             box-sizing: border-box;

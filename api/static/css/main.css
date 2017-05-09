@@ -430,6 +430,8 @@ body {
     .box.link-box .main-link-desc {
       float: left;
       width: 100%;
+      height: 21px;
+      overflow: hidden;
       box-sizing: border-box; }
       .box.link-box .main-link-desc p {
         float: left;

@@ -3,6 +3,9 @@
     app.controller('mainCtrl', ['$scope', 'restful', '$location', '$route', '$routeParams', '$interval', 'FileUploader', '$http', '$document', '$filter', function ($scope, restful, $location, $route, $routeParams, $interval, FileUploader, $http, $document, $filter) {
         /*Some globals*/
         $scope.todayDateTime = new Date;
+        $scope.navigation = {
+            usernav: false
+        };
         $scope.actionDataInProgress = false;
         $scope.statusBarBoolean = false;
         $scope.statusRequestTrue = function () {
@@ -46,9 +49,9 @@
         /*Menu elements*/
         $scope.menu = {
             status: true,
-            rspl: function(){
-                if(window.innerWidth <= 768)
-                   this.status = false;
+            rspl: function () {
+                if (window.innerWidth <= 768)
+                    this.status = false;
             },
             hide: function () {
                 this.status = !this.status;
@@ -357,7 +360,8 @@
                     });
                     this.clear();
                     $location.path('/links').replace();
-                } this.error.noUnique = true;
+                }
+                this.error.noUnique = true;
             },
             hide: function (app_id, app_status) {
                 var confirmResult = confirm("Do you want to change visibility of this app?");
@@ -420,6 +424,11 @@
                 url: 'api/upload/avatar',
                 formData: []
             }),
+            username: '',
+            email: '',
+            password: '',
+            pass_verify: '',
+            current_pass: '',
             manageFill(username, email) {
                 this.username = username;
                 this.email = email;
@@ -437,30 +446,34 @@
                 }
             },
             user_update: function () {
-                if (this.password == null || this.password == this.pass_verify)
+                if (this.password == null || this.password == this.pass_verify) {
                     $scope.actionDataInProgress = true;
-                restful.post('auth/checkpass', {
-                    pass: this.current_pass
-                }).then((response) => {
-                    if (response == 'True') {
-                        var user_info = {
-                            username: this.username,
-                            email: this.email,
+                    restful.post('auth/checkpass', {
+                        pass: this.current_pass
+                    }).then((response) => {
+                        if (response == 'True') {
+                            var user_info = {
+                                username: this.username,
+                                email: this.email,
+                            }
+                            restful.update('user', $scope.current_user.id, user_info).then((response) => {
+                                update.me();
+                                this.clear();
+                                $scope.statusRequestTrue();
+                            });
+                            if (this.pass_verify.length > 0 && this.password.length >0 && this.password == this.pass_verify){
+                                restful.post('auth/changepass', {
+                                    newpass: this.password
+                                }).then(() => {
+                                    window.location.reload();
+                                })
+                            }
+                        } else{
+                            $scope.actionDataInProgress = false;
+                            $scope.userFormWrongPass = true;
                         }
-                        restful.update('user', $scope.current_user.id, user_info).then((response) => {
-                            update.me();
-                            this.clear();
-                            $scope.statusRequestTrue();
-                        });
-                        if (this.pass_verify != null && this.password != null && this.password == this.pass_verify)
-                            restful.post('auth/changepass', {
-                                newpass: this.password
-                            }).then(() => {
-                                window.location.reload();
-                            })
-                    } else
-                        $scope.userFormWrongPass = true;
-                });
+                    });
+                }
             },
             clear: function () {
                 this.password = '';
@@ -587,6 +600,7 @@
             $scope.statusBarBoolean = false;
             $scope.searchBy = '';
             $scope.menu.active(next.originalPath);
+            $scope.navigation.usernav = false;
 
         });
 
@@ -598,7 +612,7 @@
                 }
             }
         };
- 
+
         /*Stats chart settings*/
 
         $scope.datasetOverride = [{

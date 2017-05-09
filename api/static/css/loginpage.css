@@ -328,8 +328,9 @@ a.button {
     box-sizing: border-box;
     padding: 20px;
     width: 25%;
-    vertical-align: top;
-    margin-bottom: 120px; }
+    height: 270px;
+    margin-bottom: 100px;
+    overflow: hidden; }
     .app-container .app-overflow .app-img {
       width: 100%;
       float: left;

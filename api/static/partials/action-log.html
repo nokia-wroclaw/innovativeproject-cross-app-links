@@ -7,7 +7,7 @@
             </header>
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th class="hidden-xs">Id</th>
                     <th>Date</th>
                     <th>Author</th>
                     <th>Content</th>
@@ -15,7 +15,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat='log in logs | orderBy: id : true | limitTo : limit.log' ng-show='logs.length'>
-                    <td>{{log.id}}</td>
+                    <td class="hidden-xs">{{log.id}}</td>
                     <td>{{log.date | date: 'short' }}</td>
                     <td>{{log.author.username || 'Removed user'}}</td>
                     <td>{{log.content}}</td>

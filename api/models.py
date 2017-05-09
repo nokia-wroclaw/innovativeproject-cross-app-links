@@ -98,7 +98,9 @@ class App(db.Model):
         self.maintenance = False
         self.landing_clicks = 0
         self.component_clicks = 0
+        self.order_id = 1
         self.date = "now()"
+        
             
             
 class Log(db.Model):

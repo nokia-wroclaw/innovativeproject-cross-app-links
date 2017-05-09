@@ -304,11 +304,13 @@ body {
     opacity: 1;
 }
 
-.component-ul li.order-li .beChanged{
-    color: green;
+.component-ul li.order-li .beChanged .glyphicon{
+    color: crimson;
+    opacity: 1;
 }
 .component-ul li.order-li .glyphicon.beChanged{
-    color: green;
+    color: crimson;
+    opacity: 1;
 }
 
 

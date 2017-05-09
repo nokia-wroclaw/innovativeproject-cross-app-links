@@ -39,9 +39,10 @@
                 return true;
             return false;
         },
-        _retriveArray: function (pinString, orderString) {
+        _retriveArray: function (pinString, orderString, hiddenString) {
             this._pinArray = pinString.split(',') || [];
             this._orderArray = orderString.split(',') || [];
+            this._hiddenArray = hiddenString.split(',') || [];
         },
         _pinArray: [],
         _pinAppTrigger: function (e) {
@@ -67,6 +68,17 @@
                 }
             });
         },
+        _hiddenArray: [],
+        _hiddenAppTrigger: function (e) {
+            if (e.target.className.indexOf('beChanged') === -1)
+                e.target.className += ' beChanged';
+            else e.target.className = e.target.className.replace(/beChanged/g, '');
+            var foundAt = this._hiddenArray.indexOf(e.target.parentElement.id);
+            if (foundAt === -1)
+                this._hiddenArray.push(e.target.parentElement.id);
+            else
+                this._hiddenArray[foundAt] = 'e';
+        },
         _appendFields: function (item) {
             if (this._cachedToken && this._pinArray.length > 0) {
                 var selfOrder = this._orderArray.indexOf(item.id.toString());
@@ -76,7 +88,12 @@
                     item.pin = true;
                 else
                     item.pin = false;
-                return !item.pin ? item : false;
+                var hide = this._hiddenArray.indexOf(item.id.toString());
+                if (hide !== -1)
+                    item.hide = true;
+                else
+                    item.hide = false;
+                return !item.hide ? item : false;
             }
             return true;
         },
@@ -112,7 +129,6 @@
                     token: e.target.value
                 };
                 this.$.AuthRequest.generateRequest();
-
             }
         },
         _handleAuthRequestResponse: function (response) {
@@ -122,7 +138,7 @@
                 localStorage.setItem('cachedToken', ComponentUser.token);
                 localStorage.setItem('cachedEmail', ComponentUser.email);
                 this.$.GetDataResponse.generateRequest();
-                this._retriveArray(ComponentUser.pin_string, ComponentUser.order_string);
+                this._retriveArray(ComponentUser.pin_string, ComponentUser.order_string, ComponentUser.hidden_string);
                 this._loadSortable();
             } else alert('Wrong token');
             if (this._cachedToken == null)
@@ -138,10 +154,12 @@
             this._loading();
             var orderString = this._orderArray.toString();
             var pinString = this._pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
+            var hiddenString = this._hiddenArray.toString().replace(/e,/g, '').replace(/,e/g, '');
             this.$.ChangesRequest.body = {
                 token: this._cachedToken,
                 pin_string: pinString,
-                order_string: orderString
+                order_string: orderString,
+                hidden_string: hiddenString
             }
             this.$.ChangesRequest.generateRequest();
         },
@@ -183,6 +201,12 @@
                 return 'glyphicon glyphicon-pushpin pinned';
             else
                 return 'glyphicon glyphicon-pushpin';
+        },
+        _setAsHidden: function(hide){
+            if(hide)
+                return 'glyphicon glyphicon-eye-close';
+            else
+                return 'glyphicon glyphicon-eye-open not-hidden';
         },
         _getColor: function (e) {
 

@@ -77,12 +77,22 @@ body{
         color: #fff;
         background: #ddd;
         border-radius: 3px;
-        padding: 15px;
+        padding: 8px 15px;
         font-size: 16px;
         font-weight: 600;
         box-sizing: border-box;
+        border: 0;
+        margin-top: 20px;
         &.red{
             background: #D45A5A;
+        }
+        &.blue{
+            background: #2ea4d2;
+        }
+        &.simply-href{
+            margin-top: 0;
+            background: none;
+            color: cornflowerblue;
         }
     }
 }

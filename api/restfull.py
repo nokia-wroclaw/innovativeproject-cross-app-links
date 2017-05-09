@@ -91,7 +91,7 @@ manager.create_api(App,
 
 # /api/v2/app , /api/v2/app/<int>
 manager.create_api(App, 
-                   include_columns=['id','name','link','desc', 'img_link', 'order_id'], 
+                   include_columns=['id','name','link','desc', 'img_link', 'order_id', 'beta'], 
                    url_prefix='/api/v2', 
                    methods=['GET'],
                    preprocessors=dict(POST=[auth_func], 

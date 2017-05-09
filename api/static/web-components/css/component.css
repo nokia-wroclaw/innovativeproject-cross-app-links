@@ -80,38 +80,40 @@ body {
     transition: 0.4s ease;
 }
 
-.main-nav>.pinned {
+.main-nav>.component-navbar>.component-overflow>.pinned {
     float: right;
     list-style: none;
-    height: 100%;
+    height: auto;
     overflow: hidden;
+    width: 100%;
     text-align: center;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 60px;
-}
-
-.main-nav>.pinned li {
-    float: left;
-}
-
-.main-nav>.pinned li a {
-    float: left;
-    width: 60px;
     background: rgba(255, 255, 255, 0.04);
-    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.main-nav>.component-navbar>.component-overflow>.pinned li {
+    float: right;
+    width: 20%;
     height: 60px;
+}
+
+.main-nav>.component-navbar>.component-overflow>.pinned li a {
+    float: left;
+    width: 100%; 
+    display: inline-block;
+    height: 100%;
     box-sizing: border-box;
     padding-top: 13px;
 }
 
-.main-nav>.pinned li a:hover img {
+.main-nav>.component-navbar>.component-overflow>.pinned li a:hover img {
     opacity: 0.6;
 }
 
-.main-nav>.pinned li a img {
+.main-nav>.component-navbar>.component-overflow>.pinned li a img {
     width: 34px;
+    height: 34px;
 }
 
 .component-navbar {
@@ -295,10 +297,15 @@ body {
     padding-top: 20px;
 }
 
-.component-ul li.order-li .glyphicon-pushpin {
+.component-ul li.order-li .glyphicon {
     opacity: 0.2;
 }
 
+.component-ul li.order-li .glyphicon-menu-hamburger{
+    opacity: 1;
+}
+
+.component-ul li.order-li .not-hidden, 
 .component-ul li.order-li .pinned {
     color: #3fce91;
     opacity: 1;
@@ -356,6 +363,17 @@ body {
     font-size: 12px;
     font-weight: 400;
     opacity: 1;
+}
+
+.component-ul li a .app-beta{
+    font-size: 10px;
+    color: white;
+    text-transform: uppercase;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 4px;
+    background: #F4B759;
 }
 
 .component-ul li.order-li .option-icon {

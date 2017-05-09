@@ -309,6 +309,7 @@ def component_user_data():
         component_user_obj['token'] = user.token
         component_user_obj['pin_string'] = user.pin_string
         component_user_obj['order_string'] = user.order_string
+        component_user_obj['hidden_string'] = user.hidden_string
         return jsonify(component_user_obj)
     return str(False)    
 
@@ -327,6 +328,7 @@ def component_user_data_update():
     if user:
         user.pin_string = data['pin_string']
         user.order_string = data['order_string']
+        user.hidden_string = data['hidden_string']
         db.session.add(user)
         db.session.commit()
         return str(True)

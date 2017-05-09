@@ -186,5 +186,5 @@ class ComponentUser(db.Model):
         self.token = str(uuid.uuid4())
         self.order_string = ''
         self.pin_string = ''
-        self.hidden_string = self.pin_string
+        self.hidden_string = ''
         self.date = "now()"

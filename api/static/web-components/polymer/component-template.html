@@ -41,19 +41,18 @@
         
 
         <nav class="main-nav">
-            <aside class="component-navbar c-hidden" id="web-component-navbar">
-                <button class="burger-icon" on-tap="_showToggle"><span class="glyphicon glyphicon-th"></span> </button>
-                <section class="component-overflow c-hidden">
-                    <div id="loading-box" class="loading-box"><span class="spinner"></span></div>
-                     <ul class="pinned">
-                        <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_pinnedFilter" sort="_selfSort">
-                            <li>  
-                                <a target="_blank" href="{{item.link}}">
-                                    <img src="{{_getProperPath(item.img_link)}}"/>
-                                </a>
-                            </li>
-                        </template>
-                    </ul>  
+            <ul class="pinned">
+                    <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_pinnedFilter" sort="_selfSort">
+                        <li>  
+                            <a target="_blank" href="{{item.link}}">
+                                <img src="{{_getProperPath(item.img_link)}}"/>
+                            </a>
+                        </li>
+                    </template>
+                </ul> 
+                <button class="burger-icon c-hidden" id="button-switch" on-tap="_showToggle"><span class="glyphicon glyphicon-th"></span> </button>
+                <aside class="component-overflow c-hidden" id="web-component-navbar">
+                    <div id="loading-box" class="loading-box"><span class="spinner"></span></div>   
                     <div class="user-label">
                             <div class="user-label-list" id="user-label-list">
                                 <template is="dom-if" if="{{!_checkAccess()}}">
@@ -105,8 +104,7 @@
                             </li>
                         </template>
                     </ul>
-                </section>
-            </aside>
+                </aside>
         </nav>
         
     </template>

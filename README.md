@@ -128,7 +128,7 @@ Just type:
 flask run
 ```
 
-## At the and
+## At the end
 
 Cross app links is a part of innovative projects summer 2017, it's created by students from Wrocław University of Science and Technology with support of employees of Nokia.
 

@@ -175,13 +175,13 @@
         },
         _showToggle: function () {
             var component = this.$$('#web-component-navbar');
-            var componentOverflow = this.$$('#web-component-navbar .component-overflow');
+            var button = this.$$('#button-switch');
             if (component.className.indexOf("visible") === -1) {
                 component.className = component.className.replace(/c-hidden/g, 'visible');
-                componentOverflow.className = componentOverflow.className.replace(/c-hidden/g, 'visible');
+                button.className = button.className.replace(/c-hidden/g, 'visible');
             } else {
                 component.className = component.className.replace(/visible/g, 'c-hidden');
-                componentOverflow.className = componentOverflow.className.replace(/visible/g, 'c-hidden');
+                button.className = button.className.replace(/visible/g, 'c-hidden');
             }
         },
         _switchView: function () {

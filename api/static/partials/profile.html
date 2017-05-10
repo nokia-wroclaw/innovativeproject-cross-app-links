@@ -1,0 +1,71 @@
+<div ng-repeat="user in users | filter : {id: filterParams.manage()}:true">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left ">
+        <div class="row">
+            <div class="box">
+                <div class="user-profile-main col-lg-6 col-md-6 col-sm-12 col-xs-12 row pull-left">
+                    <div class="col-lg-3 col-md-3 col-sm-2 hidden-xs">
+                        <div class="user-profile-avatar">
+                            <img ng-src="../static/img/avatars/{{user.avatar_url}}.png?{{todayDateTime.getTime()}}">
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-10 col-xs-12">
+                        <div class="user-profile-info">
+                            <h1 class="user-profile-username">@{{user.username}}</h1>
+                            <h1 class="user-profile-usergroup">{{user.group.name}}</h1>
+                            <div class="user-profile-email">
+                                <span class="glyphicon glyphicon-send"></span>{{user.email}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-profile-stat">
+                    <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left ">
+                        <div class="site-stat no-color">
+                            <span class="stat-desc ">Users invited</span>
+                            <span class="stat-number ">{{user.invites.length || 0}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left ">
+                        <div class="site-stat no-color">
+                            <span class="stat-desc ">Applications</span>
+                            <span class="stat-number ">{{user.applications.length || 0}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 pull-left">
+        <div class="box box-table">
+            <table class="table ">
+                <header>
+                    <h3 class="orange">Last actions of @{{user.username}}</h3>
+                    <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
+                </header>
+                <tbody>
+                    <tr ng-repeat='log in user.logs| orderBy: id : true | limitTo : 5' ng-show='user.logs.length'>
+                        <td class="hidden-xs">{{log.id}}</td>
+                        <td>{{log.date| date: 'short' }}</td>
+                        <td>{{log.content}}</td>
+                    </tr>
+                </tbody>
+                <span class='warning-text' ng-hide='user.logs.length'>There is no activity yet</span>
+            </table>
+            <div href="action-log" class="full-width-button-area">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12 pull-left">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 row-buried" ng-repeat='app in user.applications | orderBy : id : true | limitTo: 4'>
+                <div class="box link-box">
+                    <div class="main-link-info">
+                        <img ng-src="../static/img/app-img/{{app.img_link}}.png">
+                        <h3 class="main-link-heading">{{app.name}}</h3>
+                    </div>
+                    <a class="settings-icon" href="links/{{app.id}}"><span class="glyphicon glyphicon-cog"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

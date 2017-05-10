@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" ng-app="mainApp" ng-cloak>
+
+<head>
+    <base href="/">
+    <title>Dashboard - Cross App Links</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/x-icon"> 
+    <!--        BOWER PCKG-->
+    <link rel="stylesheet" href="../static/bower_components/lato-font/css/lato-font.css">
+    <link rel="stylesheet" href="../static/bower_components/dstyle_resetCSS/reset.min.css">
+    <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" type="text/css" />
+    <!--        BOWER PCKG:END-->
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/forms.css">
+    <link rel="stylesheet" href="../static/css/popup.css">
+    <link rel="stylesheet" href="../static/css/notes.css">
+    <link rel="stylesheet" href="../static/css/user.css">
+    <link rel="stylesheet" href="../static/css/media.css">
+
+</head>
+
+<body ng-controller="mainCtrl">
+    <div id="loading" class="loading">
+        <span class="loading-icon"></span>
+        <span class="text">
+            Loading content...
+        </span>
+    </div>
+    <div class="loading view-loader" ng-show="actionDataInProgress">
+        <span class="loading-icon"></span>
+        <span class="text">
+            Sending request...
+        </span>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <header class="main-header col-sm-12 col-xs-12 pull-right row" ng-class="menu.status ? 'col-lg-10 col-md-11' : 'col-lg-12 col-md-12'">
+                <div class="col-lg-12 row header-cell">
+                    <div class="site-name col-lg-2 col-md-1 col-sm-1 col-xs-2 hidden-md hidden-sm hidden-xs pull-left" ng-show="menu.status">
+                        <a href="dashboard"><img src="../static/img/logo.png"></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="header-nav-icon pull-left" >
+                            <a href="#" ng-click="menu.hide()"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                            <a href="/" target="_self"><span class="glyphicon glyphicon-th"></span></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pull-right text-right">
+                        <div class="user-section" ng-mouseover="navigation.usernav=true" ng-mouseleave="navigation.usernav=false">
+                            <div class="user-avatar"><span class="glyphicon glyphicon-menu-hamburger"></span><img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}"></div>
+                            <span class="user-name">{{current_user.username}}</span>
+                            <nav class="user-menu" ng-show="navigation.usernav">
+                                <ul>
+                                    <li><a href="profile/{{current_user.id}}"><span class="glyphicon glyphicon-user"></span>My profile</a></li>
+                                    <li><a href="usercp"><span class="glyphicon glyphicon-cog"></span>Account settings</a></li>
+                                    <li><a href="usercp/permissions"><span class="glyphicon glyphicon-ok"></span>My permissions</a></li>
+                                    <li><a href="/api/auth/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                       
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="container-fluid" ng-class="menu.status ? 'container-fluid' : 'container'">
+            <div class="row">
+                <nav id="navigation" class="main-navigation col-lg-2 col-md-1 col-sm-12 col-xs-12 pull-left" ng-show="menu.status">
+                    <div class="main-navigation-overflow" ng-scrollbars ng-scrollbars-config="config">
+                        <ul>
+                            <h4 class="label hidden-md">Main</h4>
+                            <li>
+                                <a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span><span class="hidden-md">Dashboard</span></a>
+                            </li>
+                            <li ng-show="current_user.group.name =='Administrator'">
+                                <a href="stats"><span class="glyphicon glyphicon glyphicon-stats"></span><span class="hidden-md">Statistics</span></a>
+                            </li>
+                            <li>
+                                <a href="action-log"><span class="glyphicon glyphicon-eye-open"></span><span class="hidden-md">Action log</span></a>
+                            </li>
+                            <li>
+                                <a href="components"><span class="glyphicon glyphicon-tasks"></span><span class="hidden-md">Components</span></a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <h4 class="label hidden-md">Links</h4>
+                            <li>
+                                <a href="links"><span class="glyphicon glyphicon-link"></span><span class="hidden-md">My links</span></a>
+                            </li>
+                            <li ng-show="current_user.group.app_add">
+                                <a href="add-link"><span class="glyphicon glyphicon-plus"></span><span class="hidden-md">Add link</span></a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <h4 class="label hidden-md">Users</h4>
+                            <li>
+                                <a href="users"><span class="glyphicon glyphicon-user"></span><span class="hidden-md">All users</span></a>
+                            </li>
+                            <li>
+                                <a href="groups"><span class="glyphicon glyphicon-tags"></span><span class="hidden-md">Groups</span></a>
+                            </li>
+                            <li ng-show="current_user.group.user_add || current_user.group.user_drop">
+                                <a href="add-user"><span class="glyphicon glyphicon-plus"></span><span class="hidden-md">Add user</span></a>
+                            </li>
+
+                        </ul>
+                        <ul>
+                            <h4 class="label hidden-md">Other</h4>
+                            <li>
+                                <a href="ver"><span class="glyphicon glyphicon-info-sign"></span><span class="hidden-md">About</span></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </nav>
+                <!--    STATIC:END : NG-->
+                <div class="col-sm-12 col-xs-12 pull-right row" ng-class="menu.status ? 'col-lg-10 col-md-11' : 'col-lg-12 col-md-12'">
+                    
+                    <div class="main-content " ng-view autoscroll="true" ng-class="menu.status ? 'col-lg-10' : 'col-lg-12'">
+                       
+                        <!--    INCLUDE : NG-->
+
+                        <!--    INCLUDE:END : NG-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--        BOWER PCKG-->
+    <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../static/bower_components/angular/angular.min.js"></script>
+    <script src="../static/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../static/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../static/bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+    <script src="../static/bower_components/chart.js/dist/Chart.min.js"></script>
+    <script src="../static/bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="../static/bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <!--        BOWER PCKG:END-->
+    <script src="../static/js/config.js"></script>
+    <script src="../static/js/services.js"></script>
+    <script src="../static/js/directives.js"></script>
+    <script src="../static/js/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<if ng-if="current_user.id > 0">
+<if ng-if="!current_user.group.user_add" ng-init="redirectToDash()">
+</if>
+<if ng-if="current_user.group.user_add">
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        <div class="login-container">
+            <div class="box box-form">
+                <header>
+                    <h3 class="orange">Invite new user!</h3>
+                </header>
+                <form name="add_user_form" ng-submit="add_user_form.$valid && invite.add(users, invites, current_user.email)" novalidate>
+                    <div class="input-socket">
+                        <input type="email" class="xs-input-fix" name="email" ng-model="invite.email" placeholder="User e-mail" required>
+                    </div>
+                    <p>Select user permission group:</p>
+                    <select class="pull-left xs-input-fix" name="group" ng-model="invite.group" required>
+                        <option ng-repeat="group in groups | orderBy:'-id'" value={{group.id}}>{{group.name}}</option>
+                    </select>
+                    <button type="submit" class='button blue pull-right xs-input-fix'>Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        <div class="login-container">
+            <div class="box box-form">
+                <header>
+                    <h3 class="orange">Remove user from application.</h3>
+                </header>
+                <form name="remove_form" ng-submit="remove_form.$valid && invite.deleteUser(current_user.email, users, removeEmail)" novalidate>
+                    <div class="input-socket">
+                        <input type="email" class="xs-input-fix" name="email" ng-model="removeEmail" placeholder="User e-mail" required>
+                    </div>
+                    <button type="submit" class='button orange pull-right xs-input-fix'>Confirm</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</if>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="search-by single-input pull-right">
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="box box-table">
+        <table class="table ">
+            <header>
+                <h3 class="green">Pending invites ({{(invites|filter: {active:true}).length}})</h3>
+            </header>
+            <thead>
+                <tr>
+                    <th class="hidden-xs">Id</th>
+                    <th>Email</th>
+                    <th class="hidden-xs">Group</th>
+                    <th class="hidden-xs">Sender</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="s_invite in invites | filter : {active:true}" ng-show="invites.length">
+                    <td class="hidden-xs">{{s_invite.id}}</td>
+                    <td>{{s_invite.email}}</td>
+                    <td class="hidden-xs">{{s_invite.groups.name}}</td>
+                    <td class="hidden-xs">{{s_invite.inviter.username}}</td>
+                    <td>
+                        <span class="button orange pull-left xs-button-fix" ng-click="invite.delete(s_invite.id)"><span class="hidden-xs">Cancel invite</span><span class="visible-xs"><span class="glyphicon glyphicon-remove"></span></span></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <span class="warning-text" ng-hide="invites.length">No invites yet.</span>
+    </div>
+</div>
+    <div class="success-bar" ng-class="{'hideOnTime': statusBarBoolean}" ng-if="statusBarBoolean && !actionDataInProgress">
+    Success! You've just sent an invitation!
+</div>
+</if>
+

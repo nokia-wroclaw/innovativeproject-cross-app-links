@@ -1,0 +1,30 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="box box-table">
+        <table class="table ">
+            <header>
+                <h3 class="orange">Action log</h3>
+                <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
+            </header>
+            <thead>
+                <tr>
+                    <th class="hidden-xs">Id</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat='log in logs | orderBy: id : true | limitTo : limit.log' ng-show='logs.length'>
+                    <td class="hidden-xs">{{log.id}}</td>
+                    <td>{{log.date | date: 'short' }}</td>
+                    <td>{{log.author.username || 'Removed user'}}</td>
+                    <td>{{log.content}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <span class='warning-text' ng-hide='logs.length'>There is no activity yet</span>
+        <div class="full-width-button-area">
+            <a href="#" class="button orange pull-right" ng-click="limit.log=limit.log+20"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+        </div>
+    </div>
+</div>

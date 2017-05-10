@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" ng-app="mainApp">
+
+<head>
+    <base href="/">
+    <title>Welcome to Cross App Links</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/x-icon"> 
+    <!--        BOWER PCKG-->
+    <link rel="stylesheet" href="../static/bower_components/lato-font/css/lato-font.css">
+    <link rel="stylesheet" href="../static/bower_components/dstyle_resetCSS/reset.min.css">
+    <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!--        BOWER PCKG:END-->
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/loginpage.css">
+    <link rel="stylesheet" href="../static/css/loginpage-media.css">
+
+</head>
+
+<body ng-controller="loginCtrl" ng-cloak>
+
+    <div class="loading">
+        <span class="loading-icon"></span>
+        <span class="text">
+            Loading content...
+        </span>
+    </div>
+    <div class="form-container">
+        <header class="main-header">
+            <nav class="project-navigation">
+                <ul>
+                    <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links">Github</a></li>
+                    <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links/blob/master/README.md">About</a></li>
+                    <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links/blob/master/LICENSE">License</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="form-overflow" ng-if="!current_user.id">
+            <header>
+                <h1>Sign in</h1>
+                <span class="login-failure" ng-show="isFailure()">Incorrect email or/and password!</span>
+            </header>
+            <form action="/api/auth" method="POST">
+                <div class="input-overflow">
+                    <span class="label">Email address</span>
+                    <input type="email" name="email" placeholder="Type here" required>
+                </div>
+                <div class="input-overflow">
+                    <span class="label">Password</span>
+                    <input type="password" name="password" placeholder="And here" required>
+                </div>
+                <div class="form-link pull-left"><a href="/api/auth/resetpassword">Forgot your password?</a></div>
+                <button type="submit" class="button blue auto pull-right">Sign in</button>
+            </form>
+        </div>
+        <div class="user-overflow" ng-if="current_user.id">
+            <div class="user-avatar"><img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}"></div>
+            <div class="user-info">
+                <span class="username">@{{current_user.username}}</span>
+                <span class="info-row">{{current_user.group.name}}</span>
+                <div class="buttons">
+                    <a href="dashboard" class="button blue">Dashboard</a>
+                    <a href="/api/auth/logout" class="button pure">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="project-container">
+        <div class="fractal-overflow mobile-phone-h">
+            <span class="fractal blue long"></span>
+            <span class="fractal orange short"></span>
+            <span class="fractal red medium"></span>
+            <span class="fractal green medium-short break"></span>
+            <span class="fractal lightgreen long"></span>
+            <span class="fractal blue medium break"></span>
+            <span class="fractal red short"></span>
+            <span class="fractal red short break"></span>
+            <span class="fractal lightgreen long break"></span>
+            <span class="fractal blue medium-short"></span>
+            <span class="fractal red micro"></span>
+            <span class="fractal blue long break"></span>
+            <span class="fractal green short "></span>
+            <span class="fractal lightgreen medium break"></span>
+            <span class="fractal orange micro"></span>
+            <span class="fractal blue short break"></span>
+            <span class="fractal red medium break"></span>
+        </div>
+        <div class="main-project-section">
+            <div class="download mobile-phone-v">
+                <a href="/static/download/cross-app-links-componentv1_0_0.zip" class="button transaprent big block">
+                    <span class="glyphicon glyphicon-save"></span>Download component
+                </a>
+            </div>
+            <div class="tablet-preview mobile-phone-h">
+                <div class="tablet-screen">
+                    <header class="project-header">
+                        <div class="logo"><img ng-src="../static/img/logo.png"></div>
+                        <h1 class="site-name">Cross app links</h1>
+                    </header>
+                    <div class="the-component">
+                        <h2>Click below to get the component.
+                            <div class="download-button">
+                                <a href="/static/download/cross-app-links-componentv1_0_0.zip" class="button green big bordered">
+                                    <span class="glyphicon glyphicon-save"></span>Download files
+                                </a>
+                            </div>
+                    </div>
+                </div>
+                <span class="tablet-button"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="app-container">
+        <div class="app-overflow" ng-repeat="app in apps">
+            <div class="app-img"><img ng-src="/static/img/app-img/{{app.img_link}}.png"></div>
+            <h4 class="app-name">{{app.name}}</h4>
+            <p class="app-desc">{{app.desc}}</p>
+            <a href="{{app.link}}">Checkout</a>
+        </div>
+    </div>
+        <footer class="main-footer">
+            <div class="copyright">Innovative projects summer 2017</div>
+        </footer>
+
+
+    <!--        BOWER PCKG-->
+    <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../static/bower_components/angular/angular.min.js"></script>
+    <script src="../static/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../static/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../static/bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+    <!--        BOWER PCKG:END-->
+    <script src="../static/js/directives.js"></script>
+    <script src="../static/js/config.js"></script>
+    <script src="../static/js/services.js"></script>
+    <script src="../static/js/loginpage.controller.js"></script>
+</body>
+
+</html>

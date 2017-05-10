@@ -1,0 +1,29 @@
+.error-page-404 {
+  position: absolute;
+  text-align: center;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 50%;
+  top: 40%; }
+  .error-page-404 h1,
+  .error-page-404 h2,
+  .error-page-404 a {
+    margin: 15px 0; }
+  .error-page-404 h1 {
+    font-size: 36px;
+    color: #34313d; }
+    .error-page-404 h1 span {
+      color: #D45A5A; }
+  .error-page-404 h3 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #34313d; }
+  .error-page-404 a {
+    margin-top: 30px;
+    text-decoration: none;
+    display: block; }
+    .error-page-404 a:hover {
+      opacity: 0.5; }
+
+/*# sourceMappingURL=404.css.map */

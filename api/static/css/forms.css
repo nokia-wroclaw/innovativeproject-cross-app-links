@@ -1,0 +1,25 @@
+.error-form-box {
+    float: left;
+    width: 100%;
+}
+
+.error-form-box span.error {
+    width: auto;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 7px;
+    border-radius: 2px;
+    background: #D45A5A;
+    margin: 5px;
+    margin-left: 0;
+    color: white;
+}
+
+.error-form-box span.error .glyphicon {
+    margin-right: 5px;
+}
+
+.no-shadow {
+    box-shadow: none;
+}

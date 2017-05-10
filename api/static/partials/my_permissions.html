@@ -1,0 +1,45 @@
+<div class="col-lg-12">
+    <div class="box box-table">
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Adding applications </th>
+                    <th>Removing applications</th>
+                    <th>Editing application</th>
+                    <th>Adding users</th>
+                    <th>Removing users</th>
+                    <th>Show statistics</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{current_user.username}}</td>
+                    <td class="text-center">
+                        <span ng-show="current_user.group.app_add" class="glyphicon glyphicon-ok"></span>
+                        <span ng-hide="current_user.group.app_add" class="glyphicon glyphicon-remove"></span>
+                    </td>
+                    <td class="text-center">
+                        <span ng-show="current_user.group.app_drop" class="glyphicon glyphicon-ok"></span>
+                        <span ng-hide="current_user.group.app_drop" class="glyphicon glyphicon-remove"></span>
+                    </td>
+                    <td class="text-center">
+                        <span ng-show="current_user.group.app_edit_all" class="glyphicon glyphicon-ok"></span>
+                        <span ng-hide="current_user.group.app_edit_all" class="glyphicon glyphicon-remove"></span>
+                    </td>
+                    <td class="text-center">
+                        <span ng-show="current_user.group.user_add" class="glyphicon glyphicon-ok"></span>
+                        <span ng-hide="current_user.group.user_add" class="glyphicon glyphicon-remove"></span>
+                    </td>
+                    <td class="text-center">
+                        <span ng-show="current_user.group.user_drop" class="glyphicon glyphicon-ok"></span>
+                        <span ng-hide="current_user.group.user_drop" class="glyphicon glyphicon-remove"></span>
+                    </td>   
+                    <td class="text-center">
+                        <span ng-show="current_user.group.id == 22" class="glyphicon glyphicon-ok"></span>
+                        <span ng-hide="current_user.group.id == 22" class="glyphicon glyphicon-remove"></span>
+                    </td>   
+                </tr>
+            </tbody>
+        </table>
+    </div>

@@ -1,0 +1,43 @@
+.noteform {
+    margin-top: 20px;
+    padding: 0;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1220;
+}
+
+.noteform>button {
+    width: 15%;
+    float: right;
+}
+
+.noteform>.single-input {
+    padding-right: 10px;
+    width: 85%;
+    float: left;
+    box-sizing: border-box;
+    position: relative;
+    
+}
+.noteform>.single-input>.note{
+
+}
+.noteform>.single-input>input {
+    width: 70%;
+    float: left;
+    bottom: 0;
+    margin-bottom: 0;
+    
+}
+
+.noteform>.single-input>select {
+    width: 30%;
+    float: right;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}

@@ -1,0 +1,35 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="search-by single-input pull-right">
+        <input class="pull-right" type='text' ng-model='searchBy' placeholder='Search by user'>
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="box box-table">
+        <table class="table ">
+            <header>
+                <h3 class="green">Users</h3>
+                <div class="header-icon"><span class="glyphicon glyphicon-option-horizontal"></span></div>
+            </header>
+            <thead>
+                <tr>
+                    <th class="hidden-xs">Id</th>
+                    <th>User</th>
+                    <th>Group</th>
+                    <th>E-mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users | limitTo : limit.users| filter : {username : searchBy}" ng-show="users.length">
+                    <td class="hidden-xs">{{user.id}}</td>
+                    <td><img class="user hidden-xs" ng-src="../static/img/avatars/{{user.avatar_url}}.png?{{todayDateTime.getTime()}}"><a href="/profile/{{user.id}}">{{user.username}}</a></td>
+                    <td>{{user.group.name}}</td>
+                    <td>{{user.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <span class="warning-text" ng-hide="users.length">No users yet.</span>
+        <div class="full-width-button-area">
+            <a href="#" class="button green pull-right" ng-click="limit.users=limit.users+2"><span class="glyphicon glyphicon-align-left"></span>Show me more</a>
+        </div>
+    </div>
+</div>

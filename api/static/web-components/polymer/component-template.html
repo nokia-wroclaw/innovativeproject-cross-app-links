@@ -1,0 +1,115 @@
+<link rel="import" href="../static/bower_components/polymer/polymer.html">
+<link rel="import" href="../static/bower_components/iron-ajax/iron-ajax.html">
+<dom-module id="web-component" id='component'>
+    <template>
+        <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/bower_components/lato-font/css/lato-font.css">
+        <link rel="stylesheet" href="../static/web-components/css/component.css">
+        
+        
+        <iron-ajax id="ComponentRequest" 
+                   
+                    url="../api/component" 
+                    method="POST" content-type="application/json" 
+                    handle-as="json"></iron-ajax>
+        
+        <iron-ajax id="AuthRequest"
+                    
+                    url="../api/component-user-data" 
+                    method="POST" 
+                    content-type="application/json" 
+                    handle-as="json" 
+                    on-response="_handleAuthRequestResponse"
+                    on-error="_handleAuthRequestError"></iron-ajax>
+        
+         <iron-ajax id="ChangesRequest" 
+                    
+                    url="../api/component-user-data-update" 
+                    method="POST" 
+                    content-type="application/json" 
+                    handle-as="json" 
+                    on-response="_handleChangesRequestResponse"
+                    on-error="_handleChangesRequestError"></iron-ajax>
+        
+        <iron-ajax id="GetDataResponse"
+                    
+                    method="GET"
+                    url="../api/v2/app" 
+                    handle-as="json" 
+                    on-response="_handleDataRequest"
+                    last-response="{{response}}"></iron-ajax>
+        
+
+        <nav class="main-nav" id="web-component-main">
+            <ul class="pinned">
+                    <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_pinnedFilter" sort="_selfSort">
+                        <li>  
+                            <a target="_blank" href="{{item.link}}">
+                                <img src="{{_getProperPath(item.img_link)}}"/>
+                            </a>
+                        </li>
+                    </template>
+                </ul> 
+                <button class="burger-icon c-hidden" id="button-switch" on-tap="_showToggle"><span class="glyphicon glyphicon-th"></span> </button>
+                <aside class="component-overflow c-hidden" id="web-component-navbar">
+                    <div id="loading-box" class="loading-box"><span class="spinner"></span></div>   
+                    <div class="user-label">
+                            <div class="user-label-list" id="user-label-list">
+                                <template is="dom-if" if="{{!_checkAccess()}}">
+                                    <div class="confirm-token">
+                                        <input id="tokenValue" type="text" placeholder="Your token" name="token" on-keydown="_tokenRequestSend">
+                                        <a class="action-button" href="../get-component-token">
+                                            <span class="glyphicon glyphicon-question-sign"></span>
+                                        </a>
+                                    </div>
+                                </template>
+                                <template is="dom-if" if="{{_checkAccess()}}">
+                                    <div class="confirmed-user">   
+                                        <div class=" signMeOut">
+                                            <span class="glyphicon glyphicon-log-out" on-tap="_signMeOut"></span> 
+                                        </div>
+                                        <div class="confirmed-user-email">
+                                           {{email}}
+                                        </div>
+                                        <span class="action-button" on-tap="_switchView">
+                                            <span class="glyphicon glyphicon-cog"></span>
+                                        </span>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    <ul class="component-ul" id="items_ul">
+                        <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_appendFields" sort="_selfSort">
+                            <li>  
+                                <a target="_blank" href="{{item.link }}">
+                                    <img crossOrigin="Anonymous" src="{{_getProperPath(item.img_link)}}" on-load='_getColor' />
+                                    <span class="text">{{item.name }}</span>
+                                    <template is="dom-if" if="{{item.beta}}"><span class="app-beta">Beta</span></template>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                    <ul class="component-ul hidden" id="sortable_ul" >
+                        <button on-tap="_changesRequestSend" class="button-simple">Confirm changes</button>
+                        <template id="orders" is="dom-repeat" items="{{response.objects}}" sort="_selfSort">
+                            <li class="order-li noselect" id="{{item.id}}">
+                                <div class="option-icon" on-tap="_pinAppTrigger" id="{{item.id}}">
+                                    <span class$="{{_setAsPinned(item.pin)}}" ></span>
+                                </div>
+                                <div class="option-icon" on-tap="_hiddenAppTrigger" id="{{item.id}}">
+                                    <span class$="{{_setAsHidden(item.hide)}}" ></span>
+                                </div>
+                                <span class="order-li-name">{{item.name}}</span>
+                                <div class="drag-icon"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+                            </li>
+                        </template>
+                    </ul>
+                </aside>
+        </nav>
+        
+    </template>
+    <script src="../static/bower_components/color-thief/dist/color-thief.min.js"></script>
+    <script src="../static/bower_components/Sortable/Sortable.js"></script>
+    <script src="../static/web-components/js/polymer-ui.js"></script>
+
+</dom-module>

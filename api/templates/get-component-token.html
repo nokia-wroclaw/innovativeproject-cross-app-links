@@ -1,0 +1,25 @@
+<!doctype>
+<html lang="en">
+    <head>
+        <title>Generate personal token</title>
+        
+        <link href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../static/css/custom-template.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container-box">
+            <h3>Generate personal token</h3>
+            <ul>
+                <p>Creating your own token gives you additional options to manage apps in the web component. By having this you can:</p>
+                <li><span class="glyphicon glyphicon-ok"></span> Set your own view order!</li>
+                <li><span class="glyphicon glyphicon-ok"></span> Pin your favourite apps to the navbar!</li>
+                <p>You only need the token to get your settings saved. <br/>It's available everywhere!</p>
+            </ul>
+            <form method="POST" action="/api/create-component-user">
+                <input type="email" name="email" placeholder="Type your e-mail">
+                <button class="button blue" type="submit">Confirm</button>
+            </form>
+            <a class="button red simply-href" href="https://cross-app-links.herokuapp.com">Visit our website</a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,83 @@
+@media only screen and (max-width: 1660px) {
+  .form-container .user-overflow .user-info .info-row,
+  .form-container .user-overflow .user-info .buttons {
+    width: 80%; }
+
+  .app-container {
+    padding: 40px; }
+    .app-container .app-overflow {
+      margin-bottom: 60px; } }
+@media only screen and (max-width: 1266px) {
+  .form-container {
+    padding: 40px; }
+    .form-container .user-overflow .user-info .info-row,
+    .form-container .user-overflow .user-info .buttons {
+      width: 100%; }
+
+  .project-container .main-project-section {
+    width: 100%;
+    top: 10vh; }
+    .project-container .main-project-section .tablet-preview {
+      width: 400px;
+      height: 520px; }
+      .project-container .main-project-section .tablet-preview .tablet-screen .project-header {
+        margin-top: 60px; }
+        .project-container .main-project-section .tablet-preview .tablet-screen .project-header .site-name {
+          font-size: 24px; }
+
+  .app-container .app-overflow {
+    width: 33.3333333%; } }
+@media only screen and (max-width: 920px) {
+  .form-container {
+    width: 100%;
+    height: auto; }
+    .form-container .user-overflow .user-info .info-row,
+    .form-container .user-overflow .user-info .buttons {
+      width: 50%; }
+
+  .project-container {
+    width: 100%;
+    height: auto;
+    float: left; }
+    .project-container .main-project-section {
+      position: static;
+      float: left; }
+
+  .app-container .app-overflow {
+    width: 50%;
+    margin-bottom: 40px; } }
+@media only screen and (max-width: 640px) {
+  .form-container .user-overflow .user-info .info-row,
+  .form-container .user-overflow .user-info .buttons {
+    width: 80%; }
+
+  .app-container .app-overflow {
+    width: 100%; } }
+@media only screen and (max-width: 500px) {
+  .mobile-phone-v {
+    visibility: visible;
+    position: static; }
+
+  .mobile-phone-h {
+    display: none !important; }
+
+  .project-container {
+    height: 90px;
+    min-height: 90px;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden; }
+    .project-container .main-project-section {
+      float: left;
+      box-sizing: border-box;
+      height: 90px;
+      margin: 0;
+      padding: 0; } }
+@media only screen and (max-width: 320px) {
+  .form-container {
+    padding: 20px; }
+    .form-container .user-overflow .user-info .info-row,
+    .form-container .user-overflow .user-info .buttons {
+      width: 100%; } }
+
+/*# sourceMappingURL=loginpage-media.css.map */

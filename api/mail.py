@@ -41,7 +41,7 @@ def send_email_register(sender,email):
     userTextBold = "You can complete your registartion by clicking the button or entering the link. \n Set up your unique password and make yourself home!"
     userText = ""
     send_email(subject,
-        'cross-apps@yandex.com',
+        str(os.environ['MAIL_USERNAME']),
         email,
         render_template("email-template.html",
             user=username,
@@ -69,7 +69,7 @@ def send_email_reset(email):
     userTextBold = "Please proceed by clicking the button. \n You will be displayed a page that will allow you to set a new password."
     userText = "If you forget your password again, please consider drinking green tea. Green tea contains polyphenols, powerful antioxidants that protect against free radicals that can damage brain cells. Among many other benefits, regular consumption of green tea may enhance memory and mental alertness and slow brain aging."
     send_email(subject,
-        'cross-apps@yandex.com',
+        str(os.environ['MAIL_USERNAME']),
         email,
         render_template("email-template.html",
             user=username,
@@ -96,7 +96,7 @@ def send_email_token(email):
     userTextBold = "Here is your unique token for Cross-app links. \n Token allows you to set your own view order \n and pin your favourite apps to the navbad."
     userText = str(new.token)
     send_email(subject,
-        'cross-apps@yandex.com',
+        str(os.environ['MAIL_USERNAME']),
         email,
         render_template("email-template.html",
             user=username,

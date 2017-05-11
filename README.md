@@ -18,6 +18,11 @@ Web component is written in Polymer 2.0. It presents our links outside the admin
 
 If you can't see the component probably you have to tell your browser to trust unsecured / untrusted content. It's beacuse we don't provide https...
 
+Default administrator account data:
+
+email: admin@example.com
+password: admin123
+
 ## Base technologies:
 
 **Javascript**

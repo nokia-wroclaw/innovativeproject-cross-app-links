@@ -10,7 +10,7 @@
         },
         ready: function () {
             this._componentRequest();
-            if (this._cachedToken == null)
+            if (this._cachedToken === null)
                 this.$.GetDataResponse.generateRequest();
             this._getValuesRequest();
 
@@ -24,16 +24,16 @@
         },
         _cachedToken: localStorage.getItem('cachedToken') || null,
         _getValuesRequest: function () {
-            if (this._cachedToken != null) {
+            if (this._cachedToken !== null) {
                 this.$.AuthRequest.body = {
                     token: this._cachedToken
                 };
                 this.$.AuthRequest.generateRequest();
             } else
-                console.log('Anonymous user')
+                console.log('Anonymous user');
         },
         _checkAccess: function () {
-            if (this._cachedToken != null)
+            if (this._cachedToken !== null)
                 return true;
             return false;
         },
@@ -114,7 +114,7 @@
             else return a.order_id < b.order_id ? -1 : 1;
         },
         _componentRequest: function () {
-            if (localStorage.getItem('secured') == null) {
+            if (localStorage.getItem('secured') === null) {
                 this.$.ComponentRequest.body = {
                     "domain": window.location.href
                 };
@@ -124,24 +124,20 @@
         },
         _tokenRequestSend: function (e) {
             if (e.keyCode === 13) {
-                this._loading();
-                this.$.AuthRequest.body = {
-                    token: e.target.value
-                };
                 this.$.AuthRequest.generateRequest();
             }
         },
         _handleAuthRequestResponse: function (response) {
             var ComponentUser = response.detail.response;
             console.log(ComponentUser);
-            if (ComponentUser != null) {
+            if (ComponentUser !== null) {
                 localStorage.setItem('cachedToken', ComponentUser.token);
                 localStorage.setItem('cachedEmail', ComponentUser.email);
                 this.$.GetDataResponse.generateRequest();
                 this._retriveArray(ComponentUser.pin_string, ComponentUser.order_string, ComponentUser.hidden_string);
                 this._loadSortable();
             } else alert('Wrong token');
-            if (this._cachedToken == null)
+            if (this._cachedToken === null)
                 location.reload();
         },
         _handleAuthRequestError: function (error) {
@@ -160,13 +156,13 @@
                 pin_string: pinString,
                 order_string: orderString,
                 hidden_string: hiddenString
-            }
+            };
             this.$.ChangesRequest.generateRequest();
         },
         _handleChangesRequestResponse: function (response) {
             var responseDetail = response.detail.response;
             console.log(responseDetail);
-            if (response != null) {
+            if (response !== null) {
                 location.reload();
             } else console.log('Something went wrong');
         },
@@ -231,4 +227,4 @@
             location.reload();
         }
     });
-}())
+}());

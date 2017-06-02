@@ -124,6 +124,9 @@
         },
         _tokenRequestSend: function (e) {
             if (e.keyCode === 13) {
+                this.$.AuthRequest.body = {
+                    token: e.target.value
+                };
                 this.$.AuthRequest.generateRequest();
             }
         },
@@ -136,9 +139,7 @@
                 this.$.GetDataResponse.generateRequest();
                 this._retriveArray(ComponentUser.pin_string, ComponentUser.order_string, ComponentUser.hidden_string);
                 this._loadSortable();
-            } else alert('Wrong token');
-            if (this._cachedToken === null)
-                location.reload();
+            }
         },
         _handleAuthRequestError: function (error) {
             console.log(error.detail);

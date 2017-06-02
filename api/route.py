@@ -10,6 +10,11 @@ from datetime import datetime
 from time import time
 from passlib.hash import sha256_crypt
 import os
+from flask_session import Session
+
+app.config['SESSION_TYPE'] = 'filesystem'
+
+Session(app)
 
 #-----------
 #STATIC VAL
@@ -71,6 +76,7 @@ def auth():
             db.session.add(user)
             db.session.commit()
             session['user'] = user.username
+            session['email'] = user.email
             return redirect('/')
 
         else:
@@ -288,12 +294,11 @@ def component(component_type):
 """
 
 
-@app.route('/api/component-user-data', methods=['GET'])
+@app.route('/api/component-user-data', methods=['POST'])
 @cross_origin()
 def component_user_data():
-    if login_fresh() and current_user.is_authenticated:
-        email = current_user.email
-        user = ComponentUser.query.filter_by(email=email).first()
+        data = request.get_json()
+        user = ComponentUser.query.filter_by(token=data['token']).first()
         if user:
             component_user_obj = {}
             component_user_obj['email'] = user.email
@@ -303,7 +308,6 @@ def component_user_data():
             component_user_obj['hidden_string'] = user.hidden_string
             return jsonify(component_user_obj)
         return str(False)
-    return str(False)
 
 """
 
@@ -313,18 +317,14 @@ def component_user_data():
 
 @app.route('/api/component-user-data-update', methods=['POST'])
 @cross_origin()
-@login_required
 def component_user_data_update():
-    if login_fresh() and current_user.is_authenticated:
-        email = current_user.email
-        data = request.get_json()
-        user = ComponentUser.query.filter_by(email=email).first()
-        if user:
-            user.pin_string = data['pin_string']
-            user.order_string = data['order_string']
-            user.hidden_string = data['hidden_string']
-            db.session.add(user)
-            db.session.commit()
-            return str(True)
-        return str(False)
+    data = request.get_json()
+    user = ComponentUser.query.filter_by(token=data['token']).first()
+    if user:
+        user.pin_string = data['pin_string']
+        user.order_string = data['order_string']
+        user.hidden_string = data['hidden_string']
+        db.session.add(user)
+        db.session.commit()
+        return str(True)
     return str(False)

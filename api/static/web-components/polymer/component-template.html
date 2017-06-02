@@ -36,13 +36,12 @@
                     method="GET"
                     url="../api/v2/app"
                     handle-as="json"
-                    on-response="_handleDataRequest"
-                    last-response="{{response}}"></iron-ajax>
+                    on-response="_handleDataRequest"></iron-ajax>
 
 
         <nav class="main-nav" id="web-component-main">
             <ul class="pinned">
-                    <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_pinnedFilter" sort="_selfSort">
+                    <template id="elements" is="dom-repeat" items="{{response}}" filter="_pinnedFilter" observe="pinArray">
                         <li>
                             <a target="_blank" href="{{item.link}}">
                                 <img src="{{_getProperPath(item.img_link)}}"/>
@@ -55,15 +54,12 @@
                     <div id="loading-box" class="loading-box"><span class="spinner"></span></div>
                     <div class="user-label">
                             <div class="user-label-list" id="user-label-list">
-                                <template is="dom-if" if="{{!_checkAccess()}}">
+                                <template is="dom-if" if="{{!checkAccess}}">
                                     <div class="confirm-token">
-                                        <input id="tokenValue" type="text" placeholder="Your token" name="token" on-keydown="_tokenRequestSend">
-                                        <a class="action-button" href="../get-component-token">
-                                            <span class="glyphicon glyphicon-question-sign"></span>
-                                        </a>
+                                        <input id="tokenValue" type="text" placeholder="Your email" name="email" on-keydown="_tokenRequestSend">
                                     </div>
                                 </template>
-                                <template is="dom-if" if="{{_checkAccess()}}">
+                                <template is="dom-if" if="{{checkAccess}}">
                                     <div class="confirmed-user">
                                         <div class=" signMeOut">
                                             <span class="glyphicon glyphicon-log-out" on-tap="_signMeOut"></span>
@@ -79,7 +75,7 @@
                             </div>
                         </div>
                     <ul class="component-ul" id="items_ul">
-                        <template id="elements" is="dom-repeat" items="{{response.objects}}" filter="_appendFields" sort="_selfSort">
+                        <template id="elements" is="dom-repeat" items="{{response}}" filter="_hideFilter" sort="_selfSort">
                             <li>
                                 <a target="_blank" href="{{item.link }}">
                                     <img crossOrigin="Anonymous" src="{{_getProperPath(item.img_link)}}" on-load='_getColor' />
@@ -91,7 +87,7 @@
                     </ul>
                     <ul class="component-ul hidden" id="sortable_ul" >
                         <button on-tap="_changesRequestSend" class="button-simple">Confirm changes</button>
-                        <template id="orders" is="dom-repeat" items="{{response.objects}}" sort="_selfSort">
+                        <template id="orders" is="dom-repeat" items="{{response}}" sort='_selfSort' observer="orderArray">
                             <li class="order-li noselect" id="{{item.id}}">
                                 <div class="option-icon" on-tap="_pinAppTrigger" id="{{item.id}}">
                                     <span class$="{{_setAsPinned(item.pin)}}" ></span>

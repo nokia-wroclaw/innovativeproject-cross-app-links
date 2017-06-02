@@ -298,11 +298,11 @@ def component(component_type):
 @cross_origin()
 def component_user_data():
         data = request.get_json()
-        user = ComponentUser.query.filter_by(token=data['token']).first()
-        if user:
+        active = True
+        user = ComponentUser.query.filter_by(email=data['email']).first()
+        if active and user:
             component_user_obj = {}
             component_user_obj['email'] = user.email
-            component_user_obj['token'] = user.token
             component_user_obj['pin_string'] = user.pin_string
             component_user_obj['order_string'] = user.order_string
             component_user_obj['hidden_string'] = user.hidden_string
@@ -319,8 +319,9 @@ def component_user_data():
 @cross_origin()
 def component_user_data_update():
     data = request.get_json()
-    user = ComponentUser.query.filter_by(token=data['token']).first()
-    if user:
+    active = True
+    user = ComponentUser.query.filter_by(email=data['email']).first()
+    if active and user:
         user.pin_string = data['pin_string']
         user.order_string = data['order_string']
         user.hidden_string = data['hidden_string']

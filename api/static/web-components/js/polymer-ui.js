@@ -5,55 +5,101 @@
         properties: {
             email: {
                 type: String,
-                value: localStorage.getItem('cachedEmail')
+                value: '',
+            },
+            response: {
+                type: Array,
+                value: []
+            },
+            pinnedResponse:{
+                type: Array,
+                value: []
+            },
+            checkAccess: {
+                type: Boolean,
+                value: false
+            },
+            pinArray:{
+                type: Array,
+                value: [],
+            },
+            orderArray:{
+                type: Array,
+                value: []
+            },
+            hiddenArray:{
+                type: Array,
+                value: [],
+            },
+            customize: {
+                type: String,
+                value: '',
+                observer: '_handleCustomizeChange'
             }
         },
         ready: function () {
             this._componentRequest();
-            if (this._cachedToken === null)
-                this.$.GetDataResponse.generateRequest();
             this._getValuesRequest();
-
+            this.$.GetDataResponse.generateRequest();
+        },
+        _handleCustomizeChange: function(){
+            this.response = this.response
+                                .map(v=>{
+                                    var selfOrder = this.orderArray.indexOf(v.id.toString());
+                                    v.selfOrder = selfOrder;
+                                    var pin = this.pinArray.indexOf(v.id.toString());
+                                    if (pin !== -1)
+                                        v.pin = true;
+                                    else
+                                        v.pin = false;
+                                    var hide = this.hiddenArray.indexOf(v.id.toString());
+                                    if (hide !== -1)
+                                        v.hide = true;
+                                    else
+                                        v.hide = false;
+                                    return v;
+                                });
+            this.notifyPath('response');
         },
         _loading: function(){
             var loading = this.$$('#loading-box');
             loading.style.visibility = 'visible';
         },
+        _loadingFinish:function(){
+            var loading = this.$$('#loading-box');
+            loading.style.visibility = 'hidden';
+        },
         _getProperPath: function (path) {
             return this.resolveUrl('../static/img/app-img/' + path + '.png');
         },
-        _cachedToken: localStorage.getItem('cachedToken') || null,
         _getValuesRequest: function () {
-            if (this._cachedToken !== null) {
+            if (this._email !== null) {
                 this.$.AuthRequest.body = {
-                    token: this._cachedToken
+                    email: localStorage.getItem('cachedEmail')
                 };
                 this.$.AuthRequest.generateRequest();
             } else
                 console.log('Anonymous user');
         },
-        _checkAccess: function () {
-            if (this._cachedToken !== null)
-                return true;
-            return false;
-        },
         _retriveArray: function (pinString, orderString, hiddenString) {
-            this._pinArray = pinString.split(',') || [];
-            this._orderArray = orderString.split(',') || [];
-            this._hiddenArray = hiddenString.split(',') || [];
+            this.pinArray = pinString.split(',') || [];
+            this.notifyPath('pinArray');
+            this.orderArray = orderString.split(',') || [];
+            this.notifyPath('orderArray');
+            this.hiddenArray = hiddenString.split(',') || [];
+            this.notifyPath('hiddenArray');
+            this.customize = new Date();
         },
-        _pinArray: [],
         _pinAppTrigger: function (e) {
             if (e.target.className.indexOf('beChanged') === -1)
                 e.target.className += ' beChanged';
             else e.target.className = e.target.className.replace(/beChanged/g, '');
-            var foundAt = this._pinArray.indexOf(e.target.parentElement.id);
+            var foundAt = this.pinArray.indexOf(e.target.parentElement.id);
             if (foundAt === -1)
-                this._pinArray.push(e.target.parentElement.id);
+                this.pinArray.push(e.target.parentElement.id);
             else
-                this._pinArray[foundAt] = 'e';
+                this.pinArray[foundAt] = 'e';
         },
-        _orderArray: [],
         _loadSortable: function () {
             var el = this.$$('#sortable_ul');
             var polymer = this;
@@ -62,54 +108,31 @@
                 animation: 150,
                 dataIdAttr: 'id',
                 onEnd: function () {
-                    polymer._orderArray = sortable.toArray();
+                    polymer.orderArray = sortable.toArray();
                 }
             });
         },
-        _hiddenArray: [],
         _hiddenAppTrigger: function (e) {
             if (e.target.className.indexOf('beChanged') === -1)
                 e.target.className += ' beChanged';
             else e.target.className = e.target.className.replace(/beChanged/g, '');
-            var foundAt = this._hiddenArray.indexOf(e.target.parentElement.id);
+            var foundAt = this.hiddenArray.indexOf(e.target.parentElement.id);
             if (foundAt === -1)
-                this._hiddenArray.push(e.target.parentElement.id);
+                this.hiddenArray.push(e.target.parentElement.id);
             else
-                this._hiddenArray[foundAt] = 'e';
+                this.hiddenArray[foundAt] = 'e';
         },
-        _appendFields: function (item) {
-            if (this._cachedToken && this._pinArray.length > 0) {
-                var selfOrder = this._orderArray.indexOf(item.id.toString());
-                item.selfOrder = selfOrder;
-                var pin = this._pinArray.indexOf(item.id.toString());
-                if (pin !== -1)
-                    item.pin = true;
-                else
-                    item.pin = false;
-                var hide = this._hiddenArray.indexOf(item.id.toString());
-                if (hide !== -1)
-                    item.hide = true;
-                else
-                    item.hide = false;
-                return !item.hide ? item : false;
-            }
-            return true;
+        _voidFilter: function(item){
+            return item.hide != null ? item : false;
+        },
+        _hideFilter: function (item) {
+            return !item.hide ? item : false;
         },
         _pinnedFilter: function (item) {
-            if (this._cachedToken && this._pinArray.length > 0) {
-                var selfOrder = this._orderArray.indexOf(item.id.toString());
-                item.selfOrder = selfOrder;
-                var pin = this._pinArray.indexOf(item.id.toString());
-                if (pin !== -1)
-                    item.pin = true;
-                else
-                    item.pin = false;
-                return item.pin ? item : false;
-            }
-            return false;
+            return item.pin ? item : false;
         },
         _selfSort: function (a, b) {
-            if (this._cachedToken && this._orderArray.length > 0)
+            if (this.email && this.orderArray.length > 0)
                 return a.selfOrder < b.selfOrder ? -1 : 1;
             else return a.order_id < b.order_id ? -1 : 1;
         },
@@ -125,18 +148,21 @@
         _tokenRequestSend: function (e) {
             if (e.keyCode === 13) {
                 this.$.AuthRequest.body = {
-                    token: e.target.value
+                    email: e.target.value
                 };
                 this.$.AuthRequest.generateRequest();
             }
         },
         _handleAuthRequestResponse: function (response) {
             var ComponentUser = response.detail.response;
-            console.log(ComponentUser);
+            localStorage.removeItem('cachedEmail');
             if (ComponentUser !== null) {
-                localStorage.setItem('cachedToken', ComponentUser.token);
+                console.log(ComponentUser);
                 localStorage.setItem('cachedEmail', ComponentUser.email);
-                this.$.GetDataResponse.generateRequest();
+                this.checkAccess = true;
+                this.notifyPath('checkAccess');
+                this.email = localStorage.getItem('cachedEmail');
+                this.notifyPath('email');
                 this._retriveArray(ComponentUser.pin_string, ComponentUser.order_string, ComponentUser.hidden_string);
                 this._loadSortable();
             }
@@ -145,15 +171,15 @@
             console.log(error.detail);
         },
         _handleDataRequest: function (response) {
-            console.log(response.detail.response);
+            this.response = response.detail.response.objects;
         },
         _changesRequestSend: function () {
             this._loading();
-            var orderString = this._orderArray.toString();
-            var pinString = this._pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
-            var hiddenString = this._hiddenArray.toString().replace(/e,/g, '').replace(/,e/g, '');
+            var orderString = this.orderArray.toString();
+            var pinString = this.pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
+            var hiddenString = this.hiddenArray.toString().replace(/e,/g, '').replace(/,e/g, '');
             this.$.ChangesRequest.body = {
-                token: this._cachedToken,
+                email: localStorage.getItem('cachedEmail'),
                 pin_string: pinString,
                 order_string: orderString,
                 hidden_string: hiddenString
@@ -162,9 +188,10 @@
         },
         _handleChangesRequestResponse: function (response) {
             var responseDetail = response.detail.response;
-            console.log(responseDetail);
             if (response !== null) {
-                location.reload();
+                console.log('finished');
+                this.$.AuthRequest.generateRequest();
+                this._loadingFinish();
             } else console.log('Something went wrong');
         },
         _handleChangesRequestError: function (error) {
@@ -223,7 +250,6 @@
         },
         _signMeOut: function () {
             this._loading();
-            localStorage.removeItem('cachedToken');
             localStorage.removeItem('cachedEmail');
             location.reload();
         }

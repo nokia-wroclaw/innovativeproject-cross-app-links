@@ -6,14 +6,15 @@
     <title>Welcome to Cross App Links</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="icon" type="image/x-icon"> 
+    <link rel="icon" type="image/x-icon">
     <!--        BOWER PCKG-->
     <link rel="stylesheet" href="../static/bower_components/lato-font/css/lato-font.css">
     <link rel="stylesheet" href="../static/bower_components/dstyle_resetCSS/reset.min.css">
     <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!--        BOWER PCKG:END-->
     <link rel="stylesheet" href="../static/css/main.css">
-    <link rel="stylesheet" href="../static/css/loginpage.css">
+    <link rel="stylesheet" href="../static/css/popup.css">
+    <link rel="stylesheet" href="../static/css/loginpage2.css">
     <link rel="stylesheet" href="../static/css/loginpage-media.css">
 
 </head>
@@ -26,16 +27,23 @@
             Loading content...
         </span>
     </div>
-    <div class="form-container">
-        <header class="main-header">
+    <div class="project-navbar">
+        <header class="nav-header">
             <nav class="project-navigation">
                 <ul>
+                   
+                 <li class="logo"><a href="#" class="logo"><img ng-src="../static/img/logo.png"></a></li>
+                 <li class="title"><a href="#" class="logo">Cross app links</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links">Github</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links/blob/master/README.md">About</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links/blob/master/LICENSE">License</a></li>
                 </ul>
             </nav>
+            <div class="nav-download"><a ng-click="instruction = !instruction"><span class="glyphicon glyphicon-save"></span></a></div>
+            <ul class="log-in"><li><a ng-click="showform = !showform">Log in</a></li></ul>
         </header>
+    </div>
+    <div class="popup log-in" ng-show="showform">
         <div class="form-overflow" ng-if="!current_user.id">
             <header>
                 <h1>Sign in</h1>
@@ -66,26 +74,8 @@
             </div>
         </div>
     </div>
-    <div class="project-container">
-        <div class="fractal-overflow mobile-phone-h">
-            <span class="fractal blue long"></span>
-            <span class="fractal orange short"></span>
-            <span class="fractal red medium"></span>
-            <span class="fractal green medium-short break"></span>
-            <span class="fractal lightgreen long"></span>
-            <span class="fractal blue medium break"></span>
-            <span class="fractal red short"></span>
-            <span class="fractal red short break"></span>
-            <span class="fractal lightgreen long break"></span>
-            <span class="fractal blue medium-short"></span>
-            <span class="fractal red micro"></span>
-            <span class="fractal blue long break"></span>
-            <span class="fractal green short "></span>
-            <span class="fractal lightgreen medium break"></span>
-            <span class="fractal orange micro"></span>
-            <span class="fractal blue short break"></span>
-            <span class="fractal red medium break"></span>
-        </div>
+    <div class="black-bg" ng-show="showform" ng-click="showform = false"></div>
+    <!--   <div class="project-container">
         <div class="main-project-section">
             <div class="download mobile-phone-v">
                 <a href="/static/download/cross-app-links-componentv1_0_0.zip" class="button transaprent big block">
@@ -111,7 +101,7 @@
             </div>
 
         </div>
-    </div>
+    </div>-->
     <div class="app-container">
         <div class="app-overflow" ng-repeat="app in apps">
             <div class="app-img"><img ng-src="/static/img/app-img/{{app.img_link}}.png"></div>
@@ -120,9 +110,14 @@
             <a href="{{app.link}}">Checkout</a>
         </div>
     </div>
-        <footer class="main-footer">
-            <div class="copyright">Innovative projects summer 2017</div>
-        </footer>
+    
+    <div class="project-container" ng-show="instruction">
+        Download
+    </div>
+    
+    <footer class="main-footer">
+        <div class="copyright">Innovative projects summer 2017</div>
+    </footer>
 
 
     <!--        BOWER PCKG-->

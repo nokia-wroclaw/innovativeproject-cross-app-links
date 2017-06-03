@@ -461,14 +461,14 @@
                                 this.clear();
                                 $scope.statusRequestTrue();
                             });
-                            if (this.pass_verify.length > 0 && this.password.length >0 && this.password == this.pass_verify){
+                            if (this.pass_verify.length > 0 && this.password.length > 0 && this.password == this.pass_verify) {
                                 restful.post('auth/changepass', {
                                     newpass: this.password
                                 }).then(() => {
                                     window.location.reload();
                                 })
                             }
-                        } else{
+                        } else {
                             $scope.actionDataInProgress = false;
                             $scope.userFormWrongPass = true;
                         }

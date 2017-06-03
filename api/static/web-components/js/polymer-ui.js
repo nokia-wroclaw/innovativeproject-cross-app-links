@@ -83,11 +83,8 @@
         },
         _retriveArray: function (pinString, orderString, hiddenString) {
             this.pinArray = pinString.split(',') || [];
-            this.notifyPath('pinArray');
             this.orderArray = orderString.split(',') || [];
-            this.notifyPath('orderArray');
             this.hiddenArray = hiddenString.split(',') || [];
-            this.notifyPath('hiddenArray');
             this.customize = new Date();
         },
         _pinAppTrigger: function (e) {

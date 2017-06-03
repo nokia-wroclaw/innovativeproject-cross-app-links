@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     <ul class="component-ul" id="items_ul">
-                        <template id="elements" is="dom-repeat" items="{{response}}" filter="_hideFilter" sort="_selfSort">
+                        <template id="elements" is="dom-repeat" items="{{response}}" filter="_hideFilter" sort="_selfSort" observer="selfOrder">
                             <li>
                                 <a target="_blank" href="{{item.link }}">
                                     <img crossOrigin="Anonymous" src="{{_getProperPath(item.img_link)}}" on-load='_getColor' />
@@ -87,7 +87,7 @@
                     </ul>
                     <ul class="component-ul hidden" id="sortable_ul" >
                         <button on-tap="_changesRequestSend" class="button-simple">Confirm changes</button>
-                        <template id="orders" is="dom-repeat" items="{{response}}" sort='_selfSort' observer="orderArray">
+                        <template id="orders" is="dom-repeat" items="{{response}}" sort='_selfSort'>
                             <li class="order-li noselect" id="{{item.id}}">
                                 <div class="option-icon" on-tap="_pinAppTrigger" id="{{item.id}}">
                                     <span class$="{{_setAsPinned(item.pin)}}" ></span>

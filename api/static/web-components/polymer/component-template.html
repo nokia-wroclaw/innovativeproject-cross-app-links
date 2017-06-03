@@ -39,7 +39,7 @@
                     on-response="_handleDataRequest"></iron-ajax>
 
 
-        <nav class="main-nav" id="web-component-main">
+        <nav class="main-nav hidden" id="web-component-main">
             <ul class="pinned">
                     <template id="elements" is="dom-repeat" items="{{response}}" filter="_pinnedFilter" observe="pinArray">
                         <li>
@@ -55,26 +55,25 @@
                     <div class="user-label">
                             <div class="user-label-list" id="user-label-list">
                                 <template is="dom-if" if="{{!checkAccess}}">
-                                    <div class="confirm-token">
-                                        <input id="tokenValue" type="text" placeholder="Your email" name="email" on-keydown="_tokenRequestSend">
+                                    <div class="action-button" on-tap="_showEmailInput">
+                                        <span class="glyphicon glyphicon-user" ></span>
                                     </div>
                                 </template>
                                 <template is="dom-if" if="{{checkAccess}}">
-                                    <div class="confirmed-user">
-                                        <div class=" signMeOut">
+                                    <div class="action-button" on-tap="_switchView">
+                                        <span class="glyphicon glyphicon-cog"></span>
+                                    </div>
+                                        <div class="action-button">
                                             <span class="glyphicon glyphicon-log-out" on-tap="_signMeOut"></span>
                                         </div>
-                                        <div class="confirmed-user-email">
-                                           {{email}}
-                                        </div>
-                                        <span class="action-button" on-tap="_switchView">
-                                            <span class="glyphicon glyphicon-cog"></span>
-                                        </span>
-                                    </div>
+
                                 </template>
                             </div>
                         </div>
                     <ul class="component-ul" id="items_ul">
+                        <template is="dom-if" if="{{!checkAccess}}">
+                            <input id="tokenValue" type="text" placeholder="Your email" name="email" on-keydown="_tokenRequestSend">
+                        </template>
                         <template id="elements" is="dom-repeat" items="{{response}}" filter="_hideFilter" sort="_selfSort">
                             <li>
                                 <a target="_blank" href="{{item.link }}">
@@ -86,19 +85,19 @@
                         </template>
                     </ul>
                     <ul class="component-ul hidden" id="sortable_ul" >
-                        <button on-tap="_changesRequestSend" class="button-simple">Confirm changes</button>
-                        <template id="orders" is="dom-repeat" items="{{response}}" sort='_selfSort' observer="orderArray">
+                        <template id="orders" is="dom-repeat" items="{{response}}" filter="_voidFilter" sort="_selfSort" observer="pin hide">
                             <li class="order-li noselect" id="{{item.id}}">
                                 <div class="option-icon" on-tap="_pinAppTrigger" id="{{item.id}}">
-                                    <span class$="{{_setAsPinned(item.pin)}}" ></span>
+                                    <span class$="glyphicon glyphicon-pushpin val-{{item.pin}}" ></span>
                                 </div>
                                 <div class="option-icon" on-tap="_hiddenAppTrigger" id="{{item.id}}">
-                                    <span class$="{{_setAsHidden(item.hide)}}" ></span>
+                                    <span class$="glyphicon glyphicon-eye-open val-{{!item.hide}}" ></span>
                                 </div>
                                 <span class="order-li-name">{{item.name}}</span>
                                 <div class="drag-icon"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
                             </li>
                         </template>
+                        <button class="button-simple" on-tap="_sortRequestSend">Sort</button>
                     </ul>
                 </aside>
         </nav>

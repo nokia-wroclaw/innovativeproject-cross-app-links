@@ -90,7 +90,7 @@ body {
     width: auto;
     max-width: 300px;
     text-align: center;
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.02);
     padding: 0;
     margin: 0;
 }
@@ -103,7 +103,7 @@ body {
 
 .main-nav>.pinned li a {
     float: left;
-    width: 100%; 
+    width: 100%;
     display: inline-block;
     height: 100%;
     box-sizing: border-box;
@@ -149,24 +149,25 @@ body {
 }
 
 .component-overflow>.user-label {
-    float: right;
-    box-sizing: border-box;
-    width: 100%;
-    height: 60px;
-}
-
-.component-overflow>.user-label .action-button {
-    float: right;
-    width: 60px;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
+    float: right;
+    box-sizing: border-box;
+    width: 60px;
     height: 100%;
+    background: rgba(255,255,255, 0.02);
+}
+
+.component-overflow>.user-label .action-button {
+    float: left;
+    width: 60px;
+    height: 60px;
+    clear: both;
     text-align: center;
     color: #fff;
     border: 0;
-    background: #23262a;
     box-sizing: border-box;
     padding-top: 23px;
     outline: none;
@@ -178,42 +179,32 @@ body {
 }
 
 .component-overflow>.user-label>.user-label-list {
-    float: left;
-    height: 60px;
-    width: 100%;
+    float: right;
+    height: 100%;
+    width: 60px;
     position: relative;
-    background: #fff;
 }
 
-.component-overflow>.user-label>.user-label-list input,
-.component-overflow>.user-label>.user-label-list>.confirmed-user>.confirmed-user-email {
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+.component-overflow input{
+    height: 60px;
     border: none;
     float: left;
     box-sizing: border-box;
-    padding-left: 10px;
     background: #fff;
     outline: none;
     color: #000;
-    width: 70%;
+    position: fixed;
+    width: 300px;
+    right: 0;
+    top: 0;
+    left: 0;
     font-size: 20px;
     font-weight: 300;
     padding-top: 7px;
-}
+    padding-left: 7px;
+    z-index: 1002;
+    visibility: hidden;
 
-.component-overflow>.user-label>.user-label-list>.confirmed-user>.confirmed-user-email {
-    background: none;
-    color: #23262a;
-    font-weight: 400;
-    font-size: 16px;
-    text-align: left;
-    padding: 20px;
-    padding-right: 0;
-    padding-bottom: 0;
 }
 
 .component-overflow>.user-label>.user-label-list>.confirmed-user>.signMeOut {
@@ -229,13 +220,9 @@ body {
     z-index: 999;
 }
 
-.component-overflow>.user-label>.user-label-list>.confirmed-user>.confirmed-user-email>.signMeOut:hover {
-    opacity: 0.9;
-}
-
 .component-ul {
     font-family: 'Lato', sans-serif;
-    width: 100%;
+    width: 300px;
     height: auto;
     box-sizing: border-box;
     float: left;
@@ -244,18 +231,22 @@ body {
 }
 
 .component-ul>.button-simple {
-    width: 100%;
-    margin: 0 auto;
-    padding: 10px;
+    width: auto;
+    float: right;
+    border-radius: 2px;
+    padding: 5px;
+    padding-top: 7px;
     box-sizing: border-box;
-    height: 60px;
+    height: auto;
     color: #fff;
     text-align: center;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
     background: #D45A5A;
     border: 0;
     outline: none;
+    margin: 10px;
 }
 
 .component-ul>.button-simple:active {
@@ -294,7 +285,7 @@ body {
     opacity: 1;
 }
 
-.component-ul li.order-li .not-hidden, 
+.component-ul li.order-li .not-hidden,
 .component-ul li.order-li .pinned {
     color: #3fce91;
     opacity: 1;
@@ -319,9 +310,8 @@ body {
     float: left;
     padding: 10px;
     width: 100%;
-    height: 112px;
+    height: 95px;
     background-color: #D45A5A;
-    border: 1px solid rgba(255, 255, 255, 0.1);
     text-decoration: none;
     color: #222;
     box-sizing: border-box;
@@ -336,9 +326,9 @@ body {
 }
 
 .component-ul li a img {
-    height: 45px;
+    height: 35px;
     margin: 0 auto;
-    margin-top: 15px;
+    margin-top: 10px;
     display: block;
     z-index: 105;
 }
@@ -371,6 +361,10 @@ body {
     font-size: 13px;
     float: left;
     margin-right: 20px;
+}
+.component-ul li.order-li .option-icon>.val-true{
+    color: #3fce91;
+    opacity: 1;
 }
 
 .component-ul li .option-icon:hover {

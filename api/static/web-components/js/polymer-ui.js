@@ -46,7 +46,6 @@
             this._componentRequest();
             this._getValuesRequest();
             this.$.GetDataResponse.generateRequest();
-
         },
         _handleCustomizeChange: function(){
             this.response = this.response

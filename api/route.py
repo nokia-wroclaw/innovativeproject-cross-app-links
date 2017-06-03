@@ -11,6 +11,25 @@ from time import time
 from passlib.hash import sha256_crypt
 import os
 from flask_session import Session
+from functools import wraps
+from flask import request, current_app
+import socket
+
+def jsonp(func):
+    """Wraps JSONified output for JSONP requests."""
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        callback = request.args.get('callback', False)
+        if callback:
+            data = str(func(*args, **kwargs).data)
+            content = str(callback) + '(' + data + ')'
+            mimetype = 'application/javascript'
+            return current_app.response_class(content, mimetype=mimetype)
+        else:
+            return func(*args, **kwargs)
+    return decorated_function
+
+
 
 app.config['SESSION_TYPE'] = 'filesystem'
 
@@ -96,6 +115,7 @@ def auth():
 def logout():
     logout_user()
     session.pop('user', None)
+    session.pop('email', None)
     return redirect('/')
 
 
@@ -314,6 +334,13 @@ def component_user_data():
     Update your component data based on posted token.
 
 """
+@app.route('/api/get-session-user', methods=['GET'])
+@jsonp
+def ping():
+    return socket.getfqdn()
+
+
+
 
 @app.route('/api/component-user-data-update', methods=['POST'])
 @cross_origin()

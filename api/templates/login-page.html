@@ -31,11 +31,9 @@
         <header class="nav-header">
             <nav class="project-navigation">
                 <ul>
-
                     <li class="logo">
                         <a href="#" class="logo"><img ng-src="../static/img/logo.png"></a>
                     </li>
-                    <li class="title"><a href="/" class="logo">Cross app links</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links">Github</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links/blob/master/README.md">About</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links/blob/master/LICENSE">License</a></li>
@@ -45,12 +43,12 @@
 
             <ul class="log-in">
                 <li ng-show="!current_user.id"><a ng-click="showform = !showform">Sign in</a></li>
-                <li ng-show="current_user.id"><a ng-click="popup = !popup">Hello, {{current_user.username}}</a></li>
+                <li ng-show="current_user.id"><a ng-click="showform = !showform"><img class="user-avatar" src="/static/img/avatars/avatar_{{current_user.id}}.png"></a></li>
             </ul>
 
         </header>
     </div>
-    <div class="popup log-in" ng-show="showform && !current_user.id">
+    <div class="popup log-in" ng-show="showform && !current_user.id || isFailure()">
         <div class="form-overflow">
             <header>
                 <h1>Sign in</h1>
@@ -70,7 +68,7 @@
             </form>
         </div>
     </div>
-    <div class="popup log-in" ng-show="current_user.id && popup">
+    <div class="popup log-in" ng-show="showform && current_user.id">
         <div class="user-overflow">
             <div class="user-avatar"><img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}"></div>
             <div class="user-info">
@@ -83,35 +81,7 @@
             </div>
         </div>
     </div>
-    <div class="black-bg" ng-show="showform" ng-click="showform=false"></div>
-    <div class="black-bg" ng-show="current_user.id && popup" ng-click="popup = false"></div>
-    <!--   <div class="project-container">
-        <div class="main-project-section">
-            <div class="download mobile-phone-v">
-                <a href="/static/download/cross-app-links-componentv1_0_0.zip" class="button transaprent big block">
-                    <span class="glyphicon glyphicon-save"></span>Download component
-                </a>
-            </div>
-            <div class="tablet-preview mobile-phone-h">
-                <div class="tablet-screen">
-                    <header class="project-header">
-                        <div class="logo"><img ng-src="../static/img/logo.png"></div>
-                        <h1 class="site-name">Cross app links</h1>
-                    </header>
-                    <div class="the-component">
-                        <h2>Click below to get the component.
-                            <div class="download-button">
-                                <a href="/static/download/cross-app-links-componentv1_0_0.zip" class="button green big bordered">
-                                    <span class="glyphicon glyphicon-save"></span>Download files
-                                </a>
-                            </div>
-                    </div>
-                </div>
-                <span class="tablet-button"></span>
-            </div>
-
-        </div>
-    </div>-->
+    <div class="black-bg" ng-show="showform || isFailure()" ng-click="showform=false"></div>
     <div class="app-container">
         <div class="app-overflow" ng-repeat="app in apps">
             <div class="app-img"><img ng-src="/static/img/app-img/{{app.img_link}}.png"></div>
@@ -122,14 +92,22 @@
     </div>
 
     <div class="project-container" ng-show="instruction">
-        <div class="the-component">
-            <h2>Click below to get the component.
-                <div class="download-button">
-                    <a href="/static/download/cross-app-links-componentv1_0_0.zip" class="button green big bordered">
-                        <span class="glyphicon glyphicon-save"></span>Download files
-                    </a>
-                </div>
-        </div>
+        <h3 class="pull-left">Install component</h3>
+        <article>
+            <p>These package includes javascript documents and index file.
+                To append the component to your website you have to copy lines from index placed between:</p>
+            <span class="code comment"
+                    ng-init = "component_tag_comment = '<!--POLYMER COMPONENT --><!--POLYMER COMPONENT: END -->'">
+                    {{component_tag_comment}}
+            </span>
+            <p>Imported code will be shown inside following tag:</p>
+            <span class="code"
+                    ng-init="component_tag= '<web-component></web-compnent>'">
+                {{component_tag}}
+            </span>
+        </article>
+        <a href="/static/download/cross-app-links-componentv1_0_0.zip" class="download-button">Download</a>
+
     </div>
 
     <footer class="main-footer">

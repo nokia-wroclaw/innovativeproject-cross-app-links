@@ -1,16 +1,23 @@
     body {
-        height: 100%;
+        height: 100vh;
+        float: left;
         font-family: 'Lato';
-        background: #f0f0f0; //url('/static/img/loginpage/2144.jpg');
+        background: darken(white,1.5%);
         background-size: cover;
+        padding-top: 80px;
     }
-    
+
+    .black-bg{
+        background: #D45A5A;
+        opacity: 0.8;
+    }
+
     .project-navbar {
         width: 100%;
         .nav-header {
             position: fixed;
-            height: 60px;
-            background: #f0f0f0;
+            height: 80px;
+            background: #fff;
             width: 100%;
             clear: both;
             float: left;
@@ -18,20 +25,19 @@
             top: 0;
             left: 0;
             right: 0;
-            box-shadow: 0 1px 3px lighten(#ccc, 10%);
-            border-bottom: 1px #e1e4e8 solid;
+            box-shadow: 0 -2px 10px lighten(#888, 5%);
         }
         .nav-download {
             float: right;
-            background-color: #D45A5A;
             border-radius: 5px;
             padding: 15px;
-            margin: 5px 5px;
-            width: 50px;
-            height: 50px;
+            margin: 0px 30px;
+            margin-top: 13px;
+            width: auto;
+            height: 100%;
             a {
                 text-decoration: none;
-                color: #404040;
+                color: #D45A5A;
                 span {
                     font-size: 20px;
                 }
@@ -40,10 +46,13 @@
         .project-navigation {
             float: left;
             height: 100%;
+            padding-top: 12px;
+            box-sizing: border-box;
             ul {
                 float: left;
                 width: 100%;
                 margin: 0;
+                height: 100%;
                 li {
                     display: inline-block;
                     box-sizing: border-box;
@@ -51,12 +60,12 @@
                     padding-bottom: 0;
                     float: left;
                     text-align: center;
-                    &.logo {
-                        padding-right: 0;
-                    }
-                    &.title {
-                        padding-left: 0;
+                    height: 100%;
+                    &.logo{
                         margin-right: 20px;
+                        margin-top: 15px;
+                        padding: 0 20px;
+
                     }
                     a {
                         display: block;
@@ -65,6 +74,10 @@
                         width: 100%;
                         text-decoration: none;
                         color: #414141;
+                        height: 100%;
+                        &:hover{
+                            border-bottom: 2px solid #D45A5A;
+                        }
                         &.logo {
                             position: relative;
                             font-size: 12px;
@@ -72,12 +85,6 @@
                             width: 100%;
                             text-decoration: none;
                             margin-left: 12px;
-                            margin-top: 9px;
-                            img {
-                                position: absolute;
-                                float: left;
-                                bottom: -10px;
-                            }
                         }
                     }
                 }
@@ -86,6 +93,7 @@
         .log-in {
             float: right;
             margin: 0;
+            margin-top: 10px;
             li {
                 display: inline-block;
                 box-sizing: border-box;
@@ -93,6 +101,16 @@
                 padding-bottom: 0;
                 float: left;
                 text-align: center;
+                img.user-avatar{
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    position: relative;
+                    bottom: 5px;
+                    &:hover{
+                        opacity: 0.6;
+                    }
+                }
                 a {
                     display: block;
                     font-size: 16px;
@@ -104,11 +122,11 @@
             }
         }
     }
-    
+
     .app-container {
         float: left;
         padding: 120px;
-        background: darken(white, 2%);
+        background: darken(white,1.5%);
         width: 100%;
         .app-overflow {
             text-align: center;
@@ -117,7 +135,7 @@
             padding: 4%;
             width: 25%;
             height: 270px;
-            margin-bottom: 100px;
+            margin-bottom: 80px;
             overflow: hidden;
             .app-img {
                 width: 100%;
@@ -125,34 +143,35 @@
                 margin-bottom: 30px;
                 text-align: center;
                 img {
-                    width: 70px;
-                    height: 70px;
+                    width: 45px;
+                    height: 45px;
                 }
             }
             .app-name {
-                font-size: 24px;
+                font-size: 18px;
                 font-weight: 400;
                 margin-bottom: 15px;
             }
             .app-desc {
-                font-size: 18px;
+                font-size: 14px;
                 font-weight: 300;
             }
         }
     }
-    
+
     .popup {
+        width: 340px;
         &.log-in {
             padding: 23px;
             background-color: rgba(255, 255, 255, 0.98);
             margin-top: 5%;
-            border-radius: 5px;
+            border-radius: 2px;
             .form-overflow,
             .user-overflow {
                 header {
                     h1 {
                         margin-bottom: 35px;
-                        font-size: 35px;
+                        font-size: 22px;
                     }
                     .login-failure {
                         opacity: 0.7;
@@ -170,8 +189,6 @@
                     overflow: hidden;
                     height: auto;
                     margin-bottom: 40px;
-                    padding-left: 40px;
-                    padding-right: 40px;
                     .label {
                         clear: both;
                         width: 100%;
@@ -264,20 +281,61 @@
             }
         }
     }
-    
+
     .project-container,
     {
         position: fixed;
         float: right;
-        width: 33.3333%;
+        width: 360px;
+        padding: 20px;
         box-sizing: border-box;
         right: 0;
-        top: 60px;
+        top: 80px;
         bottom: 0;
-        background-color: #fff;
-        box-shadow: inset 7px 0px 0px -5px rgba(0, 0, 0, 0.04);
+        background-color: #D45A5A;
+        height: 100%;
+        z-index: 9999999999999999;
+        h3{
+            color: rgba(0,0,0,0.4);
+            margin-bottom: 20px;
+        }
+        article{
+            color: #fff;
+            float: left;
+            width: 100%;
+            font-size: 14px;
+            p{float: left;margin: 0;}
+            .code{
+                color: lighten(cornflowerblue, 5%);
+                background: #34313d;
+                padding: 7px;
+                font-size: 12px;
+                border-radius: 2px;
+                clear: both;
+                margin: 20px 0;
+                float: left;
+                &.comment{
+                    color: lighten(#34313d, 40%);
+                    font-size: 9px;
+                }
+            }
+        }
+        .download-button{
+            clear: both;
+            float: left;
+            width: 100%;
+            margin-top: 40px;
+            color :#fff;
+            background: transparent;
+            padding: 14px 7px;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+
+        }
     }
-    
+
     .the-component {
         float: left;
         width: 100%;
@@ -311,14 +369,18 @@
             }
         }
     }
-    
+
     footer.main-footer {
+        float: left;
+        width: 100%;
         background: #34313d;
+        box-sizing: border-box;
+        padding: 20px 0;
         .copyright {
             float: left;
             text-transform: uppercase;
             font-size: 15px;
-            color: #414141;
+            color: #fff;
             font-weight: 500;
             margin-top: 8px;
             padding: 0;

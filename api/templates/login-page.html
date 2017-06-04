@@ -31,20 +31,27 @@
         <header class="nav-header">
             <nav class="project-navigation">
                 <ul>
-                   
-                 <li class="logo"><a href="#" class="logo"><img ng-src="../static/img/logo.png"></a></li>
-                 <li class="title"><a href="#" class="logo">Cross app links</a></li>
+
+                    <li class="logo">
+                        <a href="#" class="logo"><img ng-src="../static/img/logo.png"></a>
+                    </li>
+                    <li class="title"><a href="#" class="logo">Cross app links</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links">Github</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links/blob/master/README.md">About</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links/blob/master/LICENSE">License</a></li>
                 </ul>
             </nav>
             <div class="nav-download"><a ng-click="instruction = !instruction"><span class="glyphicon glyphicon-save"></span></a></div>
-            <ul class="log-in"><li><a ng-click="showform = !showform">Log in</a></li></ul>
+
+            <ul class="log-in">
+                <li ng-show="!current_user.id"><a ng-click="showform = !showform">Sign in</a></li>
+                <li ng-show="current_user.id"><a ng-click="showform = !showform">Hello, {{current_user.username}}</a></li>
+            </ul>
+
         </header>
     </div>
-    <div class="popup log-in" ng-show="showform">
-        <div class="form-overflow" ng-if="!current_user.id">
+    <div class="popup log-in" ng-show="showform && !current_user.id">
+        <div class="form-overflow">
             <header>
                 <h1>Sign in</h1>
                 <span class="login-failure" ng-show="isFailure()">Incorrect email or/and password!</span>
@@ -62,7 +69,9 @@
                 <button type="submit" class="button blue auto pull-right">Sign in</button>
             </form>
         </div>
-        <div class="user-overflow" ng-if="current_user.id">
+    </div>
+    <div class="popup log-in" ng-show="showform && current_user.id">
+        <div class="user-overflow">
             <div class="user-avatar"><img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}"></div>
             <div class="user-info">
                 <span class="username">@{{current_user.username}}</span>
@@ -110,11 +119,18 @@
             <a href="{{app.link}}">Checkout</a>
         </div>
     </div>
-    
+
     <div class="project-container" ng-show="instruction">
-        Download
+        <div class="the-component">
+            <h2>Click below to get the component.
+                <div class="download-button">
+                    <a href="/static/download/cross-app-links-componentv1_0_0.zip" class="button green big bordered">
+                        <span class="glyphicon glyphicon-save"></span>Download files
+                    </a>
+                </div>
+        </div>
     </div>
-    
+
     <footer class="main-footer">
         <div class="copyright">Innovative projects summer 2017</div>
     </footer>

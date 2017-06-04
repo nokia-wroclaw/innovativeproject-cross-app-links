@@ -27,7 +27,7 @@
             Loading content...
         </span>
     </div>
-    <div class="project-navbar">
+    <div class="project-navbar" ng-init="popup=true">
         <header class="nav-header">
             <nav class="project-navigation">
                 <ul>
@@ -35,7 +35,7 @@
                     <li class="logo">
                         <a href="#" class="logo"><img ng-src="../static/img/logo.png"></a>
                     </li>
-                    <li class="title"><a href="#" class="logo">Cross app links</a></li>
+                    <li class="title"><a href="/" class="logo">Cross app links</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links">Github</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links/blob/master/README.md">About</a></li>
                     <li><a href="https://github.com/nokia-wroclaw/innovativeproject-cross-app-links/blob/master/LICENSE">License</a></li>
@@ -45,7 +45,7 @@
 
             <ul class="log-in">
                 <li ng-show="!current_user.id"><a ng-click="showform = !showform">Sign in</a></li>
-                <li ng-show="current_user.id"><a ng-click="showform = !showform">Hello, {{current_user.username}}</a></li>
+                <li ng-show="current_user.id"><a ng-click="popup = !popup">Hello, {{current_user.username}}</a></li>
             </ul>
 
         </header>
@@ -56,7 +56,7 @@
                 <h1>Sign in</h1>
                 <span class="login-failure" ng-show="isFailure()">Incorrect email or/and password!</span>
             </header>
-            <form action="/api/auth" method="POST">
+            <form action="/api/auth" method="POST" ng-submit="showWelcome=true">
                 <div class="input-overflow">
                     <span class="label">Email address</span>
                     <input type="email" name="email" placeholder="Type here" required>
@@ -70,7 +70,7 @@
             </form>
         </div>
     </div>
-    <div class="popup log-in" ng-show="showform && current_user.id">
+    <div class="popup log-in" ng-show="current_user.id && popup">
         <div class="user-overflow">
             <div class="user-avatar"><img ng-src="../static/img/avatars/{{current_user.avatar_url}}.png?{{todayDateTime.getTime()}}"></div>
             <div class="user-info">
@@ -83,7 +83,8 @@
             </div>
         </div>
     </div>
-    <div class="black-bg" ng-show="showform" ng-click="showform = false"></div>
+    <div class="black-bg" ng-show="showform" ng-click="showform=false"></div>
+    <div class="black-bg" ng-show="current_user.id && popup" ng-click="popup = false"></div>
     <!--   <div class="project-container">
         <div class="main-project-section">
             <div class="download mobile-phone-v">

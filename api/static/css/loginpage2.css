@@ -59,16 +59,17 @@ body {
           text-decoration: none;
           color: #414141; }
           .project-navbar .project-navigation ul li a.logo {
-            font-size: 10px;
-            font-weight: 700;
+            position: relative;
+            font-size: 12px;
+            font-weight: 600;
             width: 100%;
-            text-decoration: none; }
+            text-decoration: none;
+            margin-left: 12px;
+            margin-top: 9px; }
             .project-navbar .project-navigation ul li a.logo img {
-              width: 30px;
-              height: 30px;
-              margin-left: 15px;
+              position: absolute;
               float: left;
-              margin-bottom: 10px; }
+              bottom: -10px; }
   .project-navbar .log-in {
     float: right;
     margin: 0; }
@@ -119,7 +120,9 @@ body {
 
 .popup.log-in {
   padding: 23px;
-  background: #fff; }
+  background-color: rgba(255, 255, 255, 0.98);
+  margin-top: 5%;
+  border-radius: 5px; }
   .popup.log-in .form-overflow header h1,
   .popup.log-in .user-overflow header h1 {
     margin-bottom: 35px;
@@ -199,7 +202,7 @@ body {
       font-weight: 600;
       color: #77a5e3;
       margin-top: 20px;
-      margin-bottom: 40px; }
+      margin-bottom: 30px; }
     .popup.log-in .user-overflow .user-info .info-row {
       color: #ccc;
       width: 50%;
@@ -213,10 +216,13 @@ body {
       width: 50%;
       text-align: center;
       display: block;
-      margin: 0 auto; }
+      margin: 0 auto;
+      margin-top: 20px; }
       .popup.log-in .user-overflow .user-info .buttons .button {
-        margin-top: 30px;
-        width: 100%; }
+        margin-top: 10px;
+        width: 100%;
+        text-decoration: none;
+        float: left; }
 
 .project-container {
   position: fixed;

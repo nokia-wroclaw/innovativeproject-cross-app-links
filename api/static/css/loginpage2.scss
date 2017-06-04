@@ -66,16 +66,17 @@
                         text-decoration: none;
                         color: #414141;
                         &.logo {
-                            font-size: 10px;
-                            font-weight: 700;
+                            position: relative;
+                            font-size: 12px;
+                            font-weight: 600;
                             width: 100%;
                             text-decoration: none;
+                            margin-left: 12px;
+                            margin-top: 9px;
                             img {
-                                width: 30px;
-                                height: 30px;
-                                margin-left: 15px;
+                                position: absolute;
                                 float: left;
-                                margin-bottom: 10px;
+                                bottom: -10px;
                             }
                         }
                     }
@@ -143,7 +144,9 @@
     .popup {
         &.log-in {
             padding: 23px;
-            background: #fff;
+            background-color: rgba(255, 255, 255, 0.98);
+            margin-top: 5%;
+            border-radius: 5px;
             .form-overflow,
             .user-overflow {
                 header {
@@ -232,7 +235,7 @@
                         font-weight: 600;
                         color: #77a5e3;
                         margin-top: 20px;
-                        margin-bottom: 40px;
+                        margin-bottom: 30px;
                     }
                     .info-row {
                         color: #ccc;
@@ -249,9 +252,12 @@
                         text-align: center;
                         display: block;
                         margin: 0 auto;
+                        margin-top: 20px;
                         .button {
-                            margin-top: 30px;
+                            margin-top: 10px;
                             width: 100%;
+                            text-decoration: none;
+                            float: left;
                         }
                     }
                 }
@@ -259,7 +265,8 @@
         }
     }
     
-    .project-container {
+    .project-container,
+    {
         position: fixed;
         float: right;
         width: 33.3333%;

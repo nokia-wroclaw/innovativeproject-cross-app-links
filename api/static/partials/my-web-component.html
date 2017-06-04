@@ -1,0 +1,25 @@
+<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
+    <div class="box">
+        <div class="component-description">
+            <h4>Become a component user and customize view inside the component!</h4>
+            <ul>
+                <li><span class="glyphicon glyphicon-ok"></span> Pin your favourites applications</li>
+                <li><span class="glyphicon glyphicon-ok"></span> Hide these you don't enjoy</li>
+                <li><span class="glyphicon glyphicon-ok"></span> Change their order</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<if ng-if="!isComponentUser">
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <div class="button blue big pull-left"
+             ng-click="user_inf.becomeComponentUser(current_user.email)">Become a component user</div>
+    </div>
+</if>
+<if ng-if="isComponentUser">
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <h3 class="pull-left">You are authenticated.</p>
+        <h4 class="pull-left">Here is your token:</h4>
+        <span class="my-web-component-token">{{current_user.component_user_id + current_user.token}}</span>
+    </div>
+</if>

@@ -138,4 +138,4 @@ Cross app links is a part of innovative projects summer 2017, it's created by st
 - [Maciej Szwarc](https://github.com/lozohcum)
 - [Vladyslav Strinada](https://github.com/vladstrinada)
 - [Bartłomiej Wach](https://github.com/Waszislaw)
-- [Malwina Żegleń](https://github.com/malwina-zeglen)
+- [Malwina Żegleń](https://github.com/grihiba)

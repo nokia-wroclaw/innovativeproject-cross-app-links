@@ -2,7 +2,7 @@
     body {
         height: 100%;
     }
-    
+
     h1,
     h2,
     h3,
@@ -12,7 +12,7 @@
         padding: 0;
         margin: 0;
     }
-    
+
     body {
         padding: 0;
         margin: 0;
@@ -21,7 +21,7 @@
         background-attachment: fixed;
         overflow: hidden;
     }
-    
+
     @keyframes spinner {
         from {
             transform: rotateZ(0);
@@ -37,7 +37,7 @@
             border-radius: 100%;
         }
     }
-    
+
     .loading {
         position: fixed;
         width: 100%!important;
@@ -81,34 +81,34 @@
 .view-loader{
     opacity: 0.9;
 }
-    
+
     .clear {
         clear: both;
     }
-    
+
     .container-fluid {
         padding: 0;
         margin: 0;
         background: #f0f0f0;
         transition: 0.3s ease;
     }
-    
+
     .container {
         width: 68.8%;
         box-sizing: border-box;
         // margin: 0 auto;
         transition: 0.3s ease;
     }
-    
+
     .row {
         padding: 0;
         margin: 0;
     }
-    
+
     .no-padding {
         padding: 0;
     }
-    
+
     [ng\:cloak],
     [ng-cloak],
     [data-ng-cloak],
@@ -118,7 +118,7 @@
         display: none !important;
     }
     /*WEBSITE */
-    
+
     .main-header {
         height: auto;
         background: darken(white, 2%);
@@ -285,7 +285,7 @@
             }
         }
     }
-    
+
     .main-navigation {
         position: fixed;
         top: 90px;
@@ -354,12 +354,12 @@
             }
         }
     }
-    
+
     .main-content {
         padding: 20px 10px;
         box-sizing: border-box;
     }
-    
+
     .user-profile-main {
         padding: 20px;
         .user-profile-avatar {
@@ -408,14 +408,14 @@
             }
         }
     }
-    
+
     .user-profile-stat {
         .site-stat {
             padding-top: 30px;
         }
     }
     /*BOX STYLESHEET*/
-    
+
     .box {
         padding: 20px;
         box-sizing: border-box;
@@ -737,7 +737,7 @@
                 font-size: 18px;
                 .input-file-choose {
                     opacity: 0.8;
-                    
+
                     &:hover {
                         opacity: 0.8;
                     }
@@ -829,7 +829,7 @@
             box-shadow: none;
         }
     }
-    
+
     .single-input {
         width: auto;
         input[type=text],
@@ -854,7 +854,7 @@
             padding: 10px;
         }
     }
-    
+
     .row {
         .row-buried {
             padding: 0;
@@ -866,7 +866,7 @@
             }
         }
     }
-    
+
     .button {
         outline: none;
         padding: 10px;
@@ -928,17 +928,23 @@
                 margin-left: 10px;
             }
         }
+        &.big{
+            font-size: 18px;
+            padding: 11px;
+            font-weight: 600;
+            width: 100%;
+        }
     }
-    
+
     .no-box-el {
         margin-bottom: 20px;
     }
-    
+
     .no-stylus {
         background: none;
         box-shadow: none;
     }
-    
+
 @keyframes hideOnTimeAnimation {
     to{
         transform: translateY(100%);

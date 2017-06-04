@@ -148,6 +148,18 @@
             me: function () {
                 restful.get('me/user').then((response) => {
                     $scope.current_user = response['objects'][0];
+                    restful.get('component_user?q={"filters":[{"name":"email","op":"eq","val":"'+$scope.current_user.email+'"}]}')
+                            .then((response)=>{
+                                $scope.isComponentUser = response['objects'][0] ? true : false;
+                                console.log($scope.isComponentUser);
+                                if($scope.isComponentUser){
+                                    $scope.current_user.token = response['objects'][0].token;
+                                    $scope.current_user.component_user_id = response['objects'][0].id;
+                                    console.log($scope.current_user);
+                                    $scope.actionDataInProgress = false;
+                                }
+                            })
+
                 });
             },
             apps: function () {
@@ -475,6 +487,21 @@
                     });
                 }
             },
+            becomeComponentUser: function(email){
+                $scope.actionDataInProgress = true;
+                var token = Math.floor((Math.random() * 999999) + 1);
+
+                var ComponentUserObj = {
+                    email: email,
+                    token: token
+                }
+
+                restful.post('component_user', ComponentUserObj)
+                        .then((response)=>{
+                            console.log(response);
+                            update.me();
+                        });
+            },
             clear: function () {
                 this.password = '';
                 this.current_pass = '';
@@ -589,7 +616,7 @@
             return app_count
         };
         /*
-        If you use some variables in a couple places you probably 
+        If you use some variables in a couple places you probably
         want to reset them when you leave a page. That's why you should put
         those variables/functions below.
         */

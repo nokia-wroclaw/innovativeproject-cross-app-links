@@ -184,9 +184,9 @@ class ComponentUser(db.Model):
     pin_string = db.Column(db.String)
     hidden_string = db.Column(db.String)
 
-    def __init__(self, email):
+    def __init__(self, email, token):
         self.email = email
-        self.token = str(uuid.uuid4())
+        self.token = token
         self.order_string = ''
         self.pin_string = ''
         self.hidden_string = ''

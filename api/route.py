@@ -53,7 +53,8 @@ index_content_list = [
     'ver',
     'profile',
     'usercp',
-    'components'
+    'components',
+    'my-web-component'
 ]
 
 #Login manager
@@ -83,6 +84,14 @@ def before_request():
     If password or email is incorrect user is redirected to the same page.
 
 """
+
+@app.route('/delete-this')
+def delete_this():
+    invites = ComponentUser.query.all()
+    for invite in invites:
+        db.session.delete(invite)
+        #db.session.commit()
+    return str(len(invites))
 
 @app.route('/api/auth', methods=['POST'])
 def auth():
@@ -302,12 +311,6 @@ def component(component_type):
 
 """
 
-    Creating a web-component token for additional access
-
-"""
-
-"""
-
     Get your personal data (for component) based on posted token.
     If token is correct return data.
 
@@ -318,10 +321,15 @@ def component(component_type):
 @cross_origin()
 def component_user_data():
         data = request.get_json()
-        active = True
-        user = ComponentUser.query.filter_by(email=data['email']).first()
-        if active and user:
+        passed_value = data['passed_value']
+        passed_value = str(passed_value)
+        id = passed_value[:2]
+        token = passed_value[2:]
+
+        user = ComponentUser.query.filter_by(token=token).first()
+        if user and str(user.id) == id:
             component_user_obj = {}
+            component_user_obj['token'] = str(user.id) + user.token
             component_user_obj['email'] = user.email
             component_user_obj['pin_string'] = user.pin_string
             component_user_obj['order_string'] = user.order_string
@@ -329,26 +337,25 @@ def component_user_data():
             return jsonify(component_user_obj)
         return str(False)
 
+
 """
 
     Update your component data based on posted token.
 
 """
-@app.route('/api/get-session-user', methods=['GET'])
-@jsonp
-def ping():
-    return socket.getfqdn()
-
-
 
 
 @app.route('/api/component-user-data-update', methods=['POST'])
 @cross_origin()
 def component_user_data_update():
     data = request.get_json()
-    active = True
-    user = ComponentUser.query.filter_by(email=data['email']).first()
-    if active and user:
+    passed_value = data['passed_value']
+    passed_value = str(passed_value)
+    id = passed_value[:2]
+    token = passed_value[2:]
+
+    user = ComponentUser.query.filter_by(token=token).first()
+    if user and str(user.id) == id:
         user.pin_string = data['pin_string']
         user.order_string = data['order_string']
         user.hidden_string = data['hidden_string']

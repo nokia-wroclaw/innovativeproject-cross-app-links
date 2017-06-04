@@ -72,7 +72,7 @@
                         </div>
                     <ul class="component-ul" id="items_ul">
                         <template is="dom-if" if="{{!checkAccess}}">
-                            <input id="tokenValue" type="text" placeholder="Your email" name="email" on-keydown="_tokenRequestSend">
+                            <input id="tokenValue" type="number" placeholder="Eight Digit Number" name="email" on-keydown="_tokenRequestSend">
                         </template>
                         <template id="elements" is="dom-repeat" items="{{response}}" filter="_hideFilter" sort="_selfSort">
                             <li>
@@ -85,7 +85,7 @@
                         </template>
                     </ul>
                     <ul class="component-ul hidden" id="sortable_ul" >
-
+                        <span class="user-email"><span class="glyphicon glyphicon-user"></span>{{email}}</span>
                         <template id="orders" is="dom-repeat" items="{{response}}" filter="_voidFilter" sort="_selfSort" observer="pin hide">
                             <li class="order-li noselect" id="{{item.id}}">
                                 <div class="option-icon" on-tap="_pinAppTrigger" id="{{item.id}}">

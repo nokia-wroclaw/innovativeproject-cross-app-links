@@ -7,6 +7,10 @@
                 type: String,
                 value: '',
             },
+            token: {
+                type: String,
+                value: '',
+            },
             response: {
                 type: Array,
                 value: [],
@@ -88,9 +92,9 @@
             return this.resolveUrl('../static/img/app-img/' + path + '.png');
         },
         _getValuesRequest: function () {
-            if (this._email !== null) {
+            if (localStorage.getItem('cachedToken') !== null) {
                 this.$.AuthRequest.body = {
-                    email: localStorage.getItem('cachedEmail')
+                    passed_value: localStorage.getItem('cachedToken')
                 };
                 this.$.AuthRequest.generateRequest();
             } else
@@ -147,7 +151,7 @@
             return item.pin ? item : false;
         },
         _selfSort: function (a, b) {
-            if (this.email && this.orderArray.length > 0)
+            if (this.token && this.orderArray.length > 0)
                 return a.selfOrder < b.selfOrder ? -1 : 1;
             else return a.order_id < b.order_id ? -1 : 1;
         },
@@ -163,7 +167,7 @@
         _tokenRequestSend: function (e) {
             if (e.keyCode === 13) {
                 this.$.AuthRequest.body = {
-                    email: e.target.value
+                    passed_value: e.target.value
                 };
                 this.$.AuthRequest.generateRequest();
             }
@@ -171,14 +175,18 @@
         _handleAuthRequestResponse: function (response) {
             var ComponentUser = response.detail.response;
             localStorage.removeItem('cachedEmail');
+            localStorage.removeItem('cachedToken');
             if (ComponentUser !== null) {
                 this._loadSortable();
-                console.log(ComponentUser);
+                console.log('You have been logged in successfully')
                 localStorage.setItem('cachedEmail', ComponentUser.email);
+                localStorage.setItem('cachedToken', ComponentUser.token);
                 this.checkAccess = true;
                 this.notifyPath('checkAccess');
                 this.email = localStorage.getItem('cachedEmail');
+                this.token = localStorage.getItem('cachedToken')
                 this.notifyPath('email');
+                this.notifyPath('token');
                 this._retriveArray(ComponentUser.pin_string, ComponentUser.order_string, ComponentUser.hidden_string);
 
             }
@@ -198,7 +206,7 @@
             var pinString = this.pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
             var hiddenString = this.hiddenArray.toString().replace(/e,/g, '').replace(/,e/g, '');
             this.$.ChangesRequest.body = {
-                email: localStorage.getItem('cachedEmail'),
+                passed_value: localStorage.getItem('cachedToken'),
                 pin_string: pinString,
                 order_string: orderString,
                 hidden_string: hiddenString
@@ -211,7 +219,7 @@
             var pinString = this.pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
             var hiddenString = this.hiddenArray.toString().replace(/e,/g, '').replace(/,e/g, '');
             this.$.ChangesRequest.body = {
-                email: localStorage.getItem('cachedEmail'),
+                passed_value: localStorage.getItem('cachedToken'),
                 pin_string: pinString,
                 order_string: orderString,
                 hidden_string: hiddenString
@@ -286,6 +294,7 @@
         _signMeOut: function () {
             this._loading();
             localStorage.removeItem('cachedEmail');
+            localStorage.removeItem('cachedToken');
             location.reload();
         }
     });

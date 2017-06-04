@@ -323,8 +323,12 @@ def component_user_data():
         data = request.get_json()
         passed_value = data['passed_value']
         passed_value = str(passed_value)
-        id = passed_value[:2]
-        token = passed_value[2:]
+        if len(passed_value) == 8:
+            id = passed_value[:2]
+            token = passed_value[2:]
+        else:
+            id = passed_value[:1]
+            token = passed_value[1:]
 
         user = ComponentUser.query.filter_by(token=token).first()
         if user and str(user.id) == id:
@@ -351,8 +355,12 @@ def component_user_data_update():
     data = request.get_json()
     passed_value = data['passed_value']
     passed_value = str(passed_value)
-    id = passed_value[:2]
-    token = passed_value[2:]
+    if len(passed_value) == 8:
+        id = passed_value[:2]
+        token = passed_value[2:]
+    else:
+        id = passed_value[:1]
+        token = passed_value[1:]
 
     user = ComponentUser.query.filter_by(token=token).first()
     if user and str(user.id) == id:

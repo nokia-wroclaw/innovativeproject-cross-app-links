@@ -9,7 +9,11 @@
             },
             response: {
                 type: Array,
-                value: []
+                value: [],
+            },
+            sorted_response: {
+                type: Array,
+                value: [],
             },
             pinnedResponse:{
                 type: Array,
@@ -38,13 +42,14 @@
             }
         },
         ready: function () {
+            this._loading();
             this._componentRequest();
             this._getValuesRequest();
             this.$.GetDataResponse.generateRequest();
         },
         _handleCustomizeChange: function(){
             this.response = this.response
-                                .map(v=>{
+                                .map((v)=>{
                                     var selfOrder = this.orderArray.indexOf(v.id.toString());
                                     v.selfOrder = selfOrder;
                                     var pin = this.pinArray.indexOf(v.id.toString());
@@ -59,7 +64,11 @@
                                         v.hide = false;
                                     return v;
                                 });
-            this.notifyPath('response');
+            this.notifyPath('response', this.response);
+            this._loadingFinish();
+        },
+        _showPolymer: function(){
+            this.$$('#web-component-main').className = 'main-nav';
         },
         _loading: function(){
             var loading = this.$$('#loading-box');
@@ -68,6 +77,12 @@
         _loadingFinish:function(){
             var loading = this.$$('#loading-box');
             loading.style.visibility = 'hidden';
+        },
+        _showEmailInput: function(){
+            var input = this.$$('#tokenValue');
+            if(input.style.visibility == 'visible')
+                input.style.visibility = 'hidden';
+            else input.style.visibility = 'visible';
         },
         _getProperPath: function (path) {
             return this.resolveUrl('../static/img/app-img/' + path + '.png');
@@ -88,14 +103,15 @@
             this.customize = new Date();
         },
         _pinAppTrigger: function (e) {
-            if (e.target.className.indexOf('beChanged') === -1)
-                e.target.className += ' beChanged';
-            else e.target.className = e.target.className.replace(/beChanged/g, '');
+            if (e.target.className.indexOf('val-true') === -1)
+                e.target.className += ' val-true';
+            else e.target.className = e.target.className.replace(/val-true/g, 'val-false');
             var foundAt = this.pinArray.indexOf(e.target.parentElement.id);
             if (foundAt === -1)
                 this.pinArray.push(e.target.parentElement.id);
             else
                 this.pinArray[foundAt] = 'e';
+            this._changesRequestSend();
         },
         _loadSortable: function () {
             var el = this.$$('#sortable_ul');
@@ -110,17 +126,19 @@
             });
         },
         _hiddenAppTrigger: function (e) {
-            if (e.target.className.indexOf('beChanged') === -1)
-                e.target.className += ' beChanged';
-            else e.target.className = e.target.className.replace(/beChanged/g, '');
+
+            if (e.target.className.indexOf('val-true') === -1)
+                e.target.className += ' val-true';
+            else e.target.className = e.target.className.replace(/val-true/g, 'val-false');
             var foundAt = this.hiddenArray.indexOf(e.target.parentElement.id);
             if (foundAt === -1)
                 this.hiddenArray.push(e.target.parentElement.id);
             else
                 this.hiddenArray[foundAt] = 'e';
+            this._changesRequestSend();
         },
         _voidFilter: function(item){
-            return item.hide != null ? item : false;
+            return item.hide !== null ? item : false;
         },
         _hideFilter: function (item) {
             return !item.hide ? item : false;
@@ -154,6 +172,7 @@
             var ComponentUser = response.detail.response;
             localStorage.removeItem('cachedEmail');
             if (ComponentUser !== null) {
+                this._loadSortable();
                 console.log(ComponentUser);
                 localStorage.setItem('cachedEmail', ComponentUser.email);
                 this.checkAccess = true;
@@ -161,7 +180,7 @@
                 this.email = localStorage.getItem('cachedEmail');
                 this.notifyPath('email');
                 this._retriveArray(ComponentUser.pin_string, ComponentUser.order_string, ComponentUser.hidden_string);
-                this._loadSortable();
+
             }
         },
         _handleAuthRequestError: function (error) {
@@ -169,6 +188,9 @@
         },
         _handleDataRequest: function (response) {
             this.response = response.detail.response.objects;
+            this._showPolymer();
+            if(!this.email)
+                this._loadingFinish();
         },
         _changesRequestSend: function () {
             this._loading();
@@ -183,12 +205,28 @@
             };
             this.$.ChangesRequest.generateRequest();
         },
+        _sortRequestSend: function () {
+            this._loading();
+            var orderString = this.orderArray.toString();
+            var pinString = this.pinArray.toString().replace(/e,/g, '').replace(/,e/g, '');
+            var hiddenString = this.hiddenArray.toString().replace(/e,/g, '').replace(/,e/g, '');
+            this.$.ChangesRequest.body = {
+                email: localStorage.getItem('cachedEmail'),
+                pin_string: pinString,
+                order_string: orderString,
+                hidden_string: hiddenString
+            };
+            this.$.ChangesRequest.generateRequest();
+            this.onlySortSend = true;
+            //location.reload();
+        },
         _handleChangesRequestResponse: function (response) {
             var responseDetail = response.detail.response;
             if (response !== null) {
-                console.log('finished');
-                this.$.AuthRequest.generateRequest();
-                this._loadingFinish();
+                if(this.onlySortSend === true)
+                    location.reload();
+                else
+                    this.$.AuthRequest.generateRequest();
             } else console.log('Something went wrong');
         },
         _handleChangesRequestError: function (error) {
@@ -225,7 +263,7 @@
         },
         _setAsHidden: function(hide){
             if(hide)
-                return 'glyphicon glyphicon-eye-close';
+                return 'glyphicon glyphicon-eye-open';
             else
                 return 'glyphicon glyphicon-eye-open not-hidden';
         },

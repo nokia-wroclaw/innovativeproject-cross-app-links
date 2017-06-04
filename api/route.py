@@ -11,6 +11,25 @@ from time import time
 from passlib.hash import sha256_crypt
 import os
 from flask_session import Session
+from functools import wraps
+from flask import request, current_app
+import socket
+
+def jsonp(func):
+    """Wraps JSONified output for JSONP requests."""
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        callback = request.args.get('callback', False)
+        if callback:
+            data = str(func(*args, **kwargs).data)
+            content = str(callback) + '(' + data + ')'
+            mimetype = 'application/javascript'
+            return current_app.response_class(content, mimetype=mimetype)
+        else:
+            return func(*args, **kwargs)
+    return decorated_function
+
+
 
 app.config['SESSION_TYPE'] = 'filesystem'
 
@@ -34,7 +53,8 @@ index_content_list = [
     'ver',
     'profile',
     'usercp',
-    'components'
+    'components',
+    'my-web-component'
 ]
 
 #Login manager
@@ -64,6 +84,14 @@ def before_request():
     If password or email is incorrect user is redirected to the same page.
 
 """
+
+@app.route('/delete-this')
+def delete_this():
+    invites = ComponentUser.query.all()
+    for invite in invites:
+        db.session.delete(invite)
+        #db.session.commit()
+    return str(len(invites))
 
 @app.route('/api/auth', methods=['POST'])
 def auth():
@@ -96,6 +124,7 @@ def auth():
 def logout():
     logout_user()
     session.pop('user', None)
+    session.pop('email', None)
     return redirect('/')
 
 
@@ -282,12 +311,6 @@ def component(component_type):
 
 """
 
-    Creating a web-component token for additional access
-
-"""
-
-"""
-
     Get your personal data (for component) based on posted token.
     If token is correct return data.
 
@@ -298,16 +321,26 @@ def component(component_type):
 @cross_origin()
 def component_user_data():
         data = request.get_json()
-        user = ComponentUser.query.filter_by(token=data['token']).first()
-        if user:
+        passed_value = data['passed_value']
+        passed_value = str(passed_value)
+        if len(passed_value) == 8:
+            id = passed_value[:2]
+            token = passed_value[2:]
+        else:
+            id = passed_value[:1]
+            token = passed_value[1:]
+
+        user = ComponentUser.query.filter_by(token=token).first()
+        if user and str(user.id) == id:
             component_user_obj = {}
+            component_user_obj['token'] = str(user.id) + user.token
             component_user_obj['email'] = user.email
-            component_user_obj['token'] = user.token
             component_user_obj['pin_string'] = user.pin_string
             component_user_obj['order_string'] = user.order_string
             component_user_obj['hidden_string'] = user.hidden_string
             return jsonify(component_user_obj)
         return str(False)
+
 
 """
 
@@ -315,12 +348,22 @@ def component_user_data():
 
 """
 
+
 @app.route('/api/component-user-data-update', methods=['POST'])
 @cross_origin()
 def component_user_data_update():
     data = request.get_json()
-    user = ComponentUser.query.filter_by(token=data['token']).first()
-    if user:
+    passed_value = data['passed_value']
+    passed_value = str(passed_value)
+    if len(passed_value) == 8:
+        id = passed_value[:2]
+        token = passed_value[2:]
+    else:
+        id = passed_value[:1]
+        token = passed_value[1:]
+
+    user = ComponentUser.query.filter_by(token=token).first()
+    if user and str(user.id) == id:
         user.pin_string = data['pin_string']
         user.order_string = data['order_string']
         user.hidden_string = data['hidden_string']

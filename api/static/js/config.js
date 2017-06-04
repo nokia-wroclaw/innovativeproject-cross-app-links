@@ -30,6 +30,8 @@
                 templateUrl: path + 'usercp.html'
             }).when('/usercp/permissions', {
                 templateUrl: path + 'my_permissions.html'
+            }).when('/my-web-component', {
+                templateUrl: path + 'my-web-component.html'
             }).when('/profile/:siteID', {
                 templateUrl: path + 'profile.html'
             }).when('/components', {

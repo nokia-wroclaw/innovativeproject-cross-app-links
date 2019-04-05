@@ -1,0 +1,45 @@
+version: '2'
+services:
+
+  app:
+    container_name: crossapp_app
+    build: .
+    restart: always
+    network_mode: host
+    ports:
+      - "5000:5000"
+    depends_on:
+        - db
+    environment:
+      DATABASE_URL: postgresql://crossapp:password@localhost:5432/crossappdb
+      FLASK_APP: run.py
+      MAIL_PASSWORD: ''
+      MAIL_PORT: 465
+      MAIL_SERVER: mail@server.com
+      MAIL_USERNAME: mail
+      MAIL_USE_SSL: 'true'
+      SERVER_ADDRESS: ''
+
+  db:
+    container_name: crossapp_db
+    image: postgres
+    restart: always
+    network_mode: host
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: crossappdb
+      POSTGRES_USER: crossapp
+      POSTGRES_PASSWORD: password
+
+
+  nginx:
+    container_name: crossapp_nginx
+    image: nginx
+    restart: always
+    network_mode: host
+    ports:
+      - "80:80"
+    volumes:
+      - ./component/:/usr/share/nginx/html
+      - ./nginx/:/etc/nginx/conf.d
